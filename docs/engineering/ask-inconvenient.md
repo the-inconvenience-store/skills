@@ -1,14 +1,14 @@
 Quickstart:
 
 ```bash
-npx skills add inconvenient/skills --skill=ask-inconvenient
+npx skills add the-inconvenience-store/skills --skill=ask-inconvenient
 ```
 
 ```bash
 npx skills update ask-inconvenient
 ```
 
-[Source](https://github.com/inconvenient/skills/tree/main/skills/engineering/ask-inconvenient)
+[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/ask-inconvenient)
 
 ## What it does
 
@@ -28,4 +28,4 @@ The idea `ask-inconvenient` gives you to think with is the **flow** — a path *
 
 ## Where it fits
 
-`ask-inconvenient` is the **router** — the standalone map that sits over the whole set. It is the node every other docs page links back to as [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient), so it never sits *in* a chain; it points *into* every chain. From here you'll most often land on [grill-with-docs](https://aihero.dev/skills-grill-with-docs), the head of the main flow, or [triage](https://aihero.dev/skills-triage), the on-ramp for work you didn't create. When even the router's own picture is stale, its [Source](https://github.com/inconvenient/skills/tree/main/skills/engineering/ask-inconvenient) is the map of record.
+`ask-inconvenient` is the **router** — the standalone map that sits over the whole set. It is the node every other docs page links back to as [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient), so it never sits *in* a chain; it points *into* every chain. From here you'll most often land on [grill-with-docs](https://aihero.dev/skills-grill-with-docs), the head of the main flow, or [triage](https://aihero.dev/skills-triage), the on-ramp for work you didn't create. When even the router's own picture is stale, its [Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/ask-inconvenient) is the map of record.

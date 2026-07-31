@@ -1,14 +1,14 @@
 Quickstart:
 
 ```bash
-npx skills add inconvenient/skills --skill=code-review
+npx skills add the-inconvenience-store/skills --skill=code-review
 ```
 
 ```bash
 npx skills update code-review
 ```
 
-[Source](https://github.com/inconvenient/skills/tree/main/skills/engineering/code-review)
+[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/code-review)
 
 ## What it does
 

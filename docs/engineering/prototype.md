@@ -1,14 +1,14 @@
 Quickstart:
 
 ```bash
-npx skills add inconvenient/skills --skill=prototype
+npx skills add the-inconvenience-store/skills --skill=prototype
 ```
 
 ```bash
 npx skills update prototype
 ```
 
-[Source](https://github.com/inconvenient/skills/tree/main/skills/engineering/prototype)
+[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/prototype)
 
 ## What it does
 

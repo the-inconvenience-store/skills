@@ -1,14 +1,14 @@
 Quickstart:
 
 ```bash
-npx skills add inconvenient/skills --skill=tdd
+npx skills add the-inconvenience-store/skills --skill=tdd
 ```
 
 ```bash
 npx skills update tdd
 ```
 
-[Source](https://github.com/inconvenient/skills/tree/main/skills/engineering/tdd)
+[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/tdd)
 
 ## What it does
 

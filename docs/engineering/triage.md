@@ -1,14 +1,14 @@
 Quickstart:
 
 ```bash
-npx skills add inconvenient/skills --skill=triage
+npx skills add the-inconvenience-store/skills --skill=triage
 ```
 
 ```bash
 npx skills update triage
 ```
 
-[Source](https://github.com/inconvenient/skills/tree/main/skills/engineering/triage)
+[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/triage)
 
 ## What it does
 

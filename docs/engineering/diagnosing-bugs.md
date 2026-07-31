@@ -1,14 +1,14 @@
 Quickstart:
 
 ```bash
-npx skills add inconvenient/skills --skill=diagnosing-bugs
+npx skills add the-inconvenience-store/skills --skill=diagnosing-bugs
 ```
 
 ```bash
 npx skills update diagnosing-bugs
 ```
 
-[Source](https://github.com/inconvenient/skills/tree/main/skills/engineering/diagnosing-bugs)
+[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/diagnosing-bugs)
 
 ## What it does
 

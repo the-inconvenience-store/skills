@@ -1,14 +1,14 @@
 Quickstart:
 
 ```bash
-npx skills add inconvenient/skills --skill=wayfinder
+npx skills add the-inconvenience-store/skills --skill=wayfinder
 ```
 
 ```bash
 npx skills update wayfinder
 ```
 
-[Source](https://github.com/inconvenient/skills/tree/main/skills/engineering/wayfinder)
+[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/wayfinder)
 
 ## What it does
 

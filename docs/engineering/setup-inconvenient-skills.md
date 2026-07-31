@@ -1,14 +1,14 @@
 Quickstart:
 
 ```bash
-npx skills add inconvenient/skills --skill=setup-inconvenient-skills
+npx skills add the-inconvenience-store/skills --skill=setup-inconvenient-skills
 ```
 
 ```bash
 npx skills update setup-inconvenient-skills
 ```
 
-[Source](https://github.com/inconvenient/skills/tree/main/skills/engineering/setup-inconvenient-skills)
+[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/setup-inconvenient-skills)
 
 ## What it does
 

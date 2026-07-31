@@ -1,14 +1,14 @@
 Quickstart:
 
 ```bash
-npx skills add inconvenient/skills --skill=research
+npx skills add the-inconvenience-store/skills --skill=research
 ```
 
 ```bash
 npx skills update research
 ```
 
-[Source](https://github.com/inconvenient/skills/tree/main/skills/engineering/research)
+[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/research)
 
 ## What it does
 

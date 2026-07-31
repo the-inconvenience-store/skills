@@ -1,14 +1,14 @@
 Quickstart:
 
 ```bash
-npx skills add inconvenient/skills --skill=handoff
+npx skills add the-inconvenience-store/skills --skill=handoff
 ```
 
 ```bash
 npx skills update handoff
 ```
 
-[Source](https://github.com/inconvenient/skills/tree/main/skills/productivity/handoff)
+[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/handoff)
 
 ## What it does
 

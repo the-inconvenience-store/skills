@@ -1,0 +1,26 @@
+{
+  "files": [
+    {
+      "path": ".claude-plugin/plugin.json",
+      "key": "version"
+    },
+    {
+      "path": ".claude-plugin/marketplace.json",
+      "key": "plugins[0].version"
+    },
+    {
+      "path": ".codex-plugin/plugin.json",
+      "key": "version"
+    }
+  ],
+  "audit": {
+    "exclude": [
+      "node_modules",
+      ".git",
+      ".beads",
+      "CHANGELOG.md",
+      "docs/",
+      "in-progress/"
+    ]
+  }
+}

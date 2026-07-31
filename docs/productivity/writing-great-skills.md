@@ -1,14 +1,14 @@
 Quickstart:
 
 ```bash
-npx skills add inconvenient/skills --skill=writing-great-skills
+npx skills add the-inconvenience-store/skills --skill=writing-great-skills
 ```
 
 ```bash
 npx skills update writing-great-skills
 ```
 
-[Source](https://github.com/inconvenient/skills/tree/main/skills/productivity/writing-great-skills)
+[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/writing-great-skills)
 
 ## What it does
 

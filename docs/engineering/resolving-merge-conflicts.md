@@ -1,14 +1,14 @@
 Quickstart:
 
 ```bash
-npx skills add inconvenient/skills --skill=resolving-merge-conflicts
+npx skills add the-inconvenience-store/skills --skill=resolving-merge-conflicts
 ```
 
 ```bash
 npx skills update resolving-merge-conflicts
 ```
 
-[Source](https://github.com/inconvenient/skills/tree/main/skills/engineering/resolving-merge-conflicts)
+[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/resolving-merge-conflicts)
 
 ## What it does
 

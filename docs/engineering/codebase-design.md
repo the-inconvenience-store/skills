@@ -1,14 +1,14 @@
 Quickstart:
 
 ```bash
-npx skills add inconvenient/skills --skill=codebase-design
+npx skills add the-inconvenience-store/skills --skill=codebase-design
 ```
 
 ```bash
 npx skills update codebase-design
 ```
 
-[Source](https://github.com/inconvenient/skills/tree/main/skills/engineering/codebase-design)
+[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/codebase-design)
 
 ## What it does
 

@@ -1,14 +1,14 @@
 Quickstart:
 
 ```bash
-npx skills add inconvenient/skills --skill=to-tickets
+npx skills add the-inconvenience-store/skills --skill=to-tickets
 ```
 
 ```bash
 npx skills update to-tickets
 ```
 
-[Source](https://github.com/inconvenient/skills/tree/main/skills/engineering/to-tickets)
+[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/to-tickets)
 
 ## What it does
 

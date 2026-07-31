@@ -15,14 +15,14 @@ set -euo pipefail
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 DESTS=("$HOME/.claude/skills" "$HOME/.agents/skills")
 
-# Collect the repo's skills once, link into every destination.
+# Collect promoted and draft skills once, then link them into every destination.
 names=()
 srcs=()
 while IFS= read -r -d '' skill_md; do
   src="$(dirname "$skill_md")"
   names+=("$(basename "$src")")
   srcs+=("$src")
-done < <(find "$REPO/skills" -name SKILL.md -not -path '*/node_modules/*' -not -path '*/deprecated/*' -print0)
+done < <(find "$REPO/skills" "$REPO/in-progress" -name SKILL.md -not -path '*/node_modules/*' -print0)
 
 for DEST in "${DESTS[@]}"; do
   # If $DEST is a symlink that resolves into this repo, we'd end up writing the
@@ -40,6 +40,19 @@ for DEST in "${DESTS[@]}"; do
   fi
 
   mkdir -p "$DEST"
+
+  # Remove broken symlinks created by skills that were removed or renamed.
+  while IFS= read -r -d '' stale_link; do
+    stale_target="$(readlink "$stale_link")"
+    case "$stale_target" in
+      "$REPO"/*)
+        if [ ! -e "$stale_target" ]; then
+          unlink "$stale_link"
+          echo "unlinked stale skill $(basename "$stale_link") ($DEST)"
+        fi
+        ;;
+    esac
+  done < <(find "$DEST" -mindepth 1 -maxdepth 1 -type l -print0)
 
   for i in "${!names[@]}"; do
     name="${names[$i]}"

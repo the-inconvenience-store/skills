@@ -1,12 +1,12 @@
 # Writing docs pages
 
-Every skill in `engineering/` and `productivity/` has a human-facing **docs page** at `docs/<bucket>/<skill-name>.md` — the docs tree mirrors those two bucket folders under `skills/`. It is published at `https://aihero.dev/skills-<skill-name>`; the URL is always `skills-<skill-name>` regardless of bucket, so the docs path is repo organisation only. The page is not the skill and not a copy of `SKILL.md`. Only these two buckets are promoted; the rest (`misc/`, `personal/`, `in-progress/`, `deprecated/`) ship no docs page.
+Every promoted skill under `skills/` has a human-facing **docs page** at `docs/<category>/<skill-name>.md`, where `<category>` is `engineering` or `productivity`. It is published at `https://aihero.dev/skills-<skill-name>`; the URL is independent of category. The page is not the skill and not a copy of `SKILL.md`. Drafts under `in-progress/` ship no docs page.
 
 Most of these skills are **user-invoked**: the agent will never fire them for you, so *you* are the index that has to remember they exist and when to reach for them. That memory is **cognitive load**. The job of a docs page is to relieve it — to orient one reader around one skill so they can hold it in their head, know when to reach for it, and see where it sits in the system. The pages are collectively a distributed router; each is a node.
 
-Act whenever a promoted skill is added, renamed, or has its behaviour changed: create or re-sync its docs page. A rename moves the file too (`docs/<bucket>/<old>.md` → `docs/<bucket>/<new>.md`), because the published URL tracks the name; a skill that moves between `engineering/` and `productivity/` moves its docs file to the matching folder. Skills in `misc/`, `personal/`, `in-progress/`, and `deprecated/` get no page — none of those buckets is promoted. A skill moving *out* of one of them into `engineering/` or `productivity/` gains a page; one moving the other way loses it.
+Act whenever a promoted skill is added, renamed, or has its behaviour changed: create or re-sync its docs page. A rename moves the file too (`docs/<category>/<old>.md` → `docs/<category>/<new>.md`), because the published URL tracks the name. A draft promoted from `in-progress/` gains a page in the appropriate category; a promoted skill moved into `in-progress/` loses its page.
 
-Because these pages are published on `aihero.dev`, **every link is absolute** — never a repo-relative path. A link to another skill points at `https://aihero.dev/skills-<name>`; a link into the repo points at its full `https://github.com/inconvenient/skills/...` URL. A relative link that works in the repo breaks once published.
+Because these pages are published on `aihero.dev`, **every link is absolute** — never a repo-relative path. A link to another skill points at `https://aihero.dev/skills-<name>`; a link into the repo points at its full `https://github.com/the-inconvenience-store/skills/...` URL. A relative link that works in the repo breaks once published.
 
 There is no H1 — the published page takes its title from the slug.
 
@@ -19,14 +19,14 @@ Fill the template below. The **fixed frame** (Quickstart block, source link, `##
 Quickstart:
 
 ```bash
-npx skills add inconvenient/skills --skill=<name>
+npx skills add the-inconvenience-store/skills --skill=<name>
 ```
 
 ```bash
 npx skills update <name>
 ```
 
-[Source](https://github.com/inconvenient/skills/tree/main/skills/<bucket>/<name>)
+[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/<name>)
 
 ## What it does
 
@@ -71,8 +71,8 @@ Always present. Situate the skill in the system in a sentence or two:
 
 ## Done when
 
-- The page exists at `docs/<bucket>/<name>.md`, and no stale page survives a rename or bucket move.
-- The Quickstart block and source link name the correct bucket and skill; the update line names the skill.
+- The page exists at `docs/<category>/<name>.md`, and no stale page survives a rename or category move.
+- The Quickstart block and source link name the correct skill; the update line names the skill.
 - `## What it does` states the defining constraint, as plain prose rather than a labelled aside.
 - `## When to reach for it` states invocation mode and the trigger boundary.
 - `## Where it fits` names the role and links to `ask-inconvenient`.

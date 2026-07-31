@@ -1,14 +1,14 @@
 Quickstart:
 
 ```bash
-npx skills add inconvenient/skills --skill=grill-with-docs
+npx skills add the-inconvenience-store/skills --skill=grill-with-docs
 ```
 
 ```bash
 npx skills update grill-with-docs
 ```
 
-[Source](https://github.com/inconvenient/skills/tree/main/skills/engineering/grill-with-docs)
+[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/grill-with-docs)
 
 ## What it does
 
