@@ -17,7 +17,8 @@
         "tdd",
         "code-review",
         "grilling"
-      ]
+      ],
+      "version": "1.2.1"
     }
   ]
 }
