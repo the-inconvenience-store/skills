@@ -1,0 +1,118 @@
+{
+  "upstream_url": "https://github.com/mattpocock/skills.git",
+  "upstream_ref": "main",
+  "report_directory": "docs/upstream",
+  "skill_roots": [
+    {
+      "upstream": "skills/engineering",
+      "local": "skills"
+    },
+    {
+      "upstream": "skills/productivity",
+      "local": "skills"
+    },
+    {
+      "upstream": "skills/in-progress",
+      "local": "in-progress"
+    },
+    {
+      "upstream": "skills/misc",
+      "local": "skills"
+    },
+    {
+      "upstream": "skills/personal",
+      "local": "skills"
+    },
+    {
+      "upstream": "skills/deprecated",
+      "local": "skills"
+    }
+  ],
+  "local_skill_roots": [
+    "skills",
+    "in-progress"
+  ],
+  "skill_mappings": [
+    {
+      "upstream": "skills/engineering/ask-matt",
+      "local": "skills/ask-inconvenient",
+      "reason": "Fork rename"
+    },
+    {
+      "upstream": "skills/engineering/setup-matt-pocock-skills",
+      "local": "skills/setup-inconvenient-skills",
+      "reason": "Fork rename"
+    },
+    {
+      "upstream": "skills/engineering/wizard",
+      "local": "in-progress/wizard",
+      "reason": "Upstream promoted this skill while the fork still carries it as a draft"
+    },
+    {
+      "upstream": "skills/productivity/to-questionnaire",
+      "local": "in-progress/to-questionnaire",
+      "reason": "Upstream promoted this skill while the fork still carries it as a draft"
+    },
+    {
+      "upstream": "skills/productivity/writing-for-agents",
+      "local": "skills/writing-great-skills",
+      "reason": "Upstream renamed and broadened writing-great-skills"
+    }
+  ],
+  "ignored_upstream_skills": [
+    {
+      "path": "skills/misc/git-guardrails-claude-code",
+      "reason": "Purposefully omitted from this fork"
+    },
+    {
+      "path": "skills/misc/migrate-to-shoehorn",
+      "reason": "Purposefully omitted from this fork"
+    },
+    {
+      "path": "skills/misc/scaffold-exercises",
+      "reason": "Purposefully omitted from this fork"
+    },
+    {
+      "path": "skills/misc/setup-pre-commit",
+      "reason": "Purposefully omitted from this fork"
+    },
+    {
+      "path": "skills/in-progress/writing-beats",
+      "reason": "Purposefully omitted upstream draft"
+    },
+    {
+      "path": "skills/in-progress/writing-fragments",
+      "reason": "Purposefully omitted upstream draft"
+    },
+    {
+      "path": "skills/in-progress/writing-shape",
+      "reason": "Purposefully omitted upstream draft"
+    }
+  ],
+  "ignored_local_skills": [],
+  "docs_root": "docs",
+  "docs_mappings": [
+    {
+      "upstream": "docs/engineering/ask-matt.md",
+      "local": "docs/engineering/ask-inconvenient.md",
+      "reason": "Fork rename"
+    },
+    {
+      "upstream": "docs/engineering/setup-matt-pocock-skills.md",
+      "local": "docs/engineering/setup-inconvenient-skills.md",
+      "reason": "Fork rename"
+    },
+    {
+      "upstream": "docs/productivity/writing-for-agents.md",
+      "local": "docs/productivity/writing-great-skills.md",
+      "reason": "Upstream renamed and broadened writing-great-skills"
+    }
+  ],
+  "ignored_upstream_docs": [],
+  "ignored_local_docs": [
+    {
+      "path": "docs/upstream/**",
+      "reason": "Generated audit reports are local operational documentation"
+    }
+  ]
+}

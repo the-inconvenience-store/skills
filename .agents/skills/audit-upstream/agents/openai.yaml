@@ -1,0 +1,5 @@
+interface:
+  display_name: "Audit upstream"
+  short_description: "Compare upstream skills and docs with this fork"
+policy:
+  allow_implicit_invocation: false
