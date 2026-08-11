@@ -1,5 +1,6 @@
 interface:
   display_name: "Audit upstream"
   short_description: "Compare upstream skills and docs with this fork"
+  default_prompt: "Use $audit-upstream to compare this fork with upstream and summarize the meaningful changes."
 policy:
   allow_implicit_invocation: false

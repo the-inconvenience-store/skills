@@ -1,6 +1,6 @@
 ---
 name: audit-upstream
-description: Audit Matt Pocock's upstream skills repository against this fork and write a Markdown report.
+description: Audit the canonical upstream skills repository against this fork and write a decision-ready Markdown report.
 disable-model-invocation: true
 ---
 
@@ -33,6 +33,30 @@ Read every new-skill entry, changed-skill file list, absent-upstream entry, docs
 
 The step is complete when every non-empty report category is represented in the assessment or explicitly identified as mechanical noise.
 
-## 4. Hand off the report
+## 4. Implement approved changes
 
-Verify the report follows [the report template](./REPORT-TEMPLATE.md), contains no unresolved template token, and remains under `docs/upstream/`. Report its path and headline counts to the user. The audit is complete only when the Markdown report is ready to make decisions from; the audit itself never merges upstream changes.
+When the user asks to adopt upstream changes, implement the meaningful behavior and its connected docs, manifests, router entries, and invocation metadata according to this repository's instructions.
+
+For every new upstream skill classified during an implementation run, update [the audit configuration](./config.json) in the same change. Add an explicit `skill_mappings` entry even when the normalized local name is unchanged; add the corresponding `docs_mappings` entry when an upstream docs page exists. If the user deliberately declines the skill, add a reasoned ignore rule instead. No newly classified skill may remain implicit after implementation.
+
+Localize adopted content. Search the implemented skill and every connected local file case-insensitively for upstream branding and identifiers:
+
+```bash
+rg -ni 'matt([ -]?pocock)?|mattpocock' <adopted paths>
+```
+
+Replace user-facing and internal references with this fork's vocabulary: `inconvenient`, the appropriate renamed skill such as `ask-inconvenient` or `setup-inconvenient-skills`, and `the-inconvenience-store/skills` where a repository identifier is needed. Inspect every match rather than applying a blind replacement. Preserve upstream identity only where exact provenance, fetch URLs, mapping keys, raw diffs, or attribution require it.
+
+Re-run `./scripts/audit-upstream.py` after implementation. Read every remaining changed mapping and explain why it is intentional; continue implementing if it exposes an unapplied behavioral change. The step is complete when the refreshed report has no unclassified additions and every remaining difference has a concrete fork reason.
+
+## 5. Finish with a decision summary
+
+Verify the report follows [the report template](./REPORT-TEMPLATE.md), contains no unresolved template token, and remains under `docs/upstream/`.
+
+Always finish by telling the user:
+
+- which changes are meaningful and why, grouped by adopt, defer, or ignore rather than by raw file count;
+- the report path and headline reconciliation counts;
+- which remaining differences are intentional fork policy.
+
+For an audit-only run, explicitly offer to implement the meaningful changes. For an implementation run, summarize what was implemented and offer to implement any meaningful changes that remain; say clearly when none remain. The audit is incomplete if the final response only reports counts or a file path.
