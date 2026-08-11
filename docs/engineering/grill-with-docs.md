@@ -12,7 +12,7 @@ npx skills update grill-with-docs
 
 ## What it does
 
-`grill-with-docs` interviews you relentlessly about a plan or design, one question at a time, until you and the agent reach a shared understanding — and it writes the vocabulary and decisions down as you go.
+`grill-with-docs` interviews you relentlessly about a plan or design in frontier-based rounds until you and the agent reach a shared understanding — and it writes the vocabulary and decisions down as you go.
 
 The grilling **leaves a paper trail**. A plain interview sharpens your thinking and then evaporates when the session ends; this one captures each term the moment it's resolved into a `CONTEXT.md` glossary, and records the hard, one-way decisions as ADRs. The alignment survives the conversation instead of living only in your head.
 
@@ -34,7 +34,7 @@ What makes this variant its own skill is where the answers go. As the grill runs
 
 ## It's working if
 
-- It asks one question at a time and waits, rather than dumping a questionnaire.
+- It asks one round at a time. Each round contains only independent questions whose prerequisites are settled.
 - Terms get written to `CONTEXT.md` the moment they resolve, in your project's own words.
 - It reaches into the codebase to answer its own questions where it can.
 - ADRs stay rare — you're not asked to rubber-stamp reversible choices.

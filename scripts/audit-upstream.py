@@ -140,6 +140,13 @@ def text_diff(
             tofile=f"upstream/{upstream_label}",
         )
     )
+    # Keep the generated Markdown clean even when a source diff contains
+    # whitespace-only lines. The diff still records the changed line marker,
+    # but does not introduce trailing whitespace into the audit report itself.
+    diff = "".join(
+        f"{line[:-1].rstrip(' \t')}\n" if line.endswith("\n") else line.rstrip(" \t")
+        for line in diff.splitlines(keepends=True)
+    )
     return diff or None, None
 
 

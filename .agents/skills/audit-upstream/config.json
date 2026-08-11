@@ -42,21 +42,6 @@
       "upstream": "skills/engineering/setup-matt-pocock-skills",
       "local": "skills/setup-inconvenient-skills",
       "reason": "Fork rename"
-    },
-    {
-      "upstream": "skills/engineering/wizard",
-      "local": "in-progress/wizard",
-      "reason": "Upstream promoted this skill while the fork still carries it as a draft"
-    },
-    {
-      "upstream": "skills/productivity/to-questionnaire",
-      "local": "in-progress/to-questionnaire",
-      "reason": "Upstream promoted this skill while the fork still carries it as a draft"
-    },
-    {
-      "upstream": "skills/productivity/writing-for-agents",
-      "local": "skills/writing-great-skills",
-      "reason": "Upstream renamed and broadened writing-great-skills"
     }
   ],
   "ignored_upstream_skills": [
@@ -101,11 +86,6 @@
       "upstream": "docs/engineering/setup-matt-pocock-skills.md",
       "local": "docs/engineering/setup-inconvenient-skills.md",
       "reason": "Fork rename"
-    },
-    {
-      "upstream": "docs/productivity/writing-for-agents.md",
-      "local": "docs/productivity/writing-great-skills.md",
-      "reason": "Upstream renamed and broadened writing-great-skills"
     }
   ],
   "ignored_upstream_docs": [],

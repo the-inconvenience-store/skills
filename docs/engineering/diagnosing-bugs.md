@@ -14,7 +14,7 @@ npx skills update diagnosing-bugs
 
 `diagnosing-bugs` runs a disciplined diagnosis loop for hard bugs and performance regressions — building a repro, minimising it, ranking hypotheses, instrumenting, then fixing with a regression test.
 
-It refuses to hypothesise before you have a **tight feedback loop** — one runnable command that already goes red on *this* bug. Reading code to build a theory before that command exists is the exact failure this skill prevents. No red-capable loop, no diagnosis.
+It refuses to hypothesise before you have a **tight feedback loop** — one runnable command that already goes red on *this* bug. Reading code to build a theory before that command exists is the exact failure this skill prevents. It also redacts secrets from commands, outputs, logs, and captured artifacts before showing them to the agent. No red-capable loop, no diagnosis.
 
 ## When to reach for it
 
@@ -30,10 +30,11 @@ It gives you a ladder of ways to build that loop — failing test, curl script, 
 
 ## It's working if
 
-- It builds and runs a repro command *before* theorising — and pastes the invocation and its red output.
+- It builds and runs a repro command *before* theorising — and shows the invocation and its redacted output.
 - The loop asserts the symptom you actually reported, not a nearby failure.
 - Hypotheses arrive as a ranked, falsifiable list shown to you before any are tested.
 - Debug instrumentation is tagged (`[DEBUG-...]`) and grepped away before it declares done.
+- Captured artifacts quote only the lines that carry the signal; credentials stay in environment variables.
 
 ## Where it fits
 

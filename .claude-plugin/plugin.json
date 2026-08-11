@@ -29,6 +29,7 @@
     "./skills/to-spec",
     "./skills/to-tickets",
     "./skills/wayfinder",
+    "./skills/wizard",
     "./skills/implement",
     "./skills/prototype",
     "./skills/research",
@@ -40,6 +41,8 @@
     "./skills/grilling",
     "./skills/handoff",
     "./skills/teach",
-    "./skills/writing-great-skills"
+    "./skills/to-questionnaire",
+    "./skills/wait-what",
+    "./skills/writing-for-agents"
   ]
 }

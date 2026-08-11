@@ -14,7 +14,7 @@ npx skills update grill-me
 
 `grill-me` runs a relentless interview about a plan or design, walking every branch of the decision tree until you and the agent reach a **shared understanding**.
 
-It asks **one question at a time** and waits. It never dumps a batch of questions at you — that is bewildering — and where a question can be answered by reading the codebase, it goes and reads rather than asking. Each question comes with the agent's own recommended answer, so you are reacting to a proposal, not staring at a blank prompt.
+It asks in **frontier-based rounds** and waits after each round. Every question in a round is independent: if one answer is needed before another question makes sense, that question waits for the next frontier. Where a fact can be found in the environment, the agent looks it up instead of asking you. Each question comes with a recommended answer, so you are reacting to a proposal rather than staring at a blank prompt.
 
 ## When to reach for it
 

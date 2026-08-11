@@ -14,7 +14,7 @@ npx skills update prototype
 
 `prototype` builds a small, disposable program whose only job is to answer one design question — does this state model feel right, or what should this UI look like.
 
-The code is **throwaway from day one**, and marked as such. It carries no tests, no error handling beyond what makes it run, no abstractions, and no persistence. The point is to learn something fast and then delete it — so the moment you start hardening it, you've stopped prototyping.
+The code is **throwaway from day one**, and marked as such. It carries no tests, no error handling beyond what makes it run, no abstractions, and no persistence. The point is to learn something fast, capture the answer, and keep the raw prototype off the main branch.
 
 ## When to reach for it
 
@@ -26,10 +26,10 @@ Reach for it when you have a design question that's hard to settle on paper — 
 
 The question decides the shape, and there are two shapes:
 
-- **"Does this logic / state model feel right?"** — a tiny interactive terminal app that pushes the state machine through the awkward cases, printing the full state after every action so you can watch what changes.
+- **"Does this logic / state model feel right?"** — a self-contained HTML demo with free-play controls and guided scenarios. A non-developer can open it directly, press buttons, and watch the full state change.
 - **"What should this look like?"** — several radically different UI variations on one route, switchable from a floating bar, so you compare real renders instead of imagining them.
 
-Picking the wrong branch wastes the whole prototype, so the question comes first. Both branches keep state in memory, run from one command, and surface the full state on every step.
+Picking the wrong branch wastes the whole prototype, so the question comes first. Both branches keep state in memory and surface the full state on every step. UI prototypes run from one command; logic demos open as a single HTML file.
 
 ## Keep the prototype as a primary source
 

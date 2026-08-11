@@ -1,6 +1,6 @@
 # Issue tracker: Beads
 
-Issues and specs (you may know a spec as a PRD) for this repo live in its repo-local [Beads](https://github.com/steveyegge/beads) database. Use the `bd` CLI for all operations.
+Issues and specs for this repo live in its repo-local [Beads](https://github.com/steveyegge/beads) database. Use the `bd` CLI for all operations.
 
 ## Conventions
 
