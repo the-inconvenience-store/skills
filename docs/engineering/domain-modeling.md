@@ -18,7 +18,7 @@ This is the **active** discipline, not the passive one. Merely reading `CONTEXT.
 
 ## When to reach for it
 
-Type `/domain-modeling`, or the agent reaches for it automatically when a task fits — when you are pinning down terminology, resolving an overloaded word, or recording an architectural decision.
+Type `/domain-modeling`, or the agent reaches for it automatically when a task fits — when codebase terminology is under discussion, when a `CONTEXT.md` is being written or edited, or when an ADR is being recorded or edited.
 
 Reach for it when the *words* are the problem: two people mean different things by "cancellation", "account" is doing three jobs, or a design conversation keeps snagging on a concept that has never been named precisely. If instead the module's *shape* is the problem — where the seam goes, how deep the interface is — use [codebase-design](https://aihero.dev/skills-codebase-design). If you want the plan itself interrogated before you build, use [grilling](https://aihero.dev/skills-grilling).
 
