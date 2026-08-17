@@ -38,4 +38,4 @@ It gives you a ladder of ways to build that loop — failing test, curl script, 
 
 ## Where it fits
 
-`diagnosing-bugs` is a reach-for-it-anytime standalone — you drop into it the moment something is broken, and drop out once the fix and its regression test are in. Its post-mortem hands off to [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) when the real finding is that there's no good seam to lock the bug down — the code, not the bug, is the problem. When you're unsure which skill fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.
+`diagnosing-bugs` is a reach-for-it-anytime standalone — you drop into it the moment something is broken, and drop out once the fix and its regression test are in. It ends at cleanup and hands off to nothing. When the real finding is that there's no good seam to lock the bug down — the code, not the bug, is the problem — that's your cue to run [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) yourself afterwards. When you're unsure which skill fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.
