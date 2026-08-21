@@ -24,7 +24,7 @@ Reach for it when a plan still has silent assumptions or dependent decisions. In
 
 ## Rounds and the frontier
 
-The frontier is the set of questions that can be answered now without guessing at an unsettled prerequisite. The skill asks that whole set in one numbered round, each with a recommended answer. Questions blocked by another answer wait for the next round.
+The frontier is the set of questions that can be answered now without guessing at an unsettled prerequisite. The skill asks that whole set in one numbered round, separates each question visually, and gives each a recommended answer. Questions blocked by another answer wait for the next round.
 
 This keeps related work moving without flattening dependencies into a bulk questionnaire. The interview ends when the frontier is empty and every branch has been visited, then waits for you to confirm the shared understanding.
 

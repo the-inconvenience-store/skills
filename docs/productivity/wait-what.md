@@ -12,7 +12,7 @@ npx skills update wait-what
 
 ## What it does
 
-`wait-what` tells the agent that its last message did not land and asks for a fresh explanation. The new version adds missing context, uses ASD-STE100 Simplified Technical English, and reuses terms from the project's `CONTEXT.md`.
+`wait-what` tells the agent that its last message did not land and asks for a fresh explanation. The new version adds missing context, uses ASD-STE100 Simplified Technical English, and reuses terms from the relevant `CONTEXT.md`. In a multi-context repo, it follows `CONTEXT-MAP.md` to find the right one.
 
 It repairs one message. It does not restart the task or alter the underlying decision.
 
