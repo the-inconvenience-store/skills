@@ -42,6 +42,11 @@
       "upstream": "skills/engineering/setup-matt-pocock-skills",
       "local": "skills/setup-inconvenient-skills",
       "reason": "Fork rename"
+    },
+    {
+      "upstream": "skills/in-progress/implement-spec",
+      "local": "in-progress/implement-spec",
+      "reason": "Adopted upstream draft; fork keeps drafts under in-progress/"
     }
   ],
   "ignored_upstream_skills": [
