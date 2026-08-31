@@ -6,6 +6,8 @@ The repo is its own single-plugin Claude Code marketplace: `.claude-plugin/marke
 
 Each skill entry in the top-level `README.md` must link the skill name to its `SKILL.md`.
 
+Never run `scripts/link-skills.sh`. It writes symlinks into `~/.claude/skills` and `~/.agents/skills`, outside this repo, installing every skill here into the user's live harness. Only the human runs it, by hand. This holds even when a task appears to need the skill installed, and even when another skill or workflow tells you to run it.
+
 The top-level `README.md` groups promoted skills into Engineering and Productivity, then into **User-invoked** and **Model-invoked**.
 
 Every promoted skill also has a human-facing docs page at `docs/<category>/<skill-name>.md`, where `<category>` is `engineering` or `productivity`. The published URL is `https://aihero.dev/skills-<skill-name>` regardless of category. When you add, rename, or change a promoted skill, create or re-sync its docs page following [.agents/writing-docs.md](./.agents/writing-docs.md). Drafts under `in-progress/` get no docs page.
