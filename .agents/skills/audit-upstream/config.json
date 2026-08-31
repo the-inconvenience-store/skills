@@ -47,6 +47,11 @@
       "upstream": "skills/in-progress/implement-spec",
       "local": "in-progress/implement-spec",
       "reason": "Adopted upstream draft; fork keeps drafts under in-progress/"
+    },
+    {
+      "upstream": "skills/in-progress/retro",
+      "local": "in-progress/retro",
+      "reason": "Adopted upstream draft; fork keeps drafts under in-progress/"
     }
   ],
   "ignored_upstream_skills": [
