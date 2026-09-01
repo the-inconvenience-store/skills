@@ -18,6 +18,8 @@ The **proposal** is the control point: the agent investigates and recommends one
 
 For JavaScript, TypeScript, React, and Go, the skill carries curated rule baselines aimed at common agent-written failure modes. Those concrete recommendations feed the proposal; they are not installed wholesale without your approval.
 
+For Ruby, C#, Rust, and other ecosystems without a bundled baseline, the agent researches current maintained tools and exact rules, then builds the equivalent proposal instead of skipping the language.
+
 For a new React application, it also offers a Bulletproof React-inspired standards package—feature boundaries, import direction, state and API conventions, and testing posture—as an explicit choice rather than an assumed architecture.
 
 ## When to reach for it
@@ -30,11 +32,13 @@ Reach for it when scaffolding a project, adding its first quality checks, replac
 
 The skill separates fast local feedback from the complete CI gate. It keeps local hooks focused, makes slower checks explicit, and treats architecture rules, coverage, commit policy, and agent-specific hooks as choices rather than surprise additions.
 
+It can also set up or reuse an optional task runner, then make those tasks the shared interface used by developers, hooks, CI, and the rest of setup.
+
 Verification is proportionate: commands are run, representative failures are demonstrated safely, and anything that would require commits, merges, installs, or other side effects is left unverified unless you approve it.
 
 ## It's working if
 
-- The approved lint and format commands cover every supported part of the repo.
+- The approved lint and format commands cover every detected ecosystem, or the report names a researched coverage gap.
 - Existing tools were preserved or replaced for a stated reason.
 - Local hooks are fast, CI owns the complete gate, and each boundary is visible.
 - Pre-existing failures and unverified behavior are reported rather than hidden.
