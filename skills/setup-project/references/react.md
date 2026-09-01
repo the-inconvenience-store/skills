@@ -12,7 +12,7 @@ React adds framework-specific checks to the JavaScript/TypeScript proposal. It d
 
 ## Propose
 
-Before proposing lint changes, read [rules-react.md](./rules-react.md). Verify the selected rules against the installed plugin and present opinionated groups separately.
+Before proposing lint changes, read [rules/react.md](./rules/react.md). Verify the selected rules against the installed plugin and present opinionated groups separately.
 
 For a new React application, ask whether the user wants to adopt [Bulletproof React standards](./bulletproof-react.md). Lead with a recommendation based on the expected size and team: adopt them for an application expected to grow; skip them for a small throwaway app or package where feature architecture does not fit. Summarize the package—feature modules, one-way imports, direct imports, state boundaries, an explicit API layer, and user-facing tests—so the user can decide without reading the source first.
 

@@ -1,4 +1,4 @@
-# Go rule catalogue
+# Go rules
 
 This is the authored baseline for agent-maintained Go. Present applicable groups in the proposal, preserve coherent existing policy, and calibrate thresholds against current code. Rule names assume current golangci-lint identifiers; verify availability and configuration against the pinned version.
 

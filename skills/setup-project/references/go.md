@@ -11,7 +11,7 @@ Use this reference for Go-specific decisions while preserving the repository's e
 
 ## Propose
 
-Before proposing lint changes, read [rules-go.md](./rules-go.md) and calibrate its thresholds against the repository.
+Before proposing lint changes, read [rules/go.md](./rules/go.md) and calibrate its thresholds against the repository.
 
 For a new setup, an aggregator such as golangci-lint can provide one versioned command and configuration for many analyzers. Keep direct tools when the repo already manages them successfully or when the aggregator does not support a required analyzer. Resolve the current supported installation method and configuration schema from official documentation.
 

@@ -13,7 +13,7 @@ Read [react.md](./react.md) as well when React or a React framework is present.
 
 ## Propose
 
-Before proposing lint changes, read [rules-typescript.md](./rules-typescript.md) and present the relevant groups with their consequences. The catalogue is the recommended baseline, not automatic consent.
+Before proposing lint changes, read [rules/typescript.md](./rules/typescript.md) and present the relevant groups with their consequences. The catalogue is the recommended baseline, not automatic consent.
 
 Keep a working linter and formatter unless replacement solves a named problem. When choosing for a new repo, compare current support for the rules and plugins the project needs, speed on this repository, editor integration, and migration cost. ESLint, oxlint, and Biome have different coverage; tool count alone does not settle the choice.
 

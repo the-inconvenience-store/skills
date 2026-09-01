@@ -1,4 +1,4 @@
-# Dependency-specific lint coverage
+# Dependency rules
 
 Use this branch for libraries the project writes against regularly: state, data fetching, routing, schemas, forms, databases, testing, logging, and observability. The rule is **search before authoring; propose before installing**.
 
@@ -26,7 +26,7 @@ An existing maintained rule wins. Verify that each lead below is still maintaine
 | Testing Library | `eslint-plugin-testing-library` |
 | Storybook | `eslint-plugin-storybook` |
 | Effect | [anti-slop](https://github.com/dmmulroy/anti-slop)'s opt-in Effect rules |
-| Tailwind or i18n | The conditional groups in [rules-react.md](./rules-react.md) |
+| Tailwind or i18n | The conditional groups in [react.md](./react.md) |
 
 For Go, check bundled linters before adding tooling:
 

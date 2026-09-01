@@ -20,11 +20,11 @@ Read only the references selected by the repository and the live decision branch
 | [references/react.md](./references/react.md) | The repo contains React or a React framework; read with `typescript.md`. |
 | [references/go.md](./references/go.md) | The repo contains Go. |
 | [references/research-ecosystem.md](./references/research-ecosystem.md) | A detected language or framework has no bundled setup reference. |
-| [references/rules-typescript.md](./references/rules-typescript.md) | The proposal adds or changes JavaScript or TypeScript lint rules. |
-| [references/rules-react.md](./references/rules-react.md) | The proposal adds or changes React lint rules. |
+| [references/rules/typescript.md](./references/rules/typescript.md) | The proposal adds or changes JavaScript or TypeScript lint rules. |
+| [references/rules/react.md](./references/rules/react.md) | The proposal adds or changes React lint rules. |
 | [references/bulletproof-react.md](./references/bulletproof-react.md) | A new React application or architecture overhaul may adopt Bulletproof React standards. |
-| [references/rules-go.md](./references/rules-go.md) | The proposal adds or changes Go lint rules. |
-| [references/dependency-rules.md](./references/dependency-rules.md) | Notable libraries need their own lint coverage. |
+| [references/rules/go.md](./references/rules/go.md) | The proposal adds or changes Go lint rules. |
+| [references/rules/dependencies.md](./references/rules/dependencies.md) | Notable libraries need their own lint coverage. |
 | [references/project-lifecycle.md](./references/project-lifecycle.md) | The setup covers reproducible installation, tests, generated code, dependency upkeep, or fresh-checkout verification. |
 | [references/git-hooks.md](./references/git-hooks.md) | The proposal includes git hooks. |
 | [references/agent-hooks.md](./references/agent-hooks.md) | The user asks for hooks inside an agent harness. |

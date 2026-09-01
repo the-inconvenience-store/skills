@@ -1,4 +1,4 @@
-# JavaScript and TypeScript rule catalogue
+# JavaScript and TypeScript rules
 
 This is the authored baseline for agent-maintained code. Present applicable groups in the proposal; preserve coherent existing policy and calibrate noisy rules before enabling them. Default to `error` except the explicit budget rules.
 

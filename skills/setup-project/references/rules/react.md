@@ -1,4 +1,4 @@
-# React rule catalogue
+# React rules
 
 Layer this catalogue on the JavaScript/TypeScript baseline. Present relevant groups for approval and verify every selected rule against the installed plugin: react.doctor's CLI, ESLint plugin, and oxlint plugin do not necessarily expose the same rules.
 
