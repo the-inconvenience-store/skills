@@ -25,6 +25,7 @@
     "./skills/triage",
     "./skills/improve-codebase-architecture",
     "./skills/setup-inconvenient-skills",
+    "./skills/setup-project",
     "./skills/tdd",
     "./skills/to-spec",
     "./skills/to-tickets",

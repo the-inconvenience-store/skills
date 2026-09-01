@@ -85,6 +85,9 @@ Off the main flow entirely.
 - **`/teach`** — learn a concept over multiple sessions, using the current directory as a stateful workspace.
 - **`/writing-for-agents`** — reference for writing documents agents consume: skills, AGENTS.md, pointed-at docs.
 
-## Precondition
+## Preconditions
 
-**`/setup-inconvenient-skills`** — run before your first engineering flow to configure the issue tracker, triage labels, and doc layout the other skills assume. Custom issue trackers also work.
+Two run-once setups, best done in one sitting. They aim at different things — one configures the skills, the other configures the repo — so neither substitutes for the other.
+
+- **`/setup-inconvenient-skills`** — run before your first engineering flow to configure the issue tracker, triage labels, and doc layout the other skills assume. Custom issue trackers also work.
+- **`/setup-project`** — run on a TypeScript, React, or Go repo to install the **guardrails** everything downstream then builds inside: a lint rule set (oxlint or golangci-lint, per language), the file structure that goes with it, a formatter, git hooks for format/lint/Conventional Commits, and optional agent hooks that format on every file edit and block edits to generated code. It detects the stack, confirms each choice with you, and finishes by making each rule and hook **fail on a real violation** — an inert config is the failure it exists to catch. Worth re-running when the stack changes; smaller adjustments are just edits to the lint config. What it installs is what lets `/code-review` spend its attention on design instead of on mechanical faults a linter already caught.
