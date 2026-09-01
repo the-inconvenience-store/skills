@@ -1,5 +1,5 @@
 interface:
   display_name: "Setup Project"
-  short_description: "Install lint rules, structure conventions, and git hooks"
+  short_description: "Guide project lint, format, CI, and hook setup"
 policy:
   allow_implicit_invocation: false
