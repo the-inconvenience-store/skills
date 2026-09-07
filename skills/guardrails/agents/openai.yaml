@@ -1,5 +1,3 @@
 interface:
-  display_name: "Setup Project"
+  display_name: "Guardrails"
   short_description: "Guide project guardrails and reproducible checks"
-policy:
-  allow_implicit_invocation: false

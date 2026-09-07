@@ -114,6 +114,12 @@ Then write the docs files using the seed templates in this skill folder as a sta
 
 For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch using the user's description.
 
-### 5. Done
+### 5. Establish guardrails
+
+After the chosen agent file and every applicable `docs/agents/*.md` file have been written, call the Skill tool with "guardrails". Run that workflow through its proposal, approval, implementation, and verification before reporting this setup complete.
+
+**Done when:** the approved project guardrails work and every verification gap is named.
+
+### 6. Done
 
 Tell the user the setup is complete and which engineering skills will now read from these files. Mention they can edit `docs/agents/*.md` directly later — re-running this skill is only necessary if they want to switch issue trackers or restart from scratch.

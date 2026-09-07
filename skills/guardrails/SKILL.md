@@ -1,10 +1,9 @@
 ---
-name: setup-project
-description: Guided setup for a project's development guardrails and reproducible checks.
-disable-model-invocation: true
+name: guardrails
+description: Set up or overhaul a project's development guardrails and reproducible checks. Use when a repository needs linting, formatting, tests, reproducible installation, dependency upkeep, CI, hooks, generated-code drift checks, or applicable framework standards.
 ---
 
-# Setup Project
+# Guardrails
 
 Set up a project's **guardrails** with the user: inspect what is already there, propose the smallest coherent setup, wait for approval, then install and verify it.
 

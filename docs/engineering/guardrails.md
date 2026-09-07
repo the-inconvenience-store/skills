@@ -1,18 +1,18 @@
 Quickstart:
 
 ```bash
-npx skills add the-inconvenience-store/skills --skill=setup-project
+npx skills add the-inconvenience-store/skills --skill=guardrails
 ```
 
 ```bash
-npx skills update setup-project
+npx skills update guardrails
 ```
 
-[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/setup-project)
+[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/guardrails)
 
 ## What it does
 
-`setup-project` guides the setup of a project's linters, formatter, tests, reproducible installation, dependency upkeep, CI checks, and hooks. It can start in an empty workspace or adapt an established repository without quietly replacing conventions that already work.
+`guardrails` guides the setup of a project's linters, formatter, tests, reproducible installation, dependency upkeep, CI checks, and hooks. It can start in an empty workspace or adapt an established repository without quietly replacing conventions that already work.
 
 The **proposal** is the control point: the agent investigates and recommends one coherent setup, then waits for you to approve or amend it before changing the project.
 
@@ -24,7 +24,7 @@ For a new React application, it also offers a Bulletproof React-inspired standar
 
 ## When to reach for it
 
-You invoke this by typing `/setup-project` — the agent won't reach for it on its own.
+Type `/guardrails`, or the agent reaches for it automatically when a task fits.
 
 Reach for it when scaffolding a project, adding its first quality checks, replacing an unsatisfactory tool, or bringing inconsistent lint and hook configuration back under control. For configuring the issue tracker and documentation expected by this collection's engineering flows, use [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) instead.
 
@@ -49,4 +49,4 @@ Verification is proportionate: commands are run, representative failures are dem
 
 ## Where it fits
 
-`setup-project` is a run-once setup, repeated when the stack or quality strategy changes. Its neighbour [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) configures the surrounding engineering workflows; downstream skills such as [implement](https://aihero.dev/skills-implement) then work inside the guardrails approved here. [Ask Inconvenient](https://aihero.dev/skills-ask-inconvenient) maps the full collection.
+`guardrails` is a run-once setup, repeated when the stack or quality strategy changes. Its neighbour [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) configures the surrounding engineering workflows; downstream skills such as [implement](https://aihero.dev/skills-implement) then work inside the guardrails approved here. [Ask Inconvenient](https://aihero.dev/skills-ask-inconvenient) maps the full collection.
