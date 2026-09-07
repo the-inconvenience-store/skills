@@ -10,7 +10,7 @@ These skills are designed to be small, easy to adapt, and composable. They work 
 
 ## Installation (30-second setup)
 
-Two ways in, two philosophies. **The [Claude Code plugin](https://code.claude.com/docs/en/plugins)** installs the whole set as a managed, read-only bundle that updates when releases ship — you subscribe rather than fork. **[skills.sh](https://skills.sh/the-inconvenience-store/skills)** copies editable skill files into your project, so you can hack on them and make them your own. Pick one — installing both leaves you with every skill twice.
+Two installation modes, two philosophies. **Managed plugins for [Claude Code](https://code.claude.com/docs/en/plugins) and [OMP](https://omp.sh/docs/plugins)** install the whole set as a read-only bundle that updates when releases ship — you subscribe rather than fork. **[skills.sh](https://skills.sh/the-inconvenience-store/skills)** copies editable skill files into your project, so you can hack on them and make them your own. Pick one mode — installing both leaves you with every skill twice.
 
 ### 1. Get the skills
 
@@ -32,6 +32,18 @@ It's in Claude Code's official marketplace, so there's nothing to add first, and
 </details>
 
 <details>
+<summary><strong>OMP</strong></summary>
+
+```bash
+omp plugin marketplace add the-inconvenience-store/skills
+omp plugin install inconvenient-skills@inconvenient
+```
+
+The first command adds this repository's OMP marketplace; the second installs the plugin at user scope. Run `/reload-plugins` in an active OMP session, or restart OMP.
+
+</details>
+
+<details>
 <summary><strong>Codex, and other agents</strong></summary>
 
 ```bash
@@ -40,7 +52,7 @@ npx skills@latest add the-inconvenience-store/skills
 
 Pick the skills you want, and which coding agents to install them on. **The installer lets you choose which skills to take — make sure `setup-inconvenient-skills` is one of them.**
 
-The repo also ships native Codex plugin metadata in [`.codex-plugin/plugin.json`](./.codex-plugin/plugin.json). Both native plugins load the same promoted skills directly from `skills/`.
+The repo also ships native Codex plugin metadata in [`.codex-plugin/plugin.json`](./.codex-plugin/plugin.json), an [OMP marketplace](./.omp-plugin/marketplace.json), and a portable [`plugin.json`](./plugin.json). Every plugin format loads the same promoted skills directly from `skills/`.
 
 </details>
 

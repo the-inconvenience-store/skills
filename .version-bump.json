@@ -11,6 +11,14 @@
     {
       "path": ".codex-plugin/plugin.json",
       "key": "version"
+    },
+    {
+      "path": ".omp-plugin/marketplace.json",
+      "key": "plugins[0].version"
+    },
+    {
+      "path": "plugin.json",
+      "key": "version"
     }
   ],
   "audit": {
