@@ -24,7 +24,7 @@ Reach for it whenever you're unsure which skill or flow a situation calls for: y
 
 ## Flows, not just skills
 
-The idea `ask-inconvenient` gives you to think with is the **flow** — a path *through* the skills rather than a single one. Most work runs along one main flow: grill → spec → tickets → implement through TDD → review → real-surface verification. On-ramps merge bugs, incoming requests, and codebase-health work onto it; standalones remain available when only one discipline is needed.
+The idea `ask-inconvenient` gives you to think with is the **flow** — a path *through* the skills rather than a single one. Before the first engineering flow, [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) records repository configuration, invokes [guardrails](https://aihero.dev/skills-guardrails), then creates the project route through [verification](https://aihero.dev/skills-verification). Most feature work then runs along one main flow: grill → spec → tickets → implement through TDD → review → real-surface verification. On-ramps merge bugs, incoming requests, and codebase-health work onto it; standalones remain available when only one discipline is needed.
 
 ## Phase boundaries
 

@@ -1,6 +1,6 @@
 ---
 name: setup-inconvenient-skills
-description: Configure this repo for the engineering skills — set up its issue tracker, triage label vocabulary, and domain doc layout. Run once before first use of the other engineering skills.
+description: Configure a repo for the engineering skills — issue tracking, triage labels, domain docs, development guardrails, and repeatable real-surface verification. Run once before first use of the other engineering skills.
 disable-model-invocation: true
 ---
 
@@ -11,8 +11,10 @@ Scaffold the per-repo configuration that the engineering skills assume:
 - **Issue tracker** — where issues live (GitHub by default; GitLab, Beads, and local markdown are also supported out of the box)
 - **Triage labels** — the strings used for the five canonical triage roles
 - **Domain docs** — where `CONTEXT.md` and ADRs live, and the consumer rules for reading them
+- **Guardrails** — the approved lint, format, test, reproducible setup, dependency, CI, and hook baseline
+- **Verification** — the project-local route for launching, driving, proving, and cleaning up each real user-facing surface
 
-This is a prompt-driven skill, not a deterministic script. Explore, present what you found, confirm with the user, then write.
+This is a prompt-driven setup, not a deterministic script. Explore, present what you found, confirm the repository-specific choices, write their shared configuration, then establish guardrails and verification through their owning skills.
 
 ## Process
 
@@ -29,6 +31,8 @@ Look at the current repo to understand its starting state. Read whatever exists;
 - `.beads/` — sign that the repo uses the Beads (`bd`) issue tracker
 - Is the `triage` skill installed? (a `triage` skill folder alongside this one, or `triage` in your available skills.) This decides whether Section B runs at all.
 - Monorepo signals — a `pnpm-workspace.yaml`, a `workspaces` field in `package.json`, or a populated `packages/*` with its own `src/`. Present only in a genuinely large multi-package repo; their absence means single-context, which is almost every repo.
+
+**Done when:** the tracker evidence, existing agent guidance, domain layout, prior setup output, triage availability, and monorepo shape are all accounted for.
 
 ### 2. Present findings and ask
 
@@ -62,14 +66,18 @@ The defaults are the five canonical roles, each label string equal to its name: 
 
 Offer **multi-context** — a root `CONTEXT-MAP.md` pointing to per-context `CONTEXT.md` files — only when exploration found monorepo signals. Then confirm which layout they want.
 
+**Done when:** the issue tracker, applicable triage vocabulary, and domain-doc layout are each confirmed by the user or settled by the stated repository default.
+
 ### 3. Confirm and edit
 
 Show the user a draft of:
 
-- The `## Agent skills` block to add to whichever of `CLAUDE.md` / `AGENTS.md` is being edited (see step 4 for selection rules)
+- The configuration portion of the `## Agent skills` block to add to whichever of `CLAUDE.md` / `AGENTS.md` is being edited (see step 4 for selection rules). The verified runtime pointer is added later by step 6.
 - The contents of `docs/agents/issue-tracker.md`, `docs/agents/domain.md`, and `docs/agents/triage-labels.md` (the last only when `triage` is installed)
 
 Let them edit before writing.
+
+**Done when:** the user has approved the exact configuration block and every applicable configuration document.
 
 ### 4. Write
 
@@ -114,12 +122,32 @@ Then write the docs files using the seed templates in this skill folder as a sta
 
 For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch using the user's description.
 
+**Done when:** the chosen agent file contains one current `## Agent skills` block and every approved configuration document exists under `docs/agents/`.
+
 ### 5. Establish guardrails
 
-After the chosen agent file and every applicable `docs/agents/*.md` file have been written, call the Skill tool with "guardrails". Run that workflow through its proposal, approval, implementation, and verification before reporting this setup complete.
+After the chosen agent file and every applicable `docs/agents/*.md` file have been written, call the Skill tool with `guardrails`. Run that workflow through proposal, approval, implementation, and verification before continuing.
 
-**Done when:** the approved project guardrails work and every verification gap is named.
+**Done when:** the approved project guardrails work and every guardrail verification gap is named.
 
-### 6. Done
+### 6. Establish real-surface verification
 
-Tell the user the setup is complete and which engineering skills will now read from these files. Mention they can edit `docs/agents/*.md` directly later — re-running this skill is only necessary if they want to switch issue trackers or restart from scratch.
+Call the Skill tool with `verification` after guardrails are complete, so it sees the repository's final launch and check commands. Request Create for a missing `docs/agents/verification/` artifact; the verification skill routes an existing artifact to Maintain. Let that skill own the artifact format, repository interview, feature map, live drive, evidence, and cleanup.
+
+After the verification artifact is proved, update the existing `## Agent skills` block with this pointer:
+
+```markdown
+### Verification
+
+Follow `docs/agents/verification/README.md` to launch and doctor each real user-facing surface, drive its public path, capture evidence, and clean up.
+```
+
+Preserve the rest of the approved block and do not add the pointer before the target exists.
+
+**Done when:** `docs/agents/verification/README.md` exists, one mapped feature is `VERIFIED` by following it, and the chosen agent file points to it.
+
+### 7. Done
+
+Tell the user the setup is complete and name the configuration, guardrails, and verification artifacts now available to the engineering skills. Mention the maintenance paths: edit tracker or domain config directly, call `guardrails` when the quality strategy changes, and call `verification` with Maintain when application surfaces move.
+
+**Done when:** the final report names every created or updated setup surface and any unresolved guardrail or verification gap.

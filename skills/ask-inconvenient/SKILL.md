@@ -89,7 +89,7 @@ Off the main flow entirely.
 
 ## Preconditions
 
-Two run-once setups, chained in one sitting. The first configures the skills, then invokes the second to configure the repo.
+One run-once entry point chains repository configuration, development guardrails, and real-surface verification. Guardrails remains available separately when only the quality strategy changes.
 
-- **`/setup-inconvenient-skills`** — run before your first engineering flow to configure the issue tracker, triage labels, and doc layout the other skills assume. Custom issue trackers also work. After writing those files, it invokes `/guardrails`.
+- **`/setup-inconvenient-skills`** — run before your first engineering flow. It configures the issue tracker, triage labels, and domain-doc layout; invokes `/guardrails` to establish the approved development baseline; then invokes `/verification` to create or maintain `docs/agents/verification/` and prove one mapped feature.
 - **`/guardrails`** — run when starting a repo or overhauling its **guardrails**. It inspects the project, then proposes one reproducible lint, format, test, dependency-upkeep, optional task-runner, CI, and hook setup for your approval. It also handles generated-code drift and researches equivalent standards for undocumented ecosystems. For a new React application it asks whether to adopt Bulletproof React-inspired application standards. It installs and verifies only what you accept; re-run it when the stack or quality strategy changes.

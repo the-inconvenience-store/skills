@@ -49,4 +49,4 @@ Verification is proportionate: commands are run, representative failures are dem
 
 ## Where it fits
 
-`guardrails` is a run-once setup, repeated when the stack or quality strategy changes. Its neighbour [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) configures the surrounding engineering workflows; downstream skills such as [implement](https://aihero.dev/skills-implement) then work inside the guardrails approved here. [Ask Inconvenient](https://aihero.dev/skills-ask-inconvenient) maps the full collection.
+`guardrails` is a run-once setup, repeated when the stack or quality strategy changes. [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) invokes it after recording repository configuration, then invokes [verification](https://aihero.dev/skills-verification) against the resulting launch and check commands. Downstream skills such as [implement](https://aihero.dev/skills-implement) work inside the approved guardrails. [Ask Inconvenient](https://aihero.dev/skills-ask-inconvenient) maps the full collection.
