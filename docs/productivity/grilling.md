@@ -14,7 +14,7 @@ npx skills update grilling
 
 `grilling` is the interview that stress-tests a plan or design before you build it. It maps the work as a **design tree**, then asks every currently answerable question at the tree's **frontier**.
 
-Questions arrive in rounds rather than one at a time. A round contains only independent decisions whose prerequisites are already settled. Your answers reshape the tree, and the next frontier is computed from them. The agent finds facts in the environment; you make the decisions.
+Questions arrive in rounds rather than one at a time. Before the first round and whenever an answer exposes a new decision shape, the agent scans the engineering-principle triggers against the current frontier. Experience First keeps product choices aimed at the user's result; Keep Execution Unblocked preserves the division that the agent finds observable facts while you make genuine product decisions. Other matched principles shape recommendations without waiting for you to name them.
 
 ## When to reach for it
 
@@ -30,4 +30,4 @@ This keeps related work moving without flattening dependencies into a bulk quest
 
 ## Where it fits
 
-`grilling` is the interview primitive under the main build chain. [grill-with-docs](https://aihero.dev/skills-grill-with-docs) uses it before [to-spec](https://aihero.dev/skills-to-spec), while [triage](https://aihero.dev/skills-triage), [wayfinder](https://aihero.dev/skills-wayfinder), and [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) use it inside their own flows. When you're unsure which entry point fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.
+`grilling` is the interview primitive under the main build chain. [grill-with-docs](https://aihero.dev/skills-grill-with-docs) uses it before [to-spec](https://aihero.dev/skills-to-spec), while [triage](https://aihero.dev/skills-triage), [wayfinder](https://aihero.dev/skills-wayfinder), and [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) use it inside their own flows. Its decision defaults come from [engineering-principles](https://aihero.dev/skills-engineering-principles). When you're unsure which entry point fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.

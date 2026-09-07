@@ -12,9 +12,9 @@ npx skills update to-tickets
 
 ## What it does
 
-`to-tickets` breaks a plan, spec, or the current conversation into a set of **tickets** — each a tracer-bullet vertical slice — and publishes them to your configured tracker, with every ticket declaring the tickets that block it.
+`to-tickets` breaks a plan, spec, or the current conversation into a set of **tickets** — each a tracer-bullet vertical slice — and publishes them to your configured tracker, with every ticket declaring its blockers and its real-surface proof.
 
-Every ticket is a **tracer bullet** — a thin *vertical* slice that cuts through all integration layers end-to-end (schema, API, UI, tests), never a horizontal slice of one layer. A completed slice is demoable or verifiable on its own, which is what makes each ticket safe to hand to an agent.
+Every ticket is a **tracer bullet** — a thin *vertical* slice that cuts through all integration layers end-to-end, never a horizontal slice of one layer. A completed slice is independently demoable, states the public path and observable result that prove it, and is safe to hand to a fresh agent.
 
 ## When to reach for it
 
@@ -39,7 +39,7 @@ The edges live in the ticket regardless of medium; the medium only decides wheth
 
 The whole skill turns on one distinction. A **horizontal** slice ships one layer of the change — all the schema, or all the API — and nothing works until every layer lands. A **vertical** slice, the tracer bullet, ships one narrow path through *every* layer at once, so it can be demoed the moment it's done.
 
-Before slicing, `to-tickets` looks for prefactoring — "make the change easy, then make the easy change" — and orders that work first. It then quizzes you on the breakdown (granularity, blocking edges, what to merge or split) before publishing anything, and publishes blockers first so each ticket's "Blocked by" can reference a real ticket.
+Before slicing, `to-tickets` applies the engineering principles for verifiable sequencing, useful intermediate states, migrations, and shared writes. It looks for prefactoring — "make the change easy, then make the easy change" — and orders that work first. It then quizzes you on the breakdown, blocking edges, proof, and what to merge or split before publishing anything.
 
 ## The wide-refactor exception
 
@@ -53,4 +53,4 @@ One shape breaks the tracer-bullet rule: a **wide refactor** — a single mechan
 grill-with-docs → to-spec → to-tickets → implement → code-review
 ```
 
-It sits between [to-spec](https://aihero.dev/skills-to-spec), which hands it a settled spec with user stories to slice against, and [implement](https://aihero.dev/skills-implement), which builds each ticket, driving [tdd](https://aihero.dev/skills-tdd) internally to write the tests test-first, before its [code-review](https://aihero.dev/skills-code-review) pass. Work the frontier one ticket per fresh context, clearing between them. When you're unsure which skill or flow fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.
+It sits between [to-spec](https://aihero.dev/skills-to-spec), which hands it settled behavior and verification decisions, and [implement](https://aihero.dev/skills-implement), which builds each ticket and runs its stated proof through [verification](https://aihero.dev/skills-verification). [engineering-principles](https://aihero.dev/skills-engineering-principles) decides when work should stay atomic, become a tracer bullet, or use bounded expand-contract. Work the frontier one ticket per fresh context, clearing between them. When you're unsure which skill or flow fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.

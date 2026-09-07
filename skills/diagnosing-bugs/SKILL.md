@@ -9,6 +9,8 @@ A discipline for hard bugs. Skip phases only when explicitly justified.
 
 When exploring the codebase, read `CONTEXT.md` (if it exists) to get a clear mental model of the relevant modules, and check ADRs in the area you're touching.
 
+Call the Skill tool with `engineering-principles`. Apply Fix Root Causes, Build the Lever, and Prove It Works, then independently scan the index against the symptom, suspected mechanism, and intended fix. Read every additional matched leaf; user-named principles are mandatory additions, not the trigger for selection.
+
 ## Redact
 
 This skill has you show commands, outputs and captured artifacts. **Redact every secret first** — write `<REDACTED>` in its place. Build loops against env vars, so the credential stays in the environment rather than in what you show. Captured artifacts carry auth headers: quote only the lines that carry the signal.
@@ -22,6 +24,8 @@ If the redacted output is not enough to diagnose the bug, say so and ask the use
 Spend disproportionate effort here. **Be aggressive. Be creative. Refuse to give up.**
 
 ### Ways to construct one — try them in roughly this order
+
+If `docs/agents/verification/` exists, call the Skill tool with `verification` and use its project-specific launch and driving route as an input. It counts as the Phase 1 loop only after it asserts this exact symptom and has been observed going red.
 
 1. **Failing test** at whatever seam reaches the bug — unit, integration, e2e.
 2. **Curl / HTTP script** against a running dev server.
@@ -126,6 +130,7 @@ If a correct seam exists:
 3. Apply the fix.
 4. Watch it pass.
 5. Re-run the Phase 1 feedback loop against the original (un-minimised) scenario.
+6. Call the Skill tool with `verification` for the original public path. The final verdict must be `VERIFIED`; `INCONCLUSIVE` leaves the diagnosis incomplete.
 
 ## Phase 6 — Cleanup
 
@@ -133,6 +138,7 @@ Required before declaring done:
 
 - [ ] Original repro no longer reproduces (re-run the Phase 1 loop)
 - [ ] Regression test passes (or absence of seam is documented)
+- [ ] Real-surface verification reports `VERIFIED`
 - [ ] All `[DEBUG-...]` instrumentation removed (`grep` the prefix)
 - [ ] Throwaway prototypes deleted (or moved to a clearly-marked debug location)
 - [ ] The hypothesis that turned out correct is stated in the commit / PR message — so the next debugger learns

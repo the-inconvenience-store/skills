@@ -14,7 +14,7 @@ npx skills update prototype
 
 `prototype` builds a small, disposable program whose only job is to answer one design question — does this state model feel right, or what should this UI look like.
 
-The code is **throwaway from day one**, and marked as such. It carries no tests, no error handling beyond what makes it run, no abstractions, and no persistence. The point is to learn something fast, capture the answer, and keep the raw prototype off the main branch.
+The code is **throwaway from day one**. Experience First keeps the experiment aimed at the user's result, Laziness Protocol keeps it cheap, and Exhaust the Design Space applies only when several genuinely different answers to a consequential question are plausible.
 
 ## When to reach for it
 
@@ -39,4 +39,4 @@ The prototype doesn't belong in the main branch: no tests, no error handling, no
 
 ## Where it fits
 
-`prototype` is a reach-for-it-anytime standalone: you drop into it to resolve a design question, then drop back out. Its answer often feeds the next step — a validated state model or UI direction becomes settled input for [to-spec](https://aihero.dev/skills-to-spec) to write up, or an architectural decision worth recording via [domain-modeling](https://aihero.dev/skills-domain-modeling). When you're unsure which skill or flow fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.
+`prototype` is a reach-for-it-anytime standalone: you drop into it to resolve a design question, then drop back out. Its answer often feeds [to-spec](https://aihero.dev/skills-to-spec), while [engineering-principles](https://aihero.dev/skills-engineering-principles) supplies the selective decision rules behind the experiment and [domain-modeling](https://aihero.dev/skills-domain-modeling) records durable domain decisions. When you're unsure which skill or flow fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.

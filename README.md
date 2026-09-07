@@ -147,11 +147,13 @@ It's hard to explain how powerful this is. It might be the single coolest techni
 
 It's time to look at your feedback loops. Without feedback on how the code it produces actually runs, the agent will be flying blind.
 
-**The Fix**: You need the usual tranche of feedback loops: static types, browser access, and automated tests.
+**The Fix**: You need the usual tranche of feedback loops: static types, automated tests, and a repeatable way to drive the real application.
 
 For automated tests, a red-green-refactor loop is critical. This is where the agent writes a failing test first, then fixes the test. This helps give the agent a consistent level of feedback that results in far better code.
 
 The **[`/tdd`](./skills/tdd/SKILL.md) skill** slots into any project. It encourages red-green-refactor and gives the agent plenty of guidance on what makes good and bad tests.
+
+The **[`/verification`](./skills/verification/SKILL.md) skill** creates, runs, and maintains that real-surface route. Passing tests support the proof; they do not replace observing the behavior a user or consumer was promised.
 
 For debugging, I've also built a **[`/diagnosing-bugs`](./skills/diagnosing-bugs/SKILL.md)** skill that wraps best debugging practices into a simple loop.
 
@@ -197,7 +199,7 @@ Skills for daily code work.
 - **[setup-project](./skills/setup-project/SKILL.md)** — Inspect a project, then propose and verify its lint, format, test, reproducible setup, dependency upkeep, optional task runner, CI, hooks, and applicable React standards with the user in control.
 - **[to-spec](./skills/to-spec/SKILL.md)** — Turn the current conversation into a spec and publish it to the issue tracker. No interview — just synthesizes what you've already discussed.
 - **[to-tickets](./skills/to-tickets/SKILL.md)** — Break any plan, spec, or conversation into a set of tracer-bullet tickets, each declaring its blocking edges — written as text in a local file, or as native blocking links on a real tracker.
-- **[implement](./skills/implement/SKILL.md)** — Build the work described by a spec or set of tickets, driving `/tdd` at pre-agreed seams and closing out with `/code-review` before committing.
+- **[implement](./skills/implement/SKILL.md)** — Build work from a spec or tickets: select the relevant engineering principles, drive TDD at pre-agreed seams, run Standards and Spec review, address findings, then prove the final behavior through real-surface verification.
 - **[wayfinder](./skills/wayfinder/SKILL.md)** — Plan a huge chunk of work, more than one agent session can hold, as a shared map of investigation tickets on the issue tracker — resolve them one at a time until the way to the destination is clear.
 
 **Model-invoked**
@@ -208,6 +210,8 @@ Skills for daily code work.
 - **[tdd](./skills/tdd/SKILL.md)** — Test-driven development with a red-green-refactor loop. Builds features or fixes bugs one vertical slice at a time.
 - **[domain-modeling](./skills/domain-modeling/SKILL.md)** — Actively build and sharpen a project's domain model — challenge terms against the glossary, stress-test with edge-case scenarios, and update `CONTEXT.md` and ADRs inline.
 - **[codebase-design](./skills/codebase-design/SKILL.md)** — Shared discipline and vocabulary for designing deep modules: a lot of behaviour behind a small interface, placed at a clean seam, testable through that interface.
+- **[engineering-principles](./skills/engineering-principles/SKILL.md)** — Selective vocabulary for 21 recurring engineering decisions. Workflows proactively scan its trigger index and load only the matched leaves; user-named principles receive extra emphasis rather than enabling selection.
+- **[verification](./skills/verification/SKILL.md)** — Create, run, or maintain portable project instructions for proving behavior through the real UI, CLI, service, mobile app, or public library interface.
 - **[code-review](./skills/code-review/SKILL.md)** — Two-axis review of the diff since a fixed point: **Standards** (does it follow the repo's coding standards, plus a Fowler smell baseline?) and **Spec** (does it faithfully implement the originating issue/spec?), run as parallel sub-agents so neither pollutes the other.
 - **[resolving-merge-conflicts](./skills/resolving-merge-conflicts/SKILL.md)** — Work through an in-progress git merge or rebase conflict hunk by hunk, resolving by intent traced to each side's primary source, then finish the operation — never `--abort`.
 - **[wizard](./skills/wizard/SKILL.md)** — Generate an interactive bash wizard for setup steps only a human can perform, such as credentials, dashboards, migrations, and cutovers.

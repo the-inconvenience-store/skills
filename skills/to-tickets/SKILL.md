@@ -22,6 +22,8 @@ If you have not already explored the codebase, do so to understand the current s
 
 Look for opportunities to prefactor the code to make the implementation easier. "Make the change easy, then make the easy change."
 
+Call the Skill tool with `engineering-principles`. Apply Sequence Verifiable Units and Outcome-Oriented Execution. Apply Migrate Callers Then Delete Legacy APIs and Separate Before Serializing Shared State only when the change or ticket graph triggers them.
+
 ### 3. Draft vertical slices
 
 Break the work into **tracer bullet** tickets.
@@ -30,6 +32,7 @@ Break the work into **tracer bullet** tickets.
 
 - Each slice cuts a narrow but COMPLETE path through every layer (schema, API, UI, tests) — vertical, NOT a horizontal slice of one layer
 - A completed slice is demoable or verifiable on its own
+- Each slice states the real user or consumer path that will prove it works
 - Each slice is sized to fit in a single fresh context window
 - Any prefactoring should be done first
 
@@ -46,6 +49,7 @@ Present the proposed breakdown as a numbered list. For each ticket, show:
 - **Title**: short descriptive name
 - **Blocked by**: which other tickets (if any) must complete first
 - **What it delivers**: the end-to-end behaviour this ticket makes work
+- **Proof**: which public path and observable result demonstrate the ticket works
 
 Ask the user:
 
@@ -79,6 +83,8 @@ Do NOT close or modify any parent issue.
 - [ ] Acceptance criterion 1
 - [ ] Acceptance criterion 2
 
+**Proof:** the public path, observable result, durable side effect, and behavior that must remain unchanged.
+
 </local-ticket-template>
 
 <issue-template>
@@ -95,6 +101,10 @@ The end-to-end behaviour this ticket makes work, from the user's perspective —
 
 - [ ] Criterion 1
 - [ ] Criterion 2
+
+## Proof
+
+The public path, observable result, durable side effect, and behavior that must remain unchanged.
 
 ## Blocked by
 

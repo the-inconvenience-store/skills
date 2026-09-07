@@ -31,8 +31,9 @@ Reach for it once a change has been talked through and the domain language is se
 - **Problem statement** — what is broken or missing, and why it's worth solving, in the project's own vocabulary.
 - **Solution** — the shape of the fix at a high level, before any implementation detail.
 - **User stories** — an extensive, numbered list of the concrete behaviours the change must support, each one independently checkable.
-- **Implementation decisions** — the choices already settled during the conversation, so they aren't relitigated later.
-- **Testing decisions** — the seams the feature will be tested at, and what "done" looks like.
+- **Implementation decisions** — the choices already settled during the conversation, sharpened by the engineering principles their triggers select.
+- **Testing decisions** — the seams where durable behavior tests will live.
+- **Verification** — the real user or consumer path, observable result, durable side effects, and behavior that must remain unchanged.
 - **Out-of-scope items** — what this change deliberately does *not* cover, to keep the ticket bounded.
 - **Further notes** — anything else worth carrying forward that doesn't fit the sections above.
 
@@ -47,6 +48,7 @@ That matters for agentic development: a good interface gives tests something dur
 - It starts writing the spec instead of asking you a fresh round of questions.
 - It checks the seams with you before writing, and proposes as few as possible.
 - The spec comes back in your project's domain vocabulary, not generic boilerplate.
+- It names how the completed behavior will be proved through its real surface.
 
 ## Where it fits
 
@@ -56,4 +58,4 @@ That matters for agentic development: a good interface gives tests something dur
 grill-with-docs → to-spec → to-tickets → implement → code-review
 ```
 
-Reach for it after the plan and domain language are resolved, and before you break the work into implementation tickets. Its key neighbours are [grill-with-docs](https://aihero.dev/skills-grill-with-docs), which sharpens the context so the spec is precise, and [to-tickets](https://aihero.dev/skills-to-tickets), which turns the spec into a set of tickets for [implement](https://aihero.dev/skills-implement) to build. When you're unsure which skill or flow fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.
+Reach for it after the plan and domain language are resolved, and before you break the work into implementation tickets. Its key neighbours are [grill-with-docs](https://aihero.dev/skills-grill-with-docs), which sharpens the context so the spec is precise, and [to-tickets](https://aihero.dev/skills-to-tickets), which turns the spec into tickets carrying an explicit proof for [implement](https://aihero.dev/skills-implement) to build and [verification](https://aihero.dev/skills-verification) to exercise. [engineering-principles](https://aihero.dev/skills-engineering-principles) supplies selective defaults without reopening settled decisions. When you're unsure which skill or flow fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.

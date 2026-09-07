@@ -5,6 +5,8 @@ description: Grill the user relentlessly about a plan, decision, or idea. Use wh
 
 Interview the user relentlessly until you reach a shared understanding. Map this as a **design tree**: every decision branches into the decisions that hang off it.
 
+Call the Skill tool with `engineering-principles` before the first round. Apply Experience First to product choices and Keep Execution Unblocked to fact-finding, then independently scan the full principle index against the current frontier. Repeat the scan whenever an answer exposes a new decision shape; the user does not need to name principles for them to apply.
+
 Work the tree in **rounds**. The **frontier** is every decision whose prerequisites are already settled: the questions you can ask _now_ without guessing at answers you haven't heard yet. Ask the whole frontier in one round: number each question and give your recommended answer. Then wait for the user's answers before the next round.
 
 Format a round like so:

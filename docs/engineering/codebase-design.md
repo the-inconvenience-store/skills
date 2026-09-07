@@ -14,7 +14,7 @@ npx skills update codebase-design
 
 `codebase-design` gives you a shared, precise vocabulary for designing **deep modules** — a lot of behaviour hidden behind a small interface, placed at a clean seam, testable through that interface.
 
-It is a **language, not a procedure**. It doesn't restructure your code or hand you a refactor plan — it fixes the words (module, interface, depth, seam, adapter, leverage, locality) so that every design conversation and every other skill that touches design speaks the same way. Consistent language is the whole point; "component," "service," "API," and "boundary" are deliberately banned because they blur the distinctions that matter.
+It is a **language, not a refactoring plan**. When that language is applied to a concrete design, it pulls only the relevant [engineering principles](https://aihero.dev/skills-engineering-principles): foundational data shape, reader load, boundary placement, structural behavior, or competing designs when the choice is expensive to reverse.
 
 ## When to reach for it
 
@@ -34,9 +34,9 @@ Callers and tests cross the same seam, so a well-placed interface gives tests so
 
 ## Pulled out on purpose
 
-`codebase-design` is the **single source of truth** for the deep-module vocabulary, split out as its own model-invoked skill so anything can reach it. Other skills point at it rather than restating the words: [tdd](https://aihero.dev/skills-tdd) borrows it to place a seam before writing the test, [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) leans on it while restructuring existing code, and [to-spec](https://aihero.dev/skills-to-spec) speaks it when it sketches seams and deepening opportunities before writing a spec.
+`codebase-design` is the **single source of truth** for deep-module vocabulary. Other skills point at it rather than restating the words: [tdd](https://aihero.dev/skills-tdd) borrows it to place a seam before writing the test, [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) uses it while restructuring existing code, and [to-spec](https://aihero.dev/skills-to-spec) speaks it when sketching test seams.
 
-The point of keeping it standalone is that you can also reach for it on its own — as a **reference** for how to think about module design — without triggering the larger process any of those skills mandate. Fix the words once, in one place, and every design conversation inherits them.
+[Engineering-principles](https://aihero.dev/skills-engineering-principles) remains a separate decision layer. It says when to minimise reader load, redesign from first principles, or exhaust the design space; `codebase-design` supplies the module, interface, depth, seam, adapter, leverage, and locality terms needed to act on those decisions.
 
 ## Where it fits
 

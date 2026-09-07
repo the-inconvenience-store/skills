@@ -1,0 +1,3 @@
+interface:
+  display_name: "Verification"
+  short_description: "Prove behavior on the real user-facing surface"

@@ -35,6 +35,8 @@ Look for the originating spec, in this order:
 
 Anything in the repo that documents how code should be written, such as `CODING_STANDARDS.md` or `CONTRIBUTING.md`.
 
+Call the Skill tool with `engineering-principles`. Select only principles whose triggers are present in this diff. Treat them as judgment baselines below documented repository standards, alongside the smell baseline; do not turn the full principle index into a checklist.
+
 On top of whatever the repo documents, the Standards axis always carries the **smell baseline** below — a fixed set of Fowler code smells (_Refactoring_, ch.3) that applies even when a repo documents nothing. Two rules bind it:
 
 - **The repo overrides.** A documented repo standard always wins; where it endorses something the baseline would flag, suppress the smell.
@@ -61,7 +63,8 @@ Each smell reads *what it is* → *how to fix*; match it against the diff:
 
 - The full diff command and commit list.
 - The list of standards-source files you found in step 3, **plus the smell baseline from step 3** pasted in full — the sub-agent has no other access to it.
-- The brief: "Report — per file/hunk where relevant — (a) every place the diff violates a documented standard: cite the standard (file + the rule); and (b) any baseline smell you spot: name it and quote the hunk. Distinguish hard violations from judgement calls — documented-standard breaches can be hard, but baseline smells are always judgement calls, and a documented repo standard overrides the baseline. Skip anything tooling enforces. Under 400 words."
+- The selected engineering principles and the concrete trigger each one matched. Omit every untriggered principle.
+- The brief: "Report — per file/hunk where relevant — (a) every place the diff violates a documented standard: cite the standard (file + the rule); (b) any baseline smell you spot: name it and quote the hunk; and (c) any selected engineering principle the diff violates: name the triggered principle and the concrete decision at issue. Distinguish hard violations from judgement calls — documented-standard breaches can be hard, but smells and principles are judgement calls, and a documented repo standard overrides both. Skip anything tooling enforces. Under 400 words."
 
 **Spec sub-agent prompt** — include:
 

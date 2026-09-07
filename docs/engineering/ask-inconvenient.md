@@ -14,7 +14,7 @@ npx skills update ask-inconvenient
 
 `ask-inconvenient` is the router over the skills in this repo. You describe the situation you're in; it tells you which skill or flow fits and in what order to run them.
 
-It **does no work itself**. It doesn't grill, write a spec, or fix anything — it only orients. It exists for the **user-invoked** skills above all: nothing fires those for you, so *you* have to remember they exist, and `ask-inconvenient` is the memory you offload that to. It also points at the model-invoked skills you'd reach for by name — `/tdd`, `/diagnosing-bugs`, `/prototype`, `/code-review`, and the two vocabulary references, `/domain-modeling` and `/codebase-design`. It answers "which one, and when", then hands you off to the skill that actually does the job.
+It **does no work itself**. It doesn't grill, write a spec, or fix anything — it only orients. It exists for the user-invoked skills above all: nothing fires those for you, so `ask-inconvenient` is the memory you offload that to. It also maps model-invoked disciplines such as [verification](https://aihero.dev/skills-verification) and the three vocabulary layers: [domain-modeling](https://aihero.dev/skills-domain-modeling), [codebase-design](https://aihero.dev/skills-codebase-design), and [engineering-principles](https://aihero.dev/skills-engineering-principles).
 
 ## When to reach for it
 
@@ -24,7 +24,7 @@ Reach for it whenever you're unsure which skill or flow a situation calls for: y
 
 ## Flows, not just skills
 
-The idea `ask-inconvenient` gives you to think with is the **flow** — a path *through* the skills rather than a single one. Most work runs along one **main flow** (idea → ship: grill → spec → tickets → implement → review), two **on-ramps** merge onto it (a triage lane for incoming bugs and requests; a codebase-health lane that generates ideas), and everything else is a **standalone** you reach for on its own. Ask a question and you get placed on the right flow, at the right step — not just handed a tool.
+The idea `ask-inconvenient` gives you to think with is the **flow** — a path *through* the skills rather than a single one. Most work runs along one main flow: grill → spec → tickets → implement through TDD → review → real-surface verification. On-ramps merge bugs, incoming requests, and codebase-health work onto it; standalones remain available when only one discipline is needed.
 
 ## Phase boundaries
 

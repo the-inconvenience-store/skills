@@ -12,9 +12,9 @@ npx skills update diagnosing-bugs
 
 ## What it does
 
-`diagnosing-bugs` runs a disciplined diagnosis loop for hard bugs and performance regressions — building a repro, minimising it, ranking hypotheses, instrumenting, then fixing with a regression test.
+`diagnosing-bugs` runs a disciplined diagnosis loop for hard bugs and performance regressions: build a repro, minimise it, rank hypotheses, instrument, fix with a regression test, then prove the original path on the real surface.
 
-It refuses to hypothesise before you have a **tight feedback loop** — one runnable command that already goes red on *this* bug. Reading code to build a theory before that command exists is the exact failure this skill prevents. It also redacts secrets from commands, outputs, logs, and captured artifacts before showing them to the agent. No red-capable loop, no diagnosis.
+It refuses to hypothesise before you have a **tight feedback loop** — one runnable command that already goes red on *this* bug. Existing project verification instructions may supply the launch and driving route, but they count only after the loop asserts the exact symptom. No red-capable loop, no diagnosis.
 
 ## When to reach for it
 
@@ -24,9 +24,9 @@ Reach for it on the hard ones: the bug that resists a first glance, the intermit
 
 ## The tight loop is the skill
 
-Everything else — bisection, hypothesis-testing, instrumentation — is mechanical once you have the signal. So the skill spends disproportionate effort on Phase 1: constructing a pass/fail command that drives the actual bug code path and asserts the user's exact symptom, then **tightening** it until it is fast, deterministic, and agent-runnable. A 30-second flaky loop is barely better than none; a 2-second deterministic one is a debugging superpower.
+Everything else — bisection, hypothesis-testing, instrumentation — is mechanical once you have the signal. The skill always applies Fix Root Causes, Build the Lever, and Prove It Works, then proactively scans the remaining principle triggers against the symptom, suspected mechanism, and intended fix. It spends disproportionate effort constructing a command that drives the actual bug path and asserts the user's exact symptom, tightening that loop until it is fast, deterministic, and agent-runnable.
 
-It gives you a ladder of ways to build that loop — failing test, curl script, CLI diff, headless browser, replayed trace, throwaway harness, fuzz loop, `git bisect run`, differential run — and, only as a last resort, a human-in-the-loop bash script. For non-deterministic bugs the goal isn't a clean repro but a **higher reproduction rate**: loop the trigger, parallelise, add stress until the flake is debuggable.
+It gives you a ladder of ways to build the loop — existing [verification](https://aihero.dev/skills-verification) instructions, a failing test, curl script, CLI diff, headless browser, replayed trace, throwaway harness, fuzz loop, `git bisect run`, or differential run — and, only as a last resort, a human-in-the-loop bash script. For non-deterministic bugs the target is a higher reproduction rate: loop the trigger and add stress until the flake is debuggable.
 
 ## It's working if
 
@@ -35,7 +35,8 @@ It gives you a ladder of ways to build that loop — failing test, curl script, 
 - Hypotheses arrive as a ranked, falsifiable list shown to you before any are tested.
 - Debug instrumentation is tagged (`[DEBUG-...]`) and grepped away before it declares done.
 - Captured artifacts quote only the lines that carry the signal; credentials stay in environment variables.
+- The regression test passes and the original real-surface path reports `VERIFIED`.
 
 ## Where it fits
 
-`diagnosing-bugs` is a reach-for-it-anytime standalone — you drop into it the moment something is broken, and drop out once the fix and its regression test are in. It ends at cleanup and hands off to nothing. When the real finding is that there's no good seam to lock the bug down — the code, not the bug, is the problem — that's your cue to run [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) yourself afterwards. When you're unsure which skill fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.
+`diagnosing-bugs` is a reach-for-it-anytime standalone — you drop into it the moment something is broken and leave only after the regression test and original public path pass. It uses [engineering-principles](https://aihero.dev/skills-engineering-principles) for the shared root-cause and proof rules, and [verification](https://aihero.dev/skills-verification) for the final real-surface verdict. When the real finding is that there's no good seam to lock the bug down, that's your cue to run [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) yourself afterwards. When you're unsure which skill fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.
