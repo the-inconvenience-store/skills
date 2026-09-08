@@ -1,6 +1,6 @@
 {
   "name": "inconvenient-skills",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Inconvenient agent skills for real engineering — grilling, spec/ticket flows, TDD, code review, domain modelling and more.",
   "author": {
     "name": "Inconvenient",
