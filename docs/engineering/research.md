@@ -24,6 +24,8 @@ Reach for it when the next step is *finding something out* — how an API behave
 
 The defining move is that the reading runs as a **background agent**. You keep working; it goes off, follows each claim back to its primary source, and drops a single cited Markdown file into wherever the repo keeps such notes. Research is legwork you delegate, not thinking you outsource — you get back a document to react to, with its sources attached.
 
+The delegation happens exactly once. The background agent is told to do the reading itself rather than spin up another researcher, because an agent handed these same instructions will otherwise fire them again and you end up paying for overlapping runs you can't see. The rule cuts the other way too: where delegation isn't available at all, the reading happens in-thread — an undelegatable run still owes you the file, not silence.
+
 ## Where it fits
 
-A reach-for-it-anytime standalone that feeds the thinking skills: the file it produces is something to grill, plan, or design against, so it sits upstream of work like [grilling](https://aihero.dev/skills-grilling) and [to-prd](https://aihero.dev/skills-to-prd) rather than in the build chain. For the whole map, see [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient).
+A reach-for-it-anytime standalone that feeds the thinking skills: the file it produces is something to grill, plan, or design against, so it sits upstream of work like [grilling](https://aihero.dev/skills-grilling) and [to-spec](https://aihero.dev/skills-to-spec) rather than in the build chain. For the whole map, see [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient).

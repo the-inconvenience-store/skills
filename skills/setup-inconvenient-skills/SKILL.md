@@ -62,6 +62,8 @@ If it is installed, ask exactly one question:
 
 The defaults are the five canonical roles, each label string equal to its name: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`. On **yes**, write them as-is. Only if the user says no — usually because their tracker already uses other names (e.g. `bug:triage` for `needs-triage`) — collect the overrides so `triage` applies existing labels instead of creating duplicates.
 
+Then check which of the agreed label strings the tracker actually has (on GitHub, `gh label list`). `docs/agents/triage-labels.md` is only a mapping; writing it does not create anything. Name the missing ones and ask whether to create them, since that writes to the shared tracker. Step 4 does the creating.
+
 **Section C — Domain docs.** Default to **single-context** — one `CONTEXT.md` + `docs/adr/` at the repo root. This fits almost every repo; write it without asking.
 
 Offer **multi-context** — a root `CONTEXT-MAP.md` pointing to per-context `CONTEXT.md` files — only when exploration found monorepo signals. Then confirm which layout they want.
@@ -122,7 +124,9 @@ Then write the docs files using the seed templates in this skill folder as a sta
 
 For "other" issue trackers, write `docs/agents/issue-tracker.md` from scratch using the user's description.
 
-**Done when:** the chosen agent file contains one current `## Agent skills` block and every approved configuration document exists under `docs/agents/`.
+**Create the labels the user approved in Section B.** On GitHub that is `gh label create "<name>" --force` per missing string; other trackers use their own command. This matters because GitHub rejects `gh issue create --label <missing>` outright rather than creating the label, so an uncreated label means `/triage` and `/to-tickets` lose the whole write, not just the label. If `/wayfinder` is installed, create its labels too: `wayfinder:map`, `wayfinder:research`, `wayfinder:prototype`, `wayfinder:grilling`, `wayfinder:task`. Where the tracker has no label concept (local markdown), there is nothing to create — the role strings live in each file's `Status:` line.
+
+**Done when:** the chosen agent file contains one current `## Agent skills` block, every approved configuration document exists under `docs/agents/`, and every approved label string either already existed in the tracker or was created.
 
 ### 5. Establish guardrails
 

@@ -5,6 +5,8 @@ description: Investigate a question against high-trust primary sources and captu
 
 Spin up a **background agent** to do the research, so you keep working while it reads.
 
+Delegate exactly once. If you are already a background agent or sub-agent, or you cannot delegate, do the research yourself instead of spawning anything — an undelegatable run must still produce the file, not quietly do nothing. End the background agent's prompt with: "Do the research yourself. Do not call the Skill tool with `research` and do not spawn further agents."
+
 Its job:
 
 1. Investigate the question against **primary sources** — official docs, source code, specs, first-party APIs — not a secondary write-up of them. Follow every claim back to the source that owns it.

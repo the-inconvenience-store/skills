@@ -24,7 +24,7 @@ Reach for it once you have an agreed plan or a written spec and you want it spli
 
 ## Prerequisites
 
-`to-tickets` publishes into your issue tracker, so [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) must have configured the tracker and its triage label vocabulary for this repo first. On a real tracker it applies the ready-for-agent label as it publishes.
+`to-tickets` publishes into your issue tracker, so [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) must have configured the tracker and its triage label vocabulary for this repo first. On a real tracker it applies the ready-for-agent label as it publishes, and checks the label exists before the first create — on GitHub a missing label fails the create outright and takes the ticket with it.
 
 ## One artifact, two readings
 
@@ -32,6 +32,8 @@ The blocking edges are the whole point. They make one set of tickets read two wa
 
 - **Local files** → one file per ticket under `.scratch/<feature>/issues/`, numbered blockers-first, the edges written as text. You work them top-to-bottom, by hand, staying in the loop.
 - **A real tracker (GitHub, Linear)** → one issue per ticket, the edges as native blocking links (or sub-issues). Any ticket whose blockers are all done is on the **frontier** and can be grabbed — so several agents can run at once.
+
+Native is the default on a real tracker, and the "Blocked by" body line is only the fallback for trackers that have no such edge. GitHub does have one — `gh issue create --blocked-by`, plus `--parent` for the sub-issue link — and because blockers are published first, their numbers are always known by the time a dependent ticket is created. An edge written as body text on a tracker that supports the real thing is invisible to the frontier query.
 
 The edges live in the ticket regardless of medium; the medium only decides whether anything acts on them in parallel. `to-tickets` produces the artifact — how you run it (sequential by hand, or a parallel fleet) is up to you.
 

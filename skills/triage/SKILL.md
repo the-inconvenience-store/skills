@@ -42,6 +42,8 @@ Every triaged issue should carry exactly one category role and one state role. I
 
 These are canonical role names — the actual label strings used in the issue tracker may differ. The mapping should have been provided to you. If not, tell the user to run `/setup-inconvenient-skills`.
 
+The mapping says what a label is called, not that the tracker has it. Before the first label write of a session, confirm the strings you are about to apply exist (on GitHub, `gh label list`). If one is missing, say so and offer to create it rather than firing the write — GitHub fails `--label <missing>` outright, which would drop the comment or state change along with the label.
+
 State transitions: an unlabeled issue normally goes to `needs-triage` first; from there it moves to `needs-info`, `ready-for-agent`, `ready-for-human`, or `wontfix`. `needs-info` returns to `needs-triage` once the reporter replies. The maintainer can override at any time — flag transitions that look unusual and ask before proceeding.
 
 ## Invocation

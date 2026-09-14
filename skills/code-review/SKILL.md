@@ -59,18 +59,20 @@ Each smell reads *what it is* → *how to fix*; match it against the diff:
 
 ### 4. Spawn both sub-agents in parallel
 
+Exactly two sub-agents run, and neither delegates further. Both briefs below end with the same guard, because a sub-agent that can rediscover this skill will spawn its own pair and fan out without bound.
+
 **Standards sub-agent prompt** — include:
 
 - The full diff command and commit list.
 - The list of standards-source files you found in step 3, **plus the smell baseline from step 3** pasted in full — the sub-agent has no other access to it.
 - The selected engineering principles and the concrete trigger each one matched. Omit every untriggered principle.
-- The brief: "Report — per file/hunk where relevant — (a) every place the diff violates a documented standard: cite the standard (file + the rule); (b) any baseline smell you spot: name it and quote the hunk; and (c) any selected engineering principle the diff violates: name the triggered principle and the concrete decision at issue. Distinguish hard violations from judgement calls — documented-standard breaches can be hard, but smells and principles are judgement calls, and a documented repo standard overrides both. Skip anything tooling enforces. Under 400 words."
+- The brief: "Report — per file/hunk where relevant — (a) every place the diff violates a documented standard: cite the standard (file + the rule); (b) any baseline smell you spot: name it and quote the hunk; and (c) any selected engineering principle the diff violates: name the triggered principle and the concrete decision at issue. Distinguish hard violations from judgement calls — documented-standard breaches can be hard, but smells and principles are judgement calls, and a documented repo standard overrides both. Skip anything tooling enforces. Under 400 words. Perform this review yourself: do not call the Skill tool with `code-review` and do not spawn further agents."
 
 **Spec sub-agent prompt** — include:
 
 - The diff command and commit list.
 - The path or fetched contents of the spec.
-- The brief: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding. Under 400 words."
+- The brief: "Report: (a) requirements the spec asked for that are missing or partial; (b) behaviour in the diff that wasn't asked for (scope creep); (c) requirements that look implemented but where the implementation looks wrong. Quote the spec line for each finding. Under 400 words. Perform this review yourself: do not call the Skill tool with `code-review` and do not spawn further agents."
 
 If the spec is missing, skip the Spec sub-agent and note this in the final report.
 

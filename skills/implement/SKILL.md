@@ -10,7 +10,7 @@ Before editing production code, call the Skill tool with `engineering-principles
 
 Call the Skill tool with `tdd` and work one red-green vertical slice at a time at the pre-agreed seams. Run typechecking and the narrow test files regularly, then the full test suite once after the implementation is coherent.
 
-Call the Skill tool with `code-review` when the implementation and automated checks are complete. Address accepted Standards and Spec findings, then rerun the affected checks.
+Call the Skill tool with `code-review` when the implementation and automated checks are complete. Commit the outstanding work first and name the commit you branched from as the fixed point: the review reads `git diff <fixed-point>...HEAD`, so anything still staged or in the working tree is invisible to it and would be reviewed as an empty diff. Address accepted Standards and Spec findings, then rerun the affected checks and commit those edits too.
 
 After the final review edits, call the Skill tool with `verification`. Prove the changed behavior through its real user or consumer surface. `INCONCLUSIVE` is not completion: report the exact gap instead of substituting tests or compilation for the missing observation.
 

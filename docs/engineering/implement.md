@@ -28,6 +28,8 @@ The idea `implement` runs on is the **seam** — the stable interface a feature 
 
 Around that core it keeps the loop tight: typecheck often, run narrow test files as it goes, and run the whole suite once the implementation is coherent. It then runs separate Standards and Spec review agents, addresses accepted findings, and calls [verification](https://aihero.dev/skills-verification) against the final state.
 
+The work is committed before that review runs, not after. [code-review](https://aihero.dev/skills-code-review) reads `git diff <fixed-point>...HEAD`, which cannot see staged or working-tree changes, so reviewing an uncommitted implementation reviews an empty diff and reports nothing wrong with it.
+
 ## Where it fits
 
 `implement` is the build and proof step near the end of the main chain:

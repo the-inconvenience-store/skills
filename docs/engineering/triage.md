@@ -24,7 +24,7 @@ Reach for it when your issue tracker has raw, unevaluated reports and you want t
 
 ## Prerequisites
 
-`triage` reads and writes your issue tracker, so [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) must have configured the tracker and the label mapping first. The role names above are **canonical** — the actual label strings in your tracker may differ, and that mapping is what setup provides. The config also decides whether external PRs count as a request surface, and who counts as external.
+`triage` reads and writes your issue tracker, so [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) must have configured the tracker and the label mapping first. The role names above are **canonical** — the actual label strings in your tracker may differ, and that mapping is what setup provides. The mapping says what a label is *called*, not that the tracker has it, so `triage` confirms the strings exist before its first label write and offers to create any that don't: on GitHub a missing label fails the write and takes the comment or state change with it. The config also decides whether external PRs count as a request surface, and who counts as external.
 
 ## A PR is an issue with attached code
 

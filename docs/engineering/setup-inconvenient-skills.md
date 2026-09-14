@@ -29,10 +29,12 @@ Reach for it **once per repo, before the first use of any other engineering skil
 It leads each with a recommended answer you can accept in a word, and skips whatever it can already infer — so most runs are a couple of quick confirmations:
 
 - **Issue tracker** — where work is tracked, so `triage`/`to-spec`/`to-tickets` know whether to call `gh`, `glab`, `bd`, write markdown under `.scratch/`, or follow a workflow you describe. GitHub, GitLab, Beads, local markdown, or other. (It proposes Beads when it finds `.beads/`; otherwise it follows your `git remote`.)
-- **Triage labels** — asked only if the `triage` skill is installed, and then just: keep the default labels (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`)? Say no only if your tracker already uses other names, so `triage` applies real ones instead of creating duplicates.
+- **Triage labels** — asked only if the `triage` skill is installed, and then just: keep the default labels (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`)? Say no only if your tracker already uses other names, so `triage` applies real ones instead of creating duplicates. Setup then checks which of the agreed strings your tracker actually has and offers to create the missing ones, since `triage-labels.md` is only a mapping and writing it creates nothing.
 - **Domain docs** — assumed single-context (one `CONTEXT.md` + `docs/adr/` at the root), which fits almost every repo; it only raises a multi-context map when it spots monorepo signals.
 
 The configuration output is `issue-tracker.md`, `domain.md`, and optionally `triage-labels.md` under `docs/agents/`, plus an `## Agent skills` block in the repository's existing `CLAUDE.md` or `AGENTS.md`.
+
+On a fresh GitHub repo the approved labels do not exist yet, and that is worth the extra confirmation: `gh issue create --label <missing>` fails outright rather than creating the label, so an uncreated label costs the whole issue later, not just its tag. Setup creates them here — the `wayfinder:*` labels too, when that skill is installed — so the first `/triage` or `/to-tickets` write lands.
 
 ## Guardrails and verification
 
@@ -43,6 +45,7 @@ Verification owns the repository interview, surface map, driving instructions, e
 ## It's working if
 
 - The tracker, domain layout, and applicable triage labels are recorded under `docs/agents/`, and one `## Agent skills` block points to the current configuration.
+- Every approved label string exists in the tracker itself, not just in `triage-labels.md`.
 - The approved project guardrails run, with any unverified boundary reported.
 - `docs/agents/verification/README.md` describes every discovered surface, one mapped feature is `VERIFIED`, and the agent-instruction block points to it.
 - Afterwards, issue workflows use the configured tracker while implementation and diagnosis can follow the recorded real-surface verification route.
