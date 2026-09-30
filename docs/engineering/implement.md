@@ -30,6 +30,36 @@ Around that core it keeps the loop tight: typecheck often, run narrow test files
 
 The work is committed before that review runs, not after. [code-review](https://aihero.dev/skills-code-review) reads `git diff <fixed-point>...HEAD`, which cannot see staged or working-tree changes, so reviewing an uncommitted implementation reviews an empty diff and reports nothing wrong with it.
 
+## Common questions
+
+**It finished, but my ticket is still open and the acceptance criteria are still unchecked.**
+
+Half-fixed here. Upstream, `implement` ends at the commit and never touches the work item at all. This version writes `closes #ISSUENUM` into the commit footer when GitHub is the configured tracker, so GitHub closes the issue when the commit lands on the default branch — which is what unblocks the next ticket, since `to-tickets` defines the frontier as tickets whose blockers are all closed. Three gaps remain: the footer does nothing on a branch that has not merged yet, other trackers have no equivalent, and nothing ticks the `- [ ]` acceptance boxes on the issue. Reconcile the criteria yourself.
+
+It does act on `code-review`'s output, unlike upstream: accepted Standards and Spec findings get addressed, the affected checks rerun, and those edits are committed too.
+
+**Can I point it at all my tickets at once, or run several in parallel?**
+
+Not with `/implement`: one invocation, one ticket. For a whole spec in one run, use [implement-spec](https://aihero.dev/skills-implement-spec), which fans the tickets out to [subagents](https://www.aihero.dev/ai-coding-dictionary/subagent), each in its own worktree, across the ready frontier, and merges them onto one integration branch. Running several `/implement` sessions side by side in one checkout is worse than unsupported: one field report describes a `git commit --amend` in one session landing on another session's commit, a stash vanishing from `refs/stash`, and commits landing on the wrong branch, all in a single afternoon across three issues. The sessions share one working directory, one index, and one HEAD. Git worktrees are the community workaround, and note that `refs/stash` is shared across worktrees too, so worktrees alone do not fix the stash case.
+
+**Can it open a pull request instead of committing?**
+
+Not built in. It commits straight to the current branch, which several people find too eager: the code lands before they have had a chance to verify it works. There is no configuration flag and no PR mode. People override it in the invocation ("commit to a branch and open a PR") or by editing their local copy of the skill. When the agent does write the PR, [pr](https://aihero.dev/skills-pr) shapes its body.
+
+**`code-review` says it cannot see my changes.**
+
+`code-review` reviews `git diff <fixed-point>...HEAD`, three-dot, which excludes staged and working-tree changes. Upstream, `implement` invokes it before committing, so unless an interim commit already exists there is nothing in that diff and the review comes back empty. This fork closes that: the skill commits the outstanding work first and names the commit you branched from as the fixed point, and says why in the same sentence so the agent doesn't quietly skip it. If you are invoking `code-review` yourself rather than through `implement`, the same rule applies — commit first, then review against the point you branched from.
+
+Separately, some people deliberately do not want the review inside the run at all, because an agent reviewing the code it just wrote is biased toward its own solution. Running [code-review](https://aihero.dev/skills-code-review) in a fresh session against a fixed point is a legitimate alternative, and is the same reason that skill runs its two axes in separate sub-agents.
+
+**One ticket burned 150k tokens. Am I using it wrong?**
+
+Probably the ticket is too big rather than the skill being misused. A run does codebase exploration, a red-green loop per seam, a full suite, and a review, so a non-trivial ticket exceeding 100k [tokens](https://www.aihero.dev/ai-coding-dictionary/token) is normal rather than a sign something broke. The lever is upstream: right-size the tickets in [to-tickets](https://aihero.dev/skills-to-tickets) so each fits one fresh window. If a single ticket keeps blowing out, split it rather than raising the [effort](https://www.aihero.dev/ai-coding-dictionary/effort) level.
+
+**`/implement #2` in a fresh session worked on something completely unrelated.**
+
+`#2` is resolved against whatever numbered list the agent can see, which in a fresh session may be a todo file, a checklist, or another work list rather than the configured tracker. The resolution is confident rather than fail-closed, so the mistake is not obvious until it has started. Pass the full reference, the issue URL or `owner/repo#2`, and ask it to confirm the title back before it begins.
+
 ## Where it fits
 
 `implement` is the build and proof step near the end of the main chain:

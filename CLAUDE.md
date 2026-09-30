@@ -12,6 +12,8 @@ The top-level `README.md` groups promoted skills into Engineering and Productivi
 
 Every promoted skill also has a human-facing docs page at `docs/<category>/<skill-name>.md`, where `<category>` is `engineering` or `productivity`. The published URL is `https://aihero.dev/skills-<skill-name>` regardless of category. When you add, rename, or change a promoted skill, create or re-sync its docs page following [.agents/writing-docs.md](./.agents/writing-docs.md). Drafts under `in-progress/` get no docs page.
 
+Removing a skill leaves its docs page in place as an **archived tombstone**: the published URL stays alive, the page opens with an `> **Archived.**` banner naming the version that removed it and what replaces it, and the body moves to past tense. `docs/engineering/resolving-merge-conflicts.md` is the worked example. A tombstone is the one docs page with no skill behind it, so don't delete it as an orphan.
+
 Every `SKILL.md` is either user-invoked (`disable-model-invocation: true` plus `policy.allow_implicit_invocation: false` in `agents/openai.yaml`, reachable only by the human) or model-invoked (model- or user-reachable). See [.agents/invocation.md](./.agents/invocation.md).
 
 [`ask-inconvenient`](./skills/ask-inconvenient/SKILL.md) is the router that maps every user-reachable skill and how they relate. The same trigger that re-syncs a docs page applies to it: whenever you add, rename, remove, or change how a user-reachable skill fits the flows, re-read `ask-inconvenient`'s `SKILL.md` and update it so the map stays accurate — a new skill it never mentions, or a stale one it still routes to, is a router that lies.

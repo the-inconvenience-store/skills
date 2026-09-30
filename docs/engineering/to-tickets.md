@@ -47,6 +47,32 @@ Before slicing, `to-tickets` applies the engineering principles for verifiable s
 
 One shape breaks the tracer-bullet rule: a **wide refactor** — a single mechanical change (rename a column, retype a shared symbol) whose **blast radius** fans across the whole codebase, so one edit breaks thousands of call sites at once and no vertical slice can land green. `to-tickets` slices it as **expand–contract** instead: expand (add the new form beside the old so nothing breaks), migrate (move call sites over in batches sized by blast radius, one ticket per batch, CI green throughout because the old form still exists), then contract (delete the old form once no caller remains). When even the batches can't stay green alone, they share an integration branch that all block a final integrate-and-verify ticket, and green is promised only there.
 
+## Common questions
+
+**It produced twelve tickets for a three-line change.**
+Over-decomposition is the most reported friction on this skill, and it is consistent across practitioners: the [model](https://www.aihero.dev/ai-coding-dictionary/model) defaults to atomic units and loses the grouping that would make them meaningful. The quiz step exists for exactly this: ask it to merge, and it will. The deeper answer is that the tickets have a floor: if the whole change fits in one context window, you don't need this skill at all. Go straight to [implement](https://aihero.dev/skills-implement).
+
+**The tickets came out one per layer: all the schema in one, all the API in another.**
+This is the failure the vertical-slice rule is written against, and the skill still produces it sometimes. Catch it at the quiz step by asking one question per ticket: what can I demo when this is done? A ticket with no answer is a horizontal slice. Some people add a "demo path" line to each ticket for this reason, and report it nudges the model toward vertical decomposition.
+
+**On GitHub the tickets weren't created as sub-issues of the spec issue.**
+Reported upstream across a dozen runs and several models, [most fully in issue #554](https://github.com/mattpocock/skills/issues/554), and worse on Codex than on Claude. This fork names the native commands explicitly, in both the skill and the GitHub tracker template: `gh issue create --parent <n>` at creation, or `gh issue edit <parent> --add-sub-issue <n>` after the fact. Both need `gh` ≥ 2.94, so check `gh --version` first; on an older `gh`, or where sub-issues aren't enabled, the fallback is a task list in the parent body plus `Part of #<map>` at the top of each child.
+
+**"Blocked by" was written into the issue body instead of a real blocking link.**
+Same class of problem, [reported upstream in issue #513](https://github.com/mattpocock/skills/issues/513), where the agent went as far as asserting GitHub has no native blocking relationship at all. It does, and this fork's skill and tracker template both say so and give the command: `gh issue create --blocked-by 12,15` at creation, or `gh issue edit <child> --add-blocked-by <n>` later. Because blockers are published first, their numbers are always available at creation time. The body text is the fallback for trackers with no native edge, not the default.
+
+**Where do the local tickets go? The v1.1 notes said a root-level `tickets.md`.**
+They did, and that was a bug: a single shared file also raced when parallel agents wrote to it. Local mode now writes one file per ticket under `.scratch/<feature-slug>/issues/<NN>-<slug>.md`, in dependency order, matching the layout the local tracker template already described. The `NN` prefix is a real ticket ID, so `/implement 03` works instead of retyping a long title.
+
+**It kept truncating when it tried to read my spec.**
+A very large spec can outgrow what a tracker issue serves back cleanly, and there is no local copy to fall back on, so the agent then burns [tool calls](https://www.aihero.dev/ai-coding-dictionary/tool-call) re-fetching chunks and never reaches the end. Don't [clear](https://www.aihero.dev/ai-coding-dictionary/clearing) or [compact](https://www.aihero.dev/ai-coding-dictionary/compaction) between `/to-spec` and `/to-tickets`. Run them in the same context window and the spec never has to be fetched back at all.
+
+**The acceptance criteria graded nothing: some passed before any work was done.**
+The template asks for criteria and says nothing about whether they can fail, so this happens. Three shapes recur: a criterion already true at the base commit, a criterion that can only be satisfied by work another ticket owns, and one that restates the request rather than deriving from the artifact. Vertical slicing prevents most of it (a slice that delivers behaviour which didn't exist before is red at the base commit by construction), but the check is worth doing by hand. For each criterion, name the observation that would show it false, and confirm it fails at the commit the implementer starts from.
+
+**The tickets are published. How do I actually run them?**
+The skill stops at the artifact, and there is no auto-dispatch mode. Dispatch is manual: look at the board, count the tickets with no open blockers, and open that many agent sessions. One ticket per fresh context, cleared between them. Be aware that [implement](https://aihero.dev/skills-implement) does not reliably close or check off the ticket when it finishes, on GitHub or in local markdown, so the ticket's state is yours to update.
+
 ## Where it fits
 
 `to-tickets` is a step in the main build chain:

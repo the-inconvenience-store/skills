@@ -40,6 +40,32 @@ The index covers five families:
 
 Two names are deliberately adapted to this workflow. **Model Behavior Structurally** leaves domain language to `domain-modeling`. **Keep Execution Unblocked** preserves the split that facts belong to the agent while product decisions belong to you.
 
+## Common questions
+
+**Twenty-one principles is a lot of context. Does all of it load every time?**
+
+No, and the selective design is the whole point. The agent scans the trigger index against the decision in front of it and reads only the matched leaves. A skill that loaded all twenty-one would be a checklist, and a checklist gets skimmed: the failure mode is an agent that nods at every principle and applies none. If you see a report citing most of the index, something has gone wrong with selection, not with the decision.
+
+**Do I have to name a principle for it to apply?**
+
+No. Selection is proactive: the workflows scan and load on their own, and naming one is an emphasis lever rather than a switch. Naming is worth doing when you want to force a particular reading of a decision — "use Subtract Before You Add" on a proposal that keeps growing, "Prove It Works" on a claim you don't believe yet. The name acts as a leading word that pulls in the whole rule without you restating it.
+
+**What happens when two principles disagree?**
+
+They are defaults, and they sit below evidence. Explicit product decisions, the accepted spec, repository standards, ADRs, and runtime evidence all outrank them, so a principle never overturns recorded intent. Where two principles genuinely pull against each other and nothing above them settles it, the skill preserves agreed behaviour and a working feedback loop first, then prefers the smaller reversible step. The worked example in the skill is migration shape: one wave is simpler, but an independently deployed consumer forces bounded expand-contract.
+
+**How is this different from `codebase-design`?**
+
+Both are vocabulary layers, and they answer different questions. [codebase-design](https://aihero.dev/skills-codebase-design) is about a module's *shape*: depth, interface, seam, adapter, leverage, locality. `engineering-principles` is about *decisions* — what to build, what to subtract, how to sequence a migration, what counts as proof. A design session usually wants both: the principles to decide, the design vocabulary to describe the result. [domain-modeling](https://aihero.dev/skills-domain-modeling) is the third layer, and it owns the project's own nouns.
+
+**Why do two of the names differ from the sources they come from?**
+
+To keep the boundaries between the vocabulary layers clean. **Model Behavior Structurally** stops short of naming things, because domain language belongs to `domain-modeling`. **Keep Execution Unblocked** preserves the split this whole set runs on: facts are the agent's job, product decisions are yours. A principle that quietly annexed a neighbouring skill's territory would make both harder to trust.
+
+**Nothing in the output mentioned a principle. Did it load at all?**
+
+Possibly, and that is the intended quiet case. Reports name a principle only when it resolved a conflict or drove a choice that would otherwise look arbitrary; a principle that merely agreed with the obvious decision earns no mention. If you want to see the selection, ask which triggers matched and why. A genuinely empty answer on a substantial change is worth pushing on.
+
 ## It's working if
 
 - Relevant principles change visible engineering decisions without waiting for you to name them.

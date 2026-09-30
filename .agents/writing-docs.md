@@ -12,7 +12,7 @@ There is no H1 — the published page takes its title from the slug.
 
 ## Page structure
 
-Fill the template below. The **fixed frame** (Quickstart block, source link, `## What it does`, `## When to reach for it`, `## Where it fits`) appears on every page. The **adaptable middle** — `## Prerequisites` and the free-form substance sections — carries only what this particular skill earns; delete the rest.
+Fill the template below. The **fixed frame** (Quickstart block, source link, `## What it does`, `## When to reach for it`, `## Common questions`, `## Where it fits`) appears on every page. The **adaptable middle** — `## Prerequisites` and the free-form substance sections — carries only what this particular skill earns; delete the rest.
 
 <page-template>
 
@@ -41,13 +41,25 @@ How and when you reach for the skill — two beats, both effectively always pres
 
 ## Prerequisites
 
-Optional — include only when the skill needs something in place to be functional; omit the heading entirely otherwise. Covers: a **workspace it writes into** (a stateful skill like `grill-with-docs` writes `CONTEXT.md` and ADRs; `teach` builds a whole directory — say what it writes and where), **prior setup** (`triage`/`to-spec`/`to-tickets` need `setup-inconvenient-skills` to have configured an issue tracker), or **repo-specific tooling**. A stateless skill that runs anywhere has no prerequisites — drop the section.
+Optional — include only when the skill needs something in place to be functional; omit the heading entirely otherwise. Covers: a **workspace it writes into** (a stateful skill like `grill-with-docs` writes `GLOSSARY.md` and ADRs; `teach` builds a whole directory — say what it writes and where), **prior setup** (`triage`/`to-spec`/`to-tickets` need `setup-inconvenient-skills` to have configured an issue tracker), or **repo-specific tooling**. A stateless skill that runs anywhere has no prerequisites — drop the section.
 
 ## <free-form middle>
 
 One to three short sections, in the skill's *own vocabulary*, that make it click — choose whatever headings fit the skill: the loop it runs, the artifact it produces, the fork it makes, the one anti-pattern it kills. There is no prescribed heading; the skills are too heterogeneous for one.
 
 The single non-negotiable: **surface the skill's leading word / defining idea** — `tight` feedback loop, `deep module`, throwaway-code-answers-a-question, red-green. It pays off twice: the reader learns what the skill *is*, and learns the word they'll later think with to *reach for* it.
+
+## Common questions
+
+Always present. The page's most valuable section after `## What it does`, and the one that takes real legwork: a list of **bolded questions, each with a plain-prose answer**, drawn from what people actually hit — the issue tracker, support threads, the same question asked three times in a row. Not invented FAQ filler.
+
+Three kinds earn their place:
+
+- **The known bug or gap.** Name it, say whether it is fixed here, and give the workaround. Where this fork has closed a gap upstream still carries, say so and link the upstream issue as provenance — that link is what makes the claim checkable.
+- **The boundary question.** "How is this different from `<sibling>`?" and "does it also do X?". The honest answer is often no, and a clean no is worth more than a hedge.
+- **The rename or removal.** Where a skill was renamed, absorbed, or retired, the old name is what people search for.
+
+Two rules bind it. **Never fabricate a report**: write "a known gap" rather than inventing a user who hit it. And **check every inherited answer against this fork's skills** before it ships — an FAQ describing a bug this fork already fixed is worse than no FAQ, because it reads as current.
 
 ## It's working if
 
@@ -75,6 +87,7 @@ Always present. Situate the skill in the system in a sentence or two:
 - The Quickstart block and source link name the correct skill; the update line names the skill.
 - `## What it does` states the defining constraint, as plain prose rather than a labelled aside.
 - `## When to reach for it` states invocation mode and the trigger boundary.
+- `## Common questions` answers real ones, invents no reports, and every inherited answer has been checked against this fork's `SKILL.md`.
 - `## Where it fits` names the role and links to `ask-inconvenient`.
 - A prerequisite (workspace, prior setup, tooling) is stated where one exists, and the section is absent where none does.
 - The middle surfaces the leading word.

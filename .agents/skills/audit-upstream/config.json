@@ -20,10 +20,6 @@
       "local": "skills"
     },
     {
-      "upstream": "skills/personal",
-      "local": "skills"
-    },
-    {
       "upstream": "skills/deprecated",
       "local": "skills"
     }
@@ -44,14 +40,19 @@
       "reason": "Fork rename"
     },
     {
-      "upstream": "skills/in-progress/implement-spec",
-      "local": "in-progress/implement-spec",
-      "reason": "Adopted upstream draft; fork keeps drafts under in-progress/"
+      "upstream": "skills/engineering/implement-spec",
+      "local": "skills/implement-spec",
+      "reason": "Promoted upstream from in-progress/ in v1.3.0; this fork promoted it too"
     },
     {
-      "upstream": "skills/in-progress/retro",
-      "local": "in-progress/retro",
-      "reason": "Adopted upstream draft; fork keeps drafts under in-progress/"
+      "upstream": "skills/engineering/retro",
+      "local": "skills/retro",
+      "reason": "Promoted upstream from in-progress/ in v1.3.0; this fork promoted it too"
+    },
+    {
+      "upstream": "skills/engineering/pr",
+      "local": "skills/pr",
+      "reason": "Adopted from upstream v1.3.0"
     }
   ],
   "ignored_upstream_skills": [
@@ -96,6 +97,26 @@
       "upstream": "docs/engineering/setup-matt-pocock-skills.md",
       "local": "docs/engineering/setup-inconvenient-skills.md",
       "reason": "Fork rename"
+    },
+    {
+      "upstream": "docs/engineering/implement-spec.md",
+      "local": "docs/engineering/implement-spec.md",
+      "reason": "Docs page for the promoted implement-spec skill"
+    },
+    {
+      "upstream": "docs/engineering/retro.md",
+      "local": "docs/engineering/retro.md",
+      "reason": "Docs page for the promoted retro skill"
+    },
+    {
+      "upstream": "docs/engineering/pr.md",
+      "local": "docs/engineering/pr.md",
+      "reason": "Docs page for the adopted pr skill"
+    },
+    {
+      "upstream": "docs/engineering/resolving-merge-conflicts.md",
+      "local": "docs/engineering/resolving-merge-conflicts.md",
+      "reason": "Archived tombstone on both sides; the skill was removed upstream in v1.3.0 and here in v1.5.0"
     }
   ],
   "ignored_upstream_docs": [],

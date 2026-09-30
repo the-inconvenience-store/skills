@@ -38,6 +38,36 @@ When the project needs them, the proposal also covers a real test baseline, gene
 
 Verification is proportionate: commands are run, representative failures are demonstrated safely, and anything that would require commits, merges, installs, or other side effects is left unverified unless you approve it.
 
+## Common questions
+
+**Will it rip out the tooling I already have?**
+
+Not without saying so. Existing tools are either preserved or replaced for a stated reason, and the reason lands in the proposal before anything changes. The proposal is the whole control point: the agent investigates, recommends one coherent setup, and waits. If you want a specific tool kept, say so at that step rather than after.
+
+**My language isn't JavaScript, TypeScript, React or Go. Does it skip me?**
+
+No. Those four ship with curated rule baselines aimed at the failure modes agents actually produce, so the proposal for them is concrete out of the box. For Ruby, C#, Rust and anything else, the agent researches the currently maintained tools and the exact rules, then builds the equivalent proposal. The output shape is the same; what differs is whether the recommendation came from a bundled baseline or from research the agent did in front of you. Research is worth reading more carefully than a baseline.
+
+**Why are the pre-commit hooks so thin? I wanted the full suite to run.**
+
+Because a slow hook gets bypassed, and a bypassed hook guards nothing. The skill deliberately splits fast local feedback from the complete gate: hooks stay quick, CI owns the full run, and the boundary between them is made visible rather than left implicit. If you genuinely want the whole suite locally, ask for it in the proposal — it is a choice, not a prohibition.
+
+**It said it couldn't verify part of what it set up.**
+
+That is the skill being honest rather than failing. Verification is proportionate: commands get run and representative failures get demonstrated safely, but anything needing a commit, a merge, an install, or another real side effect is left unverified unless you approve it. A report that names an unverified path is more useful than one that claims a green CI run it never triggered. The same applies to failures that were already there before it started: those get reported, not quietly absorbed.
+
+**How is this different from `setup-inconvenient-skills`?**
+
+Different subject. [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) configures what the *skills* need — the issue tracker, the triage labels, the domain-doc layout — and then invokes this one. `guardrails` configures what the *project* needs: lint, format, tests, reproducible install, dependency upkeep, CI, hooks. Running the setup skill gets you both. Run `guardrails` on its own when only the quality strategy is changing.
+
+**When do I run it again?**
+
+When the stack changes or the quality strategy does: a new language in the repo, a formatter swap, a move from ad-hoc scripts to a task runner, a CI provider change. [retro](https://aihero.dev/skills-retro) is the other common route in — when a session's finding turns out to be "this repo has no baseline at all", that is a `guardrails` run rather than one more lint rule.
+
+**Does the Bulletproof React package come as standard on a React app?**
+
+No. It is offered as an explicit choice, and only for a new React application. Feature boundaries, import direction, state and API conventions and testing posture are opinionated enough that inheriting them by accident would be worse than not having them. Decline it and the rest of the proposal stands unchanged.
+
 ## It's working if
 
 - The approved lint and format commands cover every detected ecosystem, or the report names a researched coverage gap.

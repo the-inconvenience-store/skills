@@ -1,40 +1,25 @@
-Quickstart:
+> **Archived.** This skill was removed from the plugin in v1.5.0, following its removal upstream, and is no longer maintained. Nothing replaces it: the agent works through a merge or rebase conflict without a dedicated skill. The page stays up for reference.
 
-```bash
-npx skills add the-inconvenience-store/skills --skill=resolving-merge-conflicts
-```
+## What it did
 
-```bash
-npx skills update resolving-merge-conflicts
-```
+`resolving-merge-conflicts` worked through an in-progress git merge or rebase conflict, hunk by hunk, and finished the operation — resolved, checked, and committed.
 
-[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/resolving-merge-conflicts)
-
-## What it does
-
-`resolving-merge-conflicts` works through an in-progress git merge or rebase conflict, hunk by hunk, and finishes the operation — resolved, checked, and committed.
-
-It resolves by **intent**, not by text. Before touching a hunk it traces each side back to its **primary source** — the commit message, the PR, the original issue — to understand why the change was made, then preserves both intents where they're compatible. It never invents new behaviour to paper over a clash, and it never reaches for `--abort`: the merge always gets finished.
-
-## When to reach for it
-
-Type `/resolving-merge-conflicts`, or the agent reaches for it automatically when a task fits.
-
-Reach for this when you're mid-merge or mid-rebase and git has stopped on conflicts it can't resolve itself. It's for the conflict in front of you — not for planning the merge or for debugging behaviour that broke afterwards. If the merge is done but something's now failing for reasons you can't see, use [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs) instead.
+It resolved by **intent**, not by text. Before touching a hunk it traced each side back to its **primary source** — the commit message, the PR, the original issue — to understand why the change was made, then preserved both intents where they were compatible. It never invented new behaviour to paper over a clash, and it never reached for `--abort`: the merge always got finished.
 
 ## Resolving by intent
 
-The trap in a conflict is treating it as a text problem — picking "ours" or "theirs" to make the markers go away. This skill treats it as an **intent** problem. Each side of a hunk exists because someone wanted something; the resolution has to honour both wants where it can, and where they're genuinely incompatible, pick the one that matches the merge's stated goal and note the trade-off out loud.
+The idea is worth keeping even without the skill. The trap in a conflict is treating it as a text problem — picking "ours" or "theirs" to make the markers go away. Each side of a hunk exists because someone wanted something; the resolution has to honour both wants where it can, and where they are genuinely incompatible, pick the one that matches the merge's stated goal and name the trade-off out loud.
 
-That's why the primary sources matter. You can't preserve an intent you haven't read, so the work starts in the history — commits, PRs, tickets — not in the diff.
+That is why the primary sources matter. You cannot preserve an intent you have not read, so the work starts in the history — commits, PRs, tickets — not in the diff. Say that much in the prompt and you get most of what the skill gave you.
 
-## It's working if
+## What to reach for instead
 
-- Each resolved hunk keeps both sides' behaviour, or names the trade-off where it couldn't.
-- No new behaviour appears that wasn't on either branch.
-- The project's own checks — typecheck, tests, format — are found and run green before the commit.
-- The merge or rebase is carried all the way to a finished commit, never aborted.
+| Your situation | Where to go |
+| --- | --- |
+| Mid-merge or mid-rebase, conflict markers in the tree | No skill. Ask the agent directly, and point it at the primary sources |
+| Merge finished, something now misbehaves for reasons you can't see | [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs) |
+| Planning how to slice work so branches collide less | [to-tickets](https://aihero.dev/skills-to-tickets), which sequences wide refactors as expand–contract |
 
-## Where it fits
+## Where it fitted
 
-A reach-for-it-anytime standalone: you invoke it at the moment a merge or rebase stalls, and it hands you back a clean, committed tree. Its natural neighbour is [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs), because a merge that resolves cleanly but misbehaves afterwards is a diagnosis problem, not a conflict one. When you're unsure which skill fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.
+A reach-for-it-anytime standalone, off every flow: you invoked it at the moment a merge or rebase stalled, and it handed you back a clean, committed tree. For the current map of what this repo does ship, see [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient).

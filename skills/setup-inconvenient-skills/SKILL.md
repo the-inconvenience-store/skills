@@ -10,7 +10,7 @@ Scaffold the per-repo configuration that the engineering skills assume:
 
 - **Issue tracker** — where issues live (GitHub by default; GitLab, Beads, and local markdown are also supported out of the box)
 - **Triage labels** — the strings used for the five canonical triage roles
-- **Domain docs** — where `CONTEXT.md` and ADRs live, and the consumer rules for reading them
+- **Domain docs** — where `GLOSSARY.md` and ADRs live, and the consumer rules for reading them
 - **Guardrails** — the approved lint, format, test, reproducible setup, dependency, CI, and hook baseline
 - **Verification** — the project-local route for launching, driving, proving, and cleaning up each real user-facing surface
 
@@ -24,7 +24,7 @@ Look at the current repo to understand its starting state. Read whatever exists;
 
 - `git remote -v` and `.git/config` — is this a GitHub repo? Which one?
 - `AGENTS.md` and `CLAUDE.md` at the repo root — does either exist? Is there already an `## Agent skills` section in either?
-- `CONTEXT.md` and `CONTEXT-MAP.md` at the repo root
+- `GLOSSARY.md` and `GLOSSARY-MAP.md` at the repo root
 - `docs/adr/` and any `src/*/docs/adr/` directories
 - `docs/agents/` — does this skill's prior output already exist?
 - `.scratch/` — sign that a local-markdown issue tracker convention is already in use
@@ -64,9 +64,9 @@ The defaults are the five canonical roles, each label string equal to its name: 
 
 Then check which of the agreed label strings the tracker actually has (on GitHub, `gh label list`). `docs/agents/triage-labels.md` is only a mapping; writing it does not create anything. Name the missing ones and ask whether to create them, since that writes to the shared tracker. Step 4 does the creating.
 
-**Section C — Domain docs.** Default to **single-context** — one `CONTEXT.md` + `docs/adr/` at the repo root. This fits almost every repo; write it without asking.
+**Section C — Domain docs.** Default to **single-context** — one `GLOSSARY.md` + `docs/adr/` at the repo root. This fits almost every repo; write it without asking.
 
-Offer **multi-context** — a root `CONTEXT-MAP.md` pointing to per-context `CONTEXT.md` files — only when exploration found monorepo signals. Then confirm which layout they want.
+Offer **multi-context** — a root `GLOSSARY-MAP.md` pointing to per-context `GLOSSARY.md` files — only when exploration found monorepo signals. Then confirm which layout they want.
 
 **Done when:** the issue tracker, applicable triage vocabulary, and domain-doc layout are each confirmed by the user or settled by the stated repository default.
 
