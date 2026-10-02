@@ -2,7 +2,7 @@
 
 **Apply when:** work spans several slices, commits, tickets, or migration batches.
 
-Break the work into the smallest units that each end in a meaningful check. Order prerequisite scaffold and risky unknowns before dependent behavior. Verify one unit before starting the next so a failure has a narrow search space.
+Break the work into the smallest units that each end in a meaningful check. Order prerequisite scaffold and risky unknowns before dependent behavior. Verify one unit before starting the next so a failure has a narrow search space. Make the change easy, then make the easy change: land behavior-preserving restructuring as its own unit, proved unchanged by existing checks, before the behavior change that needs it.
 
 For product work, prefer tracer bullets that deliver a complete public path through the necessary layers. For migrations that cannot be atomic, keep each expand-contract batch buildable and reserve a final unit for deleting the old path.
 

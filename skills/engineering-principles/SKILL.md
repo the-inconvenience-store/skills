@@ -1,6 +1,6 @@
 ---
 name: engineering-principles
-description: Shared decision principles for implementation, refactoring, architecture, review, debugging, verification, migration, and parallel work. Use when another engineering skill needs common judgment rules or the user names Laziness Protocol, Foundational Thinking, Redesign from First Principles, Subtract Before You Add, Minimize Reader Load, Outcome-Oriented Execution, Experience First, Exhaust the Design Space, Build the Lever, Model Behavior Structurally, Boundary Discipline, Type System Discipline, Make Operations Idempotent, Migrate Callers Then Delete Legacy APIs, Separate Before Serializing Shared State, Prove It Works, Fix Root Causes, Sequence Verifiable Units, Guard the Context Window, Keep Execution Unblocked, or Encode Lessons in Structure.
+description: Shared decision principles for implementation, refactoring, architecture, review, debugging, verification, migration, and parallel work. Use when another engineering skill needs common judgment rules or the user names Laziness Protocol, Foundational Thinking, Redesign from First Principles, Subtract Before You Add, Minimize Reader Load, Outcome-Oriented Execution, Experience First, Exhaust the Design Space, Build the Lever, Model Behavior Structurally, Boundary Discipline, Type System Discipline, Make Operations Idempotent, Migrate Callers Then Delete Legacy APIs, Separate Before Serializing Shared State, Treat Observable Behavior as Contract, Fail Loudly, Prove It Works, Protect the Signal, Fix Root Causes, Sequence Verifiable Units, Guard the Context Window, Keep Execution Unblocked, or Encode Lessons in Structure.
 ---
 
 # Engineering Principles
@@ -19,6 +19,8 @@ Resolve conflicts in this order:
 
 When two principles pull in different directions, preserve agreed behavior and a working feedback loop, then prefer the smaller reversible step. Surface the conflict when it materially changes the design.
 
+Scale deliberation to reversibility. A two-way door proceeds on precedent and is corrected afterwards; a one-way door, such as data loss, a published contract, or an external action, earns design exploration and confirmation.
+
 ## Apply selectively
 
 1. Classify the current decision before acting: product experience, data shape, boundary, type, lifecycle, migration, verification, collaboration, or recurring lesson.
@@ -27,13 +29,13 @@ When two principles pull in different directions, preserve agreed behavior and a
 4. Add every principle the user names even when the independent scan would not have selected it, then reconcile it through Precedence.
 5. Read each selected reference in full and translate it into a constraint, design choice, or proof obligation before acting.
 
-Do not load an unmatched reference or run a 21-item review. Name a principle in the final report only when the user requested it, it resolved a conflict, or it drove a non-obvious decision.
+Do not load an unmatched reference or run the whole index as a review. Name a principle in the final report only when the user requested it, it resolved a conflict, or it drove a non-obvious decision.
 
 Selection is complete when every material decision surface has been scanned and every matching or user-named principle is applied or ruled out by its boundary.
 
 ## Core
 
-- **Laziness Protocol** — sizing a diff or considering another abstraction, wrapper, parameter, or layer. Read [references/laziness-protocol.md](references/laziness-protocol.md).
+- **Laziness Protocol** — sizing a diff or considering another abstraction, wrapper, parameter, layer, or dependency. Read [references/laziness-protocol.md](references/laziness-protocol.md).
 - **Foundational Thinking** — choosing core data structures, shared types, or scaffold that every later slice needs. Read [references/foundational-thinking.md](references/foundational-thinking.md).
 - **Redesign from First Principles** — integrating a new requirement that does not fit the current shape. Read [references/redesign-from-first-principles.md](references/redesign-from-first-principles.md).
 - **Subtract Before You Add** — extending or rewriting code that already carries dead or superseded paths. Read [references/subtract-before-you-add.md](references/subtract-before-you-add.md).
@@ -51,11 +53,14 @@ Selection is complete when every material decision surface has been scanned and 
 - **Make Operations Idempotent** — commands, jobs, migrations, or lifecycle steps may retry or resume after partial progress. Read [references/make-operations-idempotent.md](references/make-operations-idempotent.md).
 - **Migrate Callers Then Delete Legacy APIs** — an internal API is being replaced while callers still exist. Read [references/migrate-callers-then-delete-legacy-apis.md](references/migrate-callers-then-delete-legacy-apis.md).
 - **Separate Before Serializing Shared State** — concurrent actors may write the same branch, file, key, process, or object. Read [references/separate-before-serializing-shared-state.md](references/separate-before-serializing-shared-state.md).
+- **Treat Observable Behavior as Contract** — a change alters output, ordering, errors, timing, defaults, identifiers, or formats that outsiders can observe. Read [references/treat-observable-behavior-as-contract.md](references/treat-observable-behavior-as-contract.md).
+- **Fail Loudly** — code catches errors, calls remote dependencies, retries, falls back, or receives malformed input. Read [references/fail-loudly.md](references/fail-loudly.md).
 
 ## Verification
 
 - **Prove It Works** — work is about to be called complete. Read [references/prove-it-works.md](references/prove-it-works.md).
-- **Fix Root Causes** — a bug, failure, or performance regression is being diagnosed. Read [references/fix-root-causes.md](references/fix-root-causes.md).
+- **Protect the Signal** — a check fails and the tempting fix changes the check rather than the code. Read [references/protect-the-signal.md](references/protect-the-signal.md).
+- **Fix Root Causes** — a bug, failure, or performance regression is being diagnosed, or performance is being optimized. Read [references/fix-root-causes.md](references/fix-root-causes.md).
 - **Sequence Verifiable Units** — work spans several slices, commits, tickets, or migration batches. Read [references/sequence-verifiable-units.md](references/sequence-verifiable-units.md).
 
 ## Collaboration

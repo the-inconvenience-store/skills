@@ -12,9 +12,9 @@ npx skills update engineering-principles
 
 ## What it does
 
-`engineering-principles` gives engineering workflows a shared vocabulary for recurring decisions: subtract before adding, model behavior structurally, keep retries idempotent, isolate parallel writers, and prove the real result.
+`engineering-principles` gives engineering workflows a shared vocabulary for recurring decisions: subtract before adding, model behavior structurally, keep retries idempotent, fail loudly, isolate parallel writers, and prove the real result without weakening the checks that prove it.
 
-It is selective rather than a 21-item checklist. The agent proactively scans every trigger against the current decision, loads only the matched leaves, and turns each into a concrete constraint, design choice, or proof obligation. You may name a principle for extra emphasis, but selection does not depend on you doing so.
+It is selective rather than a 24-item checklist. The agent proactively scans every trigger against the current decision, loads only the matched leaves, and turns each into a concrete constraint, design choice, or proof obligation. You may name a principle for extra emphasis, but selection does not depend on you doing so.
 
 ## When to reach for it
 
@@ -26,15 +26,15 @@ Name a principle directly when you want to steer a decision: “use Subtract Bef
 
 The principles sit below explicit product decisions, the accepted spec, repository standards, ADRs, and runtime evidence. They fill judgment gaps; they do not overturn recorded intent.
 
-This matters when useful principles pull in different directions. A one-wave API migration is simpler, but an independently deployed consumer may require bounded expand-contract. The skill preserves agreed behavior and a working feedback loop, then prefers the smaller reversible step.
+This matters when useful principles pull in different directions. A one-wave API migration is simpler, but an independently deployed consumer may require bounded expand-contract. The skill preserves agreed behavior and a working feedback loop, then prefers the smaller reversible step. Deliberation scales with reversibility: a two-way door proceeds on precedent, while a one-way door such as data loss or a published contract earns exploration and confirmation.
 
-## Twenty-one leading words
+## Twenty-four leading words
 
 The index covers five families:
 
 - **Shape:** Laziness Protocol, Foundational Thinking, Redesign from First Principles, Subtract Before You Add, Minimize Reader Load, Outcome-Oriented Execution, Experience First, Exhaust the Design Space, and Build the Lever.
-- **Architecture:** Model Behavior Structurally, Boundary Discipline, Type System Discipline, Make Operations Idempotent, Migrate Callers Then Delete Legacy APIs, and Separate Before Serializing Shared State.
-- **Verification:** Prove It Works, Fix Root Causes, and Sequence Verifiable Units.
+- **Architecture:** Model Behavior Structurally, Boundary Discipline, Type System Discipline, Make Operations Idempotent, Migrate Callers Then Delete Legacy APIs, Separate Before Serializing Shared State, Treat Observable Behavior as Contract, and Fail Loudly.
+- **Verification:** Prove It Works, Protect the Signal, Fix Root Causes, and Sequence Verifiable Units.
 - **Collaboration:** Guard the Context Window and Keep Execution Unblocked.
 - **Learning:** Encode Lessons in Structure.
 
@@ -42,9 +42,9 @@ Two names are deliberately adapted to this workflow. **Model Behavior Structural
 
 ## Common questions
 
-**Twenty-one principles is a lot of context. Does all of it load every time?**
+**Twenty-four principles is a lot of context. Does all of it load every time?**
 
-No, and the selective design is the whole point. The agent scans the trigger index against the decision in front of it and reads only the matched leaves. A skill that loaded all twenty-one would be a checklist, and a checklist gets skimmed: the failure mode is an agent that nods at every principle and applies none. If you see a report citing most of the index, something has gone wrong with selection, not with the decision.
+No, and the selective design is the whole point. The agent scans the trigger index against the decision in front of it and reads only the matched leaves. A skill that loaded all twenty-four would be a checklist, and a checklist gets skimmed: the failure mode is an agent that nods at every principle and applies none. If you see a report citing most of the index, something has gone wrong with selection, not with the decision.
 
 **Do I have to name a principle for it to apply?**
 
