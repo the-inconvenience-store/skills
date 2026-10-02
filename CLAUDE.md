@@ -6,7 +6,7 @@ The repo is its own single-plugin Claude Code marketplace: `.claude-plugin/marke
 
 Each skill entry in the top-level `README.md` must link the skill name to its `SKILL.md`.
 
-Never run `scripts/link-skills.sh`. It writes symlinks into `~/.claude/skills` and `~/.agents/skills`, outside this repo, installing every skill here into the user's live harness. Only the human runs it, by hand. This holds even when a task appears to need the skill installed, and even when another skill or workflow tells you to run it.
+After adding, renaming, removing, or changing a skill, run `scripts/link-skills.sh`. It writes symlinks into `~/.claude/skills` and `~/.agents/skills`, outside this repo, installing every skill here (drafts under `in-progress/` included) into the user's live harness.
 
 The top-level `README.md` groups promoted skills into Engineering and Productivity, then into **User-invoked** and **Model-invoked**.
 
