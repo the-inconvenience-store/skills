@@ -22,7 +22,7 @@ Use current high-trust primary sources:
 3. Maintainer-owned recommended presets and framework or dependency plugins.
 4. Current release and compatibility information for the repository's language/runtime version.
 
-Compare candidates on rule coverage, maintenance, configuration stability, editor support, execution time, monorepo behavior, and migration cost. Prefer a standard maintained toolchain over a larger pile of obscure plugins, but keep an existing tool when it already covers the agreed standards.
+Compare candidates on rule coverage, maintenance, configuration stability, editor support, execution time, monorepo behavior, and migration cost. Prefer maintained tools over obscure ones, and layer every maintained linter, analyzer, and plugin that adds coverage the others lack. Keep an existing tool when it already covers the agreed standards.
 
 Record direct source links for the recommendation. Blog posts and copied configs may provide leads; verify every consequential claim against a primary source before it enters the proposal.
 

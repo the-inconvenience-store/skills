@@ -17,7 +17,7 @@ Before proposing lint changes, read [rules/typescript.md](./rules/typescript.md)
 
 Keep a working linter and formatter unless replacement solves a named problem. When choosing for a new repo, compare current support for the rules and plugins the project needs, speed on this repository, editor integration, and migration cost. ESLint, oxlint, and Biome have different coverage; tool count alone does not settle the choice.
 
-Propose rule groups rather than hundreds of individual rules:
+Present rule groups rather than hundreds of individual rules, and include every group the stack supports:
 
 - correctness and suspicious constructs;
 - TypeScript safety, including async/promise handling when type information is available;
@@ -29,7 +29,7 @@ Style belongs to the formatter where possible. Preserve the existing formatter i
 
 Treat compiler strictness, file naming, import aliases, test placement, and directory structure as separate choices. Infer them from an existing repo or include them in the proposal for a new repo. Do not smuggle an architectural migration into linter setup.
 
-For a linter migration, account for every existing plugin, rule override, ignore, and CI invocation. Report unmapped behavior before removing the old tool. Coexistence is reasonable when a required rule has no replacement, provided the extra runtime is visible in the proposal.
+For a linter migration, account for every existing plugin, rule override, ignore, and CI invocation. Report unmapped behavior before removing the old tool. Coexistence is reasonable whenever each linter covers rules the other lacks, such as oxlint for fast correctness plus ESLint for type-aware or plugin rules, provided the extra runtime is visible in the proposal.
 
 ## Commands and hooks
 

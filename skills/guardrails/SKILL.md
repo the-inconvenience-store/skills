@@ -5,7 +5,7 @@ description: Set up or overhaul a project's development guardrails and reproduci
 
 # Guardrails
 
-Set up a project's **guardrails** with the user: inspect what is already there, propose the smallest coherent setup, wait for approval, then install and verify it.
+Set up a project's **guardrails** with the user: inspect what is already there, propose one coherent setup with **generous** lint coverage, wait for approval, then install and verify it.
 
 The proposal is the control point. The agent owns discovery and recommendations; the user owns the outcome. Preserve working conventions and tooling unless the proposal names a concrete reason to change them.
 
@@ -74,6 +74,8 @@ Present one cohesive plan before installing or editing anything. Keep it short e
 - which accepted checks run at pre-commit, pre-push, commit-message, or CI time;
 - how existing violations will be handled without hiding them;
 - the files and dependencies expected to change.
+
+Be **generous** with linters: more lint coverage means cleaner code. Propose every maintained linter, analyzer, plugin, and rule group that applies to the detected stack and dependencies—correctness, type safety, security, complexity, imports and boundaries, tests, accessibility, documentation, and library-specific rules. Layer several linters when each covers rules the others lack. Leave one out only for a named reason: it duplicates a rule already enabled, fights the formatter, targets a dependency the project lacks, or exceeds the hook budget, in which case it runs at pre-push or CI instead.
 
 Lead with the recommended setup. Include an alternative only where it changes a meaningful tradeoff. Treat new architecture, file-layout, naming, coverage, custom-rule, and agent-hook work as optional scope rather than implied setup.
 
