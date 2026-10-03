@@ -87,7 +87,13 @@ Let them edit before writing.
 
 - If `CLAUDE.md` exists, edit it.
 - Else if `AGENTS.md` exists, edit it.
-- If neither exists, ask the user which one to create — don't pick for them.
+- If neither exists, ask the user which one to create — don't pick for them. Offer four options:
+  - `CLAUDE.md` only;
+  - `AGENTS.md` only;
+  - `AGENTS.md` with `CLAUDE.md` as a symlink to it (`ln -s AGENTS.md CLAUDE.md`), for repos shared across agent harnesses;
+  - `CLAUDE.md` with `AGENTS.md` as a symlink to it (`ln -s CLAUDE.md AGENTS.md`), for the same case with Claude as the primary harness.
+
+  For a symlink option, write the block to the real file, create a relative symlink at the repo root, and confirm with `test -L` that the link exists and resolves to the real file. Mention that Windows clones need `core.symlinks` enabled, or they get a text file holding the target path.
 
 Never create `AGENTS.md` when `CLAUDE.md` already exists (or vice versa) — always edit the one that's already there.
 

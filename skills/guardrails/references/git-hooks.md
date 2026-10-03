@@ -16,8 +16,15 @@ Offer lifecycle checks because they serve the project, not because hooks exist:
 
 - **pre-commit:** fast formatting and linting of the affected files or packages;
 - **pre-push:** slower typechecks or focused tests when the user wants a local gate;
-- **commit-msg:** a commit convention only when the project uses one;
+- **commit-msg:** commit-message linting (see below);
 - **post-merge or post-checkout:** dependency installation only when the user accepts the surprising side effect.
+
+**Commit-message linting:** ask the user whether they want [Conventional Commits](https://www.conventionalcommits.org/) enforced on the `commit-msg` hook. If the repo already enforces a convention, reuse it and skip the question. Recommend the linter that fits the toolchain:
+
+- **JavaScript/TypeScript repos:** [commitlint](https://commitlint.js.org/) with `@commitlint/config-conventional` unless the user names another preset.
+- **Other repos:** [cocogitto](https://github.com/cocogitto/cocogitto) (`cog verify --file "$1"`), a single binary that avoids a Node toolchain. Explain how developers and CI install it.
+
+If accepted, wire it through the existing or proposed hook manager, and note that CI can lint PR titles or commit ranges as the backstop. If declined, add no commit-message hook.
 
 State the expected runtime and the CI backstop. Each hook is independently optional. If the repository has no manager, recommend one that fits its existing toolchain and explain the installation behavior on a fresh clone; avoid presenting a catalogue unless the user asks for alternatives.
 

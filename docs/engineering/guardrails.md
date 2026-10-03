@@ -30,7 +30,7 @@ Reach for it when scaffolding a project, adding its first quality checks, replac
 
 ## Guardrails with boundaries
 
-The skill separates fast local feedback from the complete CI gate. It keeps local hooks focused, makes slower checks explicit, and treats architecture rules, coverage, commit policy, and agent-specific hooks as choices rather than surprise additions.
+The skill separates fast local feedback from the complete CI gate. It keeps local hooks focused, makes slower checks explicit, and treats architecture rules, coverage, commit policy, and agent-specific hooks as choices rather than surprise additions. When git hooks are in scope, it asks whether you want Conventional Commits enforced on `commit-msg`: commitlint for JavaScript and TypeScript repos, cocogitto for everything else.
 
 It can also set up or reuse an optional task runner, then make its `bootstrap`, `check`, and `codegen` tasks the shared interface where those jobs apply. Without a task runner, it keeps the project's native commands instead of adding task aliases.
 
