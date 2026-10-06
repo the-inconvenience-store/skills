@@ -53,6 +53,11 @@
       "upstream": "skills/engineering/pr",
       "local": "skills/pr",
       "reason": "Adopted from upstream v1.3.0"
+    },
+    {
+      "upstream": "skills/in-progress/chief-of-staff",
+      "local": "in-progress/chief-of-staff",
+      "reason": "Adopted upstream draft"
     }
   ],
   "ignored_upstream_skills": [
