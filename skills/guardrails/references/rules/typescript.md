@@ -21,8 +21,9 @@ Measure plugin cost and findings. If cognitive and cyclomatic rules report the s
 
 When the project accepts [anti-slop](https://github.com/dmmulroy/anti-slop), read that repository's current installation instructions and enable its generic rules at error. It is installed from the repository, so do not infer its files or setup from the rule names below:
 
-- `anti-slop/no-chained-type-assertions`, `no-conditional-empty-object-spread`, `no-known-value-widening`, `no-module-mocking`, `no-reflect-apply`, `no-reflect-get`, `no-runtime-typeof`, `no-shape-in-symbol-names`.
-- `anti-slop/no-unknown-parameters`, `no-unknown-returns`, `no-unknown-type-aliases`, `no-unsafe-dictionary-type`, `no-widen-then-assert`, `require-safety-comment-for-type-assertion`.
+- `anti-slop/no-array-filter-map`, `no-reduce-accumulator-copy`, `no-chained-type-assertions`, `no-conditional-empty-object-spread`, `no-known-value-widening`, `no-module-mocking`, `no-reflect-apply`, `no-reflect-get`, `no-runtime-typeof`, `no-shape-in-symbol-names`.
+- `anti-slop/no-unknown-parameters`, `no-unknown-returns`, `no-unknown-type-aliases`, `no-unsafe-dictionary-type`, `no-widen-then-assert`, `require-readable-spacing`, `require-safety-comment-for-type-assertion`.
+- Native `oxc/no-accumulating-spread` alongside them: it catches the spread copies in reducers and loops that `no-reduce-accumulator-copy` deliberately leaves to it.
 - Offer `anti-slop/no-object-parameters` separately: banning options objects is an architectural position.
 - Enable the `anti-slop-effect` group only when Effect is a direct dependency or the user requests it.
 
