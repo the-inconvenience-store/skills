@@ -16,7 +16,7 @@ npx skills update guardrails
 
 The **proposal** is the control point: the agent investigates and recommends one coherent setup, then waits for you to approve or amend it before changing the project.
 
-For JavaScript, TypeScript, React, and Go, the skill carries curated rule baselines aimed at common agent-written failure modes. Those concrete recommendations feed the proposal; they are not installed wholesale without your approval. The skill is **generous** with lint coverage: it proposes every maintained linter, plugin, and rule group that applies to the stack, and leaves one out only for a named reason such as duplication, a formatter conflict, or hook runtime.
+For JavaScript, TypeScript, React, and Go, the skill carries curated rule baselines aimed at common agent-written failure modes. Those concrete recommendations feed the proposal; they are not installed wholesale without your approval. The skill is **generous** with lint coverage: it proposes every maintained linter, plugin, and rule group that applies to the stack, and leaves one out only for a named reason such as duplication, a formatter conflict, or hook runtime. When it sets up a JavaScript or TypeScript formatter (Prettier, oxfmt, or Biome), it starts from a house style: 2-space indent, 80-column width, trailing commas everywhere, no semicolons, single quotes in code, and double quotes in JSX.
 
 For Ruby, C#, Rust, and other ecosystems without a bundled baseline, the agent researches current maintained tools and exact rules, then builds the equivalent proposal instead of skipping the language.
 

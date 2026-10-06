@@ -25,7 +25,7 @@ Present rule groups rather than hundreds of individual rules, and include every 
 - test mistakes supported by the detected runner;
 - maintainability budgets, only with thresholds calibrated to the project.
 
-Style belongs to the formatter where possible. Preserve the existing formatter in an established repo; changing one can rewrite most files without improving enforcement.
+Style belongs to the formatter where possible. Preserve the existing formatter in an established repo; changing one can rewrite most files without improving enforcement. When setting up a formatter, use the default config in [rules/typescript.md](./rules/typescript.md#formatter-companion).
 
 Treat compiler strictness, file naming, import aliases, test placement, and directory structure as separate choices. Infer them from an existing repo or include them in the proposal for a new repo. Do not smuggle an architectural migration into linter setup.
 

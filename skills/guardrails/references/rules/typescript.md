@@ -89,6 +89,23 @@ For Vitest, recommend:
 
 Map to the Jest equivalents when Jest is detected. Offer colocated unit tests, coverage thresholds, and test-directory changes as separate choices; they are not implied by accepting these lint rules.
 
+## Formatter companion
+
+When this setup installs or configures the formatter, start Prettier and Prettier-compatible formatters such as oxfmt from this config:
+
+```json
+{
+  "tabWidth": 2,
+  "printWidth": 80,
+  "trailingComma": "all",
+  "semi": false,
+  "singleQuote": true,
+  "jsxSingleQuote": false
+}
+```
+
+For Biome, use the equivalent options: `indentWidth: 2`, `lineWidth: 80`, `trailingCommas: "all"`, `semicolons: "asNeeded"`, `quoteStyle: "single"`, `jsxQuoteStyle: "double"`. An established repo's formatter config still wins; propose these values as a separate choice there, since adopting them rewrites most files.
+
 ## Overrides
 
 Tests, generated files, framework entry points, stories, and configuration files often need scoped exceptions. Make each override explain a real context. Blanket disables and repository-wide ignore patterns are not rollout strategies.
