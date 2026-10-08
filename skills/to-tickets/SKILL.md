@@ -68,7 +68,9 @@ Publish the approved tickets. **How** depends on the tracker `/setup-inconvenien
 
   Before the first create, confirm the triage label exists (on GitHub, `gh label list`); if it's missing, offer to create it rather than firing the write, since GitHub rejects `--label <missing>` and loses the whole issue with it.
 
-  Use the platform's **native** blocking and sub-issue relationships — the body "Blocked by" line is the fallback for trackers that have none, not the default. GitHub has both, whatever an agent's prior assumption: `gh issue create --blocked-by <n>,<n>` (blockers are published first, so their numbers are known), `gh issue edit <child> --add-blocked-by <n>` after the fact, and `--parent <n>` / `gh issue edit <parent> --add-sub-issue <n>` for the parent link. Check `docs/agents/issue-tracker.md` for this repo's exact commands and fallbacks.
+  Use the platform's **native** blocking and sub-issue relationships — the body "Blocked by" line is the fallback for trackers that have none, not the default. GitHub has both, whatever an agent's prior assumption: `gh issue create --blocked-by <n>,<n>` (blockers are published first, so their numbers are known), `gh issue edit <child> --add-blocked-by <n>` after the fact, and `--parent <n>` / `gh issue edit <parent> --add-sub-issue <n>` for the parent link. Check the tracker doc for this repo's exact commands and fallbacks.
+
+  If the source was an existing issue, make each ticket its sub-issue (the tracker doc's sub-issue operation).
 
 Work the **frontier**: any ticket whose blockers are all done. For a purely linear chain that means top to bottom.
 
@@ -112,7 +114,7 @@ The public path, observable result, durable side effect, and behavior that must 
 
 ## Blocked by
 
-- A reference to each blocking ticket, or "None — can start immediately".
+- A reference to each blocking ticket, or "None — can start immediately". Omit this section when blockers were set as native edges.
 
 </issue-template>
 

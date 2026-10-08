@@ -38,7 +38,7 @@ Because the refactor step was removed and the description was not. The removal w
 
 **It asked me to choose a test seam and I had no idea which to pick.**
 
-This is the most-reported friction with the skill ([issue #607](https://github.com/mattpocock/skills/issues/607)). The prompt lists candidate seams by name only, with nothing about what each one catches or misses, so you are choosing between labels. There is no fix shipped yet. The practical workaround is to ask the agent for the trade-offs before answering: what does the component-level seam miss that the integration seam catches, and how much slower is it. It is also why the chain agrees seams up front in `to-spec`, where you have the whole feature in view rather than one prompt.
+This was the most-reported friction with the skill ([issue #607](https://github.com/mattpocock/skills/issues/607)): the prompt listed candidate seams by name only, so you were choosing between labels. The skill now gives each proposed seam a one-line note on what it catches and what it misses. If the notes still don't settle it, ask for the cost too: how much slower is the integration seam than the component-level one. It is also why the chain agrees seams up front in `to-spec`, where you have the whole feature in view rather than one prompt.
 
 **It wrote the implementation before the test, even though the skill says red first.**
 

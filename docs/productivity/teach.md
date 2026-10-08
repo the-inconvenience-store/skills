@@ -45,7 +45,7 @@ The word to think with is **storage strength** — long-term retention — as op
 ## Common questions
 
 **Where does it put the files? Mine ended up in `~/.claude/skills`.**
-A real, open bug ([#377](https://github.com/mattpocock/skills/issues/377)). `SKILL.md` uses `./` for two different roots at once: `./MISSION-FORMAT.md` and its siblings really do sit next to `SKILL.md` in the installed skill, while `./lessons/`, `./reference/`, `./learning-records/` and `./assets/` are meant to be in your directory. An agent that resolves the first kind against the skill's install directory goes on to resolve the second kind there too, and writes your course into the skill folder. Check where the first lesson landed before you build on it, and name the directory explicitly when you start rather than relying on "the current directory" being understood.
+In the directory you ran `/teach` in ([#377](https://github.com/mattpocock/skills/issues/377), fixed). `SKILL.md` now says which paths resolve from your directory (`./lessons/` and the rest) and which from the skill's own folder (only the `*-FORMAT.md` templates), so the course no longer lands in the skill install.
 
 **Do I stay in one session, or start a new one per lesson?**
 All three approaches work: staying in the same session, re-invoking `/teach` in a new session, or opening a new session in the same folder. Each lesson is its own invocation. The folder is the continuity, not the conversation. Common practice is to open a fresh session in the workspace and say `/teach next lesson for <topic>`.

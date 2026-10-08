@@ -124,7 +124,12 @@
       "reason": "Archived tombstone on both sides; the skill was removed upstream in v1.3.0 and here in v1.5.0"
     }
   ],
-  "ignored_upstream_docs": [],
+  "ignored_upstream_docs": [
+    {
+      "path": "docs/agents/**",
+      "reason": "Upstream's own issue-triage configuration for its repository, not a skill docs page"
+    }
+  ],
   "ignored_local_docs": [
     {
       "path": "docs/upstream/**",

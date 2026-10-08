@@ -56,7 +56,7 @@ There is no stopping criterion in the skill, and this shows up as two complaints
 
 **`/wayfinder` created research tickets. Do I resolve those myself?**
 
-No, it fires them for you. A charting session spawns a `/research` subagent per research ticket and burns them down in parallel, capturing findings on a throwaway `research/<name>` branch with a [context pointer](https://www.aihero.dev/ai-coding-dictionary/context-pointer) from the ticket. Research tickets are the one exception to wayfinder's one-ticket-per-session rule, because they are [AFK](https://www.aihero.dev/ai-coding-dictionary/afk): nothing waits on you. Two known snags with those branches: the subagent has been seen opening a draft PR from a branch that is never meant to merge ([issue #576](https://github.com/mattpocock/skills/issues/576) upstream), and deleting the branch later breaks the context pointers the tickets hold.
+No, it fires them for you. A charting session spawns a `/research` subagent per research ticket and burns them down in parallel, capturing findings on a throwaway `research/<name>` branch with a [context pointer](https://www.aihero.dev/ai-coding-dictionary/context-pointer) from the ticket. Research tickets are the one exception to wayfinder's one-ticket-per-session rule, because they are [AFK](https://www.aihero.dev/ai-coding-dictionary/afk): nothing waits on you. The branch is pushed but never gets a PR, since it is never meant to merge ([issue #576](https://github.com/mattpocock/skills/issues/576) upstream, now fixed). One known snag remains: deleting the branch later breaks the context pointers the tickets hold.
 
 ## Where it fits
 

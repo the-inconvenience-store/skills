@@ -6,6 +6,8 @@ disable-model-invocation: true
 
 Implement the work described by the user in the spec or tickets. The behavior and test seams are already agreed; execute them rather than reopening product decisions.
 
+If the user passes a ticket reference, fetch it from the issue tracker and state its title before starting. If the reference is ambiguous, ask.
+
 Before editing production code, call the Skill tool with `engineering-principles`. Independently scan its full trigger index against the spec, ticket, repository, and intended change; read every matched leaf and turn it into a concrete constraint. User-named principles are mandatory additions, not a prerequisite for selection.
 
 Call the Skill tool with `tdd` and work one red-green vertical slice at a time at the pre-agreed seams. Run typechecking and the narrow test files regularly, then the full test suite once after the implementation is coherent.

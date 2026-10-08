@@ -26,9 +26,9 @@ The **Spec** axis needs somewhere to find the originating spec — an issue refe
 
 ## Two axes, never merged
 
-The defining idea is the **two axes**. **Standards** asks whether the diff conforms to how this repo writes code: its documented standards, a fixed Fowler smell baseline, and only the engineering principles triggered by this change. Repository standards override the baselines; smells and principles remain judgment calls rather than hard violations. **Spec** asks the orthogonal question — does the code do what the issue or spec actually asked, without missing requirements or smuggling in scope creep?
+The defining idea is the **two axes**. **Standards** asks whether the diff conforms to how this repo writes code: every file in the repo that documents standards (`CODING_STANDARDS.md` and `CONTRIBUTING.md` always, when present), a fixed Fowler smell baseline, and only the engineering principles triggered by this change. Repository standards override the baselines; smells and principles remain judgment calls rather than hard violations. **Spec** asks the orthogonal question — does the code do what the issue or spec actually asked, without missing requirements or smuggling in scope creep?
 
-They run as parallel sub-agents so neither pollutes the other's context, and the final report presents them under separate `## Standards` and `## Spec` headings with a per-axis summary. Real-surface execution remains the job of [verification](https://aihero.dev/skills-verification), not a third review axis.
+They run as parallel foreground sub-agents, issued together, so neither pollutes the other's context, and the final report presents them under separate `## Standards` and `## Spec` headings with a per-axis summary. Real-surface execution remains the job of [verification](https://aihero.dev/skills-verification), not a third review axis.
 
 Two sub-agents is the whole fan-out. Both briefs forbid the sub-agent from reaching for `/code-review` itself or spawning anything further, because a review agent that can rediscover this skill will start its own pair and the count climbs without a ceiling.
 
