@@ -1,6 +1,6 @@
 ---
 name: guardrails
-description: Set up or overhaul a project's development guardrails and reproducible checks. Use when a repository needs linting, formatting, tests, reproducible installation, dependency upkeep, CI, hooks, generated-code drift checks, or applicable framework standards.
+description: Set up or overhaul a project's development guardrails and reproducible checks. Use when a repository needs linting, formatting, tests, reproducible installation, dependency upkeep, security scanning, CI, hooks, generated-code drift checks, or applicable framework standards.
 ---
 
 # Guardrails
@@ -26,6 +26,7 @@ Read only the references selected by the repository and the live decision branch
 | [references/rules/dependencies.md](./references/rules/dependencies.md) | Notable libraries need their own lint coverage. |
 | [references/project-lifecycle.md](./references/project-lifecycle.md) | The setup covers reproducible installation, tests, generated code, dependency upkeep, or fresh-checkout verification. |
 | [references/git-hooks.md](./references/git-hooks.md) | The proposal includes git hooks. |
+| [references/security-scanning.md](./references/security-scanning.md) | The user accepts Semgrep or Gitleaks. |
 | [references/agent-hooks.md](./references/agent-hooks.md) | The user asks for hooks inside an agent harness. |
 
 For another ecosystem, follow `research-ecosystem.md` and build an equivalent evidence-backed setup. A missing bundled reference requires research; it is not permission to skip that language.
@@ -38,7 +39,7 @@ Read the repository before asking questions or changing files:
 
 - Check `git status` and preserve unrelated work.
 - Identify languages, runtimes, package managers, frameworks, packages or modules, and whether the repo is new or established.
-- Read existing tool-version files, lockfiles, setup commands, lint, format, compiler, test, code-generation, dependency-update, CI, and hook configuration. Check `core.hooksPath` as well as tracked hook-manager files.
+- Read existing tool-version files, lockfiles, setup commands, lint, format, compiler, test, code-generation, dependency-update, security-scanning, CI, and hook configuration. Check `core.hooksPath` as well as tracked hook-manager files.
 - Read the project's agent instructions and contributor documentation for stated conventions.
 - Run existing check commands when doing so is safe; record failures that predate this setup.
 - Read the matching stack references above.
@@ -58,6 +59,8 @@ If the workspace has not been scaffolded, ask what the project must do and which
 
 **Task runner — optional:** reuse an existing runner, or ask whether the user wants one and recommend only the runner that fits the repo—such as Nx, Turborepo, Taskfile, Makefile, or `mise`. If accepted, make its tasks the canonical command interface and use them for the rest of setup, hooks, CI, and verification. Add named tasks only when a task runner is accepted; otherwise use the ecosystem's native commands without creating task-shaped wrappers.
 
+**Security scanning — optional:** offer Semgrep for vulnerability and bug patterns, and Gitleaks for secrets. Each runs as a pre-commit hook that catches what an agent or person is about to commit, with CI as the backstop. Recommend both, name the cost (committed rules to maintain, hook runtime, a triage of existing findings), and add only the ones the user accepts. When an established scanner already covers the same job, reuse it.
+
 Bundle related choices into one short conversation. Offer a recommendation and its consequence; omit menus of irrelevant tools. If the user already expressed a preference, carry it into the proposal instead of asking again.
 
 **Done when:** the desired scope and any hard constraints are known well enough to propose one setup.
@@ -72,6 +75,7 @@ Present one cohesive plan before installing or editing anything. Keep it short e
 - the reproducible setup, test baseline, generated-code lifecycle, and dependency upkeep selected from `project-lifecycle.md`;
 - the commands developers and CI will run;
 - which accepted checks run at pre-commit, pre-push, commit-message, or CI time;
+- when security scanning was accepted: the Semgrep rule sources and how they are vendored, the agent-failure rules, the Gitleaks configuration, and how existing findings are triaged;
 - how existing violations will be handled without hiding them;
 - the files and dependencies expected to change.
 
@@ -105,7 +109,7 @@ Store discoverable facts in configuration and scripts. Put only the commands nee
 
 Verify in proportion to the change:
 
-1. Run every new or changed lint, format-check, test, code-generation, dependency-audit, and aggregate command that the user accepted. Use the approved task runner when one was selected.
+1. Run every new or changed lint, format-check, test, code-generation, dependency-audit, security-scan, and aggregate command that the user accepted. Use the approved task runner when one was selected.
 2. Use a disposable file or temporary edit to demonstrate one representative violation per configured ecosystem, then restore it and confirm the check passes. Preserve any pre-existing failures in the report.
 3. Invoke hook scripts with controlled input or use the manager's test mechanism. Confirm both the relevant-file path and the no-op path.
 4. Measure local hook duration. Move slow checks to pre-push or CI with the user's approval.
@@ -122,7 +126,7 @@ Tell the user:
 - what changed and what was deliberately kept;
 - the commands to run;
 - which checks run locally and in CI;
-- existing violations, researched ecosystems, dependency-update behavior, and any test, code-generation, or coverage gaps left over;
+- existing violations, security findings and how each was resolved, researched ecosystems, dependency-update behavior, and any test, code-generation, or coverage gaps left over;
 - anything approved but not verified, with the reason.
 
 The setup is complete when the approved guardrails work and the user can see their boundaries. It is not complete merely because configuration files exist.

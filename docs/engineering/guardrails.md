@@ -12,7 +12,7 @@ npx skills update guardrails
 
 ## What it does
 
-`guardrails` guides the setup of a project's linters, formatter, tests, reproducible installation, dependency upkeep, CI checks, and hooks. It can start in an empty workspace or adapt an established repository without quietly replacing conventions that already work.
+`guardrails` guides the setup of a project's linters, formatter, tests, reproducible installation, dependency upkeep, security scanning, CI checks, and hooks. It can start in an empty workspace or adapt an established repository without quietly replacing conventions that already work.
 
 The **proposal** is the control point: the agent investigates and recommends one coherent setup, then waits for you to approve or amend it before changing the project.
 
@@ -36,6 +36,10 @@ It can also set up or reuse an optional task runner, then make its `bootstrap`, 
 
 When the project needs them, the proposal also covers a real test baseline, generated-code drift checks, locked installation, dependency audits and update automation, and proof that a fresh checkout can pass the complete gate. Update bots and other workflow changes remain explicit choices.
 
+## Security scanning at commit time
+
+Semgrep and Gitleaks are optional, but recommended when agents commit to the repo. They run as **pre-commit** hooks on staged changes, so an injectable query, disabled TLS check, or pasted API key is caught at the commit that introduces it rather than at review. CI runs the same scans as the backstop. Semgrep's rules are committed to the repo so the hook works offline and stays fast. They include a small set of project rules aimed at mistakes agents commonly make, each with a message naming the safe alternative. Registry rules are vendored only into private repos, because their license forbids redistribution; public repos fetch those packs in CI instead.
+
 Verification is proportionate: commands are run, representative failures are demonstrated safely, and anything that would require commits, merges, installs, or other side effects is left unverified unless you approve it.
 
 ## Common questions
@@ -56,6 +60,10 @@ Because a slow hook gets bypassed, and a bypassed hook guards nothing. The skill
 
 That is the skill being honest rather than failing. Verification is proportionate: commands get run and representative failures get demonstrated safely, but anything needing a commit, a merge, an install, or another real side effect is left unverified unless you approve it. A report that names an unverified path is more useful than one that claims a green CI run it never triggered. The same applies to failures that were already there before it started: those get reported, not quietly absorbed.
 
+**Why do the security scans run on pre-commit when other slow checks get pushed to CI?**
+
+Because the point is to catch the problem before it lands in history, where a leaked secret is already leaked. Both tools scan only staged files: Gitleaks is a single fast binary, and Semgrep uses committed rules with no network calls. The hook's runtime is measured during setup. If Semgrep goes over budget, the slowest rule packs move to CI and the rest stay in the hook.
+
 **How is this different from `setup-inconvenient-skills`?**
 
 Different subject. [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) configures what the *skills* need — the issue tracker, the triage labels, the domain-doc layout — and then invokes this one. `guardrails` configures what the *project* needs: lint, format, tests, reproducible install, dependency upkeep, CI, hooks. Running the setup skill gets you both. Run `guardrails` on its own when only the quality strategy is changing.
@@ -75,6 +83,7 @@ No. It is offered as an explicit choice, and only for a new React application. F
 - Local hooks are fast, CI owns the complete gate, and each boundary is visible.
 - A fresh checkout has a defined locked setup-and-check path, even when that path could not be exercised safely during setup.
 - Generated code and dependency updates have clear commands and ownership when the project uses them.
+- When security scanning was accepted, a staged vulnerable pattern or fake secret is blocked at commit with a message saying what to do instead.
 - Pre-existing failures and unverified behavior are reported rather than hidden.
 
 ## Where it fits

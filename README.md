@@ -205,7 +205,7 @@ Skills for daily code work.
 
 **Model-invoked**
 
-- **[guardrails](./skills/guardrails/SKILL.md)** — Inspect a project, then propose and verify its lint, format, test, reproducible setup, dependency upkeep, optional task runner, CI, hooks, and applicable React standards with the user in control.
+- **[guardrails](./skills/guardrails/SKILL.md)** — Inspect a project, then propose and verify its lint, format, test, reproducible setup, dependency upkeep, optional task runner, optional Semgrep and Gitleaks scanning, CI, hooks, and applicable React standards with the user in control.
 - **[prototype](./skills/prototype/SKILL.md)** — Build a throwaway prototype to answer a design question — a shareable HTML demo for state/logic questions, or several radically different UI variations toggleable from one route.
 - **[diagnosing-bugs](./skills/diagnosing-bugs/SKILL.md)** — Disciplined diagnosis loop for hard bugs and performance regressions: reproduce → minimise → hypothesise → instrument → fix → regression-test.
 - **[research](./skills/research/SKILL.md)** — Investigate a question against high-trust primary sources and capture the findings as a cited Markdown file in the repo, run as a background agent.

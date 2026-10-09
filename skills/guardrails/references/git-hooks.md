@@ -14,7 +14,7 @@ Read current official documentation only for the detected or proposed manager.
 
 Offer lifecycle checks because they serve the project, not because hooks exist:
 
-- **pre-commit:** fast formatting and linting of the affected files or packages;
+- **pre-commit:** fast formatting and linting of the affected files or packages, plus accepted Semgrep and Gitleaks scans of staged changes (`security-scanning.md`);
 - **pre-push:** slower typechecks or focused tests when the user wants a local gate;
 - **commit-msg:** commit-message linting (see below);
 - **post-merge or post-checkout:** dependency installation only when the user accepts the surprising side effect.
