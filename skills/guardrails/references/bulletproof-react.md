@@ -38,7 +38,7 @@ Dependencies flow `shared → features → app`:
 - the app layer composes features and shared code;
 - imports target the defining file directly rather than a barrel.
 
-Translate `app/` to the framework's route layer—Next.js App Router, Expo Router, Remix, React Router, or TanStack Start—and preserve required route exports. Derive lint zones from the actual feature list; do not paste example paths.
+Translate `app/` to the framework's route layer (Next.js App Router, Expo Router, Remix, React Router, or TanStack Start) and preserve required route exports. Derive lint zones from the actual feature list; do not paste example paths.
 
 ## Project standards
 

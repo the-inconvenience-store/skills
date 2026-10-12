@@ -12,40 +12,40 @@ npx skills update to-tickets
 
 ## What it does
 
-`to-tickets` breaks a plan, spec, or the current conversation into a set of **tickets** — each a tracer-bullet vertical slice — and publishes them to your configured tracker, with every ticket declaring its blockers and its real-surface proof.
+`to-tickets` breaks a plan, spec, or the current conversation into a set of **tickets**, each a tracer-bullet vertical slice, and publishes them to your configured tracker, with every ticket declaring its blockers and its real-surface proof.
 
-Every ticket is a **tracer bullet** — a thin *vertical* slice that cuts through all integration layers end-to-end, never a horizontal slice of one layer. A completed slice is independently demoable, states the public path and observable result that prove it, and is safe to hand to a fresh agent.
+Every ticket is a **tracer bullet**: a thin *vertical* slice that cuts through all integration layers end-to-end, never a horizontal slice of one layer. A completed slice is independently demoable, states the public path and observable result that prove it, and is safe to hand to a fresh agent.
 
 ## When to reach for it
 
-You invoke this by typing `/to-tickets` — the agent won't reach for it on its own.
+You invoke this by typing `/to-tickets`; the agent won't reach for it on its own.
 
-Reach for it once you have an agreed plan or a written spec and you want it split into tickets. Point it at the conversation, or pass a spec or issue reference and it fetches the body and comments first. If the change hasn't been written up as a spec yet, produce one first — for that, use [to-spec](https://aihero.dev/skills-to-spec).
+Reach for it once you have an agreed plan or a written spec and you want it split into tickets. Point it at the conversation, or pass a spec or issue reference and it fetches the body and comments first. If the change hasn't been written up as a spec yet, produce one first; for that, use [to-spec](https://aihero.dev/skills-to-spec).
 
 ## Prerequisites
 
-`to-tickets` publishes into your issue tracker, so [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) must have configured the tracker and its triage label vocabulary for this repo first. On a real tracker it applies the ready-for-agent label as it publishes, and checks the label exists before the first create — on GitHub a missing label fails the create outright and takes the ticket with it.
+`to-tickets` publishes into your issue tracker, so [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) must have configured the tracker and its triage label vocabulary for this repo first. On a real tracker it applies the ready-for-agent label as it publishes, and checks the label exists before the first create, since on GitHub a missing label fails the create outright and takes the ticket with it.
 
 ## One artifact, two readings
 
 The blocking edges are the whole point. They make one set of tickets read two ways, depending on the tracker:
 
 - **Local files** → one file per ticket under `.scratch/<feature>/issues/`, numbered blockers-first, the edges written as text. You work them top-to-bottom, by hand, staying in the loop.
-- **A real tracker (GitHub, Linear)** → one issue per ticket, the edges as native blocking links (or sub-issues). Any ticket whose blockers are all done is on the **frontier** and can be grabbed — so several agents can run at once.
+- **A real tracker (GitHub, Linear)** → one issue per ticket, the edges as native blocking links (or sub-issues). Any ticket whose blockers are all done is on the **frontier** and can be grabbed, so several agents can run at once.
 
-Native is the default on a real tracker, and the "Blocked by" body line is only the fallback for trackers that have no such edge. GitHub does have one — `gh issue create --blocked-by`, plus `--parent` for the sub-issue link — and because blockers are published first, their numbers are always known by the time a dependent ticket is created. An edge written as body text on a tracker that supports the real thing is invisible to the frontier query.
+Native is the default on a real tracker, and the "Blocked by" body line is only the fallback for trackers that have no such edge. GitHub does have one (`gh issue create --blocked-by`, plus `--parent` for the sub-issue link), and because blockers are published first, their numbers are always known by the time a dependent ticket is created. An edge written as body text on a tracker that supports the real thing is invisible to the frontier query.
 
-The edges live in the ticket regardless of medium; the medium only decides whether anything acts on them in parallel. `to-tickets` produces the artifact — how you run it (sequential by hand, or a parallel fleet) is up to you.
+The edges live in the ticket regardless of medium; the medium only decides whether anything acts on them in parallel. `to-tickets` produces the artifact; how you run it (sequential by hand, or a parallel fleet) is up to you.
 
 ## Vertical slices, not horizontal ones
 
-The whole skill turns on one distinction. A **horizontal** slice ships one layer of the change — all the schema, or all the API — and nothing works until every layer lands. A **vertical** slice, the tracer bullet, ships one narrow path through *every* layer at once, so it can be demoed the moment it's done.
+The whole skill turns on one distinction. A **horizontal** slice ships one layer of the change (all the schema, or all the API), and nothing works until every layer lands. A **vertical** slice, the tracer bullet, ships one narrow path through *every* layer at once, so it can be demoed the moment it's done.
 
-Before slicing, `to-tickets` applies the engineering principles for verifiable sequencing, useful intermediate states, migrations, and shared writes. It looks for prefactoring — "make the change easy, then make the easy change" — and orders that work first. It then quizzes you on the breakdown, blocking edges, proof, and what to merge or split before publishing anything.
+Before slicing, `to-tickets` applies the engineering principles for verifiable sequencing, useful intermediate states, migrations, and shared writes. It looks for prefactoring ("make the change easy, then make the easy change") and orders that work first. It then quizzes you on the breakdown, blocking edges, proof, and what to merge or split before publishing anything.
 
 ## The wide-refactor exception
 
-One shape breaks the tracer-bullet rule: a **wide refactor** — a single mechanical change (rename a column, retype a shared symbol) whose **blast radius** fans across the whole codebase, so one edit breaks thousands of call sites at once and no vertical slice can land green. `to-tickets` slices it as **expand–contract** instead: expand (add the new form beside the old so nothing breaks), migrate (move call sites over in batches sized by blast radius, one ticket per batch, CI green throughout because the old form still exists), then contract (delete the old form once no caller remains). When even the batches can't stay green alone, they share an integration branch that all block a final integrate-and-verify ticket, and green is promised only there.
+One shape breaks the tracer-bullet rule: a **wide refactor**: a single mechanical change (rename a column, retype a shared symbol) whose **blast radius** fans across the whole codebase, so one edit breaks thousands of call sites at once and no vertical slice can land green. `to-tickets` slices it as **expand–contract** instead: expand (add the new form beside the old so nothing breaks), migrate (move call sites over in batches sized by blast radius, one ticket per batch, CI green throughout because the old form still exists), then contract (delete the old form once no caller remains). When even the batches can't stay green alone, they share an integration branch that all block a final integrate-and-verify ticket, and green is promised only there.
 
 ## Common questions
 

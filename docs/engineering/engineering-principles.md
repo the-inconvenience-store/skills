@@ -48,7 +48,7 @@ No, and the selective design is the whole point. The agent scans the trigger ind
 
 **Do I have to name a principle for it to apply?**
 
-No. Selection is proactive: the workflows scan and load on their own, and naming one is an emphasis lever rather than a switch. Naming is worth doing when you want to force a particular reading of a decision — "use Subtract Before You Add" on a proposal that keeps growing, "Prove It Works" on a claim you don't believe yet. The name acts as a leading word that pulls in the whole rule without you restating it.
+No. Selection is proactive: the workflows scan and load on their own, and naming one is an emphasis lever rather than a switch. Naming is worth doing when you want to force a particular reading of a decision: "use Subtract Before You Add" on a proposal that keeps growing, "Prove It Works" on a claim you don't believe yet. The name acts as a leading word that pulls in the whole rule without you restating it.
 
 **What happens when two principles disagree?**
 
@@ -56,7 +56,7 @@ They are defaults, and they sit below evidence. Explicit product decisions, the 
 
 **How is this different from `codebase-design`?**
 
-Both are vocabulary layers, and they answer different questions. [codebase-design](https://aihero.dev/skills-codebase-design) is about a module's *shape*: depth, interface, seam, adapter, leverage, locality. `engineering-principles` is about *decisions* — what to build, what to subtract, how to sequence a migration, what counts as proof. A design session usually wants both: the principles to decide, the design vocabulary to describe the result. [domain-modeling](https://aihero.dev/skills-domain-modeling) is the third layer, and it owns the project's own nouns.
+Both are vocabulary layers, and they answer different questions. [codebase-design](https://aihero.dev/skills-codebase-design) is about a module's *shape*: depth, interface, seam, adapter, leverage, locality. `engineering-principles` is about *decisions*: what to build, what to subtract, how to sequence a migration, what counts as proof. A design session usually wants both: the principles to decide, the design vocabulary to describe the result. [domain-modeling](https://aihero.dev/skills-domain-modeling) is the third layer, and it owns the project's own nouns.
 
 **Why do two of the names differ from the sources they come from?**
 

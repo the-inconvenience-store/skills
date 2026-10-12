@@ -22,9 +22,9 @@ Communication to and from subagents should be sparse. Communicate primarily thro
 
 2. Call the Skill tool with `engineering-principles`. Scan its full trigger index against the spec, the task graph, and the repository; read every matched leaf and turn it into a concrete constraint. User-named principles are mandatory additions, not a prerequisite for selection. Save the constraints as a markdown notes file in a directory outside the repo, accessible by all future subagents.
 
-3. (optional) Use an **exploration subagent** to conduct any exploration required by the tickets — relevant codebase files or external documentation. It saves its markdown notes in the same notes directory. This lets **implementer subagents** focus on implementation rather than exploration.
+3. (optional) Use an **exploration subagent** to conduct any exploration required by the tickets: relevant codebase files or external documentation. It saves its markdown notes in the same notes directory. This lets **implementer subagents** focus on implementation rather than exploration.
 
-4. Create the integration branch. If the issue tracker closes work through PRs, or the user asks for one, open a draft PR after the first merge in step 6 — a branch with no commits ahead of main can't open one — marked as closing the spec and tickets.
+4. Create the integration branch. If the issue tracker closes work through PRs, or the user asks for one, open a draft PR after the first merge in step 6 (a branch with no commits ahead of main can't open one), marked as closing the spec and tickets.
 
 5. Use **implementer subagents** to implement each ticket, each in its own worktree on its own branch. Each implementer subagent:
    - confirms its worktree is based on the integration branch before starting, and resets onto it if not;

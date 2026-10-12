@@ -30,5 +30,5 @@ Used by `/wayfinder`. The **map** is an epic bead with **child** beads as ticket
 - **Child ticket**: a task created with `bd create "<question>" --type task --parent <map> --no-inherit-labels --labels wayfinder:<type> --body-file -`, where `<type>` is `research`, `prototype`, `grilling`, or `task`.
 - **Blocking**: Beads' native dependency edge. `bd dep add <child> <blocker>` means the child is blocked by the blocker. A ticket is unblocked when every blocker is closed.
 - **Frontier query**: `bd ready --parent <map> --unassigned --sort oldest --json` lists the open, unblocked, unclaimed children in creation order.
-- **Claim**: `bd update <id> --claim` — the session's first write.
+- **Claim**: `bd update <id> --claim`, the session's first write.
 - **Resolve**: `bd comment <id> "<answer>"`, then `bd close <id>`, then add the context pointer (gist + ticket ID) to the map with `bd comment <map> "<pointer>"`.

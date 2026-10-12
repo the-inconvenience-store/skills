@@ -9,7 +9,7 @@
     {
       "name": "inconvenient-skills",
       "source": "./",
-      "description": "Inconvenient agent skills for real engineering — grilling, spec/ticket flows, TDD, code review, domain modelling and more.",
+      "description": "Inconvenient agent skills for real engineering: grilling, spec/ticket flows, TDD, code review, domain modelling and more.",
       "category": "engineering",
       "keywords": [
         "engineering",
@@ -18,7 +18,7 @@
         "code-review",
         "grilling"
       ],
-      "version": "1.7.1"
+      "version": "1.7.2"
     }
   ]
 }

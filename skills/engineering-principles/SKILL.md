@@ -35,36 +35,36 @@ Selection is complete when every material decision surface has been scanned and 
 
 ## Core
 
-- **Laziness Protocol** — sizing a diff or considering another abstraction, wrapper, parameter, layer, or dependency. Read [references/laziness-protocol.md](references/laziness-protocol.md).
-- **Foundational Thinking** — choosing core data structures, shared types, or scaffold that every later slice needs. Read [references/foundational-thinking.md](references/foundational-thinking.md).
-- **Redesign from First Principles** — integrating a new requirement that does not fit the current shape. Read [references/redesign-from-first-principles.md](references/redesign-from-first-principles.md).
-- **Subtract Before You Add** — extending or rewriting code that already carries dead or superseded paths. Read [references/subtract-before-you-add.md](references/subtract-before-you-add.md).
-- **Minimize Reader Load** — tracing requires too many layers, aliases, mutable facts, or pass-through calls. Read [references/minimize-reader-load.md](references/minimize-reader-load.md).
-- **Outcome-Oriented Execution** — an intermediate design, migration state, or compatibility path may outlive its purpose. Read [references/outcome-oriented-execution.md](references/outcome-oriented-execution.md).
-- **Experience First** — product scope or UX is being traded against implementation convenience. Read [references/experience-first.md](references/experience-first.md).
-- **Exhaust the Design Space** — a costly-to-reverse design has no strong precedent and several plausible shapes. Read [references/exhaust-the-design-space.md](references/exhaust-the-design-space.md).
-- **Build the Lever** — repeated, broad, or uncertain work can be performed or proved by a reusable tool. Read [references/build-the-lever.md](references/build-the-lever.md).
+- **Laziness Protocol**: sizing a diff or considering another abstraction, wrapper, parameter, layer, or dependency. Read [references/laziness-protocol.md](references/laziness-protocol.md).
+- **Foundational Thinking**: choosing core data structures, shared types, or scaffold that every later slice needs. Read [references/foundational-thinking.md](references/foundational-thinking.md).
+- **Redesign from First Principles**: integrating a new requirement that does not fit the current shape. Read [references/redesign-from-first-principles.md](references/redesign-from-first-principles.md).
+- **Subtract Before You Add**: extending or rewriting code that already carries dead or superseded paths. Read [references/subtract-before-you-add.md](references/subtract-before-you-add.md).
+- **Minimize Reader Load**: tracing requires too many layers, aliases, mutable facts, or pass-through calls. Read [references/minimize-reader-load.md](references/minimize-reader-load.md).
+- **Outcome-Oriented Execution**: an intermediate design, migration state, or compatibility path may outlive its purpose. Read [references/outcome-oriented-execution.md](references/outcome-oriented-execution.md).
+- **Experience First**: product scope or UX is being traded against implementation convenience. Read [references/experience-first.md](references/experience-first.md).
+- **Exhaust the Design Space**: a costly-to-reverse design has no strong precedent and several plausible shapes. Read [references/exhaust-the-design-space.md](references/exhaust-the-design-space.md).
+- **Build the Lever**: repeated, broad, or uncertain work can be performed or proved by a reusable tool. Read [references/build-the-lever.md](references/build-the-lever.md).
 
 ## Architecture
 
-- **Model Behavior Structurally** — rules repeat as conditionals or state assumptions across the codebase. Read [references/model-behavior-structurally.md](references/model-behavior-structurally.md).
-- **Boundary Discipline** — parsing, validation, errors, or framework concerns are crossing into business logic. Read [references/boundary-discipline.md](references/boundary-discipline.md).
-- **Type System Discipline** — types permit invalid domain states or external data enters as trusted. Read [references/type-system-discipline.md](references/type-system-discipline.md).
-- **Make Operations Idempotent** — commands, jobs, migrations, or lifecycle steps may retry or resume after partial progress. Read [references/make-operations-idempotent.md](references/make-operations-idempotent.md).
-- **Migrate Callers Then Delete Legacy APIs** — an internal API is being replaced while callers still exist. Read [references/migrate-callers-then-delete-legacy-apis.md](references/migrate-callers-then-delete-legacy-apis.md).
-- **Separate Before Serializing Shared State** — concurrent actors may write the same branch, file, key, process, or object. Read [references/separate-before-serializing-shared-state.md](references/separate-before-serializing-shared-state.md).
-- **Treat Observable Behavior as Contract** — a change alters output, ordering, errors, timing, defaults, identifiers, or formats that outsiders can observe. Read [references/treat-observable-behavior-as-contract.md](references/treat-observable-behavior-as-contract.md).
-- **Fail Loudly** — code catches errors, calls remote dependencies, retries, falls back, or receives malformed input. Read [references/fail-loudly.md](references/fail-loudly.md).
+- **Model Behavior Structurally**: rules repeat as conditionals or state assumptions across the codebase. Read [references/model-behavior-structurally.md](references/model-behavior-structurally.md).
+- **Boundary Discipline**: parsing, validation, errors, or framework concerns are crossing into business logic. Read [references/boundary-discipline.md](references/boundary-discipline.md).
+- **Type System Discipline**: types permit invalid domain states or external data enters as trusted. Read [references/type-system-discipline.md](references/type-system-discipline.md).
+- **Make Operations Idempotent**: commands, jobs, migrations, or lifecycle steps may retry or resume after partial progress. Read [references/make-operations-idempotent.md](references/make-operations-idempotent.md).
+- **Migrate Callers Then Delete Legacy APIs**: an internal API is being replaced while callers still exist. Read [references/migrate-callers-then-delete-legacy-apis.md](references/migrate-callers-then-delete-legacy-apis.md).
+- **Separate Before Serializing Shared State**: concurrent actors may write the same branch, file, key, process, or object. Read [references/separate-before-serializing-shared-state.md](references/separate-before-serializing-shared-state.md).
+- **Treat Observable Behavior as Contract**: a change alters output, ordering, errors, timing, defaults, identifiers, or formats that outsiders can observe. Read [references/treat-observable-behavior-as-contract.md](references/treat-observable-behavior-as-contract.md).
+- **Fail Loudly**: code catches errors, calls remote dependencies, retries, falls back, or receives malformed input. Read [references/fail-loudly.md](references/fail-loudly.md).
 
 ## Verification
 
-- **Prove It Works** — work is about to be called complete. Read [references/prove-it-works.md](references/prove-it-works.md).
-- **Protect the Signal** — a check fails and the tempting fix changes the check rather than the code. Read [references/protect-the-signal.md](references/protect-the-signal.md).
-- **Fix Root Causes** — a bug, failure, or performance regression is being diagnosed, or performance is being optimized. Read [references/fix-root-causes.md](references/fix-root-causes.md).
-- **Sequence Verifiable Units** — work spans several slices, commits, tickets, or migration batches. Read [references/sequence-verifiable-units.md](references/sequence-verifiable-units.md).
+- **Prove It Works**: work is about to be called complete. Read [references/prove-it-works.md](references/prove-it-works.md).
+- **Protect the Signal**: a check fails and the tempting fix changes the check rather than the code. Read [references/protect-the-signal.md](references/protect-the-signal.md).
+- **Fix Root Causes**: a bug, failure, or performance regression is being diagnosed, or performance is being optimized. Read [references/fix-root-causes.md](references/fix-root-causes.md).
+- **Sequence Verifiable Units**: work spans several slices, commits, tickets, or migration batches. Read [references/sequence-verifiable-units.md](references/sequence-verifiable-units.md).
 
 ## Collaboration
 
-- **Guard the Context Window** — a phase boundary, long investigation, large output, or parallel fan-out threatens useful context. Read [references/guard-the-context-window.md](references/guard-the-context-window.md).
-- **Keep Execution Unblocked** — a reversible execution choice risks becoming an unnecessary human checkpoint. Read [references/keep-execution-unblocked.md](references/keep-execution-unblocked.md).
-- **Encode Lessons in Structure** — a correction or instruction has become recurring. Read [references/encode-lessons-in-structure.md](references/encode-lessons-in-structure.md).
+- **Guard the Context Window**: a phase boundary, long investigation, large output, or parallel fan-out threatens useful context. Read [references/guard-the-context-window.md](references/guard-the-context-window.md).
+- **Keep Execution Unblocked**: a reversible execution choice risks becoming an unnecessary human checkpoint. Read [references/keep-execution-unblocked.md](references/keep-execution-unblocked.md).
+- **Encode Lessons in Structure**: a correction or instruction has become recurring. Read [references/encode-lessons-in-structure.md](references/encode-lessons-in-structure.md).

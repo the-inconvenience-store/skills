@@ -20,7 +20,7 @@ For JavaScript, TypeScript, React, and Go, the skill carries curated rule baseli
 
 For Ruby, C#, Rust, and other ecosystems without a bundled baseline, the agent researches current maintained tools and exact rules, then builds the equivalent proposal instead of skipping the language.
 
-For a new React application, it also offers a Bulletproof React-inspired standards package—feature boundaries, import direction, state and API conventions, and testing posture—as an explicit choice rather than an assumed architecture.
+For a new React application, it also offers a Bulletproof React-inspired standards package (feature boundaries, import direction, state and API conventions, and testing posture) as an explicit choice rather than an assumed architecture.
 
 ## When to reach for it
 
@@ -54,7 +54,7 @@ No. Those four ship with curated rule baselines aimed at the failure modes agent
 
 **Why are the pre-commit hooks so thin? I wanted the full suite to run.**
 
-Because a slow hook gets bypassed, and a bypassed hook guards nothing. The skill deliberately splits fast local feedback from the complete gate: hooks stay quick, CI owns the full run, and the boundary between them is made visible rather than left implicit. If you genuinely want the whole suite locally, ask for it in the proposal — it is a choice, not a prohibition.
+Because a slow hook gets bypassed, and a bypassed hook guards nothing. The skill deliberately splits fast local feedback from the complete gate: hooks stay quick, CI owns the full run, and the boundary between them is made visible rather than left implicit. If you genuinely want the whole suite locally, ask for it in the proposal. It is a choice, not a prohibition.
 
 **It said it couldn't verify part of what it set up.**
 
@@ -66,11 +66,11 @@ Because the point is to catch the problem before it lands in history, where a le
 
 **How is this different from `setup-inconvenient-skills`?**
 
-Different subject. [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) configures what the *skills* need — the issue tracker, the triage labels, the domain-doc layout — and then invokes this one. `guardrails` configures what the *project* needs: lint, format, tests, reproducible install, dependency upkeep, CI, hooks. Running the setup skill gets you both. Run `guardrails` on its own when only the quality strategy is changing.
+Different subject. [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) configures what the *skills* need (the issue tracker, the triage labels, the domain-doc layout) and then invokes this one. `guardrails` configures what the *project* needs: lint, format, tests, reproducible install, dependency upkeep, CI, hooks. Running the setup skill gets you both. Run `guardrails` on its own when only the quality strategy is changing.
 
 **When do I run it again?**
 
-When the stack changes or the quality strategy does: a new language in the repo, a formatter swap, a move from ad-hoc scripts to a task runner, a CI provider change. [retro](https://aihero.dev/skills-retro) is the other common route in — when a session's finding turns out to be "this repo has no baseline at all", that is a `guardrails` run rather than one more lint rule.
+When the stack changes or the quality strategy does: a new language in the repo, a formatter swap, a move from ad-hoc scripts to a task runner, a CI provider change. [retro](https://aihero.dev/skills-retro) is the other common route in: when a session's finding turns out to be "this repo has no baseline at all", that is a `guardrails` run rather than one more lint rule.
 
 **Does the Bulletproof React package come as standard on a React app?**
 

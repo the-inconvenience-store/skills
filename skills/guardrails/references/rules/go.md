@@ -19,7 +19,7 @@ Prefer `cyclop + gocognit`; omit `gocyclo` because it duplicates cyclomatic find
 
 ## Correctness
 
-Keep the standard floor—`errcheck`, `govet`, `ineffassign`, `staticcheck`, `unused`—then recommend:
+Keep the standard floor (`errcheck`, `govet`, `ineffassign`, `staticcheck`, `unused`), then recommend:
 
 - Resources and data access: `bodyclose`, `sqlclosecheck`, `rowserrcheck`.
 - Contexts: `contextcheck`, `noctx`, `containedctx`, `fatcontext`.

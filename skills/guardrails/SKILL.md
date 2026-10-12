@@ -57,9 +57,9 @@ Use the user's request and the repository as defaults. Ask only about choices th
 
 If the workspace has not been scaffolded, ask what the project must do and which stack constraints already exist. Include the official scaffold or minimal initialization in the proposal instead of silently choosing a framework.
 
-**Task runner — optional:** reuse an existing runner, or ask whether the user wants one and recommend only the runner that fits the repo—such as Nx, Turborepo, Taskfile, Makefile, or `mise`. If accepted, make its tasks the canonical command interface and use them for the rest of setup, hooks, CI, and verification. Add named tasks only when a task runner is accepted; otherwise use the ecosystem's native commands without creating task-shaped wrappers.
+**Task runner (optional):** reuse an existing runner, or ask whether the user wants one and recommend only the runner that fits the repo, such as Nx, Turborepo, Taskfile, Makefile, or `mise`. If accepted, make its tasks the canonical command interface and use them for the rest of setup, hooks, CI, and verification. Add named tasks only when a task runner is accepted; otherwise use the ecosystem's native commands without creating task-shaped wrappers.
 
-**Security scanning — optional:** offer Semgrep for vulnerability and bug patterns, and Gitleaks for secrets. Each runs as a pre-commit hook that catches what an agent or person is about to commit, with CI as the backstop. Recommend both, name the cost (committed rules to maintain, hook runtime, a triage of existing findings), and add only the ones the user accepts. When an established scanner already covers the same job, reuse it.
+**Security scanning (optional):** offer Semgrep for vulnerability and bug patterns, and Gitleaks for secrets. Each runs as a pre-commit hook that catches what an agent or person is about to commit, with CI as the backstop. Recommend both, name the cost (committed rules to maintain, hook runtime, a triage of existing findings), and add only the ones the user accepts. When an established scanner already covers the same job, reuse it.
 
 Bundle related choices into one short conversation. Offer a recommendation and its consequence; omit menus of irrelevant tools. If the user already expressed a preference, carry it into the proposal instead of asking again.
 
@@ -71,7 +71,7 @@ Present one cohesive plan before installing or editing anything. Keep it short e
 
 - what stays, what changes, and why;
 - the linter and formatter per ecosystem;
-- the task runner and canonical task names, when accepted—including `bootstrap`, `check`, and `codegen` only where those jobs apply;
+- the task runner and canonical task names, when accepted, including `bootstrap`, `check`, and `codegen` only where those jobs apply;
 - the reproducible setup, test baseline, generated-code lifecycle, and dependency upkeep selected from `project-lifecycle.md`;
 - the commands developers and CI will run;
 - which accepted checks run at pre-commit, pre-push, commit-message, or CI time;
@@ -79,7 +79,7 @@ Present one cohesive plan before installing or editing anything. Keep it short e
 - how existing violations will be handled without hiding them;
 - the files and dependencies expected to change.
 
-Be **generous** with linters: more lint coverage means cleaner code. Propose every maintained linter, analyzer, plugin, and rule group that applies to the detected stack and dependencies—correctness, type safety, security, complexity, imports and boundaries, tests, accessibility, documentation, and library-specific rules. Layer several linters when each covers rules the others lack. Leave one out only for a named reason: it duplicates a rule already enabled, fights the formatter, targets a dependency the project lacks, or exceeds the hook budget, in which case it runs at pre-push or CI instead.
+Be **generous** with linters: more lint coverage means cleaner code. Propose every maintained linter, analyzer, plugin, and rule group that applies to the detected stack and dependencies: correctness, type safety, security, complexity, imports and boundaries, tests, accessibility, documentation, and library-specific rules. Layer several linters when each covers rules the others lack. Leave one out only for a named reason: it duplicates a rule already enabled, fights the formatter, targets a dependency the project lacks, or exceeds the hook budget, in which case it runs at pre-push or CI instead.
 
 Lead with the recommended setup. Include an alternative only where it changes a meaningful tradeoff. Treat new architecture, file-layout, naming, coverage, custom-rule, and agent-hook work as optional scope rather than implied setup.
 

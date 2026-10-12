@@ -14,32 +14,32 @@ npx skills update to-spec
 
 `to-spec` turns the current conversation and your codebase understanding into a spec, then publishes it to your issue tracker.
 
-It does **not** interview you again. By the time you reach for it, the alignment work is done — `to-spec` synthesises what is already known rather than asking a fresh round of questions.
+It does **not** interview you again. By the time you reach for it, the alignment work is done: `to-spec` synthesises what is already known rather than asking a fresh round of questions.
 
 ## When to reach for it
 
-You invoke this by typing `/to-spec` — the agent won't reach for it on its own.
+You invoke this by typing `/to-spec`; the agent won't reach for it on its own.
 
-Reach for it once a change has been talked through and the domain language is settled, and you want that shared understanding written down before any code is written. If you *haven't* aligned yet, grill first — for that, use [grill-with-docs](https://aihero.dev/skills-grill-with-docs). To split the finished spec into tickets, use [to-tickets](https://aihero.dev/skills-to-tickets).
+Reach for it once a change has been talked through and the domain language is settled, and you want that shared understanding written down before any code is written. If you *haven't* aligned yet, grill first; for that, use [grill-with-docs](https://aihero.dev/skills-grill-with-docs). To split the finished spec into tickets, use [to-tickets](https://aihero.dev/skills-to-tickets).
 
 ## Prerequisites
 
-`to-spec` publishes into your issue tracker, so [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) must have configured the tracker and triage labels for this repo first. It applies the `ready-for-agent` label itself — no separate triage pass needed.
+`to-spec` publishes into your issue tracker, so [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) must have configured the tracker and triage labels for this repo first. It applies the `ready-for-agent` label itself, so no separate triage pass needed.
 
 ## What the spec includes
 
-- **Problem statement** — what is broken or missing, and why it's worth solving, in the project's own vocabulary.
-- **Solution** — the shape of the fix at a high level, before any implementation detail.
-- **User stories** — an extensive, numbered list of the concrete behaviours the change must support, each one independently checkable.
-- **Implementation decisions** — the choices already settled during the conversation, sharpened by the engineering principles their triggers select.
-- **Testing decisions** — the seams where durable behavior tests will live.
-- **Verification** — the real user or consumer path, observable result, durable side effects, and behavior that must remain unchanged.
-- **Out-of-scope items** — what this change deliberately does *not* cover, to keep the ticket bounded.
-- **Further notes** — anything else worth carrying forward that doesn't fit the sections above.
+- **Problem statement**: what is broken or missing, and why it's worth solving, in the project's own vocabulary.
+- **Solution**: the shape of the fix at a high level, before any implementation detail.
+- **User stories**: an extensive, numbered list of the concrete behaviours the change must support, each one independently checkable.
+- **Implementation decisions**: the choices already settled during the conversation, sharpened by the engineering principles their triggers select.
+- **Testing decisions**: the seams where durable behavior tests will live.
+- **Verification**: the real user or consumer path, observable result, durable side effects, and behavior that must remain unchanged.
+- **Out-of-scope items**: what this change deliberately does *not* cover, to keep the ticket bounded.
+- **Further notes**: anything else worth carrying forward that doesn't fit the sections above.
 
 ## Deep modules
 
-Before writing the spec, `to-spec` sketches the **seams** at which the feature will be tested and looks for **deep module** opportunities — a lot of functionality hidden behind a small, stable interface. It prefers existing seams to new ones and the highest seam possible, ideally just one across the whole change.
+Before writing the spec, `to-spec` sketches the **seams** at which the feature will be tested and looks for **deep module** opportunities: a lot of functionality hidden behind a small, stable interface. It prefers existing seams to new ones and the highest seam possible, ideally just one across the whole change.
 
 That matters for agentic development: a good interface gives tests something durable to target, so the code underneath can change without the tests moving.
 

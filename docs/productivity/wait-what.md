@@ -18,7 +18,7 @@ It repairs one message. It does not restart the task or alter the underlying dec
 
 ## When to reach for it
 
-You invoke this by typing `/wait-what` — the agent won't reach for it on its own.
+You invoke this by typing `/wait-what`; the agent won't reach for it on its own.
 
 Reach for it the moment you stop following an explanation. Only you know that the message missed, so invocation remains a human decision.
 

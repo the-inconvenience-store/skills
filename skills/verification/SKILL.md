@@ -11,9 +11,9 @@ Prove behavior through the **real surface** a user touches: the running UI, CLI,
 
 Choose one branch from intent and repository state, then read only its reference:
 
-- **Create** — the user asks to create, set up, or bootstrap repeatable project verification. Read [references/create.md](references/create.md) and [references/project-format.md](references/project-format.md).
-- **Run** — the user asks to verify behavior, another skill needs completion evidence, or a change must be proved on its real surface. Read [references/run.md](references/run.md). If project instructions exist, they own how the surface is driven.
-- **Maintain** — the user asks to audit, update, refresh, or repair existing verification instructions or their feature map. Read [references/maintain.md](references/maintain.md) and [references/project-format.md](references/project-format.md).
+- **Create**: the user asks to create, set up, or bootstrap repeatable project verification. Read [references/create.md](references/create.md) and [references/project-format.md](references/project-format.md).
+- **Run**: the user asks to verify behavior, another skill needs completion evidence, or a change must be proved on its real surface. Read [references/run.md](references/run.md). If project instructions exist, they own how the surface is driven.
+- **Maintain**: the user asks to audit, update, refresh, or repair existing verification instructions or their feature map. Read [references/maintain.md](references/maintain.md) and [references/project-format.md](references/project-format.md).
 
 Intent alone is not enough. Inspect `docs/agents/verification/` before choosing:
 
@@ -37,9 +37,9 @@ Do not substitute an internal setter, mock-only path, cached screenshot, file ti
 
 Every Run ends with exactly one verdict:
 
-- **VERIFIED** — the intended path ran and every named observable result held.
-- **NOT VERIFIED** — the path ran and a named result failed.
-- **INCONCLUSIVE** — the path or result could not be observed reliably. This is not a pass.
+- **VERIFIED**: the intended path ran and every named observable result held.
+- **NOT VERIFIED**: the path ran and a named result failed.
+- **INCONCLUSIVE**: the path or result could not be observed reliably. This is not a pass.
 
 Report the command or interaction, the observed result, the evidence location when one exists, and any verification gap. Redact secrets, authentication material, and personal data from captured output.
 

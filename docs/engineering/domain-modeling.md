@@ -12,34 +12,34 @@ npx skills update domain-modeling
 
 ## What it does
 
-`domain-modeling` builds and sharpens a project's **ubiquitous language** as you design — challenging fuzzy terms, stress-testing relationships with concrete scenarios, and writing the glossary and decisions down the moment they crystallise.
+`domain-modeling` builds and sharpens a project's **ubiquitous language** as you design: challenging fuzzy terms, stress-testing relationships with concrete scenarios, and writing the glossary and decisions down the moment they crystallise.
 
-This is the **active** discipline, not the passive one. Merely reading `GLOSSARY.md` to borrow its vocabulary is a one-line habit any skill can do; this skill is for when you are *changing* the model — coining a canonical term, catching a contradiction between the code and what you just said, recording a hard-to-reverse decision. And it keeps the glossary clean: `GLOSSARY.md` is a glossary and nothing else — no implementation details, no spec, no scratch pad.
+This is the **active** discipline, not the passive one. Merely reading `GLOSSARY.md` to borrow its vocabulary is a one-line habit any skill can do; this skill is for when you are *changing* the model: coining a canonical term, catching a contradiction between the code and what you just said, recording a hard-to-reverse decision. And it keeps the glossary clean: `GLOSSARY.md` is a glossary and nothing else: no implementation details, no spec, no scratch pad.
 
 ## When to reach for it
 
-Type `/domain-modeling`, or the agent reaches for it automatically when a task fits — when codebase terminology is under discussion, when a `GLOSSARY.md` is being written or edited, or when an ADR is being recorded or edited.
+Type `/domain-modeling`, or the agent reaches for it automatically when a task fits: when codebase terminology is under discussion, when a `GLOSSARY.md` is being written or edited, or when an ADR is being recorded or edited.
 
-Reach for it when the *words* are the problem: two people mean different things by "cancellation", "account" is doing three jobs, or a design conversation keeps snagging on a concept that has never been named precisely. If instead the module's *shape* is the problem — where the seam goes, how deep the interface is — use [codebase-design](https://aihero.dev/skills-codebase-design). If you want the plan itself interrogated before you build, use [grilling](https://aihero.dev/skills-grilling).
+Reach for it when the *words* are the problem: two people mean different things by "cancellation", "account" is doing three jobs, or a design conversation keeps snagging on a concept that has never been named precisely. If instead the module's *shape* is the problem (where the seam goes, how deep the interface is), use [codebase-design](https://aihero.dev/skills-codebase-design). If you want the plan itself interrogated before you build, use [grilling](https://aihero.dev/skills-grilling).
 
 ## Prerequisites
 
-The skill writes into two places, both created lazily — only once there is something to record. Resolved terms go into `GLOSSARY.md` at the root (or, in a multi-context repo flagged by a `GLOSSARY-MAP.md`, into the per-context `GLOSSARY.md`). Decisions go into `docs/adr/`. Nothing needs to exist up front; the first resolved term creates the glossary, the first real trade-off creates the ADR.
+The skill writes into two places, both created lazily, only once there is something to record. Resolved terms go into `GLOSSARY.md` at the root (or, in a multi-context repo flagged by a `GLOSSARY-MAP.md`, into the per-context `GLOSSARY.md`). Decisions go into `docs/adr/`. Nothing needs to exist up front; the first resolved term creates the glossary, the first real trade-off creates the ADR.
 
 ## Glossary vs. ADR
 
 Two artifacts, two different bars:
 
-- **The glossary** (`GLOSSARY.md`) captures language. Every time a vague term is made canonical, it's written down inline — not batched — so the shared vocabulary stays current with the conversation. It stays ruthlessly free of implementation detail.
+- **The glossary** (`GLOSSARY.md`) captures language. Every time a vague term is made canonical, it's written down inline, not batched, so the shared vocabulary stays current with the conversation. It stays ruthlessly free of implementation detail.
 - **An ADR** captures a decision, and the bar is high: offered only when the choice is **hard to reverse**, **surprising without context**, and **the result of a real trade-off**. Miss any one of the three and there is no ADR. This is what keeps `docs/adr/` a record of consequential forks rather than a diary.
 
-The move that makes it click: when you state how something works, the skill cross-references the code and surfaces the contradiction — "your code cancels entire Orders, but you just said partial cancellation is possible — which is right?" The language and the code are forced to agree.
+The move that makes it click: when you state how something works, the skill cross-references the code and surfaces the contradiction: "your code cancels entire Orders, but you just said partial cancellation is possible. Which is right?" The language and the code are forced to agree.
 
 ## Pulled out on purpose
 
 `domain-modeling` is the **single source of truth** for building the project's ubiquitous language, split out as its own model-invoked skill so any other skill can reach it. [grill-with-docs](https://aihero.dev/skills-grill-with-docs) leans on it to record terms and decisions as a grilling session runs, [triage](https://aihero.dev/skills-triage) uses it to keep tickets in the project's own words, and [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) reaches for it while it works.
 
-Keeping it standalone means you can also reach for it directly — as a **reference** for how to sharpen a model — without committing to the steps any of those skills mandate. The language lives in one place, and everything that needs it points there.
+Keeping it standalone means you can also reach for it directly, as a **reference** for how to sharpen a model, without committing to the steps any of those skills mandate. The language lives in one place, and everything that needs it points there.
 
 ## Common questions
 

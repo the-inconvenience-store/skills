@@ -1,4 +1,4 @@
-# Upstream audit — {{AUDIT_DATE}}
+# Upstream audit: {{AUDIT_DATE}}
 
 ## Provenance
 

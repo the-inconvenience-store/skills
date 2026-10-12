@@ -77,4 +77,4 @@ Wait for approval exactly as the main skill requires. Research chooses what to r
 - Exercise accepted hooks through controlled inputs and measure their runtime.
 - Report the sources consulted, selected versions, pre-existing findings, declined groups, and remaining coverage gaps.
 
-This branch is complete when the researched ecosystem receives an approved, working setup equivalent in rigor to the bundled stacks—not when the agent has merely named popular tools.
+This branch is complete when the researched ecosystem receives an approved, working setup equivalent in rigor to the bundled stacks, not when the agent has merely named popular tools.

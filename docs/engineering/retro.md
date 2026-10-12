@@ -12,13 +12,13 @@ npx skills update retro
 
 ## What it does
 
-`retro` looks back over a coding session and suggests improvements to the agent's **environment**, so the next run goes better. It reads the session's own record — the current one by default, or one you point it at in the session logs — finds the moments the agent struggled, and hands you a list of candidate fixes, most severe first.
+`retro` looks back over a coding session and suggests improvements to the agent's **environment**, so the next run goes better. It reads the session's own record (the current one by default, or one you point it at in the session logs), finds the moments the agent struggled, and hands you a list of candidate fixes, most severe first.
 
 It changes the environment, not the code. The bug the agent shipped, the file it took twenty tool calls to find, the rule the reviewer missed: `retro` doesn't fix any of them in place. It asks what about the repo let them happen, and proposes the check, the pointer, or the standard that stops them happening again. It also only proposes; nothing changes until you pick a candidate.
 
 ## When to reach for it
 
-You invoke this by typing `/retro` — the agent won't reach for it on its own.
+You invoke this by typing `/retro`, and the agent won't reach for it on its own.
 
 Reach for it at the end of a session that felt harder than it should have: the agent went looking for something for too long, made a mistake a machine could have caught, or needed information it had no way to get. A smooth session has little to teach; a painful one is where the findings are. If what you want is a verdict on the code the session produced, use [code-review](https://aihero.dev/skills-code-review) instead.
 
@@ -39,7 +39,7 @@ Each candidate belongs to one category, and the category decides where the fix g
 
 The leading idea is that standards belong to the **reviewer**, not the implementer. The implementing agent carries the most context pressure: it explores, writes code, and debugs failures. The reviewing agent receives a diff and nothing else. So a new rule goes where there is room to apply it, in review, and never in `AGENTS.md`, which loads into every session's context window whether it's relevant or not.
 
-Before any rule gets written, the violation is classified. A **mechanical** one — a banned API, an import shape, a file-location rule — gets a deterministic check, because a check can fail and a sentence in a standards file can't. The check is usually a rule the repo's linter already ships, switched on. Security and bug patterns, and patterns in files the linter never reads, such as CI workflows and Dockerfiles, become Semgrep rules. Only genuine judgement calls, the kind no linter could ever enforce, become prose. A repo with no guardrail at all (no pre-commit hook, no CI job running lint, typecheck, and tests) is reported as a finding in its own right.
+Before any rule gets written, the violation is classified. A **mechanical** one (a banned API, an import shape, a file-location rule) gets a deterministic check, because a check can fail and a sentence in a standards file can't. The check is usually a rule the repo's linter already ships, switched on. Security and bug patterns, and patterns in files the linter never reads, such as CI workflows and Dockerfiles, become Semgrep rules. Only genuine judgement calls, the kind no linter could ever enforce, become prose. A repo with no guardrail at all (no pre-commit hook, no CI job running lint, typecheck, and tests) is reported as a finding in its own right.
 
 ## Common questions
 

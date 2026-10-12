@@ -273,7 +273,7 @@ def reconcile_skills(
         if ignore:
             matched_ignore_patterns.add(ignore.pattern)
             ignored.append(
-                Comparison(upstream_path, "—", "ignored", reason=ignore.reason)
+                Comparison(upstream_path, "-", "ignored", reason=ignore.reason)
             )
             continue
 
@@ -311,12 +311,12 @@ def reconcile_skills(
         ignore = matching_rule(local_path, ignored_local_rules)
         if ignore:
             ignored.append(
-                Comparison("—", local_path, "ignored", reason=ignore.reason)
+                Comparison("-", local_path, "ignored", reason=ignore.reason)
             )
             continue
         deltas = compare_directories(None, local_dir, "(absent)", local_path)
         comparisons.append(
-            Comparison("—", local_path, "absent", deltas)
+            Comparison("-", local_path, "absent", deltas)
         )
 
     stale = [
@@ -357,7 +357,7 @@ def reconcile_docs(
         if ignore:
             matched_ignore_patterns.add(ignore.pattern)
             ignored.append(
-                Comparison(upstream_path, "—", "ignored", reason=ignore.reason)
+                Comparison(upstream_path, "-", "ignored", reason=ignore.reason)
             )
             continue
         local_path, reason = mappings.get(upstream_path, (upstream_path, None))
@@ -386,7 +386,7 @@ def reconcile_docs(
         if ignore:
             continue
         deltas = compare_files(None, local_file, "(absent)", local_path)
-        comparisons.append(Comparison("—", local_path, "absent", deltas))
+        comparisons.append(Comparison("-", local_path, "absent", deltas))
 
     stale = [
         rule
@@ -427,7 +427,7 @@ def ignored_table(items: list[Comparison]) -> str:
                 for value in (
                     f"`{item.upstream}`",
                     f"`{item.local}`",
-                    item.reason or "—",
+                    item.reason or "-",
                 )
             )
             + " |"
@@ -465,7 +465,7 @@ def render_detailed_diffs(items: list[Comparison]) -> str:
             sections.append(f"Mapping note: {item.reason}.")
         for delta in item.deltas:
             sections.append(
-                f"<details>\n<summary><code>{delta.path}</code> — "
+                f"<details>\n<summary><code>{delta.path}</code>: "
                 f"{delta.status}</summary>\n"
             )
             if delta.diff:
@@ -478,10 +478,10 @@ def render_detailed_diffs(items: list[Comparison]) -> str:
 
 def render_mappings(config: dict[str, Any]) -> str:
     mappings = [
-        ("Skill", item["upstream"], item["local"], item.get("reason", "—"))
+        ("Skill", item["upstream"], item["local"], item.get("reason", "-"))
         for item in config["skill_mappings"]
     ] + [
-        ("Docs", item["upstream"], item["local"], item.get("reason", "—"))
+        ("Docs", item["upstream"], item["local"], item.get("reason", "-"))
         for item in config["docs_mappings"]
     ]
     if not mappings:

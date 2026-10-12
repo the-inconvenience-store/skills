@@ -20,21 +20,21 @@ It first writes the repository-specific configuration under `docs/agents/`, disc
 
 ## When to reach for it
 
-You invoke this by typing `/setup-inconvenient-skills` — the agent won't reach for it on its own.
+You invoke this by typing `/setup-inconvenient-skills`; the agent won't reach for it on its own.
 
 Reach for it **once per repo, before the first use of any other engineering skill**. Re-run the full setup only to switch foundational configuration or start over. Day-to-day changes belong to the owning surface: edit tracker or domain config directly, run [guardrails](https://aihero.dev/skills-guardrails) when the quality strategy changes, and run [verification](https://aihero.dev/skills-verification) with Maintain when application surfaces move.
 
 ## Repository-specific decisions
 
-It leads each with a recommended answer you can accept in a word, and skips whatever it can already infer — so most runs are a couple of quick confirmations:
+It leads each with a recommended answer you can accept in a word, and skips whatever it can already infer, so most runs are a couple of quick confirmations:
 
-- **Issue tracker** — where work is tracked, so `triage`/`to-spec`/`to-tickets` know whether to call `gh`, `glab`, `bd`, write markdown under `.scratch/`, or follow a workflow you describe. GitHub, GitLab, Beads, local markdown, or other. (It proposes Beads when it finds `.beads/`; otherwise it follows your `git remote`.)
-- **Triage labels** — asked only if the `triage` skill is installed, and then just: keep the default labels (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`)? Say no only if your tracker already uses other names, so `triage` applies real ones instead of creating duplicates. Setup then checks which of the agreed strings your tracker actually has and offers to create the missing ones, since `triage-labels.md` is only a mapping and writing it creates nothing.
-- **Domain docs** — assumed single-context (one `GLOSSARY.md` + `docs/adr/` at the root), which fits almost every repo; it only raises a multi-context map when it spots monorepo signals.
+- **Issue tracker**: where work is tracked, so `triage`/`to-spec`/`to-tickets` know whether to call `gh`, `glab`, `bd`, write markdown under `.scratch/`, or follow a workflow you describe. GitHub, GitLab, Beads, local markdown, or other. (It proposes Beads when it finds `.beads/`; otherwise it follows your `git remote`.)
+- **Triage labels**: asked only if the `triage` skill is installed, and then just: keep the default labels (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`)? Say no only if your tracker already uses other names, so `triage` applies real ones instead of creating duplicates. Setup then checks which of the agreed strings your tracker actually has and offers to create the missing ones, since `triage-labels.md` is only a mapping and writing it creates nothing.
+- **Domain docs**: assumed single-context (one `GLOSSARY.md` + `docs/adr/` at the root), which fits almost every repo; it only raises a multi-context map when it spots monorepo signals.
 
 The configuration output is `issue-tracker.md`, `domain.md`, and optionally `triage-labels.md` under `docs/agents/`, plus an `## Agent skills` block in the repository's existing `CLAUDE.md` or `AGENTS.md`.
 
-On a fresh GitHub repo the approved labels do not exist yet, and that is worth the extra confirmation: `gh issue create --label <missing>` fails outright rather than creating the label, so an uncreated label costs the whole issue later, not just its tag. Setup creates them here — the `wayfinder:*` labels too, when that skill is installed — so the first `/triage` or `/to-tickets` write lands.
+On a fresh GitHub repo the approved labels do not exist yet, and that is worth the extra confirmation: `gh issue create --label <missing>` fails outright rather than creating the label, so an uncreated label costs the whole issue later, not just its tag. Setup creates them here (the `wayfinder:*` labels too, when that skill is installed) so the first `/triage` or `/to-tickets` write lands.
 
 ## Guardrails and verification
 
@@ -58,7 +58,7 @@ Known gap, still open. The file-selection rule is "edit `CLAUDE.md` if it exists
 
 **It didn't create my triage labels.**
 
-It does here, and that is a deliberate fork change. Upstream, `docs/agents/triage-labels.md` is only a *mapping* — it tells `/triage` which strings in your tracker correspond to the five canonical roles — and writing it creates nothing, which was filed as a bug more than once. The failure mode is worse than a missing label: GitHub rejects `gh issue create --label <missing>` outright rather than creating the label, so an uncreated label loses the whole issue that `/triage` or `/to-tickets` was writing.
+It does here, and that is a deliberate fork change. Upstream, `docs/agents/triage-labels.md` is only a *mapping* (it tells `/triage` which strings in your tracker correspond to the five canonical roles), and writing it creates nothing, which was filed as a bug more than once. The failure mode is worse than a missing label: GitHub rejects `gh issue create --label <missing>` outright rather than creating the label, so an uncreated label loses the whole issue that `/triage` or `/to-tickets` was writing.
 
 So this version checks the agreed strings against the tracker (`gh label list` on GitHub), names the missing ones, asks before writing to your shared tracker, and creates what you approve with `gh label create --force`. Two follow-ons:
 
@@ -67,7 +67,7 @@ So this version checks the agreed strings against the tracker (`gh label list` o
 
 **Can I configure the other skills' behaviour here ([grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) cadence, question format, tone)?**
 
-No. It settles three things itself — tracker, labels, doc layout — and then hands off to [guardrails](https://aihero.dev/skills-guardrails) for the development baseline and [verification](https://aihero.dev/skills-verification) for the real-surface route, each of which owns its own questions. None of that is a preferences store. There have been direct requests to make it the home for per-user preferences, and the standing answer is that skills stay opinionated: *"Config is death."* Preferences belong in your `CLAUDE.md` as plain instructions, which every skill already reads.
+No. It settles three things itself (tracker, labels, doc layout) and then hands off to [guardrails](https://aihero.dev/skills-guardrails) for the development baseline and [verification](https://aihero.dev/skills-verification) for the real-surface route, each of which owns its own questions. None of that is a preferences store. There have been direct requests to make it the home for per-user preferences, and the standing answer is that skills stay opinionated: *"Config is death."* Preferences belong in your `CLAUDE.md` as plain instructions, which every skill already reads.
 
 **Can I keep the config in `~/.claude` instead of committing it to every repo?**
 

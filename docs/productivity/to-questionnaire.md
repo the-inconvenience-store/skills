@@ -18,7 +18,7 @@ It **grills the send, not the subject**. The skill asks you who will receive the
 
 ## When to reach for it
 
-You invoke this by typing `/to-questionnaire` — the agent won't reach for it on its own.
+You invoke this by typing `/to-questionnaire`; the agent won't reach for it on its own.
 
 Reach for it when planning stalls on facts or decisions that live in someone else's head. If you can answer the questions yourself and want the agent to pressure-test those answers, use [grill-me](https://aihero.dev/skills-grill-me) instead.
 

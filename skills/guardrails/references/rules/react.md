@@ -48,7 +48,7 @@ Enable `firebase-*`, `supabase-*`, `nosql-injection-risk`, and `raw-sql-injectio
 
 Some releases expose `require-reduced-motion` only through the CLI. Move unavailable rules to an optional CLI pass rather than leaving inert config.
 
-### Creative-direction rules — explicit opt-in
+### Creative-direction rules (explicit opt-in)
 
 Present this family as one separate decision because it encodes visual direction rather than correctness:
 

@@ -2,7 +2,7 @@
 
 [![skills.sh](https://skills.sh/b/the-inconvenience-store/skills)](https://skills.sh/the-inconvenience-store/skills)
 
-Agent skills for doing real engineering — not vibe coding.
+Agent skills for doing real engineering, not vibe coding.
 
 Developing real applications is hard. Approaches like GSD, BMAD, and Spec-Kit try to help by owning the process. But while doing so, they take away your control and make bugs in the process hard to resolve.
 
@@ -10,7 +10,7 @@ These skills are designed to be small, easy to adapt, and composable. They work 
 
 ## Installation (30-second setup)
 
-Two installation modes, two philosophies. **Managed plugins for [Claude Code](https://code.claude.com/docs/en/plugins) and [OMP](https://omp.sh/docs/plugins)** install the whole set as a read-only bundle that updates when releases ship — you subscribe rather than fork. **[skills.sh](https://skills.sh/the-inconvenience-store/skills)** copies editable skill files into your project, so you can hack on them and make them your own. Pick one mode — installing both leaves you with every skill twice.
+Two installation modes, two philosophies. **Managed plugins for [Claude Code](https://code.claude.com/docs/en/plugins) and [OMP](https://omp.sh/docs/plugins)** install the whole set as a read-only bundle that updates when releases ship, so you subscribe rather than fork. **[skills.sh](https://skills.sh/the-inconvenience-store/skills)** copies editable skill files into your project, so you can hack on them and make them your own. Pick one mode: installing both leaves you with every skill twice.
 
 ### 1. Get the skills
 
@@ -59,7 +59,7 @@ The repo also ships native Codex plugin metadata in [`.codex-plugin/plugin.json`
 <details>
 <summary><strong>For tinkerers</strong></summary>
 
-Use the same installer, on any agent — including Claude Code:
+Use the same installer, on any agent, including Claude Code:
 
 ```bash
 npx skills@latest add the-inconvenience-store/skills
@@ -183,7 +183,7 @@ Software engineering fundamentals matter more than ever. These skills condense t
 
 ## Reference
 
-These split on one axis — who can invoke them. **User-invoked** skills are reachable only when you type them (e.g. `/grill-me`); their job is to orchestrate. **Model-invoked** skills can be invoked by you _or_ reached for automatically by the agent when the task fits; they hold the reusable discipline. A user-invoked skill may invoke model-invoked skills, but never another user-invoked one.
+These split on one axis: who can invoke them. **User-invoked** skills are reachable only when you type them (e.g. `/grill-me`); their job is to orchestrate. **Model-invoked** skills can be invoked by you _or_ reached for automatically by the agent when the task fits; they hold the reusable discipline. A user-invoked skill may invoke model-invoked skills, but never another user-invoked one.
 
 ### Engineering
 
@@ -191,32 +191,32 @@ Skills for daily code work.
 
 **User-invoked**
 
-- **[ask-inconvenient](./skills/ask-inconvenient/SKILL.md)** — Ask which skill or flow fits your situation. A router over the user-invoked skills in this repo.
-- **[grill-with-docs](./skills/grill-with-docs/SKILL.md)** — Grilling session that also builds your project's domain model, sharpening terminology and updating `GLOSSARY.md` and ADRs inline.
-- **[triage](./skills/triage/SKILL.md)** — Move issues through a state machine of triage roles.
-- **[improve-codebase-architecture](./skills/improve-codebase-architecture/SKILL.md)** — Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
-- **[setup-inconvenient-skills](./skills/setup-inconvenient-skills/SKILL.md)** — Configure the issue tracker, triage labels, and domain docs; establish approved development guardrails; then create and prove the repository's real-surface verification route. Run once per repo.
-- **[to-spec](./skills/to-spec/SKILL.md)** — Turn the current conversation into a spec and publish it to the issue tracker. No interview — just synthesizes what you've already discussed.
-- **[to-tickets](./skills/to-tickets/SKILL.md)** — Break any plan, spec, or conversation into a set of tracer-bullet tickets, each declaring its blocking edges — written as text in a local file, or as native blocking links on a real tracker.
-- **[implement](./skills/implement/SKILL.md)** — Build work from a spec or tickets: select the relevant engineering principles, drive TDD at pre-agreed seams, run Standards and Spec review, address findings, then prove the final behavior through real-surface verification.
-- **[implement-spec](./skills/implement-spec/SKILL.md)** — Build a whole spec in one run: read its tickets as a task graph, run implementer subagents across the ready frontier in parallel, and land everything on one integration branch.
-- **[wayfinder](./skills/wayfinder/SKILL.md)** — Plan a huge chunk of work, more than one agent session can hold, as a shared map of investigation tickets on the issue tracker — resolve them one at a time until the way to the destination is clear.
-- **[retro](./skills/retro/SKILL.md)** — Look back over a session and suggest changes to the agent's environment, not the code: navigation pointers, deterministic checks, coding standards, steering files, tooling.
+- **[ask-inconvenient](./skills/ask-inconvenient/SKILL.md)**: Ask which skill or flow fits your situation. A router over the user-invoked skills in this repo.
+- **[grill-with-docs](./skills/grill-with-docs/SKILL.md)**: Grilling session that also builds your project's domain model, sharpening terminology and updating `GLOSSARY.md` and ADRs inline.
+- **[triage](./skills/triage/SKILL.md)**: Move issues through a state machine of triage roles.
+- **[improve-codebase-architecture](./skills/improve-codebase-architecture/SKILL.md)**: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
+- **[setup-inconvenient-skills](./skills/setup-inconvenient-skills/SKILL.md)**: Configure the issue tracker, triage labels, and domain docs; establish approved development guardrails; then create and prove the repository's real-surface verification route. Run once per repo.
+- **[to-spec](./skills/to-spec/SKILL.md)**: Turn the current conversation into a spec and publish it to the issue tracker. No interview; it just synthesizes what you've already discussed.
+- **[to-tickets](./skills/to-tickets/SKILL.md)**: Break any plan, spec, or conversation into a set of tracer-bullet tickets, each declaring its blocking edges, written as text in a local file, or as native blocking links on a real tracker.
+- **[implement](./skills/implement/SKILL.md)**: Build work from a spec or tickets: select the relevant engineering principles, drive TDD at pre-agreed seams, run Standards and Spec review, address findings, then prove the final behavior through real-surface verification.
+- **[implement-spec](./skills/implement-spec/SKILL.md)**: Build a whole spec in one run: read its tickets as a task graph, run implementer subagents across the ready frontier in parallel, and land everything on one integration branch.
+- **[wayfinder](./skills/wayfinder/SKILL.md)**: Plan a huge chunk of work, more than one agent session can hold, as a shared map of investigation tickets on the issue tracker, then resolve them one at a time until the way to the destination is clear.
+- **[retro](./skills/retro/SKILL.md)**: Look back over a session and suggest changes to the agent's environment, not the code: navigation pointers, deterministic checks, coding standards, steering files, tooling.
 
 **Model-invoked**
 
-- **[guardrails](./skills/guardrails/SKILL.md)** — Inspect a project, then propose and verify its lint, format, test, reproducible setup, dependency upkeep, optional task runner, optional Semgrep and Gitleaks scanning, CI, hooks, and applicable React standards with the user in control.
-- **[prototype](./skills/prototype/SKILL.md)** — Build a throwaway prototype to answer a design question — a shareable HTML demo for state/logic questions, or several radically different UI variations toggleable from one route.
-- **[diagnosing-bugs](./skills/diagnosing-bugs/SKILL.md)** — Disciplined diagnosis loop for hard bugs and performance regressions: reproduce → minimise → hypothesise → instrument → fix → regression-test.
-- **[research](./skills/research/SKILL.md)** — Investigate a question against high-trust primary sources and capture the findings as a cited Markdown file in the repo, run as a background agent.
-- **[tdd](./skills/tdd/SKILL.md)** — Test-driven development with a red-green-refactor loop. Builds features or fixes bugs one vertical slice at a time.
-- **[domain-modeling](./skills/domain-modeling/SKILL.md)** — Actively build and sharpen a project's domain model — challenge terms against the glossary, stress-test with edge-case scenarios, and update `GLOSSARY.md` and ADRs inline.
-- **[codebase-design](./skills/codebase-design/SKILL.md)** — Shared discipline and vocabulary for designing deep modules: a lot of behaviour behind a small interface, placed at a clean seam, testable through that interface.
-- **[engineering-principles](./skills/engineering-principles/SKILL.md)** — Selective vocabulary for 24 recurring engineering decisions. Workflows proactively scan its trigger index and load only the matched leaves; user-named principles receive extra emphasis rather than enabling selection.
-- **[verification](./skills/verification/SKILL.md)** — Create, run, or maintain portable project instructions for proving behavior through the real UI, CLI, service, mobile app, or public library interface.
-- **[code-review](./skills/code-review/SKILL.md)** — Two-axis review of the diff since a fixed point: **Standards** (does it follow the repo's coding standards, plus a Fowler smell baseline?) and **Spec** (does it faithfully implement the originating issue/spec?), run as parallel sub-agents so neither pollutes the other.
-- **[pr](./skills/pr/SKILL.md)** — Shape a PR body that's fast to review: the smallest visual that makes the change clear, before/after evidence that it works, and a one-way or two-way door call with its blast radius.
-- **[wizard](./skills/wizard/SKILL.md)** — Generate an interactive bash wizard for setup steps only a human can perform, such as credentials, dashboards, migrations, and cutovers.
+- **[guardrails](./skills/guardrails/SKILL.md)**: Inspect a project, then propose and verify its lint, format, test, reproducible setup, dependency upkeep, optional task runner, optional Semgrep and Gitleaks scanning, CI, hooks, and applicable React standards with the user in control.
+- **[prototype](./skills/prototype/SKILL.md)**: Build a throwaway prototype to answer a design question: a shareable HTML demo for state/logic questions, or several radically different UI variations toggleable from one route.
+- **[diagnosing-bugs](./skills/diagnosing-bugs/SKILL.md)**: Disciplined diagnosis loop for hard bugs and performance regressions: reproduce → minimise → hypothesise → instrument → fix → regression-test.
+- **[research](./skills/research/SKILL.md)**: Investigate a question against high-trust primary sources and capture the findings as a cited Markdown file in the repo, run as a background agent.
+- **[tdd](./skills/tdd/SKILL.md)**: Test-driven development with a red-green-refactor loop. Builds features or fixes bugs one vertical slice at a time.
+- **[domain-modeling](./skills/domain-modeling/SKILL.md)**: Actively build and sharpen a project's domain model: challenge terms against the glossary, stress-test with edge-case scenarios, and update `GLOSSARY.md` and ADRs inline.
+- **[codebase-design](./skills/codebase-design/SKILL.md)**: Shared discipline and vocabulary for designing deep modules: a lot of behaviour behind a small interface, placed at a clean seam, testable through that interface.
+- **[engineering-principles](./skills/engineering-principles/SKILL.md)**: Selective vocabulary for 24 recurring engineering decisions. Workflows proactively scan its trigger index and load only the matched leaves; user-named principles receive extra emphasis rather than enabling selection.
+- **[verification](./skills/verification/SKILL.md)**: Create, run, or maintain portable project instructions for proving behavior through the real UI, CLI, service, mobile app, or public library interface.
+- **[code-review](./skills/code-review/SKILL.md)**: Two-axis review of the diff since a fixed point: **Standards** (does it follow the repo's coding standards, plus a Fowler smell baseline?) and **Spec** (does it faithfully implement the originating issue/spec?), run as parallel sub-agents so neither pollutes the other.
+- **[pr](./skills/pr/SKILL.md)**: Shape a PR body that's fast to review: the smallest visual that makes the change clear, before/after evidence that it works, and a one-way or two-way door call with its blast radius.
+- **[wizard](./skills/wizard/SKILL.md)**: Generate an interactive bash wizard for setup steps only a human can perform, such as credentials, dashboards, migrations, and cutovers.
 
 ### Productivity
 
@@ -224,13 +224,13 @@ General workflow tools, not code-specific.
 
 **User-invoked**
 
-- **[grill-me](./skills/grill-me/SKILL.md)** — Get relentlessly interviewed about a plan or design until every branch of the decision tree is resolved.
-- **[handoff](./skills/handoff/SKILL.md)** — Compact the current conversation into a handoff document so another agent can continue the work.
-- **[teach](./skills/teach/SKILL.md)** — Teach the user a new skill or concept over multiple sessions, using the current directory as a stateful teaching workspace.
-- **[to-questionnaire](./skills/to-questionnaire/SKILL.md)** — Turn a decision blocked on someone else's knowledge into a Markdown questionnaire they can answer asynchronously.
-- **[wait-what](./skills/wait-what/SKILL.md)** — Re-pitch the agent's last message with missing context, simpler English, and the project's vocabulary.
+- **[grill-me](./skills/grill-me/SKILL.md)**: Get relentlessly interviewed about a plan or design until every branch of the decision tree is resolved.
+- **[handoff](./skills/handoff/SKILL.md)**: Compact the current conversation into a handoff document so another agent can continue the work.
+- **[teach](./skills/teach/SKILL.md)**: Teach the user a new skill or concept over multiple sessions, using the current directory as a stateful teaching workspace.
+- **[to-questionnaire](./skills/to-questionnaire/SKILL.md)**: Turn a decision blocked on someone else's knowledge into a Markdown questionnaire they can answer asynchronously.
+- **[wait-what](./skills/wait-what/SKILL.md)**: Re-pitch the agent's last message with missing context, simpler English, and the project's vocabulary.
 
 **Model-invoked**
 
-- **[grilling](./skills/grilling/SKILL.md)** — Interview the user in frontier-based rounds until every branch of the design tree is resolved. The reusable loop behind `grill-me` and `grill-with-docs`.
-- **[writing-for-agents](./skills/writing-for-agents/SKILL.md)** — Reference for writing documents agents consume, including skills, `AGENTS.md`, and `CLAUDE.md`.
+- **[grilling](./skills/grilling/SKILL.md)**: Interview the user in frontier-based rounds until every branch of the design tree is resolved. The reusable loop behind `grill-me` and `grill-with-docs`.
+- **[writing-for-agents](./skills/writing-for-agents/SKILL.md)**: Reference for writing documents agents consume, including skills, `AGENTS.md`, and `CLAUDE.md`.

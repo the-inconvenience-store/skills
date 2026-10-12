@@ -18,7 +18,7 @@ It reads the tickets as a **task graph**, not a list. Blocking edges decide what
 
 ## When to reach for it
 
-You invoke this by typing `/implement-spec` — the agent won't reach for it on its own.
+You invoke this by typing `/implement-spec`, and the agent won't reach for it on its own.
 
 | Your situation | Reach for |
 | --- | --- |
@@ -44,7 +44,7 @@ Everything lands on one branch. Each implementer:
 
 Whether a pull request exists at all is the tracker's call. If your tracker closes work through PRs, or you ask for one, a draft PR opens after the first merge and is marked ready at the end. Otherwise the run stops on the integration branch with every ticket resolved the way your tracker closes work, which works fully offline against a local markdown tracker.
 
-Implementers talk to the orchestrator through **context pointers** — the spec, the ticket, shared exploration notes, earlier commits — rather than pasted summaries, which keeps each subagent's prompt small and the orchestrator's window free for the graph.
+Implementers talk to the orchestrator through **context pointers** (the spec, the ticket, shared exploration notes, earlier commits) rather than pasted summaries, which keeps each subagent's prompt small and the orchestrator's window free for the graph.
 
 ## Common questions
 

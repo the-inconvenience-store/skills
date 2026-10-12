@@ -14,7 +14,7 @@ npx skills update pr
 
 `pr` is the shape a pull request body should take: a **Summary** that shows the change, **Evidence** that it works, and a **Merge Danger** call on how risky it is to land. It is a format reference, not a workflow. It does not push a branch, open the PR, or decide what goes into it; it tells the agent what the body should look like once it is writing one.
 
-The summary is a picture, not a paragraph. Where a default PR body narrates the diff in prose, this one picks the **smallest view** that makes the key point clear — pseudocode, a call tree, a component tree, a file tree, a Mermaid diagram, or a shaped diff — and keeps the words around it brief. The reviewer already has the diff open; the body's job is to show them its shape before they read it.
+The summary is a picture, not a paragraph. Where a default PR body narrates the diff in prose, this one picks the **smallest view** that makes the key point clear (pseudocode, a call tree, a component tree, a file tree, a Mermaid diagram, or a shaped diff) and keeps the words around it brief. The reviewer already has the diff open; the body's job is to show them its shape before they read it.
 
 ## When to reach for it
 
@@ -30,9 +30,9 @@ Type `/pr`, or the agent reaches for it automatically whenever it is writing a P
 
 Three sections, in this order:
 
-- **Summary** — one or more small visuals, each placed next to the short text it supports. Use one, sometimes several, rarely all of them. Keep only the calls, files, props, and boundaries the reviewer needs.
-- **Evidence** — a before and after. A screenshot is the strongest evidence when the change is visual and the environment can take one; otherwise the exact test that failed and now passes, written as pseudocode, or the console output that changed.
-- **Merge Danger** — whether the change is a **one-way door** or a **two-way door**, and its **blast radius**. A two-way door is cheap to walk back; a one-way door (a destructive migration, a public API removal, a hard-to-reverse decision) is not. Blast radius names what could break if the change is wrong: layout shift, consumers of an API, mobile responsiveness.
+- **Summary**: one or more small visuals, each placed next to the short text it supports. Use one, sometimes several, rarely all of them. Keep only the calls, files, props, and boundaries the reviewer needs.
+- **Evidence**: a before and after. A screenshot is the strongest evidence when the change is visual and the environment can take one; otherwise the exact test that failed and now passes, written as pseudocode, or the console output that changed.
+- **Merge Danger**: whether the change is a **one-way door** or a **two-way door**, and its **blast radius**. A two-way door is cheap to walk back; a one-way door (a destructive migration, a public API removal, a hard-to-reverse decision) is not. Blast radius names what could break if the change is wrong: layout shift, consumers of an API, mobile responsiveness.
 
 The door call is the leading idea. It turns "is this safe to merge?" from a gut feeling into a stated claim the reviewer can disagree with, and it tells them where to spend their review: a two-way door with a small blast radius can be skimmed; a one-way door deserves a slow read.
 
@@ -40,7 +40,7 @@ The door call is the leading idea. It turns "is this safe to merge?" from a gut 
 
 **Can I trust the agent's own door call?**
 
-Not blindly, and that is the point of stating it. The agent that wrote the change is the one grading it, and a self-report is most comfortable exactly when it says "two-way, small blast radius". Reversibility is also often invisible in the diff: rolling back a commit won't unsend a batch of emails, and a flagged rollout stays two-way only until the first write lands in the new format. The skill gives the agent a definition — destructive actions and hard-to-reverse decisions are one-way — not a checklist, so read the Merge Danger line hardest of all. Two things help: make sure the agent has the ticket or spec in front of it, not just the diff, and write down the changes your repo always treats as one-way (schema migrations, anything that ships outward or deletes) where the agent will read them before it makes the call.
+Not blindly, and that is the point of stating it. The agent that wrote the change is the one grading it, and a self-report is most comfortable exactly when it says "two-way, small blast radius". Reversibility is also often invisible in the diff: rolling back a commit won't unsend a batch of emails, and a flagged rollout stays two-way only until the first write lands in the new format. The skill gives the agent a definition (destructive actions and hard-to-reverse decisions are one-way), not a checklist, so read the Merge Danger line hardest of all. Two things help: make sure the agent has the ticket or spec in front of it, not just the diff, and write down the changes your repo always treats as one-way (schema migrations, anything that ships outward or deletes) where the agent will read them before it makes the call.
 
 **Does it open the PR for me?**
 
@@ -48,11 +48,11 @@ No. `pr` covers only the body. [implement](https://aihero.dev/skills-implement) 
 
 **Won't it just produce another wall of text and diagrams?**
 
-That is the failure it is built against, and it can still happen. The complaint about agent PR bodies is consistent: a long summary when all you need to know is what changed, how it was verified, what could break, and whether it's safe to merge. The skill tells the agent to skip preambles, keep prose brief, and pick the smallest view — usually one visual, rarely all of them. If you still get a stack of diagrams, the agent has ignored that; if the body is huge because the diff is huge, the problem is the size of the PR, and `pr` will not split it for you.
+That is the failure it is built against, and it can still happen. The complaint about agent PR bodies is consistent: a long summary when all you need to know is what changed, how it was verified, what could break, and whether it's safe to merge. The skill tells the agent to skip preambles, keep prose brief, and pick the smallest view, usually one visual, rarely all of them. If you still get a stack of diagrams, the agent has ignored that; if the body is huge because the diff is huge, the problem is the size of the PR, and `pr` will not split it for you.
 
 **My repo already has a PR template. Which one wins?**
 
-Neither, by default: `pr` carries its own template and does not look for `.github/pull_request_template.md` or anything like it. Left alone, the agent is holding two competing instructions for the same document. Settle it in your repo's agent docs — for example by filling the repo template and putting Summary, Evidence and Merge Danger under it.
+Neither, by default: `pr` carries its own template and does not look for `.github/pull_request_template.md` or anything like it. Left alone, the agent is holding two competing instructions for the same document. Settle it in your repo's agent docs, for example by filling the repo template and putting Summary, Evidence and Merge Danger under it.
 
 **Is the output HTML? Why doesn't the Mermaid diagram render?**
 

@@ -46,7 +46,7 @@ An inconclusive observation stays inconclusive. The skill never rounds it up bec
 
 **Isn't this what my end-to-end tests already do?**
 
-Not quite, and the difference is what is being proved. An end-to-end test proves that a scripted path held the last time CI ran it, against whatever fixtures and stubs the suite installs. Verification proves that *this* change, on the surface as shipped, launches, accepts the interaction, and produces the promised state — now. The two are complementary, and the skill says so: a test preserves behaviour at a seam, verification proves the application path. If your e2e suite genuinely drives the real surface, say so in `docs/agents/verification/` and let Run invoke it; the skill is not precious about the mechanism, only about what gets observed.
+Not quite, and the difference is what is being proved. An end-to-end test proves that a scripted path held the last time CI ran it, against whatever fixtures and stubs the suite installs. Verification proves that *this* change, on the surface as shipped, launches, accepts the interaction, and produces the promised state, now. The two are complementary, and the skill says so: a test preserves behaviour at a seam, verification proves the application path. If your e2e suite genuinely drives the real surface, say so in `docs/agents/verification/` and let Run invoke it; the skill is not precious about the mechanism, only about what gets observed.
 
 **It came back `INCONCLUSIVE` and everything else passed. Can I treat that as done?**
 
@@ -66,7 +66,7 @@ Yes. The real surface is whatever the consumer touches: a CLI's argv and stdout,
 
 **Maintain found something broken. Will it just update the feature map?**
 
-Only for drift it owns: documentation that no longer matches the source, or a harness the skill itself wrote. A product regression gets reported, not rewritten as intended behaviour. This is the failure mode the split exists to prevent — a maintenance pass that quietly redefines a bug as the spec, leaving the feature map green and the product broken.
+Only for drift it owns: documentation that no longer matches the source, or a harness the skill itself wrote. A product regression gets reported, not rewritten as intended behaviour. This is the failure mode the split exists to prevent: a maintenance pass that quietly redefines a bug as the spec, leaving the feature map green and the product broken.
 
 ## It's working if
 

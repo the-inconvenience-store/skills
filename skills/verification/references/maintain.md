@@ -6,9 +6,9 @@ Keep existing driving instructions and feature maps aligned with the application
 
 End with exactly one outcome:
 
-- **clean** — every mapped feature received source and live coverage; nothing changed.
-- **changed** — verified corrections were made only within the verification artifact or helpers it owns.
-- **blocked** — complete coverage or a safe correction was impossible; name the blocker.
+- **clean**: every mapped feature received source and live coverage; nothing changed.
+- **changed**: verified corrections were made only within the verification artifact or helpers it owns.
+- **blocked**: complete coverage or a safe correction was impossible; name the blocker.
 
 ## 1. Locate and index
 

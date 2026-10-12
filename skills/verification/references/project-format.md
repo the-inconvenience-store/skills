@@ -26,14 +26,14 @@ Helpers follow the repository's existing convention for scripts or test drivers.
 
 Every `<surface>/README.md` contains these H2 sections:
 
-- **Surface** — what a user or consumer touches and which application or package owns it.
-- **Launch** — exact command, required environment, readiness signal, and teardown handle.
-- **Doctor** — one read-only check that says whether this instance is safe and useful to drive.
-- **Drive** — the repository's real harness, commands, selectors, prompts, routes, or API entry points.
-- **Evidence** — what proves actions and results, where captures go, and how secrets are redacted.
-- **Cleanup** — how to stop only what the run started and remove scratch state without deleting evidence.
-- **Isolation** — whether concurrent instances are safe and how their ports, profiles, data, or sessions differ.
-- **Feature map** — a link to `features/README.md` and the rule that every user-facing feature belongs there.
+- **Surface**: what a user or consumer touches and which application or package owns it.
+- **Launch**: exact command, required environment, readiness signal, and teardown handle.
+- **Doctor**: one read-only check that says whether this instance is safe and useful to drive.
+- **Drive**: the repository's real harness, commands, selectors, prompts, routes, or API entry points.
+- **Evidence**: what proves actions and results, where captures go, and how secrets are redacted.
+- **Cleanup**: how to stop only what the run started and remove scratch state without deleting evidence.
+- **Isolation**: whether concurrent instances are safe and how their ports, profiles, data, or sessions differ.
+- **Feature map**: a link to `features/README.md` and the rule that every user-facing feature belongs there.
 
 Write exact repository instructions, not generic examples. A command must be runnable as written. A selector must exist in the current application.
 
@@ -41,11 +41,11 @@ Write exact repository instructions, not generic examples. A command must be run
 
 `features/README.md` indexes every feature file with a one-line user outcome. Each feature file contains:
 
-- **User outcome** — the capability and result in the user's language.
-- **How to reach it** — the path from a clean, known state.
-- **How to drive it** — exact interactions using the surface harness.
-- **Proof** — observable output and durable side effects that must hold.
-- **Gotchas** — prerequisites, permissions, destructive edges, or state that must be reset.
+- **User outcome**: the capability and result in the user's language.
+- **How to reach it**: the path from a clean, known state.
+- **How to drive it**: exact interactions using the surface harness.
+- **Proof**: observable output and durable side effects that must hold.
+- **Gotchas**: prerequisites, permissions, destructive edges, or state that must be reset.
 
 Features are user capabilities, not routes, files, components, or implementation layers. Split a feature only when its paths can be reached and proved independently.
 
