@@ -14,7 +14,7 @@ npx skills update to-tickets
 
 `to-tickets` breaks a plan, spec, or the current conversation into a set of **tickets**, each a tracer-bullet vertical slice, and publishes them to your configured tracker, with every ticket declaring its blockers and its real-surface proof.
 
-Every ticket is a **tracer bullet**: a thin *vertical* slice that cuts through all integration layers end-to-end, never a horizontal slice of one layer. A completed slice is independently demoable, states the public path and observable result that prove it, and is safe to hand to a fresh agent.
+Every ticket is a **tracer bullet**: a thin *vertical* slice that cuts through all integration layers end-to-end, never a horizontal slice of one layer. A completed slice is independently demoable, states the public path and observable result that prove it, and is safe to hand to a fresh agent. It is also small: at most three acceptance criteria, each a single observable claim, proved by one journey.
 
 ## When to reach for it
 
@@ -52,6 +52,9 @@ One shape breaks the tracer-bullet rule: a **wide refactor**: a single mechanica
 **It produced twelve tickets for a three-line change.**
 Over-decomposition is the most reported friction on this skill, and it is consistent across practitioners: the [model](https://www.aihero.dev/ai-coding-dictionary/model) defaults to atomic units and loses the grouping that would make them meaningful. The quiz step exists for exactly this: ask it to merge, and it will. The deeper answer is that the tickets have a floor: if the whole change fits in one context window, you don't need this skill at all. Go straight to [implement](https://aihero.dev/skills-implement).
 
+**One ticket took a whole day and never closed.**
+The opposite failure, and the costlier one. A ticket carrying eight compound acceptance criteria across nine user stories is an epic with a ticket number: the implementer compacts its context again and again, rereads the same files after each compaction, and can't close the ticket because some criteria need another ticket's behavior to be observable. The skill now sets a ceiling as well as a floor: at most three criteria, each one observable claim, proved by one journey, and a criterion that depends on another ticket's behavior moves there or becomes a blocking edge. The quiz shows each ticket's criteria count so you can reject an oversized one before it's published.
+
 **The tickets came out one per layer: all the schema in one, all the API in another.**
 This is the failure the vertical-slice rule is written against, and the skill still produces it sometimes. Catch it at the quiz step by asking one question per ticket: what can I demo when this is done? A ticket with no answer is a horizontal slice. Some people add a "demo path" line to each ticket for this reason, and report it nudges the model toward vertical decomposition.
 
@@ -68,7 +71,7 @@ They did, and that was a bug: a single shared file also raced when parallel agen
 A very large spec can outgrow what a tracker issue serves back cleanly, and there is no local copy to fall back on, so the agent then burns [tool calls](https://www.aihero.dev/ai-coding-dictionary/tool-call) re-fetching chunks and never reaches the end. Don't [clear](https://www.aihero.dev/ai-coding-dictionary/clearing) or [compact](https://www.aihero.dev/ai-coding-dictionary/compaction) between `/to-spec` and `/to-tickets`. Run them in the same context window and the spec never has to be fetched back at all.
 
 **The acceptance criteria graded nothing: some passed before any work was done.**
-The template asks for criteria and says nothing about whether they can fail, so this happens. Three shapes recur: a criterion already true at the base commit, a criterion that can only be satisfied by work another ticket owns, and one that restates the request rather than deriving from the artifact. Vertical slicing prevents most of it (a slice that delivers behaviour which didn't exist before is red at the base commit by construction), but the check is worth doing by hand. For each criterion, name the observation that would show it false, and confirm it fails at the commit the implementer starts from.
+The template asks for criteria and says nothing about whether they can fail, so this happens. Three shapes recur: a criterion already true at the base commit, a criterion that can only be satisfied by work another ticket owns (the slice rules now move it to that ticket or add a blocking edge), and one that restates the request rather than deriving from the artifact. Vertical slicing prevents most of it (a slice that delivers behaviour which didn't exist before is red at the base commit by construction), but the check is worth doing by hand. For each criterion, name the observation that would show it false, and confirm it fails at the commit the implementer starts from.
 
 **The tickets are published. How do I actually run them?**
 The skill stops at the artifact, and there is no auto-dispatch mode. Dispatch is manual: look at the board, count the tickets with no open blockers, and open that many agent sessions. One ticket per fresh context, cleared between them. Be aware that [implement](https://aihero.dev/skills-implement) does not reliably close or check off the ticket when it finishes, on GitHub or in local markdown, so the ticket's state is yours to update.

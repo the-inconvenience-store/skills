@@ -26,7 +26,7 @@ Reach for it once the work is written down as a spec or split into tickets and y
 
 The idea `implement` runs on is the **seam**: the stable interface a feature is tested at, chosen before any code is written. It doesn't invent seams mid-build; it uses the ones already picked (during [to-spec](https://aihero.dev/skills-to-spec)) and writes tests against them via [tdd](https://aihero.dev/skills-tdd). Working at pre-agreed seams is what keeps the implementation honest: the tests target something durable, so the code underneath can move without the tests moving.
 
-Around that core it keeps the loop tight: typecheck often, run narrow test files as it goes, and run the whole suite once the implementation is coherent. It then runs separate Standards and Spec review agents, addresses accepted findings, and calls [verification](https://aihero.dev/skills-verification) against the final state.
+Around that core it keeps the loop tight: typecheck, lint the changed files, and run narrow test files as it edits, and run the whole suite once the implementation is coherent. A check that passed is not rerun unless a later edit could change its result. It then runs separate Standards and Spec review agents once, addresses accepted findings, reruns only the affected checks, and calls [verification](https://aihero.dev/skills-verification) against the final state.
 
 The work is committed before that review runs, not after. [code-review](https://aihero.dev/skills-code-review) reads `git diff <fixed-point>...HEAD`, which cannot see staged or working-tree changes, so reviewing an uncommitted implementation reviews an empty diff and reports nothing wrong with it.
 
@@ -54,7 +54,7 @@ Separately, some people deliberately do not want the review inside the run at al
 
 **One ticket burned 150k tokens. Am I using it wrong?**
 
-Probably the ticket is too big rather than the skill being misused. A run does codebase exploration, a red-green loop per seam, a full suite, and a review, so a non-trivial ticket exceeding 100k [tokens](https://www.aihero.dev/ai-coding-dictionary/token) is normal rather than a sign something broke. The lever is upstream: right-size the tickets in [to-tickets](https://aihero.dev/skills-to-tickets) so each fits one fresh window. If a single ticket keeps blowing out, split it rather than raising the [effort](https://www.aihero.dev/ai-coding-dictionary/effort) level.
+Probably the ticket is too big rather than the skill being misused. A run does codebase exploration, a red-green loop per seam, a full suite, and a review, so a non-trivial ticket exceeding 100k [tokens](https://www.aihero.dev/ai-coding-dictionary/token) is normal rather than a sign something broke. The lever is upstream: right-size the tickets in [to-tickets](https://aihero.dev/skills-to-tickets) so each fits one fresh window, which it now enforces as at most three acceptance criteria and one proof journey per ticket. If a single ticket keeps blowing out, split it rather than raising the [effort](https://www.aihero.dev/ai-coding-dictionary/effort) level.
 
 **`/implement #2` in a fresh session worked on something completely unrelated.**
 

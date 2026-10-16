@@ -57,7 +57,7 @@ The **brief** is short and made of context pointers:
 - Its slot's environment, from the slot hooks.
 - The worker's own checklist, which is step 5 of `SKILL.md` for a single ticket: confirm the worktree is based on the integration branch, scan `engineering-principles`, build with `tdd`, commit with Conventional Commits, merge the integration tip, run the full suite green.
 - Its boundaries: work inside this worktree only, commit locally, and leave pushing and merging to the orchestrator.
-- Its report: end with exactly one line, `DONE <commit sha>` once the full suite is green, or `BLOCKED: <the decision or fact it needs>`.
+- Its report: end with exactly one line, `DONE <commit sha>` once the full suite is green, `BLOCKED: too large` with the criteria proved and remaining if its context is compacted before the ticket is done, or `BLOCKED: <the decision or fact it needs>`.
 
 ## Steps 6 and 7 replacement: monitor and merge
 
@@ -67,6 +67,7 @@ Wait on all working workers with `herdr agent wait`, and read a worker's output 
   - A clean merge, or a trivial conflict (imports, lockfiles, generated files), you finish yourself.
   - Any other conflict goes back to the same worker: tell it to merge the integration tip, resolve, rerun the full suite, and report again.
 - **Merged**: set the row to `merged`, close the worker's pane, and check the frontier. Dispatch newly unblocked tickets. Track merges from the run log; the tracker's blocked-by counts lag during a run.
+- **`BLOCKED: too large`**: merge what the worker committed, split the ticket in the tracker so the proven criteria close and the remainder becomes a new frontier ticket, and dispatch it to a fresh worker.
 - **`BLOCKED`**: answer it yourself if the spec, tickets, notes, or codebase settle the question. If it needs a product decision, see **Failures**.
 - **Idle without a report, or crashed**: treat it as a failed attempt.
 

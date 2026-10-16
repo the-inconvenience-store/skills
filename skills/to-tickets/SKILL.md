@@ -33,7 +33,9 @@ Break the work into **tracer bullet** tickets.
 - Each slice cuts a narrow but COMPLETE path through every layer (schema, API, UI, tests): vertical, NOT a horizontal slice of one layer
 - A completed slice is demoable or verifiable on its own
 - Each slice states the real user or consumer path that will prove it works
-- Each slice is sized to fit in a single fresh context window
+- Each slice is sized to fit in a single fresh context window: at most three acceptance criteria, each one observable claim. A criterion that joins several claims with "and" or semicolons is several criteria
+- Each slice has one proof journey. A slice that needs several unrelated journeys to prove it is several slices
+- A criterion that can only be observed through another ticket's behavior belongs to that ticket, or makes that ticket a blocker
 - Any prefactoring should be done first
 
 </vertical-slice-rules>
@@ -50,6 +52,7 @@ Present the proposed breakdown as a numbered list. For each ticket, show:
 - **Blocked by**: which other tickets (if any) must complete first
 - **What it delivers**: the end-to-end behaviour this ticket makes work
 - **Proof**: which public path and observable result demonstrate the ticket works
+- **Size**: the number of acceptance criteria
 
 Ask the user:
 

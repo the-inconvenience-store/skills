@@ -30,7 +30,7 @@ Run mode uses project instructions under `docs/agents/verification/` when they e
 
 **Create** learns how the repository actually launches and exposes its user-facing surfaces, writes portable instructions and feature maps, then proves one mapped feature by following those instructions cold.
 
-**Run** selects the changed behavior, health-checks a known instance, drives the public path, captures the action and result, checks promised side effects, and cleans up what it started without deleting evidence.
+**Run** selects the changed behavior, health-checks a known instance, drives the public path, captures the action and result, checks promised side effects, and cleans up what it started without deleting evidence. A path longer than a handful of interactions is written as one scratch script and run in a single call, then named as a candidate route for Maintain to promote.
 
 **Maintain** compares every mapped feature with source and then drives every feature live. Documentation and owned harness drift are corrected; a product regression is reported rather than rewritten as intended behavior.
 
@@ -55,6 +55,10 @@ No, and that is the one rule the skill will not bend. An inconclusive observatio
 **I don't have `docs/agents/verification/`. Does Run just fail?**
 
 No. It performs the strongest direct check the repository and the available tools support, reports that there is no reusable route, and leaves permanent project files alone. That last part is deliberate: a Run invocation is not allowed to quietly become a Create invocation and write a half-learned route into your repo. When you do want the route, ask for it and the skill takes the Create branch, which learns how the repo launches, writes the instructions, and then proves one mapped feature by following them cold.
+
+**Verification took hundreds of browser steps and hours of agent time.**
+
+Each interaction driven as its own agent action costs a full model turn, so a long flow driven click by click is slow even when every click is fast. Run now writes a path longer than a handful of interactions as one scratch script and runs it in a single call, rerunning the same script after a fix. The script stays scratch during Run; the verdict names it so a Maintain pass can promote it into `docs/agents/verification/`.
 
 **Why does Create insist on proving a feature before it finishes?**
 

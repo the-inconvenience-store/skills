@@ -38,6 +38,8 @@ Exercise the public path. Capture both the action and the result. Check durable 
 
 Do not use internal setters, test-only endpoints, direct database mutation, or mock echoes unless the production design itself exposes that boundary. A test may support the result but cannot replace this drive.
 
+When the path takes more than a handful of interactions, write it as one scratch script in the run's scratch directory and run it in a single call instead of driving each step as its own action; rerun the same script after a fix. Name it in the verdict as a candidate reusable route for Maintain to promote.
+
 Store evidence where Cleanup will not delete it. Redact secrets and personal data before quoting or sharing captures.
 
 **Done when:** every claimed result has direct evidence or an explicit observation gap.
