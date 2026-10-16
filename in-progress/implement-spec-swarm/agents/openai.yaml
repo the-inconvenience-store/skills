@@ -1,5 +1,0 @@
-interface:
-  display_name: "Implement Spec Swarm"
-  short_description: "Implement a whole spec on one integration branch, with subagents or a herdr swarm"
-policy:
-  allow_implicit_invocation: false
