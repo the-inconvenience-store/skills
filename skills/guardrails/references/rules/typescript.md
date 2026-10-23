@@ -79,6 +79,16 @@ The linter does not replace the compiler. For a new strict TypeScript project, p
 
 Offer `exactOptionalPropertyTypes` separately and count its findings before enabling it in an existing project. `noUncheckedIndexedAccess` deserves the same migration check.
 
+## Dead code
+
+`noUnusedLocals`, `noUnusedParameters`, and the linter's unused-variable rules only see one file. For unused files, exports, types, enum and class members, and dependencies, offer [Knip](https://knip.dev) as a whole-project CI scan. Do not propose `ts-prune` or `unimported`; both are archived and point to Knip.
+
+- Configure entry points deliberately. Knip's framework plugins infer most of them; add the rest (scripts, workers, files loaded by convention or dynamic import) to `knip.json` rather than ignoring their findings.
+- For a published package, treat the package's `exports` entries as entry points so its public API is not reported.
+- Use `--production` when test-only code should not keep production code alive.
+- Give each `ignore` entry a real context, matching the override rule below.
+- In an established repo, count findings first. Remove the dead code, or record the current findings as a baseline and fail only on new ones. Review `--fix` output before keeping it.
+
 ## Tests
 
 For Vitest, recommend:

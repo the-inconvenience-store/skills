@@ -103,4 +103,4 @@ Never enable an `all` preset across unrelated frameworks.
 
 ## Whole-project CI checks
 
-Offer `unused-file`, `unused-export`, `unused-type`, `unused-dependency`, `unused-dev-dependency`, `circular-dependency`, `duplicate-jsx-subtree`, and high-complexity React checks through the react.doctor CLI or another project scanner when the user wants them. Verify they actually execute; do not place CLI-only metadata in single-file linter configuration.
+Offer `unused-file`, `unused-export`, `unused-type`, `unused-dependency`, `unused-dev-dependency`, `circular-dependency`, `duplicate-jsx-subtree`, and high-complexity React checks through the react.doctor CLI or another project scanner when the user wants them. When Knip from the JavaScript/TypeScript baseline is accepted, let it own the unused file, export, type, and dependency checks rather than running both. Verify they actually execute; do not place CLI-only metadata in single-file linter configuration.

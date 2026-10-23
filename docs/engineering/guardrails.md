@@ -64,6 +64,10 @@ That is the skill being honest rather than failing. Verification is proportionat
 
 Because the point is to catch the problem before it lands in history, where a leaked secret is already leaked. Both tools scan only staged files: Gitleaks is a single fast binary, and Semgrep uses committed rules with no network calls. The hook's runtime is measured during setup. If Semgrep goes over budget, the slowest rule packs move to CI and the rest stay in the hook.
 
+**Does it catch dead code?**
+
+Yes, as an optional whole-project CI scan on top of the per-file unused-variable rules. TypeScript repos get [Knip](https://knip.dev) for unused files, exports, and dependencies. Go modules that build a binary get `deadcode`, which reports functions unreachable from `main`, including exported ones that `unused` cannot see. Both tools judge reachability from configured entry points, so the agent sets those up explicitly, and an established repo gets a baseline rather than a wall of failures.
+
 **How is this different from `setup-inconvenient-skills`?**
 
 Different subject. [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) configures what the *skills* need (the issue tracker, the triage labels, the domain-doc layout) and then invokes this one. `guardrails` configures what the *project* needs: lint, format, tests, reproducible install, dependency upkeep, CI, hooks. Running the setup skill gets you both. Run `guardrails` on its own when only the quality strategy is changing.

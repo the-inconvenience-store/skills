@@ -29,6 +29,15 @@ Keep the standard floor (`errcheck`, `govet`, `ineffassign`, `staticcheck`, `unu
 
 `errorlint` and `nilerr` are priorities: wrapped-error comparisons and checked-then-discarded errors fail silently.
 
+## Dead code
+
+`unused` and `unparam` only see unexported code, because an exported symbol might have importers outside the package. For a module that builds a binary, offer `deadcode` (`golang.org/x/tools/cmd/deadcode`) as a separate CI scan: it reports functions, exported or not, that are unreachable from `main`. It is not a golangci-lint linter, so run and pin it on its own.
+
+- Run with `-test` so test helpers count as reachable, unless the user wants those reported too.
+- Code reached only through reflection, `go:linkname`, plugins, or generated registration looks dead; scope the scan with `-filter` or record those packages as accepted exceptions.
+- Skip it for library modules: their exported API is the point, and `deadcode` needs a `main` to start from.
+- In an established repo, count findings first. Remove the dead code, or record the current findings as a baseline and fail only on new ones.
+
 ## Escape hatches and unfinished work
 
 - `nolintlint`: require a specific linter and an explanation; reject unused suppressions.
