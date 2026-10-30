@@ -28,9 +28,9 @@ Reach for it **once per repo, before the first use of any other engineering skil
 
 It leads each with a recommended answer you can accept in a word, and skips whatever it can already infer, so most runs are a couple of quick confirmations:
 
-- **Issue tracker**: where work is tracked, so `triage`/`to-spec`/`to-tickets` know whether to call `gh`, `glab`, `bd`, write markdown under `.scratch/`, or follow a workflow you describe. GitHub, GitLab, Beads, local markdown, or other. (It proposes Beads when it finds `.beads/`; otherwise it follows your `git remote`.)
+- **Issue tracker**: where work is tracked, so `triage`/`to-spec`/`to-tickets` know whether to call `gh`, `glab`, `bd`, write markdown under `.scratch/`, or follow a workflow you describe. GitHub, GitLab, Beads, local markdown, or other. (It proposes Beads when it finds `.beads/`; otherwise it follows your `git remote`.) If you pick GitHub or GitLab and no remote points at that host, setup asks for the repo URL and wires it up (`git init` if needed, `git remote add origin <url>`), and stops if `gh repo view` / `glab repo view` still can't see the project.
 - **Triage labels**: asked only if the `triage` skill is installed, and then just: keep the default labels (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`)? Say no only if your tracker already uses other names, so `triage` applies real ones instead of creating duplicates. Setup then checks which of the agreed strings your tracker actually has and offers to create the missing ones, since `triage-labels.md` is only a mapping and writing it creates nothing.
-- **Domain docs**: assumed single-context (one `GLOSSARY.md` + `docs/adr/` at the root), which fits almost every repo; it only raises a multi-context map when it spots monorepo signals.
+- **Domain docs**: assumed single-context (one `GLOSSARY.md` + `docs/adr/` at the root), which fits almost every repo; it only raises a multi-context map when it spots monorepo signals. If it finds the legacy `CONTEXT.md` / `CONTEXT-MAP.md`, it offers to `git mv` them to their `GLOSSARY` names and rewrite those names in `docs/agents/domain.md`.
 
 The configuration output is `issue-tracker.md`, `domain.md`, and optionally `triage-labels.md` under `docs/agents/`, plus an `## Agent skills` block in the repository's existing `CLAUDE.md` or `AGENTS.md`.
 

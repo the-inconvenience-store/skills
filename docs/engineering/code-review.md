@@ -30,7 +30,7 @@ The defining idea is the **two axes**. **Standards** asks whether the diff confo
 
 They run as parallel foreground sub-agents, issued together, so neither pollutes the other's context, and the final report presents them under separate `## Standards` and `## Spec` headings with a per-axis summary. Real-surface execution remains the job of [verification](https://aihero.dev/skills-verification), not a third review axis.
 
-Two sub-agents is the whole fan-out. Both briefs forbid the sub-agent from reaching for `/code-review` itself or spawning anything further, because a review agent that can rediscover this skill will start its own pair and the count climbs without a ceiling.
+Two sub-agents is the whole fan-out, and each starts with a fresh context window. Both briefs forbid the sub-agent from reaching for `/code-review` itself or spawning anything further, because a review agent that can rediscover this skill will start its own pair and the count climbs without a ceiling.
 
 ## Common questions
 

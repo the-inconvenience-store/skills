@@ -199,7 +199,7 @@ Skills for daily code work.
 - **[to-spec](./skills/to-spec/SKILL.md)**: Turn the current conversation into a spec and publish it to the issue tracker. No interview; it just synthesizes what you've already discussed.
 - **[to-tickets](./skills/to-tickets/SKILL.md)**: Break any plan, spec, or conversation into a set of tracer-bullet tickets, each declaring its blocking edges, written as text in a local file, or as native blocking links on a real tracker.
 - **[implement](./skills/implement/SKILL.md)**: Build work from a spec or tickets: select the relevant engineering principles, drive TDD at pre-agreed seams, run Standards and Spec review, address findings, then prove the final behavior through real-surface verification.
-- **[implement-spec](./skills/implement-spec/SKILL.md)**: Build a whole spec in one run: read its tickets as a task graph, run at most two implementer subagents at a time across the ready frontier, integrating each before dispatching the next, and land everything on one integration branch.
+- **[implement-spec](./skills/implement-spec/SKILL.md)**: Build a whole spec in one run: read its tickets as a task graph, run implementer subagents across the ready frontier in parallel, and land everything on one integration branch.
 - **[wayfinder](./skills/wayfinder/SKILL.md)**: Plan a huge chunk of work, more than one agent session can hold, as a shared map of investigation tickets on the issue tracker, then resolve them one at a time until the way to the destination is clear.
 - **[retro](./skills/retro/SKILL.md)**: Look back over a session and suggest changes to the agent's environment, not the code: navigation pointers, deterministic checks, coding standards, steering files, tooling.
 
