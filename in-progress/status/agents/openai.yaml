@@ -1,5 +1,0 @@
-interface:
-  display_name: "Status"
-  short_description: "Brief progress, next steps, and blockers"
-policy:
-  allow_implicit_invocation: false
