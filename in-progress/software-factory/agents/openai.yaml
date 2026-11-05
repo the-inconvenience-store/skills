@@ -1,0 +1,5 @@
+interface:
+  display_name: "Software Factory"
+  short_description: "Design the tasks and services of an agent software factory"
+policy:
+  allow_implicit_invocation: false

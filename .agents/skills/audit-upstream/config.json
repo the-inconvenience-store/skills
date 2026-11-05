@@ -58,6 +58,11 @@
       "upstream": "skills/in-progress/chief-of-staff",
       "local": "in-progress/chief-of-staff",
       "reason": "Adopted upstream draft"
+    },
+    {
+      "upstream": "skills/in-progress/software-factory",
+      "local": "in-progress/software-factory",
+      "reason": "Adopted upstream draft"
     }
   ],
   "ignored_upstream_skills": [
