@@ -4,23 +4,23 @@ Quickstart:
 npx skills add the-inconvenience-store/skills
 ```
 
-Select `setup-inconvenient-skills`, `guardrails`, and `verification`; setup calls the other two.
+Select `bootstrap-skills`, `guardrails`, and `verification`; setup calls the other two.
 
 ```bash
-npx skills update setup-inconvenient-skills guardrails verification
+npx skills update bootstrap-skills guardrails verification
 ```
 
-[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/setup-inconvenient-skills)
+[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/bootstrap-skills)
 
 ## What it does
 
-`setup-inconvenient-skills` teaches one repo how the engineering skills should behave in it: where issues live, what the triage labels are called, where domain docs sit, which development guardrails apply, and how future agents prove behavior through the real surface.
+`bootstrap-skills` teaches one repo how the engineering skills should behave in it: where issues live, what the triage labels are called, where domain docs sit, which development guardrails apply, and how future agents prove behavior through the real surface.
 
 It first writes the repository-specific configuration under `docs/agents/`, discovered from the actual repo and confirmed with you rather than guessed. It then calls the owning skills: [guardrails](https://aihero.dev/skills-guardrails) establishes the approved quality baseline, and [verification](https://aihero.dev/skills-verification) creates or maintains the app-driving route. The setup remains prompt-driven rather than a deterministic scaffold.
 
 ## When to reach for it
 
-You invoke this by typing `/setup-inconvenient-skills`; the agent won't reach for it on its own.
+You invoke this by typing `/bootstrap-skills`; the agent won't reach for it on its own.
 
 Reach for it **once per repo, before the first use of any other engineering skill**. Re-run the full setup only to switch foundational configuration or start over. Day-to-day changes belong to the owning surface: edit tracker or domain config directly, run [guardrails](https://aihero.dev/skills-guardrails) when the quality strategy changes, and run [verification](https://aihero.dev/skills-verification) with Maintain when application surfaces move.
 
@@ -87,4 +87,4 @@ One long-standing complaint says yes, in these words: *"having a skill to set up
 
 ## Where it fits
 
-`setup-inconvenient-skills` is the **run-once setup** for the engineering set. It configures the repository, delegates the quality baseline to [guardrails](https://aihero.dev/skills-guardrails), and delegates real-surface setup to [verification](https://aihero.dev/skills-verification). Downstream skills such as [triage](https://aihero.dev/skills-triage), [to-spec](https://aihero.dev/skills-to-spec), [to-tickets](https://aihero.dev/skills-to-tickets), [implement](https://aihero.dev/skills-implement), and [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs) then consume those artifacts. When you're unsure which skill or flow fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.
+`bootstrap-skills` is the **run-once setup** for the engineering set. It configures the repository, delegates the quality baseline to [guardrails](https://aihero.dev/skills-guardrails), and delegates real-surface setup to [verification](https://aihero.dev/skills-verification). Downstream skills such as [triage](https://aihero.dev/skills-triage), [to-spec](https://aihero.dev/skills-to-spec), [to-tickets](https://aihero.dev/skills-to-tickets), [implement](https://aihero.dev/skills-implement), and [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs) then consume those artifacts. When you're unsure which skill or flow fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.

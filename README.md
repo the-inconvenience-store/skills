@@ -50,7 +50,7 @@ The first command adds this repository's OMP marketplace; the second installs th
 npx skills@latest add the-inconvenience-store/skills
 ```
 
-Pick the skills you want, and which coding agents to install them on. **Select `setup-inconvenient-skills`, `guardrails`, and `verification` together: the setup skill calls the other two.**
+Pick the skills you want, and which coding agents to install them on. **Select `bootstrap-skills`, `guardrails`, and `verification` together: the setup skill calls the other two.**
 
 The repo also ships native Codex plugin metadata in [`.codex-plugin/plugin.json`](./.codex-plugin/plugin.json), an [OMP marketplace](./.omp-plugin/marketplace.json), and a portable [`plugin.json`](./plugin.json). Every plugin format loads the same promoted skills directly from `skills/`.
 
@@ -69,7 +69,7 @@ It writes the skills into your repo as ordinary files you own and can edit. Noth
 
 </details>
 
-### 2. Run `/setup-inconvenient-skills`
+### 2. Run `/bootstrap-skills`
 
 In your agent, run it once per repo. It will:
 
@@ -195,7 +195,7 @@ Skills for daily code work.
 - **[grill-with-docs](./skills/grill-with-docs/SKILL.md)**: Grilling session that also builds your project's domain model, sharpening terminology and updating `GLOSSARY.md` and ADRs inline.
 - **[triage](./skills/triage/SKILL.md)**: Move issues through a state machine of triage roles.
 - **[improve-codebase-architecture](./skills/improve-codebase-architecture/SKILL.md)**: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
-- **[setup-inconvenient-skills](./skills/setup-inconvenient-skills/SKILL.md)**: Configure the issue tracker, triage labels, and domain docs; establish approved development guardrails; then create and prove the repository's real-surface verification route. Run once per repo.
+- **[bootstrap-skills](./skills/bootstrap-skills/SKILL.md)**: Configure the issue tracker, triage labels, and domain docs; establish approved development guardrails; then create and prove the repository's real-surface verification route. Run once per repo.
 - **[to-spec](./skills/to-spec/SKILL.md)**: Turn the current conversation into a spec and publish it to the issue tracker. No interview; it just synthesizes what you've already discussed.
 - **[to-tickets](./skills/to-tickets/SKILL.md)**: Break any plan, spec, or conversation into a set of tracer-bullet tickets, each declaring its blocking edges, written as text in a local file, or as native blocking links on a real tracker.
 - **[implement](./skills/implement/SKILL.md)**: Build work from a spec or tickets: select the relevant engineering principles, drive TDD at pre-agreed seams, run Standards and Spec review, address findings, then prove the final behavior through real-surface verification.

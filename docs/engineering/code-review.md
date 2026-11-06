@@ -22,7 +22,7 @@ Reach for this when there is a diff to judge against a known-good point and you 
 
 ## Prerequisites
 
-The **Spec** axis needs somewhere to find the originating spec: an issue reference in the commit messages, a path you pass in, or a spec under `docs/`/`specs/`. That issue-tracker wiring comes from [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills); without a spec the Spec axis simply skips and says so. The **Standards** axis always carries a Fowler smell baseline and adds only the [engineering principles](https://aihero.dev/skills-engineering-principles) whose triggers appear in the diff.
+The **Spec** axis needs somewhere to find the originating spec: an issue reference in the commit messages, a path you pass in, or a spec under `docs/`/`specs/`. That issue-tracker wiring comes from [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills); without a spec the Spec axis simply skips and says so. The **Standards** axis always carries a Fowler smell baseline and adds only the [engineering principles](https://aihero.dev/skills-engineering-principles) whose triggers appear in the diff.
 
 ## Two axes, never merged
 

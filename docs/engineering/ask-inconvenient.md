@@ -24,7 +24,7 @@ Reach for it whenever you're unsure which skill or flow a situation calls for: y
 
 ## Flows, not just skills
 
-The idea `ask-inconvenient` gives you to think with is the **flow**: a path *through* the skills rather than a single one. Before the first engineering flow, [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) records repository configuration, invokes [guardrails](https://aihero.dev/skills-guardrails), then creates the project route through [verification](https://aihero.dev/skills-verification). Most feature work then runs along one main flow: grill → spec → tickets → implement through TDD → review → real-surface verification. On-ramps merge bugs, incoming requests, and codebase-health work onto it; standalones remain available when only one discipline is needed.
+The idea `ask-inconvenient` gives you to think with is the **flow**: a path *through* the skills rather than a single one. Before the first engineering flow, [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) records repository configuration, invokes [guardrails](https://aihero.dev/skills-guardrails), then creates the project route through [verification](https://aihero.dev/skills-verification). Most feature work then runs along one main flow: grill → spec → tickets → implement through TDD → review → real-surface verification. On-ramps merge bugs, incoming requests, and codebase-health work onto it; standalones remain available when only one discipline is needed.
 
 ## Phase boundaries
 
@@ -58,7 +58,7 @@ That advice is often correct and rarely durable. Someone asked it how to make [i
 
 **It named a skill I don't have, or missed one I do.**
 
-Check the changelog for a rename before assuming it is gone. `writing-great-skills` became [writing-for-agents](https://aihero.dev/skills-writing-for-agents) with no alias, `to-prd` became [to-spec](https://aihero.dev/skills-to-spec), `pathfinder` became [wayfinder](https://aihero.dev/skills-wayfinder), and this fork renames two more: `ask-matt` is `ask-inconvenient` and `setup-matt-pocock-skills` is [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills). Four skills were retired outright into the skills that absorbed them: `ubiquitous-language`, `design-an-interface`, `qa` and `request-refactor-plan`. `resolving-merge-conflicts` was removed in v1.5.0 with nothing replacing it. The reverse case is the router's own lag, above.
+Check the changelog for a rename before assuming it is gone. `writing-great-skills` became [writing-for-agents](https://aihero.dev/skills-writing-for-agents) with no alias, `to-prd` became [to-spec](https://aihero.dev/skills-to-spec), `pathfinder` became [wayfinder](https://aihero.dev/skills-wayfinder), and this fork renames two more: `ask-matt` is `ask-inconvenient` and `setup-matt-pocock-skills` is [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills). Four skills were retired outright into the skills that absorbed them: `ubiquitous-language`, `design-an-interface`, `qa` and `request-refactor-plan`. `resolving-merge-conflicts` was removed in v1.5.0 with nothing replacing it. The reverse case is the router's own lag, above.
 
 ## Where it fits
 

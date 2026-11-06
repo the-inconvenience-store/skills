@@ -36,7 +36,7 @@
     },
     {
       "upstream": "skills/engineering/setup-matt-pocock-skills",
-      "local": "skills/setup-inconvenient-skills",
+      "local": "skills/bootstrap-skills",
       "reason": "Fork rename"
     },
     {
@@ -105,7 +105,7 @@
     },
     {
       "upstream": "docs/engineering/setup-matt-pocock-skills.md",
-      "local": "docs/engineering/setup-inconvenient-skills.md",
+      "local": "docs/engineering/bootstrap-skills.md",
       "reason": "Fork rename"
     },
     {

@@ -40,7 +40,7 @@ For a PR, the same states read against the attached code: `ready-for-agent` mean
 
 Every triaged issue should carry exactly one category role and one state role. If state roles conflict, flag it and ask the maintainer before doing anything else.
 
-These are canonical role names. The actual label strings used in the issue tracker may differ. The mapping should have been provided to you. If not, tell the user to run `/setup-inconvenient-skills`.
+These are canonical role names. The actual label strings used in the issue tracker may differ. The mapping should have been provided to you. If not, tell the user to run `/bootstrap-skills`.
 
 The mapping says what a label is called, not that the tracker has it. Before the first label write of a session, confirm the strings you are about to apply exist (on GitHub, `gh label list`). If one is missing, say so and offer to create it rather than firing the write. GitHub fails `--label <missing>` outright, which would drop the comment or state change along with the label.
 

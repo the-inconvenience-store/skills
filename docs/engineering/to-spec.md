@@ -24,7 +24,7 @@ Reach for it once a change has been talked through and the domain language is se
 
 ## Prerequisites
 
-`to-spec` publishes into your issue tracker, so [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) must have configured the tracker and triage labels for this repo first. It applies the `ready-for-agent` label itself, so no separate triage pass needed.
+`to-spec` publishes into your issue tracker, so [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) must have configured the tracker and triage labels for this repo first. It applies the `ready-for-agent` label itself, so no separate triage pass needed.
 
 ## What the spec includes
 

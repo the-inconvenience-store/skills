@@ -45,7 +45,7 @@ Localize adopted content. Search the implemented skill and every connected local
 rg -ni 'matt([ -]?pocock)?|mattpocock' <adopted paths>
 ```
 
-Replace user-facing and internal references with this fork's vocabulary: `inconvenient`, the appropriate renamed skill such as `ask-inconvenient` or `setup-inconvenient-skills`, and `the-inconvenience-store/skills` where a repository identifier is needed. Inspect every match rather than applying a blind replacement. Preserve upstream identity only where exact provenance, fetch URLs, mapping keys, raw diffs, or attribution require it.
+Replace user-facing and internal references with this fork's vocabulary: `inconvenient`, the appropriate renamed skill such as `ask-inconvenient` or `bootstrap-skills`, and `the-inconvenience-store/skills` where a repository identifier is needed. Inspect every match rather than applying a blind replacement. Preserve upstream identity only where exact provenance, fetch URLs, mapping keys, raw diffs, or attribution require it.
 
 Re-run `./scripts/audit-upstream.py` after implementation. Read every remaining changed mapping and explain why it is intentional; continue implementing if it exposes an unapplied behavioral change. The step is complete when the refreshed report has no unclassified additions and every remaining difference has a concrete fork reason.
 

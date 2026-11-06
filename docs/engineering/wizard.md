@@ -69,4 +69,4 @@ Promoted, as of v1.2. It graduated out of the drafts bucket and now ships in the
 
 ## Where it fits
 
-`wizard` is a reach-for-it-anytime standalone at the boundary between automation and human access. It often appears during [implement](https://aihero.dev/skills-implement) when a build needs credentials or a cutover. [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) configures this skill set; `wizard` generates setup paths for everything else. [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you when the boundary is unclear.
+`wizard` is a reach-for-it-anytime standalone at the boundary between automation and human access. It often appears during [implement](https://aihero.dev/skills-implement) when a build needs credentials or a cutover. [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) configures this skill set; `wizard` generates setup paths for everything else. [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you when the boundary is unclear.

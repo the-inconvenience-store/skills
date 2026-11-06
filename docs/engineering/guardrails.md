@@ -26,7 +26,7 @@ For a new React application, it also offers a Bulletproof React-inspired standar
 
 Type `/guardrails`, or the agent reaches for it automatically when a task fits.
 
-Reach for it when scaffolding a project, adding its first quality checks, replacing an unsatisfactory tool, or bringing inconsistent lint and hook configuration back under control. For configuring the issue tracker and documentation expected by this collection's engineering flows, use [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) instead.
+Reach for it when scaffolding a project, adding its first quality checks, replacing an unsatisfactory tool, or bringing inconsistent lint and hook configuration back under control. For configuring the issue tracker and documentation expected by this collection's engineering flows, use [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) instead.
 
 ## Guardrails with boundaries
 
@@ -68,9 +68,9 @@ Because the point is to catch the problem before it lands in history, where a le
 
 Yes, as an optional whole-project CI scan on top of the per-file unused-variable rules. TypeScript repos get [Knip](https://knip.dev) for unused files, exports, and dependencies. Go modules that build a binary get `deadcode`, which reports functions unreachable from `main`, including exported ones that `unused` cannot see. Both tools judge reachability from configured entry points, so the agent sets those up explicitly, and an established repo gets a baseline rather than a wall of failures.
 
-**How is this different from `setup-inconvenient-skills`?**
+**How is this different from `bootstrap-skills`?**
 
-Different subject. [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) configures what the *skills* need (the issue tracker, the triage labels, the domain-doc layout) and then invokes this one. `guardrails` configures what the *project* needs: lint, format, tests, reproducible install, dependency upkeep, CI, hooks. Running the setup skill gets you both. Run `guardrails` on its own when only the quality strategy is changing.
+Different subject. [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) configures what the *skills* need (the issue tracker, the triage labels, the domain-doc layout) and then invokes this one. `guardrails` configures what the *project* needs: lint, format, tests, reproducible install, dependency upkeep, CI, hooks. Running the setup skill gets you both. Run `guardrails` on its own when only the quality strategy is changing.
 
 **When do I run it again?**
 
@@ -92,4 +92,4 @@ No. It is offered as an explicit choice, and only for a new React application. F
 
 ## Where it fits
 
-`guardrails` is a run-once setup, repeated when the stack or quality strategy changes. [setup-inconvenient-skills](https://aihero.dev/skills-setup-inconvenient-skills) invokes it after recording repository configuration, then invokes [verification](https://aihero.dev/skills-verification) against the resulting launch and check commands. Downstream skills such as [implement](https://aihero.dev/skills-implement) work inside the approved guardrails. [Ask Inconvenient](https://aihero.dev/skills-ask-inconvenient) maps the full collection.
+`guardrails` is a run-once setup, repeated when the stack or quality strategy changes. [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) invokes it after recording repository configuration, then invokes [verification](https://aihero.dev/skills-verification) against the resulting launch and check commands. Downstream skills such as [implement](https://aihero.dev/skills-implement) work inside the approved guardrails. [Ask Inconvenient](https://aihero.dev/skills-ask-inconvenient) maps the full collection.

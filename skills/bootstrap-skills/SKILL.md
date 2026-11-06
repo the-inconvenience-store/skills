@@ -1,10 +1,10 @@
 ---
-name: setup-inconvenient-skills
+name: bootstrap-skills
 description: "Configure a repo for the engineering skills: issue tracking, triage labels, domain docs, development guardrails, and repeatable real-surface verification. Run once before first use of the other engineering skills."
 disable-model-invocation: true
 ---
 
-# Setup Inconvenient Skills
+# Bootstrap Skills
 
 Scaffold the per-repo configuration that the engineering skills assume:
 
