@@ -16,11 +16,27 @@ npx skills update tdd
 
 It will **not** write all the tests up front. Batching the tests first ("horizontal slicing") produces tests of _imagined_ behaviour: they check the shape of things and go numb to real changes. `tdd` instead takes vertical slices: one test, then just enough code to pass it, then the next test, each cycle informed by what the last one taught you. Tests target public interfaces only, so the implementation underneath can change without the tests moving.
 
+It is a reference for the loop, not a replacement for the session driving it. Before writing any test, it names the public **seams** under test, explains what each catches and misses, and waits for your confirmation.
+
 ## When to reach for it
 
 Type `/tdd`, or the agent reaches for it automatically when a task fits: building a feature or fixing a bug test-first, or when you say "red-green-refactor".
 
-Reach for it when there's a concrete behaviour to build and you want tests that survive a refactor. If the behaviour isn't pinned down yet, settle the spec first; for that, use [to-spec](https://aihero.dev/skills-to-spec). When the work is really about the shape of the interface rather than the tests, use [codebase-design](https://aihero.dev/skills-codebase-design); `tdd` calls into it for the deep-module vocabulary during planning.
+Reach for it when there is concrete behaviour with an input and an observable output, and you want tests that survive a refactor.
+
+| Your situation | Reach for |
+| --- | --- |
+| Defined behaviour to build test-first | `tdd` |
+| Behaviour and acceptance criteria still unsettled | [to-spec](https://aihero.dev/skills-to-spec) |
+| The interface or test boundary itself needs design | [codebase-design](https://aihero.dev/skills-codebase-design) |
+| A ticket to implement through the whole work loop | [implement](https://aihero.dev/skills-implement) |
+| Proof that the actual user-facing behaviour works | [verification](https://aihero.dev/skills-verification) |
+
+Agreeing where to test does not decide whether a change benefits from a red-green loop. For config, wiring or straight delegation, first identify an independent expected result. A test that only restates the implementation is tautological, not useful coverage.
+
+## Prerequisites
+
+Have a test runner available for the agreed seams. Install [codebase-design](https://aihero.dev/skills-codebase-design) too if the interface shape needs discussion; `tdd` delegates that vocabulary rather than carrying a second design guide.
 
 ## Red-green, one slice at a time
 
@@ -28,7 +44,7 @@ The leading idea is the **red-green loop**: write one failing test (red), add ju
 
 Two rules keep the tests honest. A good test reads like a specification ("user can checkout with valid cart") and exercises real code paths through the public API, so renaming an internal function never breaks it. And expected values come from an independent source of truth (a known-good literal, a worked example, the spec), never recomputed the way the code computes them, which is how a **tautological** test passes by construction and tells you nothing.
 
-Refactoring only happens once the suite is green; never while red.
+Mocks belong at system boundaries, such as external APIs, time or randomness, not around your own modules. Refactoring is outside the red-green loop and belongs to [code-review](https://aihero.dev/skills-code-review).
 
 ## Common questions
 
@@ -62,9 +78,11 @@ No. Run against one ticket, it will happily propose work that belongs to a sibli
 
 ## It's working if
 
-- It writes one test, gets it passing, and only then writes the next, not a batch of tests followed by a batch of code.
-- The tests name behaviours, not internals, and would survive an internal rename.
-- Expected values are literals from the spec, not figures derived the same way the code derives them.
+- Before any test is written, the seams are confirmed, with a note on what each catches and misses.
+- One test goes red, gets just enough implementation to pass, and only then does the next test appear.
+- Test names describe capabilities, not internal calls, and survive an internal rename.
+- Expected values trace to an independent source, such as a spec or worked example, rather than recomputing the implementation.
+- Mocks isolate system boundaries, not your own collaborators.
 
 ## Where it fits
 
@@ -75,3 +93,5 @@ grill-with-docs → to-spec → to-tickets → implement → code-review
 ```
 
 [implement](https://aihero.dev/skills-implement) is the chain's build step, and it drives `tdd` internally to build each ticket test-first before handing off to [code-review](https://aihero.dev/skills-code-review), so `tdd` is the engine inside that step rather than a step of its own. You can also reach for it directly, whenever there's a concrete behaviour to build without a full spec. Its other neighbour is [codebase-design](https://aihero.dev/skills-codebase-design), which it leans on to find deep-module seams worth testing at. When you're unsure which skill or flow fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.
+
+Passing this loop is not proof of the real user journey. [guardrails](https://aihero.dev/skills-guardrails) supplies the repository checks, and [verification](https://aihero.dev/skills-verification) supplies real-surface evidence beyond tests and compilation.

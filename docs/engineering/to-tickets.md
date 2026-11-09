@@ -20,7 +20,15 @@ Every ticket is a **tracer bullet**: a thin *vertical* slice that cuts through a
 
 You invoke this by typing `/to-tickets`; the agent won't reach for it on its own.
 
-Reach for it once you have an agreed plan or a written spec and you want it split into tickets. Point it at the conversation, or pass a spec or issue reference and it fetches the body and comments first. If the change hasn't been written up as a spec yet, produce one first; for that, use [to-spec](https://aihero.dev/skills-to-spec).
+| Where you are | What to run |
+| --- | --- |
+| A spec issue and a multi-session build | `/to-tickets #<spec_issue>`; it reads the body and comments |
+| A settled plan only in the conversation | `/to-tickets` can read the thread directly |
+| The whole change fits one context window | [implement](https://aihero.dev/skills-implement), without a ticket-splitting step |
+| Nothing is settled yet | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) first |
+| A cleared [wayfinder](https://aihero.dev/skills-wayfinder) map | [to-spec](https://aihero.dev/skills-to-spec) first, to collapse the linked decisions |
+
+The published tickets are agent-ready by construction. Do not send them through [triage](https://aihero.dev/skills-triage), which is for raw incoming reports.
 
 ## Prerequisites
 
@@ -30,8 +38,10 @@ Reach for it once you have an agreed plan or a written spec and you want it spli
 
 The blocking edges are the whole point. They make one set of tickets read two ways, depending on the tracker:
 
-- **Local files** → one file per ticket under `.scratch/<feature>/issues/`, numbered blockers-first, the edges written as text. You work them top-to-bottom, by hand, staying in the loop.
-- **A real tracker (GitHub, Linear)** → one issue per ticket, the edges as native blocking links (or sub-issues). Any ticket whose blockers are all done is on the **frontier** and can be grabbed, so several agents can run at once.
+| Tracker | Where the edges live | How you work them |
+| --- | --- | --- |
+| Local markdown | Text in one file per ticket under `.scratch/<feature>/issues/<NN>-<slug>.md`, numbered blockers-first | Work available tickets by hand, using dependency order for a linear chain |
+| A real tracker | Native blocking links, with parent/sub-issue relationships kept separately | Any ticket whose blockers are done is on the **frontier** and can be grabbed |
 
 Native is the default on a real tracker, and the "Blocked by" body line is only the fallback for trackers that have no such edge. GitHub does have one (`gh issue create --blocked-by`, plus `--parent` for the sub-issue link), and because blockers are published first, their numbers are always known by the time a dependent ticket is created. An edge written as body text on a tracker that supports the real thing is invisible to the frontier query.
 
@@ -45,7 +55,13 @@ Before slicing, `to-tickets` applies the engineering principles for verifiable s
 
 ## The wide-refactor exception
 
-One shape breaks the tracer-bullet rule: a **wide refactor**: a single mechanical change (rename a column, retype a shared symbol) whose **blast radius** fans across the whole codebase, so one edit breaks thousands of call sites at once and no vertical slice can land green. `to-tickets` slices it as **expand–contract** instead: expand (add the new form beside the old so nothing breaks), migrate (move call sites over in batches sized by blast radius, one ticket per batch, CI green throughout because the old form still exists), then contract (delete the old form once no caller remains). When even the batches can't stay green alone, they share an integration branch that all block a final integrate-and-verify ticket, and green is promised only there.
+A **wide refactor** is one mechanical change (rename a column, retype a shared symbol) whose **blast radius** fans across the codebase, so no vertical slice can land green. It uses **expand–contract** instead:
+
+- **Expand:** add the new form beside the old so nothing breaks.
+- **Migrate:** move callers in batches sized by blast radius, each blocked by the expand. CI stays green while the old form exists.
+- **Contract:** delete the old form once no caller remains, blocked by every migration batch.
+
+When even batches cannot stay green alone, they share an integration branch and all block a final integrate-and-verify ticket. Green is promised at that final boundary, not at each intermediate batch.
 
 ## Common questions
 
@@ -74,7 +90,15 @@ A very large spec can outgrow what a tracker issue serves back cleanly, and ther
 The template asks for criteria and says nothing about whether they can fail, so this happens. Three shapes recur: a criterion already true at the base commit, a criterion that can only be satisfied by work another ticket owns (the slice rules now move it to that ticket or add a blocking edge), and one that restates the request rather than deriving from the artifact. Vertical slicing prevents most of it (a slice that delivers behaviour which didn't exist before is red at the base commit by construction), but the check is worth doing by hand. For each criterion, name the observation that would show it false, and confirm it fails at the commit the implementer starts from.
 
 **The tickets are published. How do I actually run them?**
-The skill stops at the artifact, and there is no auto-dispatch mode. Dispatch is manual: look at the board, count the tickets with no open blockers, and open that many agent sessions. One ticket per fresh context, cleared between them. Be aware that [implement](https://aihero.dev/skills-implement) does not reliably close or check off the ticket when it finishes, on GitHub or in local markdown, so the ticket's state is yours to update.
+The skill stops after publishing; it does not dispatch implementation. Work the frontier with [implement](https://aihero.dev/skills-implement), one ticket per fresh context, or give the graph to [implement-spec](https://aihero.dev/skills-implement-spec) for parallel work on one integration branch. On GitHub, `implement` adds a closing commit footer, which only closes the issue when the commit reaches the default branch; acceptance checkboxes and non-GitHub ticket state still need reconciliation. Keep those states accurate so the next ticket becomes visibly unblocked.
+
+## It's working if
+
+- Before publishing, the numbered breakdown shows blockers, delivered behavior, proof, and no more than three single-claim acceptance criteria per ticket.
+- Each normal ticket has one demoable proof journey, not merely a completed layer.
+- The first ticket has no blockers; later tickets depend only on work that genuinely gates them.
+- A fresh session can understand a ticket without stale file paths or line numbers; decision-rich prototype snippets are the exception.
+- Any necessary prefactoring comes first, and native dependencies exist on trackers that support them.
 
 ## Where it fits
 

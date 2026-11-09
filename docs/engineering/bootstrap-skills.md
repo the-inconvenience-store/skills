@@ -18,21 +18,46 @@ npx skills update bootstrap-skills guardrails verification
 
 It first writes the repository-specific configuration under `docs/agents/`, discovered from the actual repo and confirmed with you rather than guessed. It then calls the owning skills: [guardrails](https://aihero.dev/skills-guardrails) establishes the approved quality baseline, and [verification](https://aihero.dev/skills-verification) creates or maintains the app-driving route. The setup remains prompt-driven rather than a deterministic scaffold.
 
+The configuration varies by repo; the installed skills do not. To use a custom tracker, describe its workflow during setup or edit `docs/agents/issue-tracker.md` later, rather than editing a `SKILL.md` that the next update will replace.
+
 ## When to reach for it
 
 You invoke this by typing `/bootstrap-skills`; the agent won't reach for it on its own.
 
 Reach for it **once per repo, before the first use of any other engineering skill**. Re-run the full setup only to switch foundational configuration or start over. Day-to-day changes belong to the owning surface: edit tracker or domain config directly, run [guardrails](https://aihero.dev/skills-guardrails) when the quality strategy changes, and run [verification](https://aihero.dev/skills-verification) with Maintain when application surfaces move.
 
+## Prerequisites
+
+Run it in the repository you want configured, somewhere it is safe to write project guidance. Have [guardrails](https://aihero.dev/skills-guardrails) and [verification](https://aihero.dev/skills-verification) installed too; setup delegates to both.
+
+| Tracker option | Where issues live | Needs |
+| --- | --- | --- |
+| GitHub | GitHub Issues | `gh` and access to the repository |
+| GitLab | GitLab Issues | `glab` and access to the project |
+| [Beads](https://github.com/steveyegge/beads) | The repo-local database | `bd` |
+| Local markdown | `.scratch/<feature>/` | No remote tracker |
+| Other | Wherever your workflow points | A description of how the agent reads and writes work there |
+
+The first four ship as templates. Local markdown is a complete option for a solo or offline repo, not just an error fallback.
+
 ## Repository-specific decisions
 
 It leads each with a recommended answer you can accept in a word, and skips whatever it can already infer, so most runs are a couple of quick confirmations:
 
-- **Issue tracker**: where work is tracked, so `triage`/`to-spec`/`to-tickets` know whether to call `gh`, `glab`, `bd`, write markdown under `.scratch/`, or follow a workflow you describe. GitHub, GitLab, Beads, local markdown, or other. (It proposes Beads when it finds `.beads/`; otherwise it follows your `git remote`.) If you pick GitHub or GitLab and no remote points at that host, setup asks for the repo URL and wires it up (`git init` if needed, `git remote add origin <url>`), and stops if `gh repo view` / `glab repo view` still can't see the project.
+- **Issue tracker**: proposes Beads when it finds `.beads/`; otherwise it follows your `git remote`. For GitHub or GitLab without a matching remote, it asks for the URL, wires it up, and stops if `gh repo view` / `glab repo view` still cannot see the project.
 - **Triage labels**: asked only if the `triage` skill is installed, and then just: keep the default labels (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`)? Say no only if your tracker already uses other names, so `triage` applies real ones instead of creating duplicates. Setup then checks which of the agreed strings your tracker actually has and offers to create the missing ones, since `triage-labels.md` is only a mapping and writing it creates nothing.
 - **Domain docs**: assumed single-context (one `GLOSSARY.md` + `docs/adr/` at the root), which fits almost every repo; it only raises a multi-context map when it spots monorepo signals. If it finds the legacy `CONTEXT.md` / `CONTEXT-MAP.md`, it offers to `git mv` them to their `GLOSSARY` names and rewrite those names in `docs/agents/domain.md`.
 
-The configuration output is `issue-tracker.md`, `domain.md`, and optionally `triage-labels.md` under `docs/agents/`, plus an `## Agent skills` block in the repository's existing `CLAUDE.md` or `AGENTS.md`.
+The output is inspectable repository guidance, not a global preferences store:
+
+| Artifact | Purpose |
+| --- | --- |
+| `docs/agents/issue-tracker.md` | Tracker operations, including wayfinding operations |
+| `docs/agents/domain.md` | Domain-doc layout and reading rules |
+| `docs/agents/triage-labels.md` | Label vocabulary, only when `triage` is installed |
+| One `## Agent skills` block in `CLAUDE.md` or `AGENTS.md` | Pointers to the configuration and, after proof, the verification route |
+
+Setup records the domain-doc layout; [domain-modeling](https://aihero.dev/skills-domain-modeling) creates `GLOSSARY.md` and ADRs lazily when terms and decisions resolve. Their absence immediately after setup is normal.
 
 On a fresh GitHub repo the approved labels do not exist yet, and that is worth the extra confirmation: `gh issue create --label <missing>` fails outright rather than creating the label, so an uncreated label costs the whole issue later, not just its tag. Setup creates them here (the `wayfinder:*` labels too, when that skill is installed) so the first `/triage` or `/to-tickets` write lands.
 
@@ -83,6 +108,7 @@ One long-standing complaint says yes, in these words: *"having a skill to set up
 - Every approved label string exists in the tracker itself, not just in `triage-labels.md`.
 - The approved project guardrails run, with any unverified boundary reported.
 - `docs/agents/verification/README.md` describes every discovered surface, one mapped feature is `VERIFIED`, and the agent-instruction block points to it.
+- No installed `SKILL.md` changed: repository-specific choices live in the repo's own guidance.
 - Afterwards, issue workflows use the configured tracker while implementation and diagnosis can follow the recorded real-surface verification route.
 
 ## Where it fits

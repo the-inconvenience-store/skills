@@ -22,13 +22,34 @@ Type `/wizard`, or the agent reaches for it automatically when work hits a human
 
 Reach for it when provisioning infrastructure, collecting credentials, navigating an unfamiliar third-party dashboard, or running a migration or cutover. If the agent has the access and tools to perform the step itself, it should do so instead.
 
+| Human-only procedure | What the wizard provides |
+| --- | --- |
+| Configure several services before the app boots | Dashboard visits in order, with values captured into their intended destinations |
+| Run a migration or cutover | Dependency-ordered stages and confirmation before irreversible actions |
+| Give the next developer a repeatable setup path | An executable procedure to retain and link from the README |
+
 ## Prerequisites
 
 The generated script requires bash. Stages that write GitHub secrets or variables use `gh`; when it is unavailable or unauthenticated, the wizard records the skipped action for you to finish manually.
 
 ## A staged procedure
 
-Before writing the script, the skill reads the repository and scopes every manual stage and captured value. Each value has a source, a destination, and a secrecy classification. The fixed template supplies confirmation gates, URL opening, hidden input, idempotent environment updates, stage progress, and a closing record of skipped work.
+Before writing the script, the skill reads the repository and shows you an ordered stage list to confirm. Every captured value has a source, a destination, and a secrecy classification. Unknown dashboard paths are checked or asked about, not invented.
+
+A **stage** is one focused task on one screen. The terminal clears between stages, so the instructions you still need must fit there. Progress shows how many stages remain, not an invented time estimate.
+
+| Value or action | Destination |
+| --- | --- |
+| Local development value | `.env` |
+| Sensitive value used by CI | GitHub secret, and `.env` if local development needs it too |
+| Public value used by CI | GitHub variable |
+| A pure action, such as flipping a switch | No stored value |
+
+The fixed [template](https://github.com/the-inconvenience-store/skills/blob/main/skills/wizard/template.sh) supplies URL opening, hidden secret entry, idempotent environment updates, confirmation gates and a closing summary. The agent authors stages rather than changing the shared library.
+
+Static verification also traces every captured value to its agreed destination and checks that GitHub secret names match the workflow's actual references. The first end-to-end run is yours, because it opens browsers and waits for human input.
+
+The script is ephemeral by default: run and remove a one-off procedure. Retain and commit it only when the user wants a repeatable setup path, then link it from the README.
 
 ## Common questions
 
@@ -62,10 +83,12 @@ Promoted, as of v1.2. It graduated out of the drafts bucket and now ships in the
 
 ## It's working if
 
-- Every human action is a named stage in dependency order.
-- Secret values use hidden input and land only where the scope says they should.
-- `bash -n` passes, and `shellcheck` passes when available.
-- The script has stage counts, not invented time estimates.
+- You confirm the ordered stages and the values they produce before the script is written.
+- Every URL opens before you are asked to paste the value from that page.
+- Secret input is hidden, and values land only in the destinations agreed during scoping.
+- Each stage fits one screen, and progress uses stage counts rather than time promises.
+- `bash -n` passes, with `shellcheck` used when available; the agent hands the human the run command rather than running the procedure itself.
+- The closing summary separates completed writes from skipped actions you must finish manually.
 
 ## Where it fits
 

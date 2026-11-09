@@ -20,7 +20,24 @@ It does **not** decide what to build. The spec is already settled and the seams 
 
 You invoke this by typing `/implement`; the agent won't reach for it on its own.
 
-Reach for it once the work is written down as a spec or split into tickets and you're ready to turn that into code. If the spec doesn't exist yet, write it first. For that, use [to-spec](https://aihero.dev/skills-to-spec), or [to-tickets](https://aihero.dev/skills-to-tickets) to break a spec into tickets. If you just want to build something test-first without a full spec, drop to [tdd](https://aihero.dev/skills-tdd) directly.
+| Where the work lives | Reach for |
+| --- | --- |
+| One ticket on the configured tracker | `/implement #42`, one fresh context per ticket |
+| A settled spec small enough for one session | `/implement` against the spec |
+| An agreed small plan in the current conversation | `/implement` here, explicitly naming the thread as its input |
+| A multi-session spec, not yet sliced | [to-tickets](https://aihero.dev/skills-to-tickets) first |
+| A spec and ticket graph you want orchestrated in one run | [implement-spec](https://aihero.dev/skills-implement-spec) |
+| Undecided product behavior | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) first |
+| One behavior to build test-first, without the planning workflow | [tdd](https://aihero.dev/skills-tdd) directly |
+| Finished code that only needs review | [code-review](https://aihero.dev/skills-code-review) directly |
+
+The same-session route avoids manufacturing a spec file for a plan you just agreed. Keep multi-session work self-contained in tickets, and clear context between them.
+
+## Prerequisites
+
+Start on the branch you want the commits on. `implement` commits to the current branch; it does not create a feature branch for you.
+
+Have the behavior and test seams agreed before the build. For tracker references, [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) must have configured the tracker; the skill fetches the reference and states its title so you can catch a mismatch before work starts.
 
 ## Pre-agreed seams
 
@@ -59,6 +76,14 @@ Probably the ticket is too big rather than the skill being misused. A run does c
 **`/implement #2` in a fresh session worked on something completely unrelated.**
 
 The agent resolved `#2` against another numbered list in context, such as a todo file or checklist, rather than the configured tracker. `implement` now fetches a passed reference from the issue tracker and states its title before starting, and asks when the reference is ambiguous. Check that the title matches the ticket you meant; passing the issue URL or `owner/repo#2` removes the ambiguity entirely.
+
+## It's working if
+
+- A passed ticket reference is fetched and named before code changes begin.
+- The trace shows [engineering-principles](https://aihero.dev/skills-engineering-principles) selection and an actual `tdd` call, not just tests added after the code.
+- Narrow checks run as the code changes; the full suite runs once the implementation is coherent.
+- The committed diff is reviewed against the branch's fixed point, and accepted findings are fixed and committed.
+- The final report names the real-surface verification verdict and observation, not only passing tests.
 
 ## Where it fits
 

@@ -20,13 +20,27 @@ It refuses to hypothesise before you have a **tight feedback loop**: one runnabl
 
 Type `/diagnosing-bugs`, or the agent reaches for it automatically when a task fits. It fires on "diagnose" / "debug this", or when you report something broken, throwing, failing, or slow.
 
-Reach for it on the hard ones: the bug that resists a first glance, the intermittent flake, the regression that crept in between two known-good states. For a quick throwaway to sanity-check a design question rather than chase a defect, use [prototype](https://aihero.dev/skills-prototype) instead.
+Reach for it on the hard ones: the bug that resists a first glance, the intermittent flake, the regression that crept in between two known-good states. It is thorough on purpose, not a shortcut to a one-message answer.
+
+| Your situation | Reach for |
+| --- | --- |
+| A specific failure, flake, or timing regression you can name | `diagnosing-bugs` |
+| A raw report that still needs confirming and writing up | [triage](https://aihero.dev/skills-triage) first |
+| An unresolved design question, not a defect | [prototype](https://aihero.dev/skills-prototype) |
+| Planned behaviour you want to build test-first | [tdd](https://aihero.dev/skills-tdd) |
+| The bug is fixed and you want to prevent the next one | [retro](https://aihero.dev/skills-retro) |
 
 ## The tight loop is the skill
 
 Everything else (bisection, hypothesis-testing, instrumentation) is mechanical once you have the signal. The skill always applies Fix Root Causes, Build the Lever, and Prove It Works, then proactively scans the remaining principle triggers against the symptom, suspected mechanism, and intended fix. It spends disproportionate effort constructing a command that drives the actual bug path and asserts the user's exact symptom, tightening that loop until it is fast, deterministic, and agent-runnable.
 
 It gives you a ladder of ways to build the loop: existing [verification](https://aihero.dev/skills-verification) instructions, a failing test, curl script, CLI diff, headless browser, replayed trace, throwaway harness, fuzz loop, `git bisect run`, or differential run, and, only as a last resort, a human-in-the-loop bash script. For non-deterministic bugs the target is a higher reproduction rate: loop the trigger and add stress until the flake is debuggable.
+
+If no red-capable loop can be built, the skill stops and lists what it tried. The next input must be access to the reproducing environment, a redacted captured artifact, or permission for temporary instrumentation, not a theory based on code alone.
+
+The repro is then minimised until every remaining input, caller, and setup step is needed to keep it red. That smaller case makes the hypothesis list sharper and, where a correct test seam exists, becomes the regression test. If no seam can exercise the real call-site pattern, the skill records that architectural finding rather than hiding it behind a shallow test.
+
+The hand-off is evidence, not just a patch: the original repro goes green, the original public path receives a `VERIFIED` verdict, and the commit or PR names the hypothesis that proved correct. A passing test alone does not replace that real-surface proof.
 
 ## Common questions
 
@@ -55,10 +69,11 @@ Renamed to `/diagnosing-bugs` in v1.0.0. The old name no longer exists. Anything
 
 - It builds and runs a repro command *before* theorising, and shows the invocation and its redacted output.
 - The loop asserts the symptom you actually reported, not a nearby failure.
-- Hypotheses arrive as a ranked, falsifiable list shown to you before any are tested.
+- It minimises the repro before offering 3–5 ranked, falsifiable hypotheses, shown to you before any are tested.
 - Debug instrumentation is tagged (`[DEBUG-...]`) and grepped away before it declares done.
 - Captured artifacts quote only the lines that carry the signal; credentials stay in environment variables.
-- The regression test passes and the original real-surface path reports `VERIFIED`.
+- The regression test passes, or the missing correct seam is explicitly recorded; the original real-surface path still reports `VERIFIED`.
+- The commit or PR message names which hypothesis was right.
 
 ## Where it fits
 

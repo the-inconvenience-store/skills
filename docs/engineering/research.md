@@ -18,13 +18,26 @@ npx skills update research
 
 Type `/research`, or the agent reaches for it automatically when a task turns into reading legwork.
 
-Reach for it when the next step is *finding something out* (how an API behaves, what a spec actually says, whether a claim holds) and you'd rather not stall your own thread doing the reading. For sharpening a plan by interview instead of by reading, use [grilling](https://aihero.dev/skills-grilling); for exploring what to build with throwaway code, use [prototype](https://aihero.dev/skills-prototype).
+Reach for it when the next step is *finding something out* and you'd rather not stall your own thread doing the reading.
+
+| What the decision needs | Reach for |
+| --- | --- |
+| An API fact, a spec's exact wording, or evidence for a version claim | `research` |
+| Your constraints and choices sharpened by interview | [grilling](https://aihero.dev/skills-grilling) |
+| Evidence from trying an unresolved design in runnable code | [prototype](https://aihero.dev/skills-prototype) |
+| A settled domain term or consequential decision recorded durably | [domain-modeling](https://aihero.dev/skills-domain-modeling) |
+
+## Prerequisites
+
+Use a writable project workspace for the output. The skill follows the repo's existing notes convention; if there is none, it chooses a sensible location and tells you where. No special notes directory needs to exist first.
 
 ## Delegated legwork
 
 The defining move is that the reading runs as a **background agent**. You keep working; it goes off, follows each claim back to its primary source, and drops a single cited Markdown file into wherever the repo keeps such notes. Research is legwork you delegate, not thinking you outsource: you get back a document to react to, with its sources attached.
 
 The delegation happens exactly once. The background agent is told to do the reading itself rather than spin up another researcher, because an agent handed these same instructions will otherwise fire them again and you end up paying for overlapping runs you can't see. The rule cuts the other way too: where delegation isn't available at all, the reading happens in-thread, and an undelegatable run still owes you the file, not silence.
+
+The deliverable is **one cited Markdown file**, not merely a conversational answer. Its facts inform a decision; they do not make the decision for you. Feed the file deliberately into the next interview, spec, or ticket, and decide separately whether it merits keeping once that work is done.
 
 ## Common questions
 
@@ -57,6 +70,13 @@ There is no stopping criterion in the skill, and this shows up as two complaints
 **`/wayfinder` created research tickets. Do I resolve those myself?**
 
 No, it fires them for you. A charting session spawns a `/research` subagent per research ticket and burns them down in parallel, capturing findings on a throwaway `research/<name>` branch with a [context pointer](https://www.aihero.dev/ai-coding-dictionary/context-pointer) from the ticket. Research tickets are the one exception to wayfinder's one-ticket-per-session rule, because they are [AFK](https://www.aihero.dev/ai-coding-dictionary/afk): nothing waits on you. The branch is pushed but never gets a PR, since it is never meant to merge ([issue #576](https://github.com/mattpocock/skills/issues/576) upstream, now fixed). One known snag remains: deleting the branch later breaks the context pointers the tickets hold.
+
+## It's working if
+
+- A top-level invocation starts one background researcher, not a chain of nested tasks; an already-delegated or undelegatable run does the reading itself.
+- One Markdown file appears in the repo's notes location, or another stated location when there is no convention.
+- Each claim cites the source that owns it: official docs, a spec, source code, or a first-party API.
+- The file answers the narrow question you supplied and can be handed directly to the next decision-making step.
 
 ## Where it fits
 

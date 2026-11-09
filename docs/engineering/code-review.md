@@ -18,19 +18,30 @@ npx skills update code-review
 
 Type `/code-review`, or the agent reaches for it automatically when you ask to review a branch, a PR, work-in-progress changes, or anything "since X".
 
-Reach for this when there is a diff to judge against a known-good point and you want the two questions (*is it built right?* and *is it the right thing?*) answered independently. It runs at the end of the build loop; for actually writing the code test-first, use [tdd](https://aihero.dev/skills-tdd), and for building a whole spec into code use [implement](https://aihero.dev/skills-implement), which commits its work and then runs its own `/code-review` pass over it.
+Reach for it when there is a committed diff to judge against a known-good point. Supply that fixed point explicitly; the skill asks rather than guessing if you omit it.
+
+| Your situation | Reach for |
+| --- | --- |
+| A diff needs independent answers to "is it built right?" and "is it the right thing?" | `code-review` |
+| Nothing is written yet and you want to build test-first | [tdd](https://aihero.dev/skills-tdd) |
+| A whole spec needs building, review included | [implement](https://aihero.dev/skills-implement) |
+| The problem is the codebase's structure, not one diff | [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) |
 
 ## Prerequisites
 
-The **Spec** axis needs somewhere to find the originating spec: an issue reference in the commit messages, a path you pass in, or a spec under `docs/`/`specs/`. That issue-tracker wiring comes from [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills); without a spec the Spec axis simply skips and says so. The **Standards** axis always carries a Fowler smell baseline and adds only the [engineering principles](https://aihero.dev/skills-engineering-principles) whose triggers appear in the diff.
+Start with a committed change and a fixed point that resolves. Staged and working-tree changes are outside the review.
+
+The **Spec** axis looks first for issue references in commit messages, then a path you supply, then a matching spec under `docs/`, `specs/`, or `.scratch/`. Issue fetching uses the tracker doc configured by [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills); a local spec path does not need tracker access. If nothing turns up, it asks where the spec is. If there is none, it skips the Spec sub-agent and says so.
+
+The **Standards** axis needs no standards document to exist: it always carries a Fowler smell baseline and adds only the [engineering principles](https://aihero.dev/skills-engineering-principles) whose triggers appear in the diff.
 
 ## Two axes, never merged
 
 The defining idea is the **two axes**. **Standards** asks whether the diff conforms to how this repo writes code: every file in the repo that documents standards (`CODING_STANDARDS.md` and `CONTRIBUTING.md` always, when present), a fixed Fowler smell baseline, and only the engineering principles triggered by this change. Repository standards override the baselines; smells and principles remain judgment calls rather than hard violations. **Spec** asks the orthogonal question: does the code do what the issue or spec actually asked, without missing requirements or smuggling in scope creep?
 
-They run as parallel foreground sub-agents, issued together, so neither pollutes the other's context, and the final report presents them under separate `## Standards` and `## Spec` headings with a per-axis summary. Real-surface execution remains the job of [verification](https://aihero.dev/skills-verification), not a third review axis.
+When a spec is available, both axes run as parallel foreground sub-agents, issued together, so neither pollutes the other's context. The final report presents separate `## Standards` and `## Spec` headings, then a finding count and worst issue **per axis**, never an overall winner. Real-surface execution remains the job of [verification](https://aihero.dev/skills-verification), not a third review axis.
 
-Two sub-agents is the whole fan-out, and each starts with a fresh context window. Both briefs forbid the sub-agent from reaching for `/code-review` itself or spawning anything further, because a review agent that can rediscover this skill will start its own pair and the count climbs without a ceiling.
+Two sub-agents is the full fan-out when both axes run; without a spec, only Standards runs. Each starts with a fresh context window. Both briefs forbid the sub-agent from reaching for `/code-review` itself or spawning anything further, because a review agent that can rediscover this skill will start its own pair and the count climbs without a ceiling.
 
 ## Common questions
 
@@ -65,9 +76,10 @@ No. It diffs `<fixed-point>...HEAD`, three-dot, which is measured from the merge
 ## It's working if
 
 - It pins and confirms the fixed point first (`git rev-parse`), failing fast on a bad ref or empty diff rather than inside the sub-agents.
-- Standards and Spec findings arrive in two distinct blocks, each citing its source: a repo standard or baseline smell for one, a quoted spec line for the other.
-- When no spec can be found, the Spec axis reports "no spec available" instead of inventing requirements.
-- Exactly two sub-agents appear in the trace. A climbing agent count means a sub-agent re-entered the skill.
+- Standards and Spec findings arrive in two distinct blocks, each citing its source: a repo standard, baseline smell, or triggered principle for one, a quoted spec line for the other.
+- The closing summary gives finding counts and the worst issue per axis, not a blended verdict.
+- When there is no spec, the Spec axis reports "no spec available" instead of inventing requirements.
+- Two sub-agents appear when a spec exists, otherwise only Standards runs. A climbing agent count means a sub-agent re-entered the skill.
 
 ## Where it fits
 

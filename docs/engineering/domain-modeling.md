@@ -20,17 +20,28 @@ This is the **active** discipline, not the passive one. Merely reading `GLOSSARY
 
 Type `/domain-modeling`, or the agent reaches for it automatically when a task fits: when codebase terminology is under discussion, when a `GLOSSARY.md` is being written or edited, or when an ADR is being recorded or edited.
 
-Reach for it when the *words* are the problem: two people mean different things by "cancellation", "account" is doing three jobs, or a design conversation keeps snagging on a concept that has never been named precisely. If instead the module's *shape* is the problem (where the seam goes, how deep the interface is), use [codebase-design](https://aihero.dev/skills-codebase-design). If you want the plan itself interrogated before you build, use [grilling](https://aihero.dev/skills-grilling).
+Reach for it when the *words* are the problem, not merely when you need to look up a term.
+
+| The situation | The move |
+| --- | --- |
+| Two people mean different things by "cancellation", or "account" is doing three jobs | `domain-modeling`: settle precise terms and rejected synonyms |
+| A consequential choice needs its reasoning preserved | `domain-modeling`: offer an ADR if all three tests below pass |
+| You only need the definition of an existing term | Read `GLOSSARY.md`; no modelling session needed |
+| The module's shape, depth, or seam is the problem | [codebase-design](https://aihero.dev/skills-codebase-design) |
+| The whole plan needs interrogation before building | [grilling](https://aihero.dev/skills-grilling) |
 
 ## Prerequisites
 
-The skill writes into two places, both created lazily, only once there is something to record. Resolved terms go into `GLOSSARY.md` at the root (or, in a multi-context repo flagged by a `GLOSSARY-MAP.md`, into the per-context `GLOSSARY.md`). Decisions go into `docs/adr/`. Nothing needs to exist up front; the first resolved term creates the glossary, the first real trade-off creates the ADR.
+Use it in the project workspace where the model belongs. Nothing needs to exist up front: the skill creates files lazily, only when there is something to record.
+
+- Resolved terms go into root `GLOSSARY.md`, or the per-context glossary named by a root `GLOSSARY-MAP.md`.
+- Decisions go into `docs/adr/NNNN-slug.md`, with sequential numbering. In a multi-context repo, context-specific decisions can live under that context's `docs/adr/`; system-wide ones stay at the root.
 
 ## Glossary vs. ADR
 
 Two artifacts, two different bars:
 
-- **The glossary** (`GLOSSARY.md`) captures language. Every time a vague term is made canonical, it's written down inline, not batched, so the shared vocabulary stays current with the conversation. It stays ruthlessly free of implementation detail.
+- **The glossary** (`GLOSSARY.md`) captures language. Each entry defines what a project-specific concept **is** in one or two sentences, with rejected synonyms under `_Avoid_`. It is written inline when the term becomes canonical, not batched at the end. Implementation details and general programming concepts do not belong.
 - **An ADR** captures a decision, and the bar is high: offered only when the choice is **hard to reverse**, **surprising without context**, and **the result of a real trade-off**. Miss any one of the three and there is no ADR. This is what keeps `docs/adr/` a record of consequential forks rather than a diary.
 
 The move that makes it click: when you state how something works, the skill cross-references the code and surfaces the contradiction: "your code cancels entire Orders, but you just said partial cancellation is possible. Which is right?" The language and the code are forced to agree.
@@ -47,7 +58,7 @@ Keeping it standalone means you can also reach for it directly, as a **reference
 The size is a symptom, not the disease: the file has absorbed implementation detail and decisions that were never glossary material. The fix is a direct instruction: `/grill-with-docs make my GLOSSARY.md more concise and remove any implementation details from it`. Run it against a bloated file and most of it goes. Only reach for a `GLOSSARY-MAP.md` split once the file is genuinely lean and still covers two domains that a reader would not want to hold at once; splitting a bloated file just gives you several bloated files. The skill's guidance here is not yet strong enough to prevent the growth in the first place, and the issue tracking that is still open.
 
 **Why is it `GLOSSARY.md` and not `CONTEXT.md`? It used to be `CONTEXT.md`.**
-This was the most-argued naming question in the whole skill set, and it is now settled on `GLOSSARY.md`. The case that won: the file is "a glossary and nothing else", so `GLOSSARY.md` says exactly what it is, and with agents in the loop everything is [context](https://www.aihero.dev/ai-coding-dictionary/context), which makes `CONTEXT.md` the less informative of the two names. The case against it was the map: `CONTEXT-MAP.md` pointing at several `CONTEXT.md` files reads naturally in a way `GLOSSARY-MAP.md` does not, and `context` is the standing DDD word for a bounded area of the model. That cost was accepted. If your repo still has a `CONTEXT.md`, rename it and its map; nothing reads the old name any more.
+The name makes the boundary explicit: it is a glossary and nothing else, whereas everything an agent reads is [context](https://www.aihero.dev/ai-coding-dictionary/context). If your repo still has `CONTEXT.md` or `CONTEXT-MAP.md`, re-run [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills): it offers to `git mv` them to their `GLOSSARY` names and update `docs/agents/domain.md`. Consumers look for the new names, so leaving the old files in place loses that shared vocabulary.
 
 **Where did `/ubiquitous-language` go?**
 It was removed, and it was not deprecated. Its job moved into `domain-modeling`, which maintains the whole model continuously rather than dumping a glossary out of one conversation. Vocabulary enforcement got more load-bearing, not less: it now runs underneath grilling, triage and mapping rather than as a separate pass you remember to do.
@@ -58,11 +69,22 @@ Ask for it explicitly rather than waiting for it to accumulate. `/grill-with-doc
 **Can I keep the domain model and use my own ADR format?**
 Not cleanly today. The glossary half and the ADR half ship in one skill, so a team with an established ADR convention (different template, different location, different naming) gets instructions that conflict with its house style. The current options are to copy the skill locally and edit it, or to override the ADR conventions in your repo's own agent docs. Splitting the two apart is [an open request](https://github.com/mattpocock/skills/issues/557).
 
+**Will it find a naming decision we settled in an old issue?**
+
+Do not assume so. The skill checks the code and glossary but does not require an issue-tracker search. Bring the relevant issue into the conversation, or put a standing instruction in your project's domain guidance to consult prior decisions. [Upstream issue #717](https://github.com/mattpocock/skills/issues/717) records this gap; a decision left only in a closed issue can otherwise be debated again.
+
 **Does a glossary actually earn its keep? It is one more artifact to review, and it can go stale.**
 Sometimes it does not, and it is worth being honest about where. DDD gets less useful the closer it gets to the implementation: the payoff is upstream, in naming and concept alignment, not in aggregates and layer ceremony. Synonym control matters at naming boundaries: module names, table names, status enums, issue titles, CLI commands. It matters much less in ordinary prose. There is also a live objection that domain terms compress communication *between humans* who already share them, and that an agent responds the same way to the plain-English description. On that reading, the glossary's value is keeping you and your reviewers aligned with what the agent is doing, not making the agent better. On a one-day build, skip it. And an unreviewed, agent-authored glossary is worse than none: it becomes confident-sounding lore that later sessions treat as truth.
 
 **Can it turn my vague prompts into domain language for me?**
 No, and there is no plan for a skill that does. A domain language you do not understand yourself becomes meaningless drivel once written down. This skill enforces precision once you have the understanding; it does not manufacture vocabulary you do not have. The related trap is using domain words without doing the modelling: right nouns over the wrong conceptual structure produce output that reads correct and is not.
+
+## It's working if
+
+- It asks which concept you mean instead of silently choosing a meaning for an overloaded word.
+- Resolved terms land in `GLOSSARY.md` during the conversation, with short definitions and rejected synonyms.
+- It surfaces a concrete contradiction between the code and the proposed model before treating either as settled.
+- ADRs are offered only for choices that are hard to reverse, surprising without context, and genuine trade-offs.
 
 ## Where it fits
 

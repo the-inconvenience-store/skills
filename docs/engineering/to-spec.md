@@ -20,13 +20,22 @@ It does **not** interview you again. By the time you reach for it, the alignment
 
 You invoke this by typing `/to-spec`; the agent won't reach for it on its own.
 
-Reach for it once a change has been talked through and the domain language is settled, and you want that shared understanding written down before any code is written. If you *haven't* aligned yet, grill first; for that, use [grill-with-docs](https://aihero.dev/skills-grill-with-docs). To split the finished spec into tickets, use [to-tickets](https://aihero.dev/skills-to-tickets).
+Reach for it once the plan is settled and the build needs to survive beyond the current conversation:
+
+| Where you are | What to run |
+| --- | --- |
+| Behavior and domain language are still undecided | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) first |
+| The agreed change fits one session | [implement](https://aihero.dev/skills-implement) in the same window; a spec is optional overhead |
+| The agreed build spans sessions | `/to-spec`, then [to-tickets](https://aihero.dev/skills-to-tickets) |
+| A [wayfinder](https://aihero.dev/skills-wayfinder) map has cleared | `/to-spec #<map_issue>` to collapse its linked decisions |
 
 ## Prerequisites
 
 `to-spec` publishes into your issue tracker, so [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) must have configured the tracker and triage labels for this repo first. It applies the `ready-for-agent` label itself, so no separate triage pass needed.
 
 ## What the spec includes
+
+The spec is a **decision record** for fresh sessions: it carries the reasoning and boundaries that would otherwise disappear when you clear context. It records the choices already made, not plausible new ones invented to fill a template.
 
 - **Problem statement**: what is broken or missing, and why it's worth solving, in the project's own vocabulary.
 - **Solution**: the shape of the fix at a high level, before any implementation detail.
@@ -37,11 +46,11 @@ Reach for it once a change has been talked through and the domain language is se
 - **Out-of-scope items**: what this change deliberately does *not* cover, to keep the ticket bounded.
 - **Further notes**: anything else worth carrying forward that doesn't fit the sections above.
 
-## Deep modules
+## Seams before prose
 
-Before writing the spec, `to-spec` sketches the **seams** at which the feature will be tested and looks for **deep module** opportunities: a lot of functionality hidden behind a small, stable interface. It prefers existing seams to new ones and the highest seam possible, ideally just one across the whole change.
+Before writing, `to-spec` sketches the **seams** at which the feature will be tested and checks them with you. It prefers existing seams to new ones and the highest seam possible, ideally just one across the whole change.
 
-That matters for agentic development: a good interface gives tests something durable to target, so the code underneath can change without the tests moving.
+That check is not a fresh product interview. It pins the public interface that [tdd](https://aihero.dev/skills-tdd) will observe and gives [code-review](https://aihero.dev/skills-code-review) an agreed contract to review against. A durable seam lets the implementation move without forcing the tests to move with it.
 
 ## Common questions
 
@@ -74,10 +83,11 @@ Very large specs can outgrow what a tracker issue will serve back cleanly, and t
 
 ## It's working if
 
-- It starts writing the spec instead of asking you a fresh round of questions.
+- It synthesises the settled conversation rather than reopening the product interview.
 - It checks the seams with you before writing, and proposes as few as possible.
 - The spec comes back in your project's domain vocabulary, not generic boilerplate.
 - It names how the completed behavior will be proved through its real surface.
+- You recognise the decisions and explicit exclusions from the conversation; nothing was invented to complete a section.
 
 ## Where it fits
 

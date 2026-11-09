@@ -20,7 +20,11 @@ It repairs one message. It does not restart the task or alter the underlying dec
 
 You invoke this by typing `/wait-what`; the agent won't reach for it on its own.
 
-Reach for it the moment you stop following an explanation. Only you know that the message missed, so invocation remains a human decision.
+Reach for it the moment you stop following an explanation: invented jargon, a pile of acronyms, or a conclusion whose premise you never saw. Only you know that the message missed, so invocation remains a human decision.
+
+## Wait, not just "be brief"
+
+The leading word is **wait**. Asking for brevity can produce clipped fragments that are shorter but no clearer. Saying the explanation lost you asks the agent to back up and supply the missing context. The glossary supplies the nouns; Simplified Technical English supplies the register.
 
 ## Common questions
 
@@ -42,8 +46,8 @@ Yes, minus the vocabulary half. You get the added context and the simplified Eng
 
 ## It's working if
 
-- The re-pitch starts with enough context to recover your place.
-- Sentences are short and use the project's existing vocabulary.
+- The re-pitch adds the missing premise so you can recover your place.
+- Sentences are clear, not merely clipped, and use the relevant glossary's terms rather than invented jargon.
 - The explanation keeps the original meaning without repeating the original wording.
 
 ## Where it fits

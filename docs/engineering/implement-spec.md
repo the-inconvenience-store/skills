@@ -32,6 +32,7 @@ You invoke this by typing `/implement-spec`, and the agent won't reach for it on
 - **An issue tracker.** The skill reads the tickets from, and resolves them on, the tracker [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) configured. If none has been configured, it stops and tells you to run that first rather than guessing.
 - **Tickets with blocking edges**, as [to-tickets](https://aihero.dev/skills-to-tickets) writes them. Without edges the graph is flat and every ticket starts at once.
 - **A harness that runs subagents in the background and gives each one a git worktree.** The concurrency is the point; a harness that runs subagents one at a time gets a slower `implement`.
+- **The runtime inputs the work needs.** A worktree does not bring across gitignored fixtures, local databases, or credentials. Identify those inputs before dispatching tickets; a skipped test is not evidence that its behavior passed.
 
 ## The integration branch
 
@@ -45,6 +46,8 @@ Everything lands on one branch. Each implementer:
 Whether a pull request exists at all is the tracker's call. If your tracker closes work through PRs, or you ask for one, a draft PR opens after the first merge and is marked ready at the end. Otherwise the run stops on the integration branch with every ticket resolved the way your tracker closes work, which works fully offline against a local markdown tracker.
 
 Implementers talk to the orchestrator through **context pointers** (the spec, the ticket, shared exploration notes, earlier commits) rather than pasted summaries, which keeps each subagent's prompt small and the orchestrator's window free for the graph. Every subagent starts with a fresh context window, so it carries nothing in but those pointers.
+
+The starting graph comes from the tracker, but the live frontier is about what has **merged into the integration branch**. A GitHub issue can remain open until the final PR merges, so its open state is not proof that its implementation still blocks the next ticket.
 
 ## Common questions
 
@@ -62,7 +65,7 @@ Both come from `code-review` running outside the one slot the skill gives it. It
 
 **Does it run the same disciplines as `implement`?**
 
-Yes. The orchestrator selects `engineering-principles` against the whole spec and saves them where every implementer can read them; each implementer adds whatever its own ticket triggers, builds with `tdd`, and commits with Conventional Commit messages. After the review, the orchestrator runs `verification` against the integration branch and reports an `INCONCLUSIVE` verdict as a gap rather than as done. The one difference is that no step agrees seams interactively, as an `implement` session does, so name the seams in the spec or the tickets if you want them pinned.
+Yes. The orchestrator selects `engineering-principles` against the whole spec and saves them where every implementer can read them; each implementer adds whatever its own ticket triggers, builds with `tdd`, and commits with Conventional Commit messages. After the review and accepted fixes, the orchestrator runs `verification` against the integration branch and reports an `INCONCLUSIVE` verdict as a gap rather than as done. Pin seams in the spec or tickets before dispatch: fresh implementers need that agreement as an input, not a product discussion repeated independently in each worktree.
 
 **Two implementers running in parallel collided on the same file, or picked different names for the same thing.**
 
@@ -78,15 +81,16 @@ No. `implement-spec` puts an agent in charge of orchestration inside one harness
 
 **A ticket's key test was skipped inside its worktree, and it reported green.**
 
-A worktree holds only what git tracks. Tests that read gitignored fixtures, local databases, or credentials can skip themselves there silently. For a ticket whose verification depends on untracked material, tell the orchestrator to run it in the main checkout instead.
+A worktree holds the tracked checkout, not the gitignored fixtures, local databases, or credentials from your main checkout. Tests that depend on those inputs can silently skip. Arrange the needed inputs safely, or run the relevant proof against the integration branch in an appropriately provisioned checkout. Do not treat a skipped check as green evidence.
 
 ## It's working if
 
 - Several implementers are running at once whenever the graph allows, not one after another.
 - A ticket starts as soon as its last blocker lands on the integration branch, not when the whole run ends.
 - Every ticket's trace shows `tdd` running, with a failing test before the code.
-- Merges into the integration branch are fast-forwards, not conflict resolutions.
+- Each implementer incorporates the integration tip and runs the full suite before handoff, rather than leaving integration surprises to the merger.
 - The final report names a `verification` verdict and what it observed on the real surface.
+- Accepted review findings are fixed once, affected checks rerun, and implementer worktrees cleaned up at close-out.
 - The run ends on one branch with every ticket resolved, and a PR only if your tracker wanted one.
 
 ## Where it fits

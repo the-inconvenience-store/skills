@@ -22,7 +22,21 @@ Unless you point it at a specific area, it also scopes itself to where developme
 
 You invoke this by typing `/improve-codebase-architecture`; the agent won't reach for it on its own.
 
-Reach for it as a periodic health check: every few days, or whenever a codebase has started to feel like it takes too much bouncing between small modules to understand one concept. It reads the existing architecture and proposes where to deepen it. If you already know the module you want to redesign and just need the vocabulary to think it through, use [codebase-design](https://aihero.dev/skills-codebase-design) instead. This skill is the survey that finds the candidates; that one is the design bench.
+Reach for it as periodic maintenance, not as a refactor that runs itself.
+
+| Your situation | How to use it |
+| --- | --- |
+| Understanding one concept requires bouncing between many small modules | Survey for deepening opportunities |
+| A big build is coming | Point it at the spec and ask "how can we make this change easy?" |
+| Legacy behaviour is hard to test | Look for the missing seams before adding tests |
+| You already know the module you want to redesign | Use [codebase-design](https://aihero.dev/skills-codebase-design) for its shape and vocabulary |
+| A specific behaviour is broken | Use [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs) |
+
+## Prerequisites
+
+Run it in the project workspace. Existing `GLOSSARY.md` and ADRs inform the scan but are not required. The HTML report goes outside the repo; the later design conversation can update `GLOSSARY.md` or create an ADR through [domain-modeling](https://aihero.dev/skills-domain-modeling).
+
+The report's default Tailwind and Mermaid assets load from CDNs, so viewing it as intended requires network access. In a locked-down environment, ask for inline CSS and SVG instead.
 
 ## Deepening opportunities
 
@@ -32,9 +46,9 @@ It speaks in the shared design vocabulary (**module**, **interface**, **depth**,
 
 ## The report, then the grill
 
-The output is a browser-ready HTML file written to your OS temp directory; nothing lands in the repo. Each candidate is a card with the files involved, the friction, a plain-English solution, the benefit in terms of locality and leverage, a before/after diagram, and a `Strong` / `Worth exploring` / `Speculative` badge. It closes with the one it would tackle first.
+The output is a browser-ready file at `<tmpdir>/architecture-review-<timestamp>.html`; the agent opens it and tells you its absolute path. Each candidate is a card with the files involved, the friction, a plain-English solution, the benefit in terms of locality and leverage, a before/after diagram, and a `Strong` / `Worth exploring` / `Speculative` badge. It closes with the one it would tackle first. A candidate that contradicts an ADR must say which decision it reopens and why the friction warrants it.
 
-Then it stops and asks which one you want to explore. Pick one and it runs the [grilling](https://aihero.dev/skills-grilling) loop over that design (constraints, what sits behind the seam, which tests survive), updating the domain model inline as decisions crystallise.
+Then it stops and asks which one you want to explore, before proposing interfaces. Pick one and it runs the [grilling](https://aihero.dev/skills-grilling) loop over that design (constraints, what sits behind the seam, which tests survive), updating the domain model inline as decisions crystallise. This is a design decision, not an implementation diff: take the settled result into [to-spec](https://aihero.dev/skills-to-spec) and the normal build flow.
 
 ## Common questions
 
@@ -68,11 +82,19 @@ Rarely, and you should know that going in. The skill is built to output findings
 
 **Does it work in Codex or another harness?**
 
-Mostly. The exploration step asks for a sub-agent without naming any [harness](https://www.aihero.dev/ai-coding-dictionary/harness)'s tool, so a harness that has no sub-agent mechanism does the walk inline rather than failing; the skill still runs, the scan is just less parallel. The one genuinely Claude-shaped piece left is the design-it-twice pattern in [codebase-design](https://aihero.dev/skills-codebase-design), which this skill reaches for when you want alternative interfaces explored.
+The local exploration step asks for a sub-agent without naming any [harness](https://www.aihero.dev/ai-coding-dictionary/harness)'s tool. The optional design-it-twice pattern in [codebase-design](https://aihero.dev/skills-codebase-design) is also tool-neutral here. Both still require sub-agent support to run as written; the skill does not define a fallback for a harness without delegation.
 
 **How do I actually implement deep modules in TypeScript?**
 
 There is no good answer shipped with the skill. The recurring request is for a `TYPESCRIPT.md` giving concrete file and module layouts for the principles, and it does not exist. The skill will tell you where a deepening belongs and what should sit behind the seam; translating that into a package or directory structure is currently on you.
+
+## It's working if
+
+- The scan follows your named direction, or explains which recent commit hot spots shaped it.
+- Each card identifies files, shows a before/after, and explains locality, leverage, and the effect on tests.
+- The report arrives before an interview, and the agent waits for you to choose a candidate.
+- It proposes a deepening rather than changing application code; later glossary and ADR edits capture the decisions.
+- Rejecting a candidate for a lasting, non-obvious reason prompts an ADR offer, not another attempt to sell the same idea.
 
 ## Where it fits
 

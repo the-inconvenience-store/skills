@@ -12,7 +12,7 @@ npx skills update grill-me
 
 ## What it does
 
-`grill-me` runs a relentless interview about a plan or design, walking every branch of the decision tree until you and the agent reach a **shared understanding**.
+`grill-me` takes a loose idea, plan, or decision and interviews you until you reach a **shared understanding**. You do not need a worked-out plan to start; the conversation exists to expose the choices you have not made yet.
 
 It asks in **frontier-based rounds** and waits after each round. Every question in a round is independent: if one answer is needed before another question makes sense, that question waits for the next frontier. Where a fact can be found in the environment, the agent looks it up instead of asking you. Each question comes with a recommended answer, so you are reacting to a proposal rather than staring at a blank prompt.
 
@@ -20,13 +20,26 @@ It asks in **frontier-based rounds** and waits after each round. Every question 
 
 You invoke this by typing `/grill-me`; the agent won't reach for it on its own.
 
-Reach for it before you build, when a plan feels roughly right but you can sense unresolved decisions hiding in it: the moment you want the soft spots found and forced into the open. If you want that same interrogation to also leave a paper trail of ADRs and a glossary behind, use [grill-with-docs](https://aihero.dev/skills-grill-with-docs) instead. And if the effort is too big to hold in one session and the route to the goal is still foggy (a greenfield project, a huge feature build), start further upstream with [wayfinder](https://aihero.dev/skills-wayfinder), which charts it as a map of decisions first and then merges back into this flow.
+Reach for it when an idea is worth taking seriously but still has unresolved decisions. It needs no repository, and the subject need not be software.
+
+| What you need | Reach for |
+| --- | --- |
+| A portable interview that writes no files | `grill-me` |
+| An interview aligned to a codebase, with a glossary and ADRs | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) |
+| A decision map for work too large for one session | [wayfinder](https://aihero.dev/skills-wayfinder) |
+| Something to react to before you can judge how it looks or feels | [prototype](https://aihero.dev/skills-prototype), then return to the conversation |
 
 ## The decision tree
 
 The session walks the plan as a tree of decisions, resolving dependencies between them one by one, a parent decision settled before the choices that hang off it. The point is not to reach agreement quickly; it is to make every implicit call explicit, so nothing important is left silently assumed. You come out the other side with a plan whose branches have all been visited.
 
 `grill-me` is **stateless**: it writes nothing and leaves no workspace behind. It runs anywhere, and the only artifact is the sharpened understanding in the conversation itself. That is the deliberate contrast with [grill-with-docs](https://aihero.dev/skills-grill-with-docs), which captures the same interview as durable ADRs and a glossary.
+
+You own the scope. Push back when a recommendation is wrong, say when the conversation drifts, and answer "I don't know" rather than nodding along. If a question needs a working example to settle it, prototype instead of spending more rounds guessing.
+
+## Prerequisites
+
+Install [grilling](https://aihero.dev/skills-grilling) and its [engineering-principles](https://aihero.dev/skills-engineering-principles) reference too. `grill-me` delegates the interview to that shared primitive.
 
 ## Common questions
 
@@ -51,6 +64,12 @@ No. The value of the session is the [context](https://www.aihero.dev/ai-coding-d
 
 **Does the model matter?**
 More than for most skills. Grilling leans on the [model](https://www.aihero.dev/ai-coding-dictionary/model)'s own sense of how systems break, so give it your best one. Implementation mostly follows context and tolerates a cheaper model.
+
+## It's working if
+
+- Questions arrive in rounds with recommendations, and later rounds build on your answers.
+- You can explain the choices you settled, including where you rejected a recommendation.
+- The agent waits for your confirmation of shared understanding before acting.
 
 ## Where it fits
 

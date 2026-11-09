@@ -20,17 +20,36 @@ The grilling **leaves a paper trail**. A plain interview sharpens your thinking 
 
 You invoke this by typing `/grill-with-docs`, and the agent won't reach for it on its own.
 
-Reach for it at the very start of a change, when the plan is still fuzzy and the domain language isn't settled, and you want to stress-test both before any code exists. If you only want the interview and don't need the artifacts, use [grilling](https://aihero.dev/skills-grilling); if the plan is already clear and you just need to pin down or record terminology, use [domain-modeling](https://aihero.dev/skills-domain-modeling). And if the change is too big to hold in one session and its route is still foggy (a greenfield project, a huge feature build), start upstream with [wayfinder](https://aihero.dev/skills-wayfinder): it charts the effort as a map of decisions, then hands back to this main flow once the way is clear.
+Reach for it at the start of a change, in a working directory, when the plan or domain language is still fuzzy:
+
+| What you have | Reach for |
+| --- | --- |
+| No working directory, just a plan to stress-test | [grill-me](https://aihero.dev/skills-grill-me) |
+| A repo and a change you can settle in one session | `/grill-with-docs` |
+| An effort too large and foggy for one session | [wayfinder](https://aihero.dev/skills-wayfinder) |
+| An existing repo with no domain docs | `/grill-with-docs`, aimed at the repo rather than a feature |
+| Settled behavior, but terminology needs sharpening | [domain-modeling](https://aihero.dev/skills-domain-modeling) |
+| A decision blocked on someone else's knowledge | [to-questionnaire](https://aihero.dev/skills-to-questionnaire) |
 
 ## Prerequisites
 
 This skill is stateful: it writes into your repo as it grills. Resolved terms land in a `GLOSSARY.md` glossary at the root (or the relevant context's `GLOSSARY.md` if a `GLOSSARY-MAP.md` marks a multi-context repo), and genuinely hard-to-reverse decisions land as ADRs under `docs/adr/`. Both are created lazily (nothing exists until the first term or decision crystallises), so you don't need to scaffold anything up front, but you do need to be somewhere it's safe to write these files.
 
+Its `SKILL.md` delegates to [grilling](https://aihero.dev/skills-grilling) for the interview and [domain-modeling](https://aihero.dev/skills-domain-modeling) for the artifacts. Both dependencies need to be available; an interview without the writing discipline is only half the skill.
+
 ## The grill
 
-The engine is a **grill**: a relentless, one-question-at-a-time walk down the decision tree, resolving dependencies between decisions before moving on, with a recommended answer offered for every question. Questions the codebase can answer are answered by reading the codebase, not by asking you.
+The engine is a **grill**: a walk down the design tree in frontier-based rounds. Each round contains the independent questions whose prerequisites are settled, with a recommended answer for each; it waits for your answers before going deeper. Facts the codebase can answer are the agent's job, not questions for you.
 
-What makes this variant its own skill is where the answers go. As the grill runs, fuzzy language gets sharpened into canonical terms and written to the glossary inline, not batched at the end. The glossary stays a glossary: pure vocabulary, no implementation details, no spec. ADRs are offered sparingly, only when a decision is hard to reverse, surprising without context, and the result of a real trade-off. Most sessions produce a sharper glossary and few or no ADRs, and that's the intended shape.
+What makes this variant its own skill is where the answers go:
+
+| What resolved | Where it lands |
+| --- | --- |
+| A canonical term | `GLOSSARY.md`, the moment it resolves |
+| A hard-to-reverse decision, surprising without context and involving a real trade-off | An ADR under `docs/adr/` |
+| Other design answers | The conversation, not a separate decision ledger |
+
+The glossary stays pure vocabulary, not implementation notes or a spec. ADRs need all three gates, so few or none is the intended shape. Keep the conversation for [to-spec](https://aihero.dev/skills-to-spec): most of the agreement still lives there, even when the glossary is excellent.
 
 ## Common questions
 
@@ -58,9 +77,10 @@ Nobody is happy with the name. There is an open suggestion to rename it `grill-d
 ## It's working if
 
 - It asks one round at a time. Each round contains only independent questions whose prerequisites are settled.
-- Terms get written to `GLOSSARY.md` the moment they resolve, in your project's own words.
+- Resolved terms get written to `GLOSSARY.md` during the session, with tight definitions and no implementation detail.
 - It reaches into the codebase to answer its own questions where it can.
 - ADRs stay rare: you're not asked to rubber-stamp reversible choices.
+- It challenges a term when your usage conflicts with the glossary, rather than quietly carrying two meanings.
 
 ## Where it fits
 

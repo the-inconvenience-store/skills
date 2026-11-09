@@ -14,13 +14,20 @@ npx skills update codebase-design
 
 `codebase-design` gives you a shared, precise vocabulary for designing **deep modules**: a lot of behaviour hidden behind a small interface, placed at a clean seam, testable through that interface.
 
-It is a **language, not a refactoring plan**. When that language is applied to a concrete design, it pulls only the relevant [engineering principles](https://aihero.dev/skills-engineering-principles): foundational data shape, reader load, boundary placement, structural behavior, or competing designs when the choice is expensive to reverse.
+It is a **language, not a refactoring plan**: the reference itself defines no survey loop or required output artifact. When that language is applied to a concrete design, it pulls only the relevant [engineering principles](https://aihero.dev/skills-engineering-principles): foundational data shape, reader load, boundary placement, structural behavior, or competing designs when the choice is expensive to reverse.
 
 ## When to reach for it
 
 Type `/codebase-design`, or the agent reaches for it automatically when a task fits.
 
-Reach for it when you're designing or improving a module's interface, hunting for deepening opportunities, deciding where a seam goes, or making code more testable and AI-navigable. Other skills pull it in whenever they need the deep-module vocabulary. If you want to sharpen the project's *domain* terms rather than its module design, use [domain-modeling](https://aihero.dev/skills-domain-modeling) instead; to run a whole architecture pass over an existing codebase, use [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture).
+Reach for it when you know which code you're designing and need to reason about its shape. Other skills pull it in whenever they need the deep-module vocabulary.
+
+| The open question | Reach for |
+| --- | --- |
+| How small can this module's interface get, and where should its seam go? | `codebase-design` |
+| Which module needs redesigning in the first place? | [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) |
+| What does "account" or "cancellation" mean in this project? | [domain-modeling](https://aihero.dev/skills-domain-modeling) |
+| Will this interface support tests that survive a refactor? | [tdd](https://aihero.dev/skills-tdd), using this vocabulary |
 
 ## Deep, not shallow
 
@@ -37,6 +44,8 @@ Callers and tests cross the same seam, so a well-placed interface gives tests so
 `codebase-design` is the **single source of truth** for deep-module vocabulary. Other skills point at it rather than restating the words: [tdd](https://aihero.dev/skills-tdd) borrows it to place a seam before writing the test, [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) uses it while restructuring existing code, and [to-spec](https://aihero.dev/skills-to-spec) speaks it when sketching test seams.
 
 [Engineering-principles](https://aihero.dev/skills-engineering-principles) remains a separate decision layer. It says when to minimise reader load, redesign from first principles, or exhaust the design space; `codebase-design` supplies the module, interface, depth, seam, adapter, leverage, and locality terms needed to act on those decisions.
+
+Two supporting references turn the vocabulary into design work when needed. [DEEPENING.md](https://github.com/the-inconvenience-store/skills/blob/main/skills/codebase-design/DEEPENING.md) classifies dependencies so the seam gets an appropriate test strategy. [DESIGN-IT-TWICE.md](https://github.com/the-inconvenience-store/skills/blob/main/skills/codebase-design/DESIGN-IT-TWICE.md) compares three or more radically different interfaces for a chosen candidate, including usage examples, hidden complexity, adapters, and trade-offs.
 
 ## Common questions
 
@@ -62,11 +71,18 @@ It does now. For a long time it did not. The inline deep-module notes that used 
 
 **Does the design-it-twice pattern work outside Claude Code?**
 
-Not cleanly. `DESIGN-IT-TWICE.md` says "spawn 3+ sub-agents in parallel using the Agent tool", which is Claude Code's [tool](https://www.aihero.dev/ai-coding-dictionary/tool) by Claude Code's name. The repo ships metadata for other [harnesses](https://www.aihero.dev/ai-coding-dictionary/harness), including Codex, and those may expose nothing under that name, so the parallel-design phase is less portable than the skill's metadata suggests. Tracked in [issue #564](https://github.com/mattpocock/skills/issues/564), open.
+The local reference asks for three or more parallel sub-agents without naming a harness-specific tool. You still need a harness with parallel delegation to run that pattern as written. [Issue #564](https://github.com/mattpocock/skills/issues/564) records the upstream portability problem caused by naming Claude Code's `Agent` tool; that tool-specific wording is not present here.
 
 **Can I add my own concepts to the glossary, such as connascence, module secrets, [progressive disclosure](https://www.aihero.dev/ai-coding-dictionary/progressive-disclosure)?**
 
 People have proposed exactly those. [Issue #180](https://github.com/mattpocock/skills/issues/180) adds Parnas's module secrets and Page-Jones's connascence as a naming layer for *what* is leaking across a seam, with a working diff attached; [issue #303](https://github.com/mattpocock/skills/issues/303) proposes progressive disclosure inside the implementation, so a module that is deep at its public interface isn't one undifferentiated slab underneath. Both are open and unmerged. The glossary as shipped is deliberately small, and the reason it stays small is stated in the skill itself: consistent language is the whole point, and a term nobody uses consistently is worse than no term.
+
+## It's working if
+
+- The design names the module, its interface, and the seam instead of using those words interchangeably.
+- The proposed extraction passes the deletion test: removing it would spread complexity back across callers.
+- A proposed seam names what actually varies and which adapters justify it.
+- The interface discussion covers invariants, ordering, and error modes, not only type signatures.
 
 ## Where it fits
 

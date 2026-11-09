@@ -22,11 +22,26 @@ Type `/grilling`, or the agent reaches for it automatically when a task fits.
 
 Reach for it when a plan still has silent assumptions or dependent decisions. In practice, you will usually enter through [grill-me](https://aihero.dev/skills-grill-me) or [grill-with-docs](https://aihero.dev/skills-grill-with-docs), which add the right wrapper around the same interview.
 
+| What you need | Reach for |
+| --- | --- |
+| The plain interview, directly or inside another skill | `grilling` |
+| An explicitly user-invoked interview with no files | [grill-me](https://aihero.dev/skills-grill-me) |
+| An interview that records codebase language and decisions | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) |
+| A larger map of unresolved decisions | [wayfinder](https://aihero.dev/skills-wayfinder) |
+
+## Prerequisites
+
+Install [engineering-principles](https://aihero.dev/skills-engineering-principles), which the interview loads before its first round and consults again when a new decision shape appears.
+
 ## Rounds and the frontier
 
 The frontier is the set of questions that can be answered now without guessing at an unsettled prerequisite. The skill asks that whole set in one numbered round, separates each question visually, and gives each a recommended answer, worded so that "yes" accepts it. Questions blocked by another answer wait for the next round.
 
 This keeps related work moving without flattening dependencies into a bulk questionnaire. The interview ends when the frontier is empty and every branch has been visited, then waits for you to confirm the shared understanding.
+
+Facts are the agent's job; decisions are yours. It dispatches fact-finding without stalling unrelated questions, while questions downstream of that research wait. Each recommendation appears on its own line so you can answer a whole round by number.
+
+The frontier is chosen by judgement, not computed from a graph. If two questions turn out to depend on each other, point that out so the affected branch can be reopened in the next round.
 
 ## Common questions
 
@@ -59,6 +74,14 @@ No, and a cap is deliberately out of scope. Some plans need three questions and 
 
 **`grill-with-docs` ran, but it never loaded `grilling`.**
 A real and unfixed rough edge, reported across [harnesses](https://www.aihero.dev/ai-coding-dictionary/harness) and models: a skill that names another skill does not reliably cause that skill to load, and `grill-with-docs` names two. The tell is a session that asks everything at once with no recommendations attached: that is the model improvising an interview rather than running this one. Asking the agent directly whether it loaded `grilling` and `domain-modeling` usually recovers it.
+
+## It's working if
+
+- Each numbered question has a recommendation, and "yes" accepts it.
+- No question requires another answer from the same round.
+- The agent looks up observable facts, while unrelated decisions keep moving.
+- Recommendations reflect applicable engineering principles.
+- An empty frontier leads to a confirmation request, not immediate implementation.
 
 ## Where it fits
 

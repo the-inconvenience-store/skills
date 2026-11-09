@@ -14,6 +14,8 @@ npx skills update writing-for-agents
 
 `writing-for-agents` is the reference for documents an agent consumes: skills, `AGENTS.md`, `CLAUDE.md`, specs, runtime prompts, and pointed-at reference files. The packaging changes, but the writing levers do not.
 
+The target is a predictable **process**, not identical output. Its pruning test asks whether each instruction changes behaviour from the model's default. A line that changes nothing is a **no-op**, even if it sounds sensible.
+
 It was previously called `writing-great-skills`. The broader name reflects its actual scope. Skill-only mechanics such as frontmatter, invocation mode, and routers now live in a linked `SKILL-MECHANICS.md`, loaded only when the document being edited is a skill.
 
 ## When to reach for it
@@ -22,11 +24,15 @@ Type `/writing-for-agents`, or the agent reaches for it automatically when you c
 
 Reach for it when an agent-facing document fires unreliably, repeats environment facts that can go stale, buries its steps, or has grown too large to scan. It gives those problems a shared vocabulary and a set of editing tests.
 
+For other agent-facing material, such as specs, tickets, reference docs and runtime prompts, invoke it explicitly. The boundary is the reader: this is guidance for documents an agent consumes, not a general prose style guide.
+
 ## Context pointers and the two loads
 
 A **context pointer** names material outside the current context and says when to load it. A skill description is a pointer; so is a line in `AGENTS.md` that sends an agent to another file. The wording decides whether the material is reached reliably.
 
-Every pointer and document spends one of two budgets. Always-loaded material costs **context load**. Material the human must remember costs **cognitive load**. Progressive disclosure moves branch-specific reference behind a pointer while keeping steps and must-read rules in view.
+Every pointer and document spends one of two budgets. Always-loaded material costs **context load**. Material the human must remember costs **cognitive load**, the price of keeping human judgement in the loop rather than something to minimise indiscriminately.
+
+The **information hierarchy** places steps first, reference beside the concepts that need it, and branch-specific detail behind pointers. Progressive disclosure moves detail down that hierarchy without hiding the rules every branch needs. **Leading words**, such as *tight*, *red* and *tracer bullet*, give both the instructions and their pointers a compact concept to think with.
 
 ## Completion criteria and pruning
 
@@ -62,6 +68,13 @@ The common route (do the work once, then have the agent write it up as a skill) 
 
 **English isn't my first language. Do I lose the leading-word advantage?**
 No. Finding the word that packs the most behaviour into the fewest [tokens](https://www.aihero.dev/ai-coding-dictionary/token) is work the reference does for you. It is one of the things it is for.
+
+## It's working if
+
+- Every step has a checkable completion criterion that covers the required work.
+- Each rule has one authoritative home, and easy environment lookups are not duplicated as stale facts.
+- Reference needed by only one branch sits behind a pointer with a clear trigger.
+- Pruning removes no-ops while preserving the behaviour the document needs to cause.
 
 ## Where it fits
 

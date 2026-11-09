@@ -14,25 +14,59 @@ npx skills update triage
 
 `triage` moves issues on your project's tracker through a small **state machine** of triage roles: categorise them, verify the claim, grill them into shape if needed, and leave a ready-for-agent brief.
 
-It never labels blind. Every triaged item carries exactly one **category** role (`bug` / `enhancement`) and one **state** role (`needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, `wontfix`), and it *recommends and waits*: it tells you its category and state call with reasoning, then acts only on your direction. Before anything is promoted to `ready-for-agent`, it verifies the claim first: a bug gets reproduced, a PR gets checked out and run.
+It *recommends and waits*: it tells you its category and state call with reasoning, then acts only on your direction. The normal evaluation verifies a bug or PR before writing an agent brief; an explicit state override skips that investigation. Raw incoming reports belong here, not tickets that [to-tickets](https://aihero.dev/skills-to-tickets) already made agent-ready.
 
 ## When to reach for it
 
 You invoke this by typing `/triage` and describing what you want in natural language; the agent won't reach for it on its own. "Show me anything that needs my attention", "let's look at #42", "move #42 to ready-for-agent".
 
-Reach for it when your issue tracker has raw, unevaluated reports and you want them sorted, verified, and turned into work an agent or human can pick up. To turn a settled conversation into a fresh spec instead, use [to-spec](https://aihero.dev/skills-to-spec); to split an existing spec into tickets, use [to-tickets](https://aihero.dev/skills-to-tickets). `triage` is the reverse direction: it processes what's *already* landed in the tracker.
+| What you have | Reach for |
+| --- | --- |
+| Raw incoming reports to evaluate | `/triage` |
+| A rough idea of your own | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) |
+| A settled conversation to publish | [to-spec](https://aihero.dev/skills-to-spec) |
+| A spec to split into agent-ready work | [to-tickets](https://aihero.dev/skills-to-tickets) |
+| A confirmed bug needing root-cause investigation | [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs) |
 
 ## Prerequisites
 
-`triage` reads and writes your issue tracker, so [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) must have configured the tracker and the label mapping first. The role names above are **canonical**. The actual label strings in your tracker may differ, and that mapping is what setup provides. The mapping says what a label is *called*, not that the tracker has it, so `triage` confirms the strings exist before its first label write and offers to create any that don't: on GitHub a missing label fails the write and takes the comment or state change with it. The config also decides whether external PRs count as a request surface, and who counts as external.
+`triage` reads and writes your issue tracker, so [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) must have configured the tracker and label mapping first. The roles below are **canonical**; the mapping supplies your tracker's actual label strings. A mapping does not itself create labels, so `triage` confirms they exist before its first label write and offers to create any missing ones. On GitHub, a missing label fails the write rather than creating the label.
+
+External PR discovery is off by default in the GitHub and GitLab templates. To include it, enable the request-surface flag in `docs/agents/issue-tracker.md`; setup does not ask about that flag.
+
+## The state machine
+
+Every triaged item carries exactly one category (`bug` or `enhancement`) and one state:
+
+| State | Means |
+| --- | --- |
+| `needs-triage` | Needs maintainer evaluation; the usual first state for an unlabeled issue |
+| `needs-info` | Waiting on the reporter; returns to evaluation when they reply |
+| `ready-for-agent` | Fully specified for an agent, normally with a brief attached |
+| `ready-for-human` | A brief plus the reason human implementation is needed |
+| `wontfix` | Closed with the reason recorded |
+
+A conflicting pair of states is a reason to stop and ask, not choose one silently. A maintainer can also request a direct state override; the skill confirms the action and asks whether a missing agent brief should be written.
 
 ## A PR is an issue with attached code
 
-Where the tracker treats external pull requests as a request surface, `triage` runs them through the *same* machine: same category roles, same states, same transitions, with the states just read against the diff instead of a report. `ready-for-agent` means a brief is attached and an agent should take the next step on the code; `ready-for-human` means it's ready to merge. Discovery surfaces only external PRs, but an explicitly named PR is always triaged regardless of author.
+Where the tracker treats external pull requests as a request surface, `triage` runs them through the same machine. `ready-for-agent` means an agent should take the next step on the diff; `ready-for-human` means it is ready for a human to merge. The brief describes what remains to do to the existing code, not how to rebuild it from nothing. Discovery surfaces only external PRs, but an explicitly named PR is always triaged regardless of author.
 
 ## Verify before you brief
 
 The step that separates `triage` from ad-hoc labelling is verification. It reproduces the bug from the reporter's steps, or checks out the PR and runs the tests, and reports back: confirmed with a code path, failed, or insufficient detail (which is itself a strong `needs-info` signal). It also runs two codebase checks: **redundancy** (is this already implemented? then it's a `wontfix`) and **prior rejection** (does `.out-of-scope/` already say no?). A confirmed verification makes a far stronger agent brief; guessing does not.
+
+The **agent brief** is the durable contract for later work; the original report remains context. It names interfaces, types, signatures, desired behavior, acceptance criteria, and scope boundaries, not file paths or line numbers that can go stale while the issue waits.
+
+Closing as `wontfix` has three distinct outcomes:
+
+| Reason | What is preserved |
+| --- | --- |
+| Already implemented | A comment pointing to the existing behavior, not a rejection record |
+| Rejected bug | A polite explanation |
+| Rejected enhancement | A `.out-of-scope/` record linked from the closing comment |
+
+The rejection knowledge base has one Markdown file per **concept**, not per issue. It groups prior requests with the reason, so "night theme" can surface an old "dark mode" decision. The maintainer confirms whether that rejection still applies; a similar request is not automatically rejected.
 
 ## Common questions
 
@@ -61,9 +95,10 @@ Yes, the tracker is config, not a hard-coded assumption, and people run it again
 
 - Every item it touches ends with exactly one category role and one state role, never zero, and never two conflicting states.
 - It hands you a recommendation with reasoning and waits, rather than relabelling on its own.
-- Bugs get reproduced and PRs get run before anything reaches `ready-for-agent`.
+- During normal evaluation, it reports the bug reproduction or PR check before promoting the item; a direct override is clearly identified.
 - Every comment it posts to the tracker opens with the `> *This was generated by AI during triage.*` disclaimer.
+- Briefs describe behavioral contracts without stale file paths or line numbers, and prior rejections are surfaced for your decision.
 
 ## Where it fits
 
-`triage` is the **periodic maintenance** pass over your issue tracker: run it whenever reports pile up, to keep the queue sorted and the `ready-for-agent` column trustworthy. It sits at the front of the tracker, upstream of the build chain: the briefs it writes are what [tdd](https://aihero.dev/skills-tdd) later picks up to implement. When a request needs sharpening it leans on [grilling](https://aihero.dev/skills-grilling) and [domain-modeling](https://aihero.dev/skills-domain-modeling) to grill it into shape in frontier-based rounds. Its close neighbour is [to-spec](https://aihero.dev/skills-to-spec), which populates the tracker from a fresh conversation where `triage` processes what's already there. When you're unsure which skill or flow fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.
+`triage` is an **on-ramp** and a periodic maintenance pass for incoming work, not a mandatory step in the idea-to-build chain. Its briefs feed [implement](https://aihero.dev/skills-implement) just as agent-ready tickets from [to-tickets](https://aihero.dev/skills-to-tickets) do. When a request needs sharpening, it runs [grilling](https://aihero.dev/skills-grilling) and [domain-modeling](https://aihero.dev/skills-domain-modeling) together, keeping the vocabulary and qualifying decisions in the repo. [to-spec](https://aihero.dev/skills-to-spec) is the neighboring route for work originating in your own conversation. When you're unsure which lane fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.

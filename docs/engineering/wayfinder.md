@@ -18,19 +18,49 @@ npx skills update wayfinder
 
 You invoke this by typing `/wayfinder`; the agent won't reach for it on its own.
 
-Reach for it when an effort is **more than one agent session can hold** and the route to its **destination** is still foggy: you can feel the shape of the work but can't yet write it down as a spec or a plan. For turning an *already-clear* thread into a spec, use [to-spec](https://aihero.dev/skills-to-spec); for slicing an already-understood plan into buildable tickets, use [to-tickets](https://aihero.dev/skills-to-tickets). Wayfinder sits upstream of both: it's what you run when there's too much fog to spec directly.
+The trigger is narrow: the effort must exceed one session **and** its route must still be unclear. Greenfield is not a requirement; an existing codebase can contain just as much fog.
+
+| What you have | Reach for |
+| --- | --- |
+| A feature you can settle in one conversation | [grill-with-docs](https://aihero.dev/skills-grill-with-docs) in a repo, or [grill-me](https://aihero.dev/skills-grill-me) without one |
+| A multi-session effort whose route is unclear | `/wayfinder` |
+| A clear thread where the decisions are already made | [to-spec](https://aihero.dev/skills-to-spec), without a map |
+| A cleared wayfinder map | [to-spec](https://aihero.dev/skills-to-spec), then [to-tickets](https://aihero.dev/skills-to-tickets) for implementation |
 
 ## Prerequisites
 
-The map and its tickets live on the repo's issue tracker, so wayfinder needs the tracker wiring that [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) lays down: it seeds a "Wayfinding operations" section describing how the map, child tickets, blocking, and frontier queries are expressed for GitHub, GitLab, or local-markdown. Absent that doc, wayfinder defaults to a local-markdown map.
+The map and tickets live on the repo's configured tracker. [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) records its "Wayfinding operations": map storage, child tickets, blocking, and frontier queries, with templates for GitHub, GitLab, Beads, and local markdown. If no tracker is configured, wayfinder asks for setup and can default to local markdown.
 
-## The map is an index, fog is the frontier
+Native blocking makes the frontier visible in the tracker. A tracker with no dependency relationship falls back to text, which needs closer supervision.
 
-The **map** is a single `wayfinder:map` issue whose tickets are its child issues, one shared URL the whole team can watch. It's an **index, not a store**: each decision lives in exactly one place (its ticket), and the map only gists and links, never restates. A session loads the map at low resolution and zooms into individual tickets on demand.
+## The map, the fog, and the frontier
 
-Beyond the live tickets lies the **fog of war**: decisions you can tell are coming but can't yet pin down. The test for whether something is a ticket or still fog is whether you can *state the question precisely now*, not whether you can answer it. Resolving a ticket clears the fog ahead of it, **graduating** whatever's now specifiable into fresh tickets. The **frontier** is the open, unblocked, unclaimed tickets (the edge of the known), and it's what the tracker's native blocking renders visually, so you see what's takeable without opening the map. Fog only gathers *toward* the **destination**; work past it is ruled **out of scope**, closed, never graduating.
+The **map** is a single `wayfinder:map` issue whose tickets are child issues. It is an **index, not a store**: each decision lives in its ticket, while the map gives only a gist and a link. Sessions load that low-resolution view and zoom into ticket detail when needed.
 
-Every ticket is **HITL** (human in the loop) or **AFK** (agent alone). Research is AFK; prototypes and grilling are HITL. A **task** may be either: it handles manual work that blocks a later decision, such as provisioning access or moving data into a form that can be inspected. Research stays a real ticket (a shared blocker downstream decisions hang on), but because it's AFK, a session doesn't stop and read: it sends a subagent that calls `research` to burn the ticket down in parallel, keeping the frontier fast, and captures the findings on a throwaway `research/<name>` branch.
+| Map section | What it holds |
+| --- | --- |
+| **Destination** | The end of the whole effort, agreed first so every ticket has a scope boundary |
+| **Notes** | Standing preferences, domain context, and skills each session should consult |
+| **Decisions so far** | One line and a link per resolved ticket |
+| **Not yet specified** | The **fog of war**: in-scope questions you cannot yet phrase precisely |
+| **Out of scope** | Work beyond the destination; it stays closed rather than graduating into tickets |
+
+Fog becomes a ticket when you can state the question precisely, not when you can answer it. Resolving a ticket can **graduate** newly visible questions into tickets; remove the same fog from *Not yet specified* so it has only one home.
+
+The **frontier** is the open, unblocked, unclaimed tickets. Assignment is the claim: take it before doing any work so concurrent sessions skip it. Human-facing discussion uses ticket **names**, with IDs inside links, rather than a wall of bare issue numbers.
+
+## Four decision-ticket types
+
+Every ticket carries a `wayfinder:<type>` label. **HITL** means a live human exchange; **AFK** means the agent can drive it alone.
+
+| Type | Mode | What it resolves |
+| --- | --- | --- |
+| `grilling` | HITL | A question settled through [grilling](https://aihero.dev/skills-grilling) and [domain-modeling](https://aihero.dev/skills-domain-modeling) |
+| `prototype` | HITL | A question about look or behavior that needs a concrete [prototype](https://aihero.dev/skills-prototype) to react to |
+| `research` | AFK | An outside fact, investigated by a [research](https://aihero.dev/skills-research) subagent on a `research/<name>` branch, linked from the ticket |
+| `task` | Either | Manual work that unblocks a decision, such as provisioning access or moving data so its shape can be inspected |
+
+A HITL ticket is not resolved by the agent answering for you or choosing its favorite prototype. A `task` earns its place by unblocking a decision, not by delivering a slice of the product. Research is the exception to one ticket per session and can run in parallel.
 
 ## Common questions
 
@@ -50,10 +80,10 @@ The most-reported failure with this skill, and there is a real hole behind it. W
 A real and repeatedly-reported outcome, verbatim from a field report. Wayfinder's default instinct is to plan comprehensively, and a map whose later tickets rest on assumptions the earlier ones invalidate is exactly the waterfall trap the skill is accused of. Two things push back on it. Scope the map to a bounded destination rather than to the whole product. Practitioners consistently report that maps scoped to one defined epic behave better than a sprawling "implement V1", and planning something very big is not the goal in the first place: shipping small increments is. And [prototype](https://www.aihero.dev/ai-coding-dictionary/prototyping) aggressively: the whole reason the route stays current is that uncertainty is flushed out by cheap concrete artifacts before implementation depends on it. Wayfinder is "prototypemaxxing", not "planmaxxing".
 
 **Can I work several tickets in parallel?**
-The frontier is built to show you what is takeable, and blocking edges are there so parallel work is safe on paper. In practice one-at-a-time is the safer default. Users working two grilling tickets at once get asked in one session a question they just answered in the other, because the sessions share no [context](https://www.aihero.dev/ai-coding-dictionary/context). There is also a known gap on prototype tickets: an agent has been reported building three UI variations, choosing one itself, and closing the ticket. The selection is yours to make, and the skill does not currently say so loudly enough. If you do run in parallel, review the dependency graph yourself first.
+The frontier supports parallel work, but separate sessions do not share live context. Two grilling sessions can ask the same question or make incompatible assumptions, so inspect the dependency graph first. Claim tickets by assignment before work starts, and keep HITL decisions with the human: the local skill explicitly requires that live exchange, including your reaction to a prototype. Research can run in parallel without that steering.
 
 **Do I have to use GitHub Issues?**
-No. Any issue tracker works. GitHub is the best-supported path because its native sub-issues and blocking relationships are what make the frontier visible without opening the map; GitLab, [Beads](https://github.com/steveyegge/beads), Linear, Jira and local markdown all get used, and the first four ship as ready-made templates from [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills). Beads is the one to look at if you want native blocking and a `bd ready` frontier query without a remote tracker. Two honest caveats. A tracker with no native blocking means the dependency graph is inferred from text and needs manual correction. And local markdown puts the artifacts in your repo, which is not recommended: storing this material in the …
+No. GitHub, GitLab, [Beads](https://github.com/steveyegge/beads), and local markdown ship as templates from [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills); Linear, Jira, and other trackers use a described workflow. Beads offers native blocking and a `bd ready` frontier without a remote tracker. With no native blocking, dependencies need manual supervision. Local markdown keeps planning artifacts in the repo, which may be useful for private planning but needs deliberate retention rather than accidental permanence.
 
 **The grilling is exhausting. Every question is three paragraphs long.**
 This is the sharpest live complaint about wayfinder and it is not resolved. The decomposition one user gave: the verbosity itself causes decision exhaustion, and the length strips out *why* a question is being asked, so you lose the chain from decision to decision as the map gets longer. The verbosity looks like a property of the current set of [models](https://www.aihero.dev/ai-coding-dictionary/model) rather than of the skill, and no fix has landed. Practitioner mitigations in circulation: run a lower [reasoning effort](https://www.aihero.dev/ai-coding-dictionary/effort), and put a plain-language instruction in your global `CLAUDE.md`. Expect to spend real thought here regardless, since the amount of thinking wayfinder demands from you is not a defect but most of what it is for.
@@ -68,8 +98,10 @@ It is this skill, renamed to `wayfinder` in v1.1 and invoked as `/wayfinder`. "D
 
 - Naming the **destination** is the first act, before any ticket exists, because it fixes the scope every ticket is measured against.
 - One map is one `wayfinder:map` issue; tickets are its child issues, referred to by **name**, never a bare `#42`.
-- A session resolves **at most one ticket** (research tickets excepted), records the answer as a resolution comment, closes the ticket, and appends a one-line pointer to *Decisions so far*.
+- A working session claims and resolves **at most one ticket** (research excepted), records a resolution comment, closes the ticket, and appends a one-line pointer to *Decisions so far*.
 - If the opening grill surfaces **no fog**, it stops and tells you the journey is small enough to skip the map.
+- Graduated fog leaves *Not yet specified*; decision detail stays in its ticket rather than being copied into the map.
+- The cleared map hands off toward a spec, not silently into production code.
 
 ## Where it fits
 

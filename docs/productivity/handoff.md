@@ -20,7 +20,16 @@ It does **not** re-state what already lives elsewhere. Anything captured in a sp
 
 You invoke this by typing `/handoff`; the agent won't reach for it on its own. Pass a note about what the next session is for and the document is tailored to it.
 
-Reach for this when a conversation has gone long enough that its context is at risk (you're near a context limit, wrapping for the day, or deliberately handing the work to another agent) and you want the thread preserved without dragging the whole transcript along.
+Reach for it when the work needs to travel, not merely when the conversation is long.
+
+| Situation | Why a file helps |
+| --- | --- |
+| Changing harness | The destination cannot see the original conversation |
+| Moving to another directory or repository | The next session needs the reasoning as well as the files |
+| Passing work to a colleague | They need a brief they can read independently |
+| Forking a side task to a second agent | The original conversation can stay live while the second agent takes the detour |
+
+For the same task in the same harness and directory, continuing or using the harness's compaction is usually simpler.
 
 ## What the document carries
 
@@ -29,7 +38,7 @@ Reach for this when a conversation has gone long enough that its context is at r
 - **References, not copies**: links and paths to the specs, plans, ADRs, issues, and diffs that hold the settled detail.
 - **Redacted secrets**: API keys, passwords, and PII stripped before the document is written.
 
-The idea to hold onto is **compaction**: a handoff is the conversation squeezed down to just its resumable core, so a fresh agent inherits the momentum, not the noise.
+The idea to hold onto is **portability**: a targeted summary can cross a boundary the original conversation cannot. For example, hand a design question to a separate [prototype](https://aihero.dev/skills-prototype) session, then bring its answer back without replacing the original thread.
 
 ## Common questions
 
@@ -59,6 +68,13 @@ A fair and repeated criticism. Two things help. Pass the argument (tell it what 
 
 **Why is it a skill rather than a slash command?**
 Both work; they suit different situations. As a skill it ships and updates through the same install path as everything else here, which is what makes it shareable; the constraint that the agent won't fire it itself is set by its frontmatter rather than by the mechanism.
+
+## It's working if
+
+- The file names the next task and suggested skills, with paths or URLs instead of copied specs and diffs.
+- You can read it cold and know what to do next, including why the current direction was chosen.
+- Claims distinguish observed results from assumptions, and secrets and personal information are redacted.
+- The destination can access both the file and the artifacts it references.
 
 ## Where it fits
 

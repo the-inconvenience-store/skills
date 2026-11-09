@@ -20,7 +20,20 @@ It changes the environment, not the code. The bug the agent shipped, the file it
 
 You invoke this by typing `/retro`, and the agent won't reach for it on its own.
 
-Reach for it at the end of a session that felt harder than it should have: the agent went looking for something for too long, made a mistake a machine could have caught, or needed information it had no way to get. A smooth session has little to teach; a painful one is where the findings are. If what you want is a verdict on the code the session produced, use [code-review](https://aihero.dev/skills-code-review) instead.
+Reach for it at the end of a session that felt harder than it should have. A smooth session has little to teach; a painful one is where the findings are.
+
+| What you want to improve | Reach for |
+| --- | --- |
+| The environment that made a specific session slow or error-prone | `retro` |
+| The code's compliance with standards and the spec | [code-review](https://aihero.dev/skills-code-review) |
+| The codebase's module structure, without needing a session history | [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) |
+| A missing lint, test, CI, or hook baseline across the repo | [guardrails](https://aihero.dev/skills-guardrails) |
+
+## Prerequisites
+
+The input is a session record, not just a diff. The current session is the default; for an older one, point the agent at its accessible session logs. It also reads the repo's existing check commands and CI configuration, so an unwired check can be identified instead of reinvented.
+
+The output is a severity-ordered list of candidates. Any accepted environment change is separate work, not an edit that `retro` applies automatically.
 
 ## Where the findings land
 
@@ -74,6 +87,7 @@ The input, and the target. [improve-codebase-architecture](https://aihero.dev/sk
 ## It's working if
 
 - Every candidate points back to a specific moment in the session, not a generic best practice.
+- It presents the candidates before changing anything, and the list is ordered by severity.
 - Repeat mistakes turn into failing checks, and your `AGENTS.md` gets shorter over time rather than longer.
 - A missing check that already existed but sat unwired shows up as the finding, rather than a proposal to build a new one.
 - The next session on the same kind of task finds its way faster.

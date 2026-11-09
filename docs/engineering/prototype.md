@@ -22,14 +22,16 @@ Type `/prototype`, or the agent reaches for it automatically when a task fits.
 
 Reach for it when you have a design question that's hard to settle on paper, such as a state machine with cases you can't hold in your head, or a screen you can't picture until you see a few versions side by side. If instead something already built is misbehaving and you need to find out why, use [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs); prototyping explores what to build, not why the built thing is broken.
 
+A [wayfinder](https://aihero.dev/skills-wayfinder) map can also send you here through a `prototype` decision ticket. Work it with the human who can judge the result, then link the artifact from that ticket; the point is to resolve the design question, not to treat the ticket as production implementation.
+
 ## Two branches
 
 The question decides the shape, and there are two shapes:
 
-- **"Does this logic / state model feel right?"**: a self-contained HTML demo with free-play controls and guided scenarios. A non-developer can open it directly, press buttons, and watch the full state change.
-- **"What should this look like?"**: several radically different UI variations on one route, switchable from a floating bar, so you compare real renders instead of imagining them.
+- **"Does this logic / state model feel right?"**: a single self-contained HTML file, with no build or server. It has a labelled state panel, free-play buttons, and tabbed guided walkthroughs that reset to a known starting state. A non-developer can double-click it and explore the awkward cases in domain language. The logic stays in a pure module, separate from the page, so the validated model can lift into real code.
+- **"What should this look like?"**: several radically different UI variations on one route, switchable from a floating bottom bar and a `?variant=` URL parameter. They disagree about layout, information hierarchy, or primary affordance, not just colour. Prefer an existing page with its real data and surrounding UI so an empty canvas does not hide the design's problems.
 
-Picking the wrong branch wastes the whole prototype, so the question comes first. Both branches keep state in memory and surface the full state on every step. UI prototypes run from one command; logic demos open as a single HTML file.
+Picking the wrong branch wastes the whole prototype, so the question comes first. Both branches surface the full relevant state. UI prototypes run from one command; logic demos open as a single HTML file. State stays in memory by default. If persistence itself is the question, use a clearly marked scratch database or local file rather than production state.
 
 ## Keep the prototype as a primary source
 
@@ -52,10 +54,17 @@ Known, and it is a naming problem. `prototype` is a generic, appealing word that
 That is a different artifact wearing this skill's name. A prototype here is scoped to one question, and "what is the whole app?" isn't one. A full-app prototype has no natural stopping point, so it becomes the production app by momentum: the cleanup pass never happens, and code written under prototype rules (no tests, no error handling) ends up in front of users. If you need a sales demo, build it deliberately as a demo and be explicit that none of it is production. If you need to settle a design question, cut it down to that question.
 
 **How do I run it in its own session?**
-A prototype lives in its own directory and generates a lot of [context](https://www.aihero.dev/ai-coding-dictionary/context) you don't want in the thread that asked the question, so run it somewhere else and bring back only the answer. [handoff](https://aihero.dev/skills-handoff) is the bridge in both directions.
+A prototype generates a lot of [context](https://www.aihero.dev/ai-coding-dictionary/context) you don't want in the thread that asked the question, so use a separate session and bring back the answer and its evidence pointer. [handoff](https://aihero.dev/skills-handoff) is the bridge in both directions. The code itself belongs close to the module or page it is exploring, following the project's routing conventions, not in an invented top-level structure.
 
 **Isn't this the fastest possible way to burn tokens?**
 It can be, if you prototype questions you could have answered by talking, or let one prototype sprawl across a whole feature. The comparison that matters isn't tokens against zero; it's [tokens](https://www.aihero.dev/ai-coding-dictionary/token) against building the wrong state model and finding out after it has production callers. Keep the question narrow and the run short, and the spend stays proportionate.
+
+## It's working if
+
+- One explicit question explains why the prototype exists, and the demo or variant plan states it.
+- A non-developer can open the logic file, follow a walkthrough, and see the full relevant state change.
+- UI variants disagree structurally and can be compared on the same route, not only as separate mockups.
+- The answer is recorded durably; main keeps the validated decision, while the implementation issue points to the throwaway branch holding the runnable evidence.
 
 ## Where it fits
 

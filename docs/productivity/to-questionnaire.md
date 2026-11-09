@@ -22,9 +22,22 @@ You invoke this by typing `/to-questionnaire`; the agent won't reach for it on i
 
 Reach for it when planning stalls on facts or decisions that live in someone else's head. If you can answer the questions yourself and want the agent to pressure-test those answers, use [grill-me](https://aihero.dev/skills-grill-me) instead.
 
+| Where the missing answer lives | Reach for |
+| --- | --- |
+| Your own thinking, not yet sharpened | [grill-me](https://aihero.dev/skills-grill-me) |
+| Observable codebase facts | Have the agent inspect the codebase |
+| Another person's knowledge | `to-questionnaire` |
+| An experience nobody can judge without seeing it | [prototype](https://aihero.dev/skills-prototype) |
+
+If a grilling session stalls on someone else's knowledge, invoke this in the same conversation, send the document, then bring the answers back.
+
 ## The artifact
 
 The result is `to-questionnaire-<slug>.md` in the current directory. It explains the purpose and context, asks the most important questions first, keeps each question to one idea, and leaves an answer stub beneath it. The questionnaire works asynchronously or as the agenda for a meeting.
+
+There are only two interview exchanges: who receives it, and what you need back. Then drafting begins. One run targets one person; it does not create a branching form or send the file for you.
+
+The recipient gets a purpose, enough context to answer without the original conversation, a deadline and rough effort, and permission to give partial answers or say "I don't know". The closing catch-all gives them room to flag something you did not know to ask.
 
 ## Common questions
 
@@ -51,9 +64,10 @@ Yes, and plenty of people did before it existed: `OPEN_QUESTIONS.md` files, spre
 
 ## It's working if
 
-- Every fact or decision you said you need is covered by a question.
-- The recipient has enough context to answer without knowing the earlier conversation.
-- Questions target the recipient's knowledge rather than asking you to guess it.
+- It asks about the recipient and what you need back, rather than interviewing you about facts you do not know.
+- Every fact or decision you named is traceable to a question in `to-questionnaire-<slug>.md`.
+- The recipient can understand why they received it and when to reply without reading the earlier conversation.
+- Questions target the recipient's knowledge, one idea at a time, with answer stubs beneath them.
 
 ## Where it fits
 

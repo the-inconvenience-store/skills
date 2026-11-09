@@ -14,7 +14,7 @@ npx skills update pr
 
 `pr` is the shape a pull request body should take: a **Summary** that shows the change, **Evidence** that it works, and a **Merge Danger** call on how risky it is to land. It is a format reference, not a workflow. It does not push a branch, open the PR, or decide what goes into it; it tells the agent what the body should look like once it is writing one.
 
-The summary is a picture, not a paragraph. Where a default PR body narrates the diff in prose, this one picks the **smallest view** that makes the key point clear (pseudocode, a call tree, a component tree, a file tree, a Mermaid diagram, or a shaped diff) and keeps the words around it brief. The reviewer already has the diff open; the body's job is to show them its shape before they read it.
+The summary is a visual, not a paragraph. Where a default PR body narrates the diff in prose, this one picks the **smallest view** that makes the key point clear and keeps the words around it brief. The reviewer already has the diff open; the body's job is to show them its shape before they read it.
 
 ## When to reach for it
 
@@ -35,6 +35,19 @@ Three sections, in this order:
 - **Merge Danger**: whether the change is a **one-way door** or a **two-way door**, and its **blast radius**. A two-way door is cheap to walk back; a one-way door (a destructive migration, a public API removal, a hard-to-reverse decision) is not. Blast radius names what could break if the change is wrong: layout shift, consumers of an API, mobile responsiveness.
 
 The door call is the leading idea. It turns "is this safe to merge?" from a gut feeling into a stated claim the reviewer can disagree with, and it tells them where to spend their review: a two-way door with a small blast radius can be skimmed; a one-way door deserves a slow read.
+
+Choose the Summary view by what the reviewer needs to understand, not by which diagram looks most impressive:
+
+| What changed | Smallest useful view |
+| --- | --- |
+| An algorithm or decision rule | Pseudocode |
+| Runtime order or ownership | Call tree |
+| UI structure | Component tree with only the relevant state and boundaries |
+| File responsibilities | Shallow file tree |
+| Interactions or data flow | Mermaid, when the renderer supports it |
+| One part of an already familiar structure | A shaped diff |
+
+Use the project's language from `GLOSSARY.md`. Several visuals are allowed, but each must earn its space; the list is a menu, not a checklist.
 
 ## Common questions
 

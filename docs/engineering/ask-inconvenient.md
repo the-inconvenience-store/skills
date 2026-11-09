@@ -12,7 +12,7 @@ npx skills update ask-inconvenient
 
 ## What it does
 
-`ask-inconvenient` is the router over the skills in this repo. You describe the situation you're in; it tells you which skill or flow fits and in what order to run them.
+`ask-inconvenient` is the router over the skills in this repo. You describe the situation you're in; it names the skill or flow that fits, the order to run it, and where your decisions sit. It recommends a next command rather than starting the work for you.
 
 It **does no work itself**. It doesn't grill, write a spec, or fix anything; it only orients. It exists for the user-invoked skills above all: nothing fires those for you, so `ask-inconvenient` is the memory you offload that to. It also maps model-invoked disciplines such as [verification](https://aihero.dev/skills-verification) and the three vocabulary layers: [domain-modeling](https://aihero.dev/skills-domain-modeling), [codebase-design](https://aihero.dev/skills-codebase-design), and [engineering-principles](https://aihero.dev/skills-engineering-principles).
 
@@ -20,15 +20,37 @@ It **does no work itself**. It doesn't grill, write a spec, or fix anything; it 
 
 You invoke this by typing `/ask-inconvenient`; the agent won't reach for it on its own.
 
-Reach for it whenever you're unsure which skill or flow a situation calls for: you have an idea and don't know where to start, a pile of bug reports and don't know if they're for `/triage`, or two skills that look interchangeable and you can't tell them apart. If you already know the skill you want, skip the router and invoke it directly.
+| Your situation | What the router gives back |
+| --- | --- |
+| An idea, and no idea where to start | The head of the main flow, including whether a spec earns its cost |
+| Incoming bugs and requests | The [triage](https://aihero.dev/skills-triage) on-ramp, not another triage pass over tickets you generated yourself |
+| Two skills that look interchangeable | A concrete boundary: working directory or none, single-session or multi-session planning |
+| A long session and a context decision | The ordered choices at a phase boundary |
+| A skill you have already picked | No extra step needed. Invoke that skill directly. |
+
+## Prerequisites
+
+The router does not install the skills it recommends. Install the ones you intend to use; this is a hand-maintained map of this repo, not a scan of every skill on your machine. Tracker-dependent routes also need [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) to configure the repo first.
 
 ## Flows, not just skills
 
 The idea `ask-inconvenient` gives you to think with is the **flow**: a path *through* the skills rather than a single one. Before the first engineering flow, [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) records repository configuration, invokes [guardrails](https://aihero.dev/skills-guardrails), then creates the project route through [verification](https://aihero.dev/skills-verification). Most feature work then runs along one main flow: grill → spec → tickets → implement through TDD → review → real-surface verification. On-ramps merge bugs, incoming requests, and codebase-health work onto it; standalones remain available when only one discipline is needed.
 
+The main flow branches when a question needs a runnable [prototype](https://aihero.dev/skills-prototype), or when a build is small enough to skip the spec-and-tickets step. Multi-session builds can use [implement](https://aihero.dev/skills-implement) per ticket or [implement-spec](https://aihero.dev/skills-implement-spec) across the whole graph. Afterward, [retro](https://aihero.dev/skills-retro) feeds the build's lessons back into the agent's environment. Separately, [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) surveys for deepening opportunities that can re-enter the flow as new ideas.
+
 ## Phase boundaries
 
-The router also helps at the boundary between two phases. It works through five choices in order: continue when the next phase needs the current conversation as a primary source; `/clear` when the context is disposable; `/handoff` when the work must travel to another harness, directory, or person; a subagent for tightly scoped AFK work; otherwise `/compact`. The decision belongs at the boundary, not halfway through a phase.
+The router makes the context decision **at a phase boundary**, not halfway through a phase. Work down the choices in order:
+
+| Option | Take it when |
+| --- | --- |
+| **Continue** | The next phase needs this conversation verbatim, or there is room to keep reasoning sharply |
+| **`/clear`** | The current context is irrelevant to the next task |
+| **[handoff](https://aihero.dev/skills-handoff)** | Work must travel to another harness, directory, colleague, or a side task forked mid-phase |
+| **Subagent** | A tightly scoped task can run without your steering |
+| **`/compact`** | Relevant context must stay, but none of the more precise choices fits |
+
+Continue preserves the conversation as a primary source; handoff buys portability, not a general-purpose context reset. Mid-phase, continue or split the remaining work into subagents.
 
 ## Common questions
 
@@ -42,7 +64,7 @@ A known bug, unfixed. Most of the skills the router routes you through set `disa
 
 **It described a skill's behaviour, and the skill doesn't do that.**
 
-Also real, also unfixed. The router answers from its own one-line summary of each skill rather than from the skill. One detailed report tracked three instances in a single session, including a recommendation to skip [to-spec](https://aihero.dev/skills-to-spec) on the strength of the gloss "turn the thread into a spec": `to-spec/SKILL.md` was never opened. In every case it verified only after the user pushed back, and never on its own initiative. Skipping `to-spec` there cost a real seam check, and the tickets that came out undercounted the work. When the router asserts something load-bearing about another skill, ask it to open that `SKILL.md` first. The same applies to questions the map does not cover at all, such as whether to use [plan mode](https://www.aihero.dev/ai-coding-dictionary/agent-mode): that answer is the [model](https://www.aihero.dev/ai-coding-dictionary/model)'s inference, not something written down here.
+A reported upstream failure came from trusting the router's one-line summaries without reading the skills. Skipping [to-spec](https://aihero.dev/skills-to-spec) on that basis lost its seam check and undercounted the work. This fork explicitly requires the router to read a skill's `SKILL.md` before describing its behavior or recommending that you skip it. Look for that read in the trace. Where the summary and the source disagree, the skill is authoritative. Questions the map does not cover, such as whether to use [plan mode](https://www.aihero.dev/ai-coding-dictionary/agent-mode), remain model inference rather than documented routing.
 
 **Why is it prose instead of a numbered checklist?**
 
@@ -59,6 +81,13 @@ That advice is often correct and rarely durable. Someone asked it how to make [i
 **It named a skill I don't have, or missed one I do.**
 
 Check the changelog for a rename before assuming it is gone. `writing-great-skills` became [writing-for-agents](https://aihero.dev/skills-writing-for-agents) with no alias, `to-prd` became [to-spec](https://aihero.dev/skills-to-spec), `pathfinder` became [wayfinder](https://aihero.dev/skills-wayfinder), and this fork renames two more: `ask-matt` is `ask-inconvenient` and `setup-matt-pocock-skills` is [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills). Four skills were retired outright into the skills that absorbed them: `ubiquitous-language`, `design-an-interface`, `qa` and `request-refactor-plan`. `resolving-merge-conflicts` was removed in v1.5.0 with nothing replacing it. The reverse case is the router's own lag, above.
+
+## It's working if
+
+- It ends with what to type next, rather than starting the recommended work.
+- The route names the relevant human decisions and context boundaries, not just a list of skills.
+- It distinguishes close alternatives with a concrete reason.
+- Load-bearing claims about another skill are preceded by reading that skill's `SKILL.md`.
 
 ## Where it fits
 
