@@ -1,9 +1,9 @@
 ---
-name: verification
+name: verify
 description: Create, run, or maintain project-local verification of real user-facing behavior. Use when the user asks to verify or prove a change on the real app, create a repeatable app-driving workflow, audit or refresh verification instructions, or when implementation needs evidence beyond tests and compilation.
 ---
 
-# Verification
+# Verify
 
 Prove behavior through the **real surface** a user touches: the running UI, CLI, service, mobile app, or library interface. Tests and compilation may support the proof; they do not replace exercising the changed path.
 
@@ -22,6 +22,8 @@ Intent alone is not enough. Inspect `docs/agents/verification/` before choosing:
 - Create with an existing artifact stops and routes to Maintain unless the user explicitly wants replacement.
 
 ## Proof standard
+
+**Headless browsers:** Run browser-based verification headlessly unless the user explicitly requests a headed browser. This applies to Create proofs, Run, and Maintain live passes, even when project driving instructions specify otherwise. If the required path cannot be exercised headlessly and the user has not requested headed mode, report the observation gap rather than switching modes.
 
 A valid proof:
 

@@ -1,24 +1,24 @@
 Quickstart:
 
 ```bash
-npx skills add the-inconvenience-store/skills --skill=verification
+npx skills add the-inconvenience-store/skills --skill=verify
 ```
 
 ```bash
-npx skills update verification
+npx skills update verify
 ```
 
-[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/verification)
+[Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/verify)
 
 ## What it does
 
-`verification` proves behavior through the **real surface** a user or consumer touches: the running UI, CLI, service, mobile app, or public library interface.
+`verify` proves behavior through the **real surface** a user or consumer touches: the running UI, CLI, service, mobile app, or public library interface.
 
 It does not treat compilation, tests, screenshots without actions, or an agent's report as proof of the changed behavior. It drives the public path, observes its result and durable side effects, and returns `VERIFIED`, `NOT VERIFIED`, or `INCONCLUSIVE`.
 
 ## When to reach for it
 
-Type `/verification`, or the agent reaches for it automatically when a task needs real-surface evidence.
+Type `/verify`, or the agent reaches for it automatically when a task needs real-surface evidence.
 
 Reach for it to prove a completed change, to create a repeatable project-local driving route, or to audit existing verification instructions after the application changes. During implementation the agent uses its Run branch; creation and maintenance happen only when that is the requested job.
 
@@ -36,6 +36,8 @@ Run mode uses project instructions under `docs/agents/verification/` when they e
 
 All three branches share one project format, so creation and maintenance cannot quietly teach different verification standards.
 
+Browser verification runs headlessly unless you explicitly request a headed browser. Each browser surface's project instructions record the headless launch configuration; a path that cannot run headlessly stays unverified rather than triggering an automatic switch to a visible browser.
+
 ## Proof, not a proxy
 
 The leading word is **proof**. A valid proof exercises the shipped path and observes what the consumer was promised. A test can preserve that contract and a typecheck can rule out a class of mistakes, but neither establishes that the running surface launches, accepts the interaction, and produces the promised state.
@@ -44,9 +46,13 @@ An inconclusive observation stays inconclusive. The skill never rounds it up bec
 
 ## Common questions
 
+**Was this called `verification`?**
+
+Yes. The skill is now `verify`; invoke `/verify` and install or update it under the new name. The project artifact remains at `docs/agents/verification/`.
+
 **Isn't this what my end-to-end tests already do?**
 
-Not quite, and the difference is what is being proved. An end-to-end test proves that a scripted path held the last time CI ran it, against whatever fixtures and stubs the suite installs. Verification proves that *this* change, on the surface as shipped, launches, accepts the interaction, and produces the promised state, now. The two are complementary, and the skill says so: a test preserves behaviour at a seam, verification proves the application path. If your e2e suite genuinely drives the real surface, say so in `docs/agents/verification/` and let Run invoke it; the skill is not precious about the mechanism, only about what gets observed.
+Not quite, and the difference is what is being proved. An end-to-end test proves that a scripted path held the last time CI ran it, against whatever fixtures and stubs the suite installs. `verify` proves that *this* change, on the surface as shipped, launches, accepts the interaction, and produces the promised state, now. The two are complementary, and the skill says so: a test preserves behaviour at a seam, verification proves the application path. If your e2e suite genuinely drives the real surface, say so in `docs/agents/verification/` and let Run invoke it; the skill is not precious about the mechanism, only about what gets observed.
 
 **It came back `INCONCLUSIVE` and everything else passed. Can I treat that as done?**
 
@@ -56,7 +62,7 @@ No, and that is the one rule the skill will not bend. An inconclusive observatio
 
 No. It performs the strongest direct check the repository and the available tools support, reports that there is no reusable route, and leaves permanent project files alone. That last part is deliberate: a Run invocation is not allowed to quietly become a Create invocation and write a half-learned route into your repo. When you do want the route, ask for it and the skill takes the Create branch, which learns how the repo launches, writes the instructions, and then proves one mapped feature by following them cold.
 
-**Verification took hundreds of browser steps and hours of agent time.**
+**`verify` took hundreds of browser steps and hours of agent time.**
 
 Each interaction driven as its own agent action costs a full model turn, so a long flow driven click by click is slow even when every click is fast. Run now writes a path longer than a handful of interactions as one scratch script and runs it in a single call, rerunning the same script after a fix. The script stays scratch during Run; the verdict names it so a Maintain pass can promote it into `docs/agents/verification/`.
 
@@ -82,4 +88,4 @@ Only for drift it owns: documentation that no longer matches the source, or a ha
 
 ## Where it fits
 
-`verification` is bootstrapped by [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) after [guardrails](https://aihero.dev/skills-guardrails) establishes the repository's final launch and check commands. It then serves as the real-surface completion gate after [implement](https://aihero.dev/skills-implement) and the reusable driving route that [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs) can use to construct and rerun a bug-specific feedback loop. It complements [tdd](https://aihero.dev/skills-tdd): tests preserve behavior at a seam; verification proves the actual application path. When you're unsure which skill or flow fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.
+`verify` is bootstrapped by [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) after [guardrails](https://aihero.dev/skills-guardrails) establishes the repository's final launch and check commands. It then serves as the real-surface completion gate after [implement](https://aihero.dev/skills-implement) and the reusable driving route that [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs) can use to construct and rerun a bug-specific feedback loop. It complements [tdd](https://aihero.dev/skills-tdd): tests preserve behavior at a seam; verification proves the actual application path. When you're unsure which skill or flow fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.

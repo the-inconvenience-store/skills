@@ -4,10 +4,10 @@ Quickstart:
 npx skills add the-inconvenience-store/skills
 ```
 
-Select `bootstrap-skills`, `guardrails`, and `verification`; setup calls the other two.
+Select `bootstrap-skills`, `guardrails`, and `verify`; setup calls the other two.
 
 ```bash
-npx skills update bootstrap-skills guardrails verification
+npx skills update bootstrap-skills guardrails verify
 ```
 
 [Source](https://github.com/the-inconvenience-store/skills/tree/main/skills/bootstrap-skills)
@@ -16,7 +16,7 @@ npx skills update bootstrap-skills guardrails verification
 
 `bootstrap-skills` teaches one repo how the engineering skills should behave in it: where issues live, what the triage labels are called, where domain docs sit, which development guardrails apply, and how future agents prove behavior through the real surface.
 
-It first writes the repository-specific configuration under `docs/agents/`, discovered from the actual repo and confirmed with you rather than guessed. It then calls the owning skills: [guardrails](https://aihero.dev/skills-guardrails) establishes the approved quality baseline, and [verification](https://aihero.dev/skills-verification) creates or maintains the app-driving route. The setup remains prompt-driven rather than a deterministic scaffold.
+It first writes the repository-specific configuration under `docs/agents/`, discovered from the actual repo and confirmed with you rather than guessed. It then calls the owning skills: [guardrails](https://aihero.dev/skills-guardrails) establishes the approved quality baseline, and [verify](https://aihero.dev/skills-verify) creates or maintains the app-driving route. The setup remains prompt-driven rather than a deterministic scaffold.
 
 The configuration varies by repo; the installed skills do not. To use a custom tracker, describe its workflow during setup or edit `docs/agents/issue-tracker.md` later, rather than editing a `SKILL.md` that the next update will replace.
 
@@ -24,11 +24,11 @@ The configuration varies by repo; the installed skills do not. To use a custom t
 
 You invoke this by typing `/bootstrap-skills`; the agent won't reach for it on its own.
 
-Reach for it **once per repo, before the first use of any other engineering skill**. Re-run the full setup only to switch foundational configuration or start over. Day-to-day changes belong to the owning surface: edit tracker or domain config directly, run [guardrails](https://aihero.dev/skills-guardrails) when the quality strategy changes, and run [verification](https://aihero.dev/skills-verification) with Maintain when application surfaces move.
+Reach for it **once per repo, before the first use of any other engineering skill**. Re-run the full setup only to switch foundational configuration or start over. Day-to-day changes belong to the owning surface: edit tracker or domain config directly, run [guardrails](https://aihero.dev/skills-guardrails) when the quality strategy changes, and run [verify](https://aihero.dev/skills-verify) with Maintain when application surfaces move.
 
 ## Prerequisites
 
-Run it in the repository you want configured, somewhere it is safe to write project guidance. Have [guardrails](https://aihero.dev/skills-guardrails) and [verification](https://aihero.dev/skills-verification) installed too; setup delegates to both.
+Run it in the repository you want configured, somewhere it is safe to write project guidance. Have [guardrails](https://aihero.dev/skills-guardrails) and [verify](https://aihero.dev/skills-verify) installed too; setup delegates to both.
 
 | Tracker option | Where issues live | Needs |
 | --- | --- | --- |
@@ -61,11 +61,11 @@ Setup records the domain-doc layout; [domain-modeling](https://aihero.dev/skills
 
 On a fresh GitHub repo the approved labels do not exist yet, and that is worth the extra confirmation: `gh issue create --label <missing>` fails outright rather than creating the label, so an uncreated label costs the whole issue later, not just its tag. Setup creates them here (the `wayfinder:*` labels too, when that skill is installed) so the first `/triage` or `/to-tickets` write lands.
 
-## Guardrails and verification
+## Guardrails and verify
 
-After writing configuration, the setup calls [guardrails](https://aihero.dev/skills-guardrails) and carries its proposal through approval, implementation, and proof. It then calls [verification](https://aihero.dev/skills-verification) against the final launch and check commands. A missing artifact takes the Create route; an existing `docs/agents/verification/` artifact takes Maintain.
+After writing configuration, the setup calls [guardrails](https://aihero.dev/skills-guardrails) and carries its proposal through approval, implementation, and proof. It then calls [verify](https://aihero.dev/skills-verify) against the final launch and check commands. A missing artifact takes the Create route; an existing `docs/agents/verification/` artifact takes Maintain.
 
-Verification owns the repository interview, surface map, driving instructions, evidence, and cleanup. Only after one mapped feature is `VERIFIED` does setup add the `docs/agents/verification/README.md` pointer to the agent-instruction block.
+`verify` owns the repository interview, surface map, driving instructions, evidence, and cleanup. Only after one mapped feature is `VERIFIED` does setup add the `docs/agents/verification/README.md` pointer to the agent-instruction block.
 
 ## Common questions
 
@@ -75,7 +75,7 @@ No. GitHub, GitLab, [Beads](https://github.com/steveyegge/beads) and local markd
 
 **Do I need to re-run it after updating the skills?**
 
-Upstream's answer, asked directly after v1.1, was yes. The skill's own closing message is softer: it tells you re-running is only needed to switch trackers or start over. Both are defensible and the reason for the gap is real: the seed templates change between versions, so a `docs/agents/issue-tracker.md` written by an older release can go stale against the skills now reading it. If a downstream skill starts doing something the docs describe differently, re-running is the cheap fix. Guardrails and verification are separate: re-run `/guardrails` when the stack or quality strategy changes, and `/verification` in Maintain mode when application surfaces move, without re-running the whole setup.
+Upstream's answer, asked directly after v1.1, was yes. The skill's own closing message is softer: it tells you re-running is only needed to switch trackers or start over. Both are defensible and the reason for the gap is real: the seed templates change between versions, so a `docs/agents/issue-tracker.md` written by an older release can go stale against the skills now reading it. If a downstream skill starts doing something the docs describe differently, re-running is the cheap fix. Guardrails and verification are separate: re-run `/guardrails` when the stack or quality strategy changes, and `/verify` in Maintain mode when application surfaces move, without re-running the whole setup.
 
 **It wrote to `CLAUDE.md`, but I'm on Codex.**
 
@@ -92,7 +92,7 @@ So this version checks the agreed strings against the tracker (`gh label list` o
 
 **Can I configure the other skills' behaviour here ([grilling](https://www.aihero.dev/ai-coding-dictionary/grilling) cadence, question format, tone)?**
 
-No. It settles three things itself (tracker, labels, doc layout) and then hands off to [guardrails](https://aihero.dev/skills-guardrails) for the development baseline and [verification](https://aihero.dev/skills-verification) for the real-surface route, each of which owns its own questions. None of that is a preferences store. There have been direct requests to make it the home for per-user preferences, and the standing answer is that skills stay opinionated: *"Config is death."* Preferences belong in your `CLAUDE.md` as plain instructions, which every skill already reads.
+No. It settles three things itself (tracker, labels, doc layout) and then hands off to [guardrails](https://aihero.dev/skills-guardrails) for the development baseline and [verify](https://aihero.dev/skills-verify) for the real-surface route, each of which owns its own questions. None of that is a preferences store. There have been direct requests to make it the home for per-user preferences, and the standing answer is that skills stay opinionated: *"Config is death."* Preferences belong in your `CLAUDE.md` as plain instructions, which every skill already reads.
 
 **Can I keep the config in `~/.claude` instead of committing it to every repo?**
 
@@ -113,4 +113,4 @@ One long-standing complaint says yes, in these words: *"having a skill to set up
 
 ## Where it fits
 
-`bootstrap-skills` is the **run-once setup** for the engineering set. It configures the repository, delegates the quality baseline to [guardrails](https://aihero.dev/skills-guardrails), and delegates real-surface setup to [verification](https://aihero.dev/skills-verification). Downstream skills such as [triage](https://aihero.dev/skills-triage), [to-spec](https://aihero.dev/skills-to-spec), [to-tickets](https://aihero.dev/skills-to-tickets), [implement](https://aihero.dev/skills-implement), and [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs) then consume those artifacts. When you're unsure which skill or flow fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.
+`bootstrap-skills` is the **run-once setup** for the engineering set. It configures the repository, delegates the quality baseline to [guardrails](https://aihero.dev/skills-guardrails), and delegates real-surface setup to [verify](https://aihero.dev/skills-verify). Downstream skills such as [triage](https://aihero.dev/skills-triage), [to-spec](https://aihero.dev/skills-to-spec), [to-tickets](https://aihero.dev/skills-to-tickets), [implement](https://aihero.dev/skills-implement), and [diagnosing-bugs](https://aihero.dev/skills-diagnosing-bugs) then consume those artifacts. When you're unsure which skill or flow fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.

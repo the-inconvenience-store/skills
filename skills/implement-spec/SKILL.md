@@ -41,7 +41,7 @@ Start every subagent with a fresh context window.
 
 8. Once every ticket has merged, run typechecking and the full test suite on the integration branch, then call the Skill tool with `code-review`. Name the commit the integration branch was cut from as the fixed point: the review reads `git diff <fixed-point>...HEAD`, so commit anything outstanding first. Send every accepted Standards and Spec finding to a single **implementer subagent**, which fixes them, reruns the affected checks, and commits; merge its work as in step 6. The review runs once: after the fix, rerun the focused checks for the fixed findings and move on.
 
-9. Call the Skill tool with `verification` on the integration branch. Prove the spec's changed behavior through its real user or consumer surface. `INCONCLUSIVE` is not completion: report the exact gap instead of substituting tests or compilation for the missing observation.
+9. Call the Skill tool with `verify` on the integration branch. Prove the spec's changed behavior through its real user or consumer surface. `INCONCLUSIVE` is not completion: report the exact gap instead of substituting tests or compilation for the missing observation.
 
 10. If a draft PR exists, mark it ready for review. Otherwise, resolve each ticket the way the issue tracker closes work.
 

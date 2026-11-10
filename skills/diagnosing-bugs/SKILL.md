@@ -25,7 +25,7 @@ Spend disproportionate effort here. **Be aggressive. Be creative. Refuse to give
 
 ### Ways to construct one (try them in roughly this order)
 
-If `docs/agents/verification/` exists, call the Skill tool with `verification` and use its project-specific launch and driving route as an input. It counts as the Phase 1 loop only after it asserts this exact symptom and has been observed going red.
+If `docs/agents/verification/` exists, call the Skill tool with `verify` and use its project-specific launch and driving route as an input. It counts as the Phase 1 loop only after it asserts this exact symptom and has been observed going red.
 
 1. **Failing test** at whatever seam reaches the bug: unit, integration, e2e.
 2. **Curl / HTTP script** against a running dev server.
@@ -130,7 +130,7 @@ If a correct seam exists:
 3. Apply the fix.
 4. Watch it pass.
 5. Re-run the Phase 1 feedback loop against the original (un-minimised) scenario.
-6. Call the Skill tool with `verification` for the original public path. The final verdict must be `VERIFIED`; `INCONCLUSIVE` leaves the diagnosis incomplete.
+6. Call the Skill tool with `verify` for the original public path. The final verdict must be `VERIFIED`; `INCONCLUSIVE` leaves the diagnosis incomplete.
 
 ## Phase 6: Cleanup
 

@@ -1,5 +1,5 @@
 interface:
   display_name: "Retro"
-  short_description: "Conduct a retrospective on a coding session."
+  short_description: "Review a session or audit agent time"
 policy:
   allow_implicit_invocation: false

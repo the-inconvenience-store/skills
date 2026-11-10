@@ -43,7 +43,7 @@ Have the behavior and test seams agreed before the build. For tracker references
 
 The idea `implement` runs on is the **seam**: the stable interface a feature is tested at, chosen before any code is written. It doesn't invent seams mid-build; it uses the ones already picked (during [to-spec](https://aihero.dev/skills-to-spec)) and writes tests against them via [tdd](https://aihero.dev/skills-tdd). Working at pre-agreed seams is what keeps the implementation honest: the tests target something durable, so the code underneath can move without the tests moving.
 
-Around that core it keeps the loop tight: typecheck, lint the changed files, and run narrow test files as it edits, and run the whole suite once the implementation is coherent. A check that passed is not rerun unless a later edit could change its result. It then runs separate Standards and Spec review agents once, addresses accepted findings, reruns only the affected checks, and calls [verification](https://aihero.dev/skills-verification) against the final state.
+Around that core it keeps the loop tight: typecheck, lint the changed files, and run narrow test files as it edits, and run the whole suite once the implementation is coherent. A check that passed is not rerun unless a later edit could change its result. It then runs separate Standards and Spec review agents once, addresses accepted findings, reruns only the affected checks, and calls [verify](https://aihero.dev/skills-verify) against the final state.
 
 The work is committed before that review runs, not after. [code-review](https://aihero.dev/skills-code-review) reads `git diff <fixed-point>...HEAD`, which cannot see staged or working-tree changes, so reviewing an uncommitted implementation reviews an empty diff and reports nothing wrong with it.
 
@@ -93,7 +93,7 @@ The agent resolved `#2` against another numbered list in context, such as a todo
 grill-with-docs → to-spec → to-tickets → implement
                                           ├─ tdd
                                           ├─ code-review
-                                          └─ verification
+                                          └─ verify
 ```
 
-Reach for it after the work has been specced and sequenced, not before. Its key neighbours are [to-tickets](https://aihero.dev/skills-to-tickets), which produces tickets with blocking edges and real-surface proof, and [tdd](https://aihero.dev/skills-tdd), which writes tests at each agreed seam. [engineering-principles](https://aihero.dev/skills-engineering-principles) supplies selective decision rules, [code-review](https://aihero.dev/skills-code-review) challenges the diff, and [verification](https://aihero.dev/skills-verification) proves the result before completion. When you're unsure which skill or flow fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.
+Reach for it after the work has been specced and sequenced, not before. Its key neighbours are [to-tickets](https://aihero.dev/skills-to-tickets), which produces tickets with blocking edges and real-surface proof, and [tdd](https://aihero.dev/skills-tdd), which writes tests at each agreed seam. [engineering-principles](https://aihero.dev/skills-engineering-principles) supplies selective decision rules, [code-review](https://aihero.dev/skills-code-review) challenges the diff, and [verify](https://aihero.dev/skills-verify) proves the result before completion. When you're unsure which skill or flow fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.

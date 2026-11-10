@@ -35,6 +35,8 @@ Every `<surface>/README.md` contains these H2 sections:
 - **Isolation**: whether concurrent instances are safe and how their ports, profiles, data, or sessions differ.
 - **Feature map**: a link to `features/README.md` and the rule that every user-facing feature belongs there.
 
+For browser surfaces, **Launch** must specify the exact headless invocation or configuration, and **Drive** must preserve headless mode unless the user explicitly requests a headed browser. Record how to confirm the browser is running headlessly. Keep this shared setup in the surface README or its linked driver, not in individual feature files.
+
 Write exact repository instructions, not generic examples. A command must be runnable as written. A selector must exist in the current application.
 
 ## Feature map

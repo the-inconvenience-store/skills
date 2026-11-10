@@ -61,10 +61,10 @@ Selection is complete when every material decision surface has been scanned and 
 - **Prove It Works**: work is about to be called complete. Read [references/prove-it-works.md](references/prove-it-works.md).
 - **Protect the Signal**: a check fails and the tempting fix changes the check rather than the code. Read [references/protect-the-signal.md](references/protect-the-signal.md).
 - **Fix Root Causes**: a bug, failure, or performance regression is being diagnosed, or performance is being optimized. Read [references/fix-root-causes.md](references/fix-root-causes.md).
-- **Sequence Verifiable Units**: work spans several slices, commits, tickets, or migration batches. Read [references/sequence-verifiable-units.md](references/sequence-verifiable-units.md).
+- **Sequence Verifiable Units**: work spans several slices, commits, tickets, or migration batches, or validation must be scoped, scheduled, or rerun. Read [references/sequence-verifiable-units.md](references/sequence-verifiable-units.md).
 
 ## Collaboration
 
 - **Guard the Context Window**: a phase boundary, long investigation, large output, or parallel fan-out threatens useful context. Read [references/guard-the-context-window.md](references/guard-the-context-window.md).
-- **Keep Execution Unblocked**: a reversible execution choice risks becoming an unnecessary human checkpoint. Read [references/keep-execution-unblocked.md](references/keep-execution-unblocked.md).
+- **Keep Execution Unblocked**: a reversible choice risks an unnecessary human checkpoint, or background work is pending while independent work may remain. Read [references/keep-execution-unblocked.md](references/keep-execution-unblocked.md).
 - **Encode Lessons in Structure**: a correction or instruction has become recurring. Read [references/encode-lessons-in-structure.md](references/encode-lessons-in-structure.md).

@@ -12,28 +12,47 @@ npx skills update retro
 
 ## What it does
 
-`retro` looks back over a coding session and suggests improvements to the agent's **environment**, so the next run goes better. It reads the session's own record (the current one by default, or one you point it at in the session logs), finds the moments the agent struggled, and hands you a list of candidate fixes, most severe first.
+`retro` looks back over agent work and proposes improvements to the agent's **environment**, so the next run goes better. Its standard mode reviews one coding session across navigation, checks, standards, steering, tooling, and information access. Its time mode measures where time goes across a session or a longer history.
 
-It changes the environment, not the code. The bug the agent shipped, the file it took twenty tool calls to find, the rule the reviewer missed: `retro` doesn't fix any of them in place. It asks what about the repo let them happen, and proposes the check, the pointer, or the standard that stops them happening again. It also only proposes; nothing changes until you pick a candidate.
+It proposes environment changes, not application fixes, and leaves implementation for a separate request. The bug the agent shipped, the file it took twenty tool calls to find, the rule the reviewer missed: `retro` asks what about the environment let them happen. A costly command is not automatically a bad check, and a long runtime alone does not prove a cause.
 
 ## When to reach for it
 
 You invoke this by typing `/retro`, and the agent won't reach for it on its own.
 
-Reach for it at the end of a session that felt harder than it should have. A smooth session has little to teach; a painful one is where the findings are.
+Reach for it at the end of a session that felt harder than it should have, or when recurring waits deserve measurement rather than another guess at what is slow.
 
 | What you want to improve | Reach for |
 | --- | --- |
-| The environment that made a specific session slow or error-prone | `retro` |
+| The environment that made a specific session slow or error-prone | `/retro`, or `/retro <session>` |
+| Where agent time goes across this repo's history | `/retro time`, with a session or period if you want a different scope |
 | The code's compliance with standards and the spec | [code-review](https://aihero.dev/skills-code-review) |
 | The codebase's module structure, without needing a session history | [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) |
 | A missing lint, test, CI, or hook baseline across the repo | [guardrails](https://aihero.dev/skills-guardrails) |
 
 ## Prerequisites
 
-The input is a session record, not just a diff. The current session is the default; for an older one, point the agent at its accessible session logs. It also reads the repo's existing check commands and CI configuration, so an unwired check can be identified instead of reinvented.
+The input is a session record, not just a diff. Standard mode defaults to the current session; for an older one, name an accessible session or point it at the logs. Time mode needs accessible historical records with timing evidence, and reports gaps rather than treating missing time as zero.
 
-The output is a severity-ordered list of candidates. Any accepted environment change is separate work, not an edit that `retro` applies automatically.
+The workflow applies to omp, Claude Code, Codex CLI, and other harnesses with accessible session evidence. It defaults to the running harness; an explicitly selected session from another harness overrides that source. AgentTrace is optional. When available, reports use `--source` with the verified harness identifier rather than mixing agents. Harness-specific missing fields remain evidence gaps, not invented timings.
+
+## One retrospective, two scopes
+
+| Invocation | Scope and purpose |
+| --- | --- |
+| `/retro` | The current session, across all retrospective categories |
+| `/retro <session>` | A specified session, with the same general scope |
+| `/retro time` | A full measured time audit of the current repo's trailing 90 days, including subagents |
+| `/retro time <session>` | A measured time audit of the specified session |
+| `/retro time` with an explicit period | A measured time audit over that period instead of the default window |
+
+An explicit natural-language request for measured time analysis selects time mode too. Simply saying a session felt slow does not turn a standard retrospective into a full history audit.
+
+Both modes share **diagnostic knowledge**: repeated round trips, approval waits, shell startup, polling, dependency and lifecycle problems, cache behavior, and other explanations to check against evidence. Standard retro loads what the session needs and may use scoped AgentTrace evidence. It does not require a full ledger, a history scan, or benchmarks just to explain a local struggle.
+
+Time mode earns the extra work with **accounted time**. It distinguishes command execution from elapsed latency, cumulative call-time from occupied wall-clock time, and overlap from actual blocking dependencies. It connects observed work to instruction costs where the evidence supports that connection, then compares safe, equivalent alternatives where possible. It stays focused on performance rather than repeating every general retrospective category. A missing measurement remains an explicit gap, not a claimed speedup.
+
+Findings cite evidence, separate cause confidence from impact confidence, and name the cheapest proposed change, its validation, and its tradeoff. Candidates are ordered by severity; the time ledger ranks supported timing impact separately. A cheap check can prevent a severe mistake, and a slow check can still be necessary.
 
 ## Where the findings land
 
@@ -58,19 +77,31 @@ Before any rule gets written, the violation is classified. A **mechanical** one 
 
 **Does it write the lint rule itself, or wait for a yes? Can I wire it to run after every session?**
 
-It waits. `retro` only proposes; nothing changes until you pick a candidate, so there's no hand-editing and no auto-applied hook either. That is deliberate: deciding what deserves a permanent check takes judgement, so the skill stays human-in-the-loop and user-invoked. You can chain it after every implementation run, but a smooth session has little to teach, and running it on every one mostly produces rules nobody needed. There is no dry-run mode: a proposed check is built like any other code, so try it against the repo before you let it block merges.
+It waits. `retro` only proposes environment changes; nothing is applied until you choose a candidate and request implementation. It stays human-in-the-loop and user-invoked. Time mode can run safe, non-mutating measurements, but it is not an optimization patch. Standard mode suits a session worth learning from; time mode suits recurring costs you want measured. A proposed check still needs validation against the repo before it blocks merges.
 
 **Won't this pile up lint rules forever? Does it ever suggest removing one?**
 
-Partly, and this is its weakest spot. The removal side it has covers prose: no-ops in steering files, and steering in `AGENTS.md` or `CLAUDE.md` that belongs in standards or a check. Those it will flag for deletion when the files are large, judged against the session it is reading, so treat each one as a candidate for the deletion test rather than a verdict. It does not audit the lint rules, hooks, or CI jobs it proposed last month. It sees one session, so it can't tell you a rule has gone noisy or outlived the bug that justified it. Pruning checks is still your job; a rule that fires constantly on good code is the cue.
+Yes, it can propose removal or clarification, not just additions. Standard retro looks for no-op steering and rules in `AGENTS.md` or `CLAUDE.md` that belong in review standards or deterministic checks. Time mode can inspect historical lint, hook, and CI costs across the requested period and identify expensive or redundant work. But runtime does not tell you whether a rule is noisy or useful: that needs evidence about false positives, failures caught, and required coverage. A recommendation to streamline a check must preserve its required behavior, not call skipped coverage a speedup.
+
+**Does plain `/retro` get the diagnostics, or do I need time mode for that?**
+
+Both get the same diagnostic knowledge. Plain `/retro` keeps all its categories and uses the relevant explanations and scoped evidence for the session. Choose time mode when you want measured accounting across the requested scope, instruction-cost analysis, and comparison of equivalent alternatives. The distinction is the work required and the question answered, not access to a better set of explanations.
+
+**Do I need AgentTrace, and will it scan all my history for a normal retro?**
+
+No to both. AgentTrace is optional and used only when available. Standard mode stays scoped to the session you selected. Time mode defaults to the current repo's trailing 90 days, including linked subagents, not every project on your machine; specify a session or period to change that scope. Its report tells you which records and timings were actually accessible.
+
+**Is this tied to omp?**
+
+No. Both modes use the selected harness's native history or exports, documented storage, and AgentTrace discovery where available. omp's archive API is an optional extra reference, not a prerequisite for Claude Code, Codex CLI, or other harnesses. A model name does not select the source: a Codex model running in omp still uses omp logs.
 
 **Won't it just invent generic advice to fill its categories?**
 
-That's the sharpest critique it gets: once the job is finished, the agent tends to forget the struggles from the middle of the session and invent generic advice to satisfy the categories. The defence is that every candidate has to come from the session's own record, so the advice is specific to that session. That cuts both ways: it rarely hallucinates something irrelevant, but it can over-index on whatever this one session happened to be about. Discard any candidate you can't trace to a specific moment. Treat the severity order as a first draft too: a quiet, expensive mistake can rank below a loud, cheap one.
+Every candidate must be traceable to the session's records rather than invented to fill a category. Standard retro can still over-index on what one session happened to be about; time mode broadens the evidence but must disclose missing records and uncertainty. Discard any finding whose evidence does not support it. A high call-time total does not by itself prove a blocking dependency, a cause, or recoverable wall-clock savings.
 
 **My session is long. Run it now, or start fresh?**
 
-By default it reviews the current session, which is the best case: the struggles are still in the context window. If the session has drifted out of the [smart zone](https://www.aihero.dev/ai-coding-dictionary/smart-zone) already, clear and point a fresh `/retro` at the previous session in the session logs instead.
+By default it reviews the current session, which is the best case: the struggles are still in the context window. If the session has drifted out of the [smart zone](https://www.aihero.dev/ai-coding-dictionary/smart-zone) already, clear and run `/retro <session>` from a fresh context instead. Use `/retro time <session>` when you want that session's measured time audit rather than a general retrospective.
 
 **The agent keeps making the same mistake. Should I add a line to `CLAUDE.md`?**
 
@@ -82,12 +113,13 @@ Nothing ships the file. The first time a session turns up a judgement-call rule 
 
 **How is it different from `improve-codebase-architecture` or `guardrails`?**
 
-The input, and the target. [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) needs nothing but the code and looks for structural improvements to it. [guardrails](https://aihero.dev/skills-guardrails) needs nothing but the project and proposes a whole quality baseline from scratch. `retro` needs a session history: it starts from what actually went wrong and works back to the environment change that prevents it, which is often a single check rather than a baseline. When the answer turns out to be "this repo has no baseline at all", `retro` hands you over to `guardrails`.
+The input, and the target. [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) needs nothing but the code and looks for structural improvements to it. [guardrails](https://aihero.dev/skills-guardrails) needs nothing but the project and proposes a whole quality baseline from scratch. `retro` starts from session evidence and works back to an environment change, often a single check rather than a baseline. Time mode adds measured performance analysis, not a general codebase survey. When the finding is "this repo has no baseline at all", `retro` hands you over to `guardrails`.
 
 ## It's working if
 
-- Every candidate points back to a specific moment in the session, not a generic best practice.
-- It presents the candidates before changing anything, and the list is ordered by severity.
+- Every candidate points back to session evidence, not a generic best practice.
+- It proposes changes before implementation, with evidence, confidence, validation, and tradeoffs.
+- Standard mode orders candidates by severity; time mode makes measured impact and missing timing evidence visible without confusing cost with severity.
 - Repeat mistakes turn into failing checks, and your `AGENTS.md` gets shorter over time rather than longer.
 - A missing check that already existed but sat unwired shows up as the finding, rather than a proposal to build a new one.
 - The next session on the same kind of task finds its way faster.
@@ -97,10 +129,10 @@ The input, and the target. [improve-codebase-architecture](https://aihero.dev/sk
 `retro` is the last step of the main chain, where the flow looks back at itself:
 
 ```txt
-grill-with-docs → to-spec → to-tickets → implement → code-review → verification → retro
+grill-with-docs → to-spec → to-tickets → implement → code-review → verify → retro
 ```
 
-Run it after a build worth learning from, in the same session or pointed at that session's log. A smooth build can skip it.
+Run standard retro after a build worth learning from, in the same session or pointed at that session's log. Use time mode as periodic performance maintenance when recurring costs need a measured explanation.
 
 - [code-review](https://aihero.dev/skills-code-review) is the reviewer agent `retro` most often tunes: new coding standards land where its Standards axis reads them.
 - [guardrails](https://aihero.dev/skills-guardrails) is where a finding goes when the gap is the whole baseline rather than one check.

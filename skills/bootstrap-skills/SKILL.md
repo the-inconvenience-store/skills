@@ -144,7 +144,7 @@ After the chosen agent file and every applicable `docs/agents/*.md` file have be
 
 ### 6. Establish real-surface verification
 
-Call the Skill tool with `verification` after guardrails are complete, so it sees the repository's final launch and check commands. Request Create for a missing `docs/agents/verification/` artifact; the verification skill routes an existing artifact to Maintain. Let that skill own the artifact format, repository interview, feature map, live drive, evidence, and cleanup.
+Call the Skill tool with `verify` after guardrails are complete, so it sees the repository's final launch and check commands. Request Create for a missing `docs/agents/verification/` artifact; the `verify` skill routes an existing artifact to Maintain. Let that skill own the artifact format, repository interview, feature map, live drive, evidence, and cleanup.
 
 After the verification artifact is proved, update the existing `## Agent skills` block with this pointer:
 
@@ -160,6 +160,6 @@ Preserve the rest of the approved block and do not add the pointer before the ta
 
 ### 7. Done
 
-Tell the user the setup is complete and name the configuration, guardrails, and verification artifacts now available to the engineering skills. Mention the maintenance paths: edit tracker or domain config directly, call `guardrails` when the quality strategy changes, and call `verification` with Maintain when application surfaces move.
+Tell the user the setup is complete and name the configuration, guardrails, and verification artifacts now available to the engineering skills. Mention the maintenance paths: edit tracker or domain config directly, call `guardrails` when the quality strategy changes, and call `verify` with Maintain when application surfaces move.
 
 **Done when:** the final report names every created or updated setup surface and any unresolved guardrail or verification gap.

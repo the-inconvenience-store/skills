@@ -50,7 +50,7 @@ The first command adds this repository's OMP marketplace; the second installs th
 npx skills@latest add the-inconvenience-store/skills
 ```
 
-Pick the skills you want, and which coding agents to install them on. **Select `bootstrap-skills`, `guardrails`, and `verification` together: the setup skill calls the other two.**
+Pick the skills you want, and which coding agents to install them on. **Select `bootstrap-skills`, `guardrails`, and `verify` together: the setup skill calls the other two.**
 
 The repo also ships native Codex plugin metadata in [`.codex-plugin/plugin.json`](./.codex-plugin/plugin.json), an [OMP marketplace](./.omp-plugin/marketplace.json), and a portable [`plugin.json`](./plugin.json). Every plugin format loads the same promoted skills directly from `skills/`.
 
@@ -75,7 +75,7 @@ In your agent, run it once per repo. It will:
 
 - Configure the issue tracker, applicable triage labels, and domain-doc layout
 - Invoke `guardrails` to propose, install, and prove the development quality baseline you approve
-- Invoke `verification` to create or maintain the real-surface driving instructions and prove one mapped feature
+- Invoke `verify` to create or maintain the real-surface driving instructions and prove one mapped feature
 
 ### 3. Bam - you're ready to go.
 
@@ -153,7 +153,7 @@ For automated tests, a red-green-refactor loop is critical. This is where the ag
 
 The **[`/tdd`](./skills/tdd/SKILL.md) skill** slots into any project. It encourages red-green-refactor and gives the agent plenty of guidance on what makes good and bad tests.
 
-The **[`/verification`](./skills/verification/SKILL.md) skill** creates, runs, and maintains that real-surface route. Passing tests support the proof; they do not replace observing the behavior a user or consumer was promised.
+The **[`/verify`](./skills/verify/SKILL.md) skill** creates, runs, and maintains that real-surface route. Passing tests support the proof; they do not replace observing the behavior a user or consumer was promised.
 
 For debugging, I've also built a **[`/diagnosing-bugs`](./skills/diagnosing-bugs/SKILL.md)** skill that wraps best debugging practices into a simple loop.
 
@@ -201,7 +201,7 @@ Skills for daily code work.
 - **[implement](./skills/implement/SKILL.md)**: Build work from a spec or tickets: select the relevant engineering principles, drive TDD at pre-agreed seams, run Standards and Spec review, address findings, then prove the final behavior through real-surface verification.
 - **[implement-spec](./skills/implement-spec/SKILL.md)**: Build a whole spec in one run: read its tickets as a task graph, run implementer subagents across the ready frontier in parallel, and land everything on one integration branch.
 - **[wayfinder](./skills/wayfinder/SKILL.md)**: Plan a huge chunk of work, more than one agent session can hold, as a shared map of investigation tickets on the issue tracker, then resolve them one at a time until the way to the destination is clear.
-- **[retro](./skills/retro/SKILL.md)**: Look back over a session and suggest changes to the agent's environment, not the code: navigation pointers, deterministic checks, coding standards, steering files, tooling.
+- **[retro](./skills/retro/SKILL.md)**: Propose improvements to the agent's environment from a session; use `/retro time` for a measured time audit of this repo's last 90 days, or a session or period you specify. Both modes share diagnostic knowledge and leave implementation to your approval.
 
 **Model-invoked**
 
@@ -213,7 +213,7 @@ Skills for daily code work.
 - **[domain-modeling](./skills/domain-modeling/SKILL.md)**: Actively build and sharpen a project's domain model: challenge terms against the glossary, stress-test with edge-case scenarios, and update `GLOSSARY.md` and ADRs inline.
 - **[codebase-design](./skills/codebase-design/SKILL.md)**: Shared discipline and vocabulary for designing deep modules: a lot of behaviour behind a small interface, placed at a clean seam, testable through that interface.
 - **[engineering-principles](./skills/engineering-principles/SKILL.md)**: Selective vocabulary for 24 recurring engineering decisions. Workflows proactively scan its trigger index and load only the matched leaves; user-named principles receive extra emphasis rather than enabling selection.
-- **[verification](./skills/verification/SKILL.md)**: Create, run, or maintain portable project instructions for proving behavior through the real UI, CLI, service, mobile app, or public library interface.
+- **[verify](./skills/verify/SKILL.md)**: Create, run, or maintain portable project instructions for proving behavior through the real UI, CLI, service, mobile app, or public library interface.
 - **[code-review](./skills/code-review/SKILL.md)**: Two-axis review of the diff since a fixed point: **Standards** (does it follow the repo's coding standards, plus a Fowler smell baseline?) and **Spec** (does it faithfully implement the originating issue/spec?), run as parallel sub-agents so neither pollutes the other.
 - **[pr](./skills/pr/SKILL.md)**: Shape a PR body that's fast to review: the smallest visual that makes the change clear, before/after evidence that it works, and a one-way or two-way door call with its blast radius.
 - **[wizard](./skills/wizard/SKILL.md)**: Generate an interactive bash wizard for setup steps only a human can perform, such as credentials, dashboards, migrations, and cutovers.

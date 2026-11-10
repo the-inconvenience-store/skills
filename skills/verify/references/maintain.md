@@ -56,6 +56,7 @@ A broken Doctor or driver caused by verification drift may be fixed and retried 
 
 - Wrong or missing user-facing description is **documentation drift**; correct it.
 - Working behavior the documented harness cannot drive is a **harness gap**; correct the owned instructions or helper.
+- Browser instructions or owned drivers that default to headed mode are **verification drift**; make headless mode the default and re-prove the changed route. Preserve headed mode only as an explicit user-requested override.
 - Application behavior that is actually broken is a **product regression**; report it and do not change the documentation to describe the bug as intended.
 
 Edit only `docs/agents/verification/` and helper scripts explicitly owned by it. Product code is outside this branch.

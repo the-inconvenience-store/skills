@@ -92,4 +92,4 @@ No. It is offered as an explicit choice, and only for a new React application. F
 
 ## Where it fits
 
-`guardrails` is a run-once setup, repeated when the stack or quality strategy changes. [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) invokes it after recording repository configuration, then invokes [verification](https://aihero.dev/skills-verification) against the resulting launch and check commands. Downstream skills such as [implement](https://aihero.dev/skills-implement) work inside the approved guardrails. [Ask Inconvenient](https://aihero.dev/skills-ask-inconvenient) maps the full collection.
+`guardrails` is a run-once setup, repeated when the stack or quality strategy changes. [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) invokes it after recording repository configuration, then invokes [verify](https://aihero.dev/skills-verify) against the resulting launch and check commands. Downstream skills such as [implement](https://aihero.dev/skills-implement) work inside the approved guardrails. [Ask Inconvenient](https://aihero.dev/skills-ask-inconvenient) maps the full collection.

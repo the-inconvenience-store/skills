@@ -30,7 +30,7 @@ Reach for it when there is concrete behaviour with an input and an observable ou
 | Behaviour and acceptance criteria still unsettled | [to-spec](https://aihero.dev/skills-to-spec) |
 | The interface or test boundary itself needs design | [codebase-design](https://aihero.dev/skills-codebase-design) |
 | A ticket to implement through the whole work loop | [implement](https://aihero.dev/skills-implement) |
-| Proof that the actual user-facing behaviour works | [verification](https://aihero.dev/skills-verification) |
+| Proof that the actual user-facing behaviour works | [verify](https://aihero.dev/skills-verify) |
 
 Agreeing where to test does not decide whether a change benefits from a red-green loop. For config, wiring or straight delegation, first identify an independent expected result. A test that only restates the implementation is tautological, not useful coverage.
 
@@ -94,4 +94,4 @@ grill-with-docs → to-spec → to-tickets → implement → code-review
 
 [implement](https://aihero.dev/skills-implement) is the chain's build step, and it drives `tdd` internally to build each ticket test-first before handing off to [code-review](https://aihero.dev/skills-code-review), so `tdd` is the engine inside that step rather than a step of its own. You can also reach for it directly, whenever there's a concrete behaviour to build without a full spec. Its other neighbour is [codebase-design](https://aihero.dev/skills-codebase-design), which it leans on to find deep-module seams worth testing at. When you're unsure which skill or flow fits, [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes you.
 
-Passing this loop is not proof of the real user journey. [guardrails](https://aihero.dev/skills-guardrails) supplies the repository checks, and [verification](https://aihero.dev/skills-verification) supplies real-surface evidence beyond tests and compilation.
+Passing this loop is not proof of the real user journey. [guardrails](https://aihero.dev/skills-guardrails) supplies the repository checks, and [verify](https://aihero.dev/skills-verify) supplies real-surface evidence beyond tests and compilation.

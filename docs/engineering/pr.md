@@ -96,10 +96,10 @@ Not by itself. Put a standing instruction in your repo's agent docs that every i
 
 ## Where it fits
 
-`pr` sits after review when the build goes up as a pull request: `to-spec → to-tickets → implement → code-review → verification → pr → retro`. It is model-invoked, so it also fires on its own any time the agent writes a PR body outside that chain.
+`pr` sits after review when the build goes up as a pull request: `to-spec → to-tickets → implement → code-review → verify → pr → retro`. It is model-invoked, so it also fires on its own any time the agent writes a PR body outside that chain.
 
 - [code-review](https://aihero.dev/skills-code-review) runs before it, because a PR body should describe a diff that has already been reviewed.
-- [verification](https://aihero.dev/skills-verification) is where the Evidence section's before-and-after usually comes from, since it drives the real surface and captures what it observed.
+- [verify](https://aihero.dev/skills-verify) is where the Evidence section's before-and-after usually comes from, since it drives the real surface and captures what it observed.
 - [implement](https://aihero.dev/skills-implement) produces the commits the body describes.
 
 [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes across the whole set when you are unsure which skill the situation wants.

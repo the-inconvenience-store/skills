@@ -12,7 +12,7 @@ npx skills update implement-spec
 
 ## What it does
 
-`implement-spec` takes a spec and its tickets and lands the whole thing in one run. The orchestrating agent hands each ticket to an implementer subagent working in its own git worktree, merges each finished branch into a single **integration branch**, runs [code-review](https://aihero.dev/skills-code-review) over the result, proves it with [verification](https://aihero.dev/skills-verification), and resolves the tickets.
+`implement-spec` takes a spec and its tickets and lands the whole thing in one run. The orchestrating agent hands each ticket to an implementer subagent working in its own git worktree, merges each finished branch into a single **integration branch**, runs [code-review](https://aihero.dev/skills-code-review) over the result, proves it with [verify](https://aihero.dev/skills-verify), and resolves the tickets.
 
 It reads the tickets as a **task graph**, not a list. Blocking edges decide what can start, so at any moment there is a **frontier** of tickets whose blockers have all landed, and every ticket on the frontier runs at once. That is the difference from working the tickets one by one: the graph's shape, not its order on the tracker, sets the pace.
 
@@ -65,7 +65,7 @@ Both come from `code-review` running outside the one slot the skill gives it. It
 
 **Does it run the same disciplines as `implement`?**
 
-Yes. The orchestrator selects `engineering-principles` against the whole spec and saves them where every implementer can read them; each implementer adds whatever its own ticket triggers, builds with `tdd`, and commits with Conventional Commit messages. After the review and accepted fixes, the orchestrator runs `verification` against the integration branch and reports an `INCONCLUSIVE` verdict as a gap rather than as done. Pin seams in the spec or tickets before dispatch: fresh implementers need that agreement as an input, not a product discussion repeated independently in each worktree.
+Yes. The orchestrator selects `engineering-principles` against the whole spec and saves them where every implementer can read them; each implementer adds whatever its own ticket triggers, builds with `tdd`, and commits with Conventional Commit messages. After the review and accepted fixes, the orchestrator runs `verify` against the integration branch and reports an `INCONCLUSIVE` verdict as a gap rather than as done. Pin seams in the spec or tickets before dispatch: fresh implementers need that agreement as an input, not a product discussion repeated independently in each worktree.
 
 **Two implementers running in parallel collided on the same file, or picked different names for the same thing.**
 
@@ -89,7 +89,7 @@ A worktree holds the tracked checkout, not the gitignored fixtures, local databa
 - A ticket starts as soon as its last blocker lands on the integration branch, not when the whole run ends.
 - Every ticket's trace shows `tdd` running, with a failing test before the code.
 - Each implementer incorporates the integration tip and runs the full suite before handoff, rather than leaving integration surprises to the merger.
-- The final report names a `verification` verdict and what it observed on the real surface.
+- The final report names a `verify` verdict and what it observed on the real surface.
 - Accepted review findings are fixed once, affected checks rerun, and implementer worktrees cleaned up at close-out.
 - The run ends on one branch with every ticket resolved, and a PR only if your tracker wanted one.
 
