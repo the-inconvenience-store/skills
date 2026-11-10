@@ -93,6 +93,7 @@ Off the main flow entirely.
 - **`/wait-what`** is the corrective for a message that didn't land. Use it mid-conversation, inside any other skill, and the agent re-pitches what it just said with the context you were missing, in plain English, using the `GLOSSARY.md` vocabulary. It works after the fact; `/grill-with-docs` is the upfront cure, because a shared language agreed early is what stops the jargon arriving at all.
 - **`/teach`**: learn a concept over multiple sessions, using the current directory as a stateful workspace.
 - **`/writing-for-agents`** is the reference for writing documents agents consume: skills, AGENTS.md, pointed-at docs.
+- **`/clean-copy`** (WIP, local development installs only): cut user-facing interface copy that should not exist before polishing wording. Keeps necessary consequences, scope facts, empty-state guidance, and units. Model-invoked. Read `in-progress/clean-copy/SKILL.md` for this draft; it is not in the plugin.
 
 ## Preconditions
 

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Clean Copy"
+  short_description: "Cut interface copy that should not exist"

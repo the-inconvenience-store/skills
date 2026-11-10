@@ -32,6 +32,8 @@ You invoke this by typing `/ask-inconvenient`; the agent won't reach for it on i
 
 The router does not install the skills it recommends. Install the ones you intend to use; this is a hand-maintained map of this repo, not a scan of every skill on your machine. Tracker-dependent routes also need [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) to configure the repo first.
 
+Local development installs also expose the WIP [clean-copy](https://github.com/the-inconvenience-store/skills/tree/main/in-progress/clean-copy) standalone for cutting unnecessary interface text. The router marks it as a draft; it is not included in the plugin.
+
 ## Flows, not just skills
 
 The idea `ask-inconvenient` gives you to think with is the **flow**: a path *through* the skills rather than a single one. Before the first engineering flow, [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) records repository configuration, invokes [guardrails](https://aihero.dev/skills-guardrails), then creates the project route through [verification](https://aihero.dev/skills-verification). Most feature work then runs along one main flow: grill → spec → tickets → implement through TDD → review → real-surface verification. On-ramps merge bugs, incoming requests, and codebase-health work onto it; standalones remain available when only one discipline is needed.
