@@ -24,6 +24,7 @@ You invoke this by typing `/ask-inconvenient`; the agent won't reach for it on i
 | --- | --- |
 | An idea, and no idea where to start | The head of the main flow, including whether a spec earns its cost |
 | Incoming bugs and requests | The [triage](https://aihero.dev/skills-triage) on-ramp, not another triage pass over tickets you generated yourself |
+| Supplied designs to reproduce in the existing app | [parity](https://aihero.dev/skills-parity), with reference captures and a visual correction loop |
 | Two skills that look interchangeable | A concrete boundary: working directory or none, single-session or multi-session planning |
 | A long session and a context decision | The ordered choices at a phase boundary |
 | A session to learn from, or measured evidence of where agent time goes | [retro](https://aihero.dev/skills-retro) for the session; `/retro time` for the time audit |

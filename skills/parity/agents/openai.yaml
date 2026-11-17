@@ -1,0 +1,5 @@
+interface:
+  display_name: "Parity"
+  short_description: "Implement designs with verified visual parity"
+policy:
+  allow_implicit_invocation: false
