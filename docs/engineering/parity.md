@@ -14,7 +14,7 @@ npx skills update parity
 
 `parity` implements supplied designs in an existing application, using its components and real behavior. It accepts HTML exports, ZIPs, screenshots, design files, and live references, including folders containing several screens and states.
 
-The agent captures a reference baseline before editing production code, then compares the running implementation against that baseline and corrects the differences. Working interactions and passing tests alone do not establish visual parity.
+The agent captures a reference baseline before editing production code, then compares the running implementation against that baseline and corrects in-scope differences. It follows existing application contracts rather than treating every detail in a mockup as authorization for new backend features.
 
 ## When to reach for it
 
@@ -39,7 +39,13 @@ Provide an existing project and accessible design references. The agent needs br
 
 The baseline makes **parity** checkable. Reading exported code explains its structure and values; rendering it reveals the actual result. When both are available, the skill requires both, as well as opening supplied images.
 
-Comparisons pair the same screen, state, viewport, and content. Differences lead to corrections and new captures, not just a list at the end. The reference stays fixed unless source evidence or your decision changes the target. Any remaining discrepancy requires your acceptance; otherwise that target remains incomplete.
+Comparisons pair the same screen, state, viewport, and content. A first pass across the requested screens identifies corrections before broad validation. The agent batches fixes and refreshes only affected captures, preserving successful evidence until a relevant change invalidates it. In-scope differences still require correction or your explicit acceptance.
+
+## A visual loop, not a release framework
+
+Project instructions own testing, review, commits, and deployment. `parity` adds no mandatory principle scan, TDD orchestration, or separate verification-skill phase. Unless project policy says otherwise, affected checks run during corrections and broad checks run once the UI is visually coherent.
+
+Missing backend capabilities, unrelated bugs, and infrastructure failures are reported separately. They do not automatically expand the task. A failure that prevents observing a requested screen leaves that screen blocked, not falsely verified.
 
 ## Common questions
 
@@ -53,11 +59,19 @@ The agent first reuses or appropriately extends existing components. If a design
 
 **How is this different from `/implement` or the upstream `/match`?**
 
-`implement` starts from settled behavior and test seams. `parity` starts from visual references and owns the baseline-to-correction loop. It is inspired by [match](https://github.com/raphaelsalaja/skills/tree/main/skills/match), with explicit handling for export folders, source-plus-render inspection, project integration, and correction of remaining differences before completion.
+`implement` starts from settled behavior and test seams. `parity` supplies the visual inspection, implementation, and correction loop. Use it directly for design reproduction; when you explicitly combine it with `implement`, the enclosing workflow runs engineering gates once. It is inspired by [match](https://github.com/raphaelsalaja/skills/tree/main/skills/match), with handling for export folders, source-plus-render inspection, and project component reuse.
 
 **Does it promise pixel-perfect results everywhere?**
 
 Only inspected viewports and states can support a parity claim. Screenshot-derived measurements remain estimates, and inferred responsive behavior is identified separately. The report includes paired captures, accepted deviations, and any missing observations.
+
+**Will it implement backend functionality implied by the mockup?**
+
+Only when explicitly in scope. It identifies missing capabilities early and continues independent visual work while a decision is pending. Approving one feature does not approve every other feature later discovered in the references.
+
+**Does every fix restart verification?**
+
+No. Only affected captures, interactions, and checks become stale. Final proof closes remaining gaps instead of repeating successful work. Unrelated findings are reported separately rather than absorbed into an unbounded repair cycle.
 
 ## It's working if
 
@@ -68,4 +82,4 @@ Only inspected viewports and states can support a parity claim. Screenshot-deriv
 
 ## Where it fits
 
-`parity` is a standalone design-to-implementation workflow. It uses [engineering-principles](https://aihero.dev/skills-engineering-principles) for implementation decisions and [verify](https://aihero.dev/skills-verify) to prove final behavior. You do not need to invoke `implement` alongside it. For the wider map, use [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient).
+`parity` is a standalone visual implementation loop that can also supplement an explicitly invoked [implement](https://aihero.dev/skills-implement) workflow without duplicating its engineering gates. For the wider map, use [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient).
