@@ -201,6 +201,7 @@ Skills for daily code work.
 - **[implement](./skills/implement/SKILL.md)**: Build work from a spec or tickets: select the relevant engineering principles, drive TDD at pre-agreed seams, run Standards and Spec review, address findings, then prove the final behavior through real-surface verification.
 - **[parity](./skills/parity/SKILL.md)**: Implement supplied designs using project components, capture a reference baseline, and compare and correct the running UI until visual parity is demonstrated.
 - **[implement-spec](./skills/implement-spec/SKILL.md)**: Build a whole spec in one run: read its tickets as a task graph, run implementer subagents across the ready frontier in parallel, and land everything on one integration branch.
+- **[ship](./skills/ship/SKILL.md)**: Rebase onto main or master, resolve conflicts, verify, commit and push your work, then open a PR using the pr skill.
 - **[wayfinder](./skills/wayfinder/SKILL.md)**: Plan a huge chunk of work, more than one agent session can hold, as a shared map of investigation tickets on the issue tracker, then resolve them one at a time until the way to the destination is clear.
 - **[retro](./skills/retro/SKILL.md)**: Propose improvements to the agent's environment from a session; use `/retro time` for a measured time audit of this repo's last 90 days, or a session or period you specify. Both modes share diagnostic knowledge and leave implementation to your approval.
 

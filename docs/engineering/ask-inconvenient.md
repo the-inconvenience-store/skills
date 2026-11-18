@@ -25,6 +25,7 @@ You invoke this by typing `/ask-inconvenient`; the agent won't reach for it on i
 | An idea, and no idea where to start | The head of the main flow, including whether a spec earns its cost |
 | Incoming bugs and requests | The [triage](https://aihero.dev/skills-triage) on-ramp, not another triage pass over tickets you generated yourself |
 | Supplied designs to reproduce in the existing app | [parity](https://aihero.dev/skills-parity), with reference captures and a visual correction loop |
+| Finished branch work to publish | [ship](https://aihero.dev/skills-ship) to rebase, resolve conflicts, verify, commit, push, and open a PR using [pr](https://aihero.dev/skills-pr) |
 | Two skills that look interchangeable | A concrete boundary: working directory or none, single-session or multi-session planning |
 | A long session and a context decision | The ordered choices at a phase boundary |
 | A session to learn from, or measured evidence of where agent time goes | [retro](https://aihero.dev/skills-retro) for the session; `/retro time` for the time audit |
@@ -41,6 +42,8 @@ Local development installs also expose the WIP standalone [clean-copy](https://g
 The idea `ask-inconvenient` gives you to think with is the **flow**: a path *through* the skills rather than a single one. Before the first engineering flow, [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) records repository configuration, invokes [guardrails](https://aihero.dev/skills-guardrails), then creates the project route through [verify](https://aihero.dev/skills-verify). Most feature work then runs along one main flow: grill → spec → tickets → implement through TDD → review → real-surface verification. On-ramps merge bugs, incoming requests, and codebase-health work onto it; standalones remain available when only one discipline is needed.
 
 The main flow branches when a question needs a runnable [prototype](https://aihero.dev/skills-prototype), or when a build is small enough to skip the spec-and-tickets step. Multi-session builds can use [implement](https://aihero.dev/skills-implement) per ticket or [implement-spec](https://aihero.dev/skills-implement-spec) across the whole graph. Afterward, [retro](https://aihero.dev/skills-retro) feeds the build's lessons back into the agent's environment. `/retro` reviews the current session, and `/retro <session>` selects another. When the question is where time goes, `/retro time` audits this repo's trailing 90 days, including subagents; name a session or period to change the scope. An explicit request for measured time analysis selects that mode too. The modes share diagnostic knowledge, but only time mode requires the full time audit. Both propose changes rather than applying them. Separately, [improve-codebase-architecture](https://aihero.dev/skills-improve-codebase-architecture) surveys for deepening opportunities that can re-enter the flow as new ideas.
+
+After implementation, [ship](https://aihero.dev/skills-ship) takes the working branch through rebase, conflict resolution, verification, commit, and push to an open PR. It uses [pr](https://aihero.dev/skills-pr) for the body and leaves merging to you.
 
 ## Phase boundaries
 

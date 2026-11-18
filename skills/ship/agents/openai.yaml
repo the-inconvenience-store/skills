@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ship"
+  short_description: "Rebase, resolve conflicts, commit, push, and open a PR"
+policy:
+  allow_implicit_invocation: false
