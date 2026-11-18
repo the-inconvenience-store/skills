@@ -8,7 +8,9 @@ Implement the work described by the user in the spec or tickets. The behavior an
 
 If the user passes a ticket reference, fetch it from the issue tracker and state its title before starting. If the reference is ambiguous, ask.
 
-Before editing production code, call the Skill tool with `engineering-principles`. Independently scan its full trigger index against the spec, ticket, repository, and intended change; read every matched leaf and turn it into a concrete constraint. User-named principles are mandatory additions, not a prerequisite for selection.
+Before editing production code, call the Skill tool with `engineering-principles` unless its selection policy is already available in context. Apply that policy against the spec, ticket, repository, and intended change.
+
+Keep small coupled edits inline. Delegate only independently executable, substantive slices whose useful parallelism repays coordination cost; multiple files alone do not establish such slices.
 
 Call the Skill tool with `tdd` and work one red-green vertical slice at a time at the pre-agreed seams. Run typechecking, lint on the changed files, and the narrow test files as you edit, then the full test suite once after the implementation is coherent. A check that passed stands until a later edit could change its result.
 

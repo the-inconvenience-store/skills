@@ -12,9 +12,9 @@ npx skills update implement-spec
 
 ## What it does
 
-`implement-spec` takes a spec and its tickets and lands the whole thing in one run. The orchestrating agent hands each ticket to an implementer subagent working in its own git worktree, merges each finished branch into a single **integration branch**, runs [code-review](https://aihero.dev/skills-code-review) over the result, proves it with [verify](https://aihero.dev/skills-verify), and resolves the tickets.
+`implement-spec` takes a spec and its tickets and lands the whole thing in one run. The orchestrating agent delegates substantive independent tickets to implementer subagents in their own git worktrees, handles small coupled tickets inline, and lands everything on a single **integration branch**. It runs [code-review](https://aihero.dev/skills-code-review) over the result, proves it with [verify](https://aihero.dev/skills-verify), and resolves the tickets.
 
-It reads the tickets as a **task graph**, not a list. Blocking edges decide what can start, so at any moment there is a **frontier** of tickets whose blockers have all landed, and every ticket on the frontier runs at once. That is the difference from working the tickets one by one: the graph's shape, not its order on the tracker, sets the pace.
+It reads the tickets as a **task graph**, not a list. Blocking edges decide what can start, so at any moment there is a **frontier** of tickets whose blockers have all landed. Independent substantive work runs in parallel when that repays coordination cost; multiple files alone do not justify extra workers. The graph's shape, not its order on the tracker, sets the pace.
 
 ## When to reach for it
 
@@ -30,7 +30,7 @@ You invoke this by typing `/implement-spec`, and the agent won't reach for it on
 ## Prerequisites
 
 - **An issue tracker.** The skill reads the tickets from, and resolves them on, the tracker [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) configured. If none has been configured, it stops and tells you to run that first rather than guessing.
-- **Tickets with blocking edges**, as [to-tickets](https://aihero.dev/skills-to-tickets) writes them. Without edges the graph is flat and every ticket starts at once.
+- **Tickets with blocking edges**, as [to-tickets](https://aihero.dev/skills-to-tickets) writes them. Without edges the graph is flat and every ticket appears ready, so the agent still checks whether work is independent and substantive enough to delegate.
 - **A harness that runs subagents in the background and gives each one a git worktree.** The concurrency is the point; a harness that runs subagents one at a time gets a slower `implement`.
 - **The runtime inputs the work needs.** A worktree does not bring across gitignored fixtures, local databases, or credentials. Identify those inputs before dispatching tickets; a skipped test is not evidence that its behavior passed.
 
@@ -39,11 +39,13 @@ You invoke this by typing `/implement-spec`, and the agent won't reach for it on
 Everything lands on one branch. Each implementer:
 
 1. confirms its worktree is based on the integration branch before it starts,
-2. adds the [engineering-principles](https://aihero.dev/skills-engineering-principles) its own ticket triggers to the ones the orchestrator selected for the whole spec,
+2. reuses relevant constraints and their rationale from the orchestrator's notes, then selects [engineering-principles](https://aihero.dev/skills-engineering-principles) for its own ticket, reading references only for missing detail or additional decisions,
 3. builds its ticket with [tdd](https://aihero.dev/skills-tdd), red-green one slice at a time, committing as it goes,
 4. merges the integration branch tip into its own branch and runs the full test suite before reporting done, so landing it is a fast-forward.
 
-Whether a pull request exists at all is the tracker's call. If your tracker closes work through PRs, or you ask for one, a draft PR opens after the first merge and is marked ready at the end. Otherwise the run stops on the integration branch with every ticket resolved the way your tracker closes work, which works fully offline against a local markdown tracker.
+Small coupled tickets meet the same implementation, checking, commit, and ticket-resolution requirements inline on the integration branch. A merger subagent is used only when integration work itself justifies delegation.
+
+Whether a pull request exists at all is the tracker's call. If your tracker closes work through PRs, or you ask for one, a draft PR opens after the first ticket lands on the integration branch and is marked ready at the end. Otherwise the run stops on the integration branch with every ticket resolved the way your tracker closes work, which works fully offline against a local markdown tracker.
 
 Implementers talk to the orchestrator through **context pointers** (the spec, the ticket, shared exploration notes, earlier commits) rather than pasted summaries, which keeps each subagent's prompt small and the orchestrator's window free for the graph. Every subagent starts with a fresh context window, so it carries nothing in but those pointers.
 
@@ -61,11 +63,11 @@ No. The goal is the integration branch. A PR opens only when the configured trac
 
 **Its review and fix loop ran for hours, or kept "fixing" tickets that hadn't been built yet.**
 
-Both come from `code-review` running outside the one slot the skill gives it. It compares the code against the whole spec, so it only makes sense once every ticket has landed; run it mid-run and every unbuilt ticket reads as a failure, the agent sets about building it, and that triggers another review. At the end, the skill runs `code-review` once, sends every finding to one fix subagent, then reruns only the focused checks for the fixed findings before moving on to verification. If you still see a second broad review start, tell it to stop. Expect that first review to find real problems: the run's output is a draft that the review finishes, not something to ship on its own.
+Both come from `code-review` running outside the one slot the skill gives it. It compares the code against the whole spec, so it only makes sense once every ticket has landed; run it mid-run and every unbuilt ticket reads as a failure, the agent sets about building it, and that triggers another review. At the end, the skill runs `code-review` once and gives accepted findings to one integration owner: small coupled fixes stay inline, while substantive independent work may use one fix subagent. Only affected checks rerun before verification. If you still see a second broad review start, tell it to stop. Expect that first review to find real problems: the run's output is a draft that the review finishes, not something to ship on its own.
 
 **Does it run the same disciplines as `implement`?**
 
-Yes. The orchestrator selects `engineering-principles` against the whole spec and saves them where every implementer can read them; each implementer adds whatever its own ticket triggers, builds with `tdd`, and commits with Conventional Commit messages. After the review and accepted fixes, the orchestrator runs `verify` against the integration branch and reports an `INCONCLUSIVE` verdict as a gap rather than as done. Pin seams in the spec or tickets before dispatch: fresh implementers need that agreement as an input, not a product discussion repeated independently in each worktree.
+Yes. The orchestrator selects `engineering-principles` for the spec and task graph and saves relevant constraints, rationale, and reference pointers. Each implementer reuses those constraints for its own ticket, reads missing or additional guidance, builds with `tdd`, and commits with Conventional Commit messages. After the review and accepted fixes, the orchestrator runs `verify` against the integration branch and reports an `INCONCLUSIVE` verdict as a gap rather than as done. Pin seams in the spec or tickets before dispatch: fresh implementers need that agreement as an input, not a product discussion repeated independently in each worktree.
 
 **Two implementers running in parallel collided on the same file, or picked different names for the same thing.**
 
@@ -85,7 +87,7 @@ A worktree holds the tracked checkout, not the gitignored fixtures, local databa
 
 ## It's working if
 
-- Several implementers are running at once whenever the graph allows, not one after another.
+- Substantive independent tickets run concurrently when the graph allows; small coupled edits stay inline.
 - A ticket starts as soon as its last blocker lands on the integration branch, not when the whole run ends.
 - Every ticket's trace shows `tdd` running, with a failing test before the code.
 - Each implementer incorporates the integration tip and runs the full suite before handoff, rather than leaving integration surprises to the merger.

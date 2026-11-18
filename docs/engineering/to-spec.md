@@ -52,6 +52,8 @@ Before writing, `to-spec` sketches the **seams** at which the feature will be te
 
 That check is not a fresh product interview. It pins the public interface that [tdd](https://aihero.dev/skills-tdd) will observe and gives [code-review](https://aihero.dev/skills-code-review) an agreed contract to review against. A durable seam lets the implementation move without forcing the tests to move with it.
 
+Principle selection reuses guidance already available in the conversation. Here, Prove It Works defines the acceptance evidence a future implementation must produce; writing the spec does not launch implementation verification.
+
 ## Common questions
 
 **Where did `/to-prd` go?**

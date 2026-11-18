@@ -14,7 +14,7 @@ npx skills update grilling
 
 `grilling` is the interview that stress-tests a plan or design before you build it. It maps the work as a **design tree**, then asks every currently answerable question at the tree's **frontier**.
 
-Questions arrive in rounds rather than one at a time. Before the first round and whenever an answer exposes a new decision shape, the agent scans the engineering-principle triggers against the current frontier. Experience First keeps product choices aimed at the user's result; Keep Execution Unblocked preserves the division that the agent finds observable facts while you make genuine product decisions. Other matched principles shape recommendations without waiting for you to name them.
+Questions arrive in rounds rather than one at a time. The agent uses [engineering-principles](https://aihero.dev/skills-engineering-principles) selection against the current frontier, reusing guidance already available in context and revisiting selection when an answer exposes a new material decision. Experience First keeps product choices aimed at the user's result; Keep Execution Unblocked preserves the division that the agent finds observable facts while you make genuine product decisions. Other matched principles shape recommendations without waiting for you to name them.
 
 ## When to reach for it
 
@@ -31,7 +31,7 @@ Reach for it when a plan still has silent assumptions or dependent decisions. In
 
 ## Prerequisites
 
-Install [engineering-principles](https://aihero.dev/skills-engineering-principles), which the interview loads before its first round and consults again when a new decision shape appears.
+Install [engineering-principles](https://aihero.dev/skills-engineering-principles), whose selection policy the interview loads if it is not already in context.
 
 ## Rounds and the frontier
 
@@ -39,7 +39,7 @@ The frontier is the set of questions that can be answered now without guessing a
 
 This keeps related work moving without flattening dependencies into a bulk questionnaire. The interview ends when the frontier is empty and every branch has been visited, then waits for you to confirm the shared understanding.
 
-Facts are the agent's job; decisions are yours. It dispatches fact-finding without stalling unrelated questions, while questions downstream of that research wait. Each recommendation appears on its own line so you can answer a whole round by number.
+Facts are the agent's job; decisions are yours. Simple lookups stay inline; substantive independent research earns delegation when useful parallelism repays coordination cost. Unrelated questions keep moving while downstream questions wait for that research. Each recommendation appears on its own line so you can answer a whole round by number.
 
 The frontier is chosen by judgement, not computed from a graph. If two questions turn out to depend on each other, point that out so the affected branch can be reopened in the next round.
 

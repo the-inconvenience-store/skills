@@ -32,7 +32,7 @@ Reach for it on the hard ones: the bug that resists a first glance, the intermit
 
 ## The tight loop is the skill
 
-Everything else (bisection, hypothesis-testing, instrumentation) is mechanical once you have the signal. The skill always applies Fix Root Causes, Build the Lever, and Prove It Works, then proactively scans the remaining principle triggers against the symptom, suspected mechanism, and intended fix. It spends disproportionate effort constructing a command that drives the actual bug path and asserts the user's exact symptom, tightening that loop until it is fast, deterministic, and agent-runnable.
+Everything else (bisection, hypothesis-testing, and instrumentation) is mechanical once you have the signal. Fix Root Causes is the diagnostic default. Build the Lever applies when repeated or broad work repays tooling cost; Prove It Works applies when preparing a completion claim. Selection follows [engineering-principles](https://aihero.dev/skills-engineering-principles), reusing guidance already available in context. The skill spends disproportionate effort constructing a command that drives the actual bug path and asserts the user's exact symptom, tightening that loop until it is fast, deterministic, and agent-runnable.
 
 It gives you a ladder of ways to build the loop: existing [verify](https://aihero.dev/skills-verify) instructions, a failing test, curl script, CLI diff, headless browser, replayed trace, throwaway harness, fuzz loop, `git bisect run`, or differential run, and, only as a last resort, a human-in-the-loop bash script. For non-deterministic bugs the target is a higher reproduction rate: loop the trigger and add stress until the flake is debuggable.
 

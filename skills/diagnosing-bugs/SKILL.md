@@ -9,7 +9,7 @@ A discipline for hard bugs. Skip phases only when explicitly justified.
 
 When exploring the codebase, read `GLOSSARY.md` (if it exists) to get a clear mental model of the relevant modules, and check ADRs in the area you're touching.
 
-Call the Skill tool with `engineering-principles`. Apply Fix Root Causes, Build the Lever, and Prove It Works, then independently scan the index against the symptom, suspected mechanism, and intended fix. Read every additional matched leaf; user-named principles are mandatory additions, not the trigger for selection.
+Call the Skill tool with `engineering-principles` unless its selection policy is already available in context. Apply that policy against the symptom, suspected mechanism, and intended fix. Fix Root Causes is the diagnostic default. Select Build the Lever when repeated or broad work repays tooling cost, and Prove It Works when preparing a completion claim.
 
 ## Redact
 

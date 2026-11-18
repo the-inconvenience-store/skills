@@ -12,7 +12,7 @@ The issue tracker and triage label vocabulary should have been provided to you. 
 
 1. Explore the repo to understand the current state of the codebase, if you haven't already. Use the project's domain glossary vocabulary throughout the spec, and respect any ADRs in the area you're touching.
 
-2. Call the Skill tool with `engineering-principles`. Apply Experience First, Foundational Thinking, and Prove It Works, then independently scan the index against the decisions already captured and read every additional matched leaf. User-named principles are mandatory additions. Use the selected principles to sharpen decisions already made; do not reopen the conversation.
+2. Call the Skill tool with `engineering-principles` unless its selection policy is already available in context. Apply that policy to sharpen decisions already captured, without reopening the conversation. Experience First applies to product choices and Foundational Thinking to shared data and seams. Use Prove It Works to define acceptance evidence for the future implementation, not to run implementation verification while writing the spec.
 
 3. Sketch out the seams at which you're going to test the feature. Existing seams should be preferred to new ones. Use the highest seam possible. If new seams are needed, propose them at the highest point you can. The fewer seams across the codebase, the better - the ideal number is one.
 

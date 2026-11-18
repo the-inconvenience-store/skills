@@ -7,7 +7,7 @@ description: Build a throwaway prototype to answer a design question. Use when t
 
 A prototype is **throwaway code that answers a question**. The question decides the shape.
 
-Call the Skill tool with `engineering-principles`. Apply Experience First and Laziness Protocol. Apply Exhaust the Design Space when the question is consequential and several genuinely different answers are plausible.
+Call the Skill tool with `engineering-principles` unless its selection policy is already available in context. Apply that policy against the question the prototype must answer, the user's experience, and the cost and reversibility of the experiment.
 
 ## Pick a branch
 

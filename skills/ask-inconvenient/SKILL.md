@@ -24,7 +24,7 @@ The route most work travels. You have an idea and want it built.
 3. **Branch: is this a multi-session build?**
    - **Yes** → **`/to-spec`** (turn the thread into a spec), then **`/to-tickets`** to split it into tracer-bullet tickets, each declaring its **blocking edges**. Then work the tickets one of two ways:
      - **`/implement`** per ticket, **`/clear`ing context between each one**. On a local tracker that's one file per ticket under `.scratch/<feature>/issues/`, worked blockers-first by hand; on a real tracker the edges become native blocking links, so any ticket whose blockers are done can be grabbed. Each ticket is self-contained, so the last one's context is disposable.
-     - **`/implement-spec`** for the whole spec in one run. It reads the tickets as a **task graph**, runs implementer subagents across the ready **frontier** in parallel, and lands everything on one **integration branch**. Reach for it when you'd rather orchestrate the build than drive each ticket yourself.
+     - **`/implement-spec`** for the whole spec in one run. It reads the tickets as a **task graph**, runs substantive independent tickets across the ready **frontier** in parallel, keeps small coupled edits inline, and lands everything on one **integration branch**. Reach for it when you'd rather orchestrate the build than drive each ticket yourself.
    - **No** → **`/implement`** right here, in the same context window.
 
    Either way, **`/implement`** builds each issue by selecting the relevant **`/engineering-principles`**, driving **`/tdd`** one red-green slice at a time, running **`/code-review`**, addressing accepted findings, then calling **`/verify`** against the final real user or consumer surface. `/implement-spec` runs the same disciplines across the graph: its implementers select principles and drive `/tdd` per ticket, then it runs one `/code-review` and one `/verify` over the integration branch. Reach for `/tdd`, `/code-review`, or `/verify` directly when you need only that discipline.
@@ -66,7 +66,7 @@ Three model-invoked references run *beneath* the other skills, each the single s
 
 - **`/domain-modeling`**: sharpen the project's *domain* language: challenge a fuzzy term, resolve an overloaded word ("account" doing three jobs), record a hard-to-reverse decision as an ADR. It's the active discipline `/grill-with-docs` drives to keep `GLOSSARY.md` a clean glossary.
 - **`/codebase-design`** is the deep-module vocabulary (module, interface, depth, seam, adapter, leverage, locality) for designing a module's *shape*: a lot of behaviour behind a small interface at a clean seam. `/tdd` and `/improve-codebase-architecture` both speak it.
-- **`/engineering-principles`**: selective decision vocabulary for implementation, architecture, migration, verification, and parallel work. Workflows proactively scan its trigger index and load only the matched leaves; name a principle only when you want to force extra emphasis.
+- **`/engineering-principles`**: selective decision vocabulary for implementation, architecture, migration, verification, and parallel work. Workflows reuse relevant references already in context and revisit selection when a new material decision appears. Workers receive relevant constraints and select additions for their own slice; name a principle when you want to force extra emphasis.
 
 ## Phase boundaries
 

@@ -33,7 +33,7 @@ Start with a committed change and a fixed point that resolves. Staged and workin
 
 The **Spec** axis looks first for issue references in commit messages, then a path you supply, then a matching spec under `docs/`, `specs/`, or `.scratch/`. Issue fetching uses the tracker doc configured by [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills); a local spec path does not need tracker access. If nothing turns up, it asks where the spec is. If there is none, it skips the Spec sub-agent and says so.
 
-The **Standards** axis needs no standards document to exist: it always carries a Fowler smell baseline and adds only the [engineering principles](https://aihero.dev/skills-engineering-principles) whose triggers appear in the diff.
+The **Standards** axis needs no standards document to exist: it always carries a Fowler smell baseline and selects [engineering principles](https://aihero.dev/skills-engineering-principles) for the decisions exposed by the diff. Selection reuses guidance already available in context; the reviewer receives relevant constraints, rationale, and reference pointers rather than the whole principle index.
 
 ## Two axes, never merged
 

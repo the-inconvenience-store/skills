@@ -14,7 +14,7 @@ npx skills update codebase-design
 
 `codebase-design` gives you a shared, precise vocabulary for designing **deep modules**: a lot of behaviour hidden behind a small interface, placed at a clean seam, testable through that interface.
 
-It is a **language, not a refactoring plan**: the reference itself defines no survey loop or required output artifact. When that language is applied to a concrete design, it pulls only the relevant [engineering principles](https://aihero.dev/skills-engineering-principles): foundational data shape, reader load, boundary placement, structural behavior, or competing designs when the choice is expensive to reverse.
+It is a **language, not a refactoring plan**: the reference itself defines no survey loop or required output artifact. When that language is applied to a concrete design, it selects only relevant [engineering principles](https://aihero.dev/skills-engineering-principles) for the module's data shape, interface, seams, and alternatives, reusing guidance already available in context rather than loading a fixed bundle.
 
 ## When to reach for it
 

@@ -51,7 +51,7 @@ The edges live in the ticket regardless of medium; the medium only decides wheth
 
 The whole skill turns on one distinction. A **horizontal** slice ships one layer of the change (all the schema, or all the API), and nothing works until every layer lands. A **vertical** slice, the tracer bullet, ships one narrow path through *every* layer at once, so it can be demoed the moment it's done.
 
-Before slicing, `to-tickets` applies the engineering principles for verifiable sequencing, useful intermediate states, migrations, and shared writes. It looks for prefactoring ("make the change easy, then make the easy change") and orders that work first. It then quizzes you on the breakdown, blocking edges, proof, and what to merge or split before publishing anything.
+Before slicing, `to-tickets` selects relevant [engineering principles](https://aihero.dev/skills-engineering-principles) for verifiable sequencing, useful intermediate states, migrations, and shared writes, reusing guidance already available in context. It looks for prefactoring ("make the change easy, then make the easy change") and orders that work first. It then quizzes you on the breakdown, blocking edges, proof, and what to merge or split before publishing anything.
 
 ## The wide-refactor exception
 

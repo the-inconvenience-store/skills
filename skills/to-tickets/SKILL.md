@@ -22,7 +22,7 @@ If you have not already explored the codebase, do so to understand the current s
 
 Look for opportunities to prefactor the code to make the implementation easier. "Make the change easy, then make the easy change."
 
-Call the Skill tool with `engineering-principles`. Apply Sequence Verifiable Units and Outcome-Oriented Execution. Apply Migrate Callers Then Delete Legacy APIs and Separate Before Serializing Shared State only when the change or ticket graph triggers them.
+Call the Skill tool with `engineering-principles` unless its selection policy is already available in context. Apply that policy against the change and ticket graph: verifiable sequencing, useful intermediate states, migration boundaries, and shared writes.
 
 ### 3. Draft vertical slices
 

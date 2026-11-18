@@ -14,7 +14,7 @@ npx skills update prototype
 
 `prototype` builds a small, disposable program whose only job is to answer one design question: does this state model feel right, or what should this UI look like.
 
-The code is **throwaway from day one**. Experience First keeps the experiment aimed at the user's result, Laziness Protocol keeps it cheap, and Exhaust the Design Space applies only when several genuinely different answers to a consequential question are plausible.
+The code is **throwaway from day one**. [Engineering-principles](https://aihero.dev/skills-engineering-principles) selection follows the question, the user's experience, and the experiment's cost and reversibility, reusing guidance already available in context. A cheap experiment does not automatically require exploring competing designs.
 
 ## When to reach for it
 

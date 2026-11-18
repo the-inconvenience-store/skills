@@ -14,7 +14,7 @@ npx skills update engineering-principles
 
 `engineering-principles` gives engineering workflows a shared vocabulary for recurring decisions: subtract before adding, model behavior structurally, keep retries idempotent, fail loudly, isolate parallel writers, and prove the real result without weakening the checks that prove it.
 
-It is selective rather than a 24-item checklist. The agent proactively scans every trigger against the current decision, loads only the matched leaves, and turns each into a concrete constraint, design choice, or proof obligation. You may name a principle for extra emphasis, but selection does not depend on you doing so.
+It is selective rather than a 24-item checklist. The agent scans triggers against the current decision, loads only references that could materially change it, and turns each into a concrete constraint, design choice, or proof obligation. References already available in context are reused across workflows; selection changes when a new material decision appears. You may name a principle for extra emphasis, but selection does not depend on you doing so.
 
 ## When to reach for it
 
@@ -45,6 +45,14 @@ Two names are deliberately adapted to this workflow. **Model Behavior Structural
 **Twenty-four principles is a lot of context. Does all of it load every time?**
 
 No, and the selective design is the whole point. The agent scans the trigger index against the decision in front of it and reads only the matched leaves. A skill that loaded all twenty-four would be a checklist, and a checklist gets skimmed: the failure mode is an agent that nods at every principle and applies none. If you see a report citing most of the index, something has gone wrong with selection, not with the decision.
+
+**Will each workflow or subagent read the same references again?**
+
+A workflow reuses the selection and references already available in its context. After compaction, it reloads only selected references whose contents are missing. A fresh worker receives the relevant constraints, their rationale, and reference pointers, then selects for its own slice rather than inheriting the parent's whole reading list. It reads references for missing detail or additional decisions.
+
+**Does Prove It Works mean rerunning everything?**
+
+No. It asks for the least expensive evidence sufficient for the observable claim and repository requirements. The integration owner inspects delegated changes and validates their integration, reusing recorded checks only while their scope and inputs remain valid. Required fresh evidence still runs. If a broad run reveals a shared failure that makes further results uninformative, the agent stops it, diagnoses with focused checks, and resumes required broader coverage after the fix.
 
 **Do I have to name a principle for it to apply?**
 

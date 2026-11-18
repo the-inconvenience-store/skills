@@ -24,10 +24,14 @@ Scale deliberation to reversibility. A two-way door proceeds on precedent and is
 ## Apply selectively
 
 1. Classify the current decision before acting: product experience, data shape, boundary, type, lifecycle, migration, verification, collaboration, or recurring lesson.
-2. Scan every index trigger against the request, accepted artifacts, repository, and proposed change. This scan is the agent's job; the user does not need to name a principle.
+2. Scan the index triggers against the current decision, using the request, accepted artifacts, repository, and proposed change. This scan is the agent's job; the user does not need to name a principle.
 3. Include every matched principle that could materially change the decision, normally one to four.
 4. Add every principle the user names even when the independent scan would not have selected it, then reconcile it through Precedence.
-5. Read each selected reference in full and translate it into a constraint, design choice, or proof obligation before acting.
+5. Read each selected reference in full unless it is already available in the current context, then translate it into a constraint, design choice, or proof obligation before acting.
+
+Reuse the selection and references while the decision and their contents remain available in the current context. Revisit selection when a new material decision appears, not merely when another workflow starts. After compaction or a fresh context, reload only the selected references whose contents are no longer available.
+
+For delegated work, pass the relevant constraints, their rationale, and reference pointers. Each worker selects principles for its own decision surface, reusing supplied constraints that fully capture the applicable rule and reading references when it needs missing detail or additional principles. A worker does not inherit the parent's entire reading list.
 
 Do not load an unmatched reference or run the whole index as a review. Name a principle in the final report only when the user requested it, it resolved a conflict, or it drove a non-obvious decision.
 

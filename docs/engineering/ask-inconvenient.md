@@ -45,6 +45,8 @@ The main flow branches when a question needs a runnable [prototype](https://aihe
 
 After implementation, [ship](https://aihero.dev/skills-ship) takes the working branch through rebase, conflict resolution, verification, commit, and push to an open PR. It uses [pr](https://aihero.dev/skills-pr) for the body and leaves merging to you.
 
+The shared engineering-principle layer reuses relevant guidance across workflows in the same context and revisits selection for new material decisions. Parallel implementation delegates substantive independent slices, while small coupled edits stay inline.
+
 ## Phase boundaries
 
 The router makes the context decision **at a phase boundary**, not halfway through a phase. Work down the choices in order:

@@ -12,7 +12,7 @@ npx skills update implement
 
 ## What it does
 
-`implement` builds the work described in a spec or set of tickets. Before editing, it proactively scans the full engineering-principle trigger index against the work and reads every matched leaf; you do not need to name principles. It then drives implementation through test-driven development and automated checks, reviews the result, and proves the changed behavior through its real user or consumer surface.
+`implement` builds the work described in a spec or set of tickets. Before editing, it selects relevant [engineering-principles](https://aihero.dev/skills-engineering-principles), reusing references already available in context; you do not need to name principles. It then drives implementation through test-driven development and automated checks, reviews the result, and proves the changed behavior through its real user or consumer surface.
 
 It does **not** decide what to build. The spec is already settled and the seams are already agreed; `implement` executes that plan rather than reopening it. Principles guide implementation decisions below that contract, and an `INCONCLUSIVE` verification result is reported rather than disguised by passing tests.
 
@@ -32,6 +32,8 @@ You invoke this by typing `/implement`; the agent won't reach for it on its own.
 | Finished code that only needs review | [code-review](https://aihero.dev/skills-code-review) directly |
 
 The same-session route avoids manufacturing a spec file for a plan you just agreed. Keep multi-session work self-contained in tickets, and clear context between them.
+
+Small coupled edits stay inline. Subagents earn their coordination cost through substantive, independently executable slices, not merely because the change touches several files.
 
 ## Prerequisites
 
