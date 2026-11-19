@@ -25,14 +25,27 @@ Ask: "What's the public interface, and which seams should we test?" Give each pr
 
 When the shape of that interface is itself in question (how deep the module is, where the seam belongs, what the interface should expose), call the Skill tool with "codebase-design" for the vocabulary. It is the shared source of the module, interface, depth, seam, adapter, leverage and locality terms, and it is a reference to consult, not a session to run.
 
+## Proof obligation
+
+Before each new test, name:
+
+- **Contract:** the observable behavior or invariant protected.
+- **Regression:** a plausible production defect that would make it fail.
+- **Gap:** why existing tests would miss that defect.
+
+Extend an existing case or table when it owns the same contract. Another layer earns a test only for a distinct boundary risk, such as serialization, persistence, or lifecycle.
+
+Test at the agreed seam using production paths. If proof requires a test-only export, getter, flag, or wrapper, reconsider the seam first.
+
 ## Anti-patterns
 
 - **Implementation-coupled**: mocks internal collaborators, tests private methods, or verifies through a side channel (querying the database instead of using the interface). The tell: the test breaks when you refactor but behavior hasn't changed.
 - **Tautological**: the assertion recomputes the expected value the way the code does (`expect(add(a, b)).toBe(a + b)`, a snapshot derived by hand the same way, a constant asserted equal to itself), so it passes by construction and can never disagree with the code. Expected values must come from an independent source of truth: a known-good literal, a worked example, the spec.
+- **Manufactured proof:** the mock or fixture supplies the behavior the assertion claims production provides. Fixtures supply inputs and boundary responses; production must produce the asserted outcome.
 - **Horizontal slicing**: writing all tests first, then all implementation. Bulk tests verify _imagined_ behavior: you test the _shape_ of things rather than user-facing behavior, the tests go insensitive to real changes, and you commit to test structure before understanding the implementation. Work in **vertical slices** instead: one test → one implementation → repeat, each test a **tracer bullet** that responds to what the last cycle taught you.
 
 ## Rules of the loop
 
-- **Red before green.** Write the failing test first, then only enough code to pass it. Don't anticipate future tests or add speculative features.
+- **Red before green.** Write the failing test first and observe it fail because the named behavior is missing or broken, rather than an unrelated setup, import, or type error. Then write only enough code to pass it. Don't anticipate future tests or add speculative features.
 - **One slice at a time.** One seam, one test, one minimal implementation per cycle.
 - **Refactoring is not part of the loop.** It belongs to the review stage (see the `code-review` skill), not the red → green implementation cycle.

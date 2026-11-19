@@ -59,6 +59,7 @@ Not feature work, just upkeep.
 
 - **`/improve-codebase-architecture`**: run whenever you have a spare moment to keep the codebase good for agents to operate in. It surfaces **deepening opportunities**; picking one _generates an idea_ you can take into the main flow at `/grill-with-docs`. It's the survey that finds the candidates; **`/codebase-design`** (below) is the bench you design the chosen one on.
 - **`/verify`**: create, run, or maintain the project's real-surface verification route. In the main flow, `/implement` uses Run after review. Reach for it directly to bootstrap `docs/agents/verification/`, prove a standalone change, or audit the feature map after the application moves.
+- **`/prune-tests`** (WIP, local development installs only): prune redundant or behavior-free tests while preserving independent contracts. Use it for existing test-suite upkeep, `/tdd` for authoring new proof. Read `in-progress/prune-tests/SKILL.md` for this user-invoked draft; it is not in the plugin.
 
 ## Vocabulary underneath
 

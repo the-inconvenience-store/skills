@@ -1,0 +1,5 @@
+interface:
+  display_name: "Prune Tests"
+  short_description: "Prune tests while preserving contracts"
+policy:
+  allow_implicit_invocation: false

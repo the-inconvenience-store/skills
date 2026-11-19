@@ -44,6 +44,8 @@ The leading idea is the **red-green loop**: write one failing test (red), add ju
 
 Two rules keep the tests honest. A good test reads like a specification ("user can checkout with valid cart") and exercises real code paths through the public API, so renaming an internal function never breaks it. And expected values come from an independent source of truth (a known-good literal, a worked example, the spec), never recomputed the way the code computes them, which is how a **tautological** test passes by construction and tells you nothing.
 
+Each new test has a **proof obligation**: a contract, a plausible regression, and a gap in existing coverage. Repeated proof belongs in the existing owner case or table unless another boundary introduces a distinct risk. Red means the test actually failed on that missing or broken behaviour, not merely on setup. Fixtures provide inputs and external responses; the production path must produce the outcome being asserted.
+
 Mocks belong at system boundaries, such as external APIs, time or randomness, not around your own modules. Refactoring is outside the red-green loop and belongs to [code-review](https://aihero.dev/skills-code-review).
 
 ## Common questions
