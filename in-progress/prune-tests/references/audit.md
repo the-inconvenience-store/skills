@@ -57,6 +57,3 @@ A suspicious form can still protect an independent contract:
 
 **Historical or required absence?** A check that `legacy.ts` is gone records a past edit. A package-contents check that excludes private credentials protects an ongoing release contract.
 
-## Provenance
-
-Adapted from [OpenClaw test-audit](https://github.com/openclaw/openclaw/tree/main/.agents/skills/test-audit) and [Caldo prune-tests](https://github.com/caldoai/skills/tree/main/skills/prune-tests). Repository-specific commands and campaign administration are intentionally left to the target repository.
