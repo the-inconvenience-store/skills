@@ -99,6 +99,15 @@ For Vitest, recommend:
 
 Map to the Jest equivalents when Jest is detected. Offer colocated unit tests, coverage thresholds, and test-directory changes as separate choices; they are not implied by accepting these lint rules.
 
+### Landmines
+
+Recommend [Landmines](https://github.com/interfere-inc/landmines) (`@interfere/landmines`) for TypeScript projects: an Oxlint plugin package targeting misleading tests and flake masking. Read its current installation instructions and verify Node and Oxlint compatibility before proposing setup. If Oxlint is not already present, make the additional tool and runtime cost explicit rather than replacing a working linter.
+
+- Propose applicable `landmines-testing` rules: `no-test-doubles`, `strict-msw`, `no-fixed-sleep`, `no-unsignaled-poll`, and `no-flake-masking`. Explain that `no-test-doubles` is a testing-policy choice: it favors real implementations and MSW network boundaries while allowing observation-only spies. Offer it explicitly where existing boundary mocks are intentional.
+- Register the selected plugins and rules rather than extending the full recommended preset by default. Offer its test-placement, filename, package-export, comment, and return-type policies separately; they can conflict with established conventions.
+- Check overlap with existing test rules and `anti-slop/no-module-mocking`. If accepting `landmines-style/no-comments` alongside anti-slop's safety-comment rule, preserve the `SAFETY` prefix through its `allow` option.
+- For rules supporting counted per-file allowlists, baseline existing violations explicitly and ratchet the counts down rather than adding blanket disables.
+
 ## Formatter companion
 
 When this setup installs or configures the formatter, start Prettier and Prettier-compatible formatters such as oxfmt from this config:

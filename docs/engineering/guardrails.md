@@ -18,6 +18,8 @@ The **proposal** is the control point: the agent investigates and recommends one
 
 For JavaScript, TypeScript, React, and Go, the skill carries curated rule baselines aimed at common agent-written failure modes. Those concrete recommendations feed the proposal; they are not installed wholesale without your approval. The skill is **generous** with lint coverage: it proposes every maintained linter, plugin, and rule group that applies to the stack, and leaves one out only for a named reason such as duplication, a formatter conflict, or hook runtime. When it sets up a JavaScript or TypeScript formatter (Prettier, oxfmt, or Biome), it starts from a house style: 2-space indent, 80-column width, trailing commas everywhere, no semicolons, single quotes in code, and double quotes in JSX.
 
+For TypeScript, it also recommends [Landmines](https://github.com/interfere-inc/landmines) (`@interfere/landmines`), an Oxlint plugin package targeting misleading tests, fixed sleeps, and flake masking. The proposal selects applicable rules rather than silently adopting the package's broader style and structure policies, and makes adding Oxlint explicit when the project does not already use it.
+
 For Ruby, C#, Rust, and other ecosystems without a bundled baseline, the agent researches current maintained tools and exact rules, then builds the equivalent proposal instead of skipping the language.
 
 For a new React application, it also offers a Bulletproof React-inspired standards package (feature boundaries, import direction, state and API conventions, and testing posture) as an explicit choice rather than an assumed architecture.
