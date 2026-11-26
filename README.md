@@ -239,6 +239,9 @@ General workflow tools, not code-specific.
 - **[wait-what](./skills/wait-what/SKILL.md)**: Re-pitch the agent's last message with missing context, simpler English, and the project's vocabulary.
 - **[reframe](./skills/reframe/SKILL.md)**: Find the expert vocabulary and checked precedents that sharpen an unclear brief.
 - **[ketchup](./skills/ketchup/SKILL.md)**: Catch up on what changed in this chat and get the evidence needed for decisions still waiting on you.
+- **[recall](./skills/recall/SKILL.md)**: Rebuild where a topic stands from recent chats and current project records.
+- **[sharpen](./skills/sharpen/SKILL.md)**: Rewrite a task prompt around better sources, methods, and proof without expanding scope.
+- **[show-me-your-work](./skills/show-me-your-work/SKILL.md)**: Keep an append-only decision trail with evidence during long or unattended work.
 
 **Model-invoked**
 

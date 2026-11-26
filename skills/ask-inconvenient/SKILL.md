@@ -18,9 +18,12 @@ Route a named intent directly. If two routes would lead to materially different 
 | --- | --- |
 | Understand how code works today or where responsibility lives | `/how`. For why a decision was made, use `/why`. |
 | Find the right words for an unclear idea | `/reframe`. For decisions that need an interview, use `/grill-with-docs` in a repo or `/grill-me` without one. |
+| Improve an already scoped task prompt before sending it | `/sharpen`. Use `/reframe` instead if the problem itself is unclear. |
 | Check whether you understood their ask | Offer the prompt: “Restate my goal, the problem, and what is still ambiguous. Do not start the work.” |
 | See what a change might break elsewhere | `/blast-radius`. For Standards and Spec review use `/code-review`; for evidence that the changed path works use `/verify`. |
 | Catch up on this chat and see what still needs their decision | `/ketchup`. For one confusing reply use `/wait-what`; for a fresh agent to take over use `/handoff`. |
+| Reconstruct where recent work on a topic stands across chats and project records | `/recall`. Use `/ketchup` for this chat alone or `/handoff` to package context already in hand. |
+| Record consequential decisions and their evidence during authorized work | `/show-me-your-work`. Use `/why` to reconstruct rationale after the fact. |
 | Investigate a broken or slow behavior | `/diagnosing-bugs`, or the triage on-ramp for an unprocessed inbox. |
 | Learn from a session, a recurring mistake, or a skill that did not help | `/retro`. Use `/retro time` only when the user wants measured time accounting. |
 | Draft or organize engineering docs for people | `/technical-writing`. For instructions agents follow use `/writing-for-agents`; for a PR body use `/pr`. |

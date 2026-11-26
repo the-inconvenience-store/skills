@@ -1,0 +1,5 @@
+interface:
+  display_name: "Sharpen"
+  short_description: "Rewrite a brief without expanding the work"
+policy:
+  allow_implicit_invocation: false

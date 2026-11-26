@@ -24,8 +24,11 @@ You invoke this by typing `/ask-inconvenient`; the agent won't reach for it on i
 | --- | --- |
 | What the code does now, or why someone designed it that way | [how](https://aihero.dev/skills-how) traces the current code; [why](https://aihero.dev/skills-why) traces the decision record |
 | An unclear idea needs the right vocabulary before design starts | [reframe](https://aihero.dev/skills-reframe), for checked precedents and a rewritten brief |
+| A scoped task prompt needs better sources, methods, or proof | [sharpen](https://aihero.dev/skills-sharpen), without expanding or doing the task |
 | A change looks small but could break a consumer elsewhere | [blast-radius](https://aihero.dev/skills-blast-radius), for a focused check of the safety assumption |
 | Progress in this chat, and what decisions still need you | [ketchup](https://aihero.dev/skills-ketchup), not [handoff](https://aihero.dev/skills-handoff) for another agent or [wait-what](https://aihero.dev/skills-wait-what) for one confusing reply |
+| Work on a topic is scattered across earlier chats | [recall](https://aihero.dev/skills-recall), which checks what still holds against current project records |
+| A long run needs a record of what was decided and why | [show-me-your-work](https://aihero.dev/skills-show-me-your-work), for an append-only trail linked to evidence |
 | An idea, and no idea where to start | The head of the main flow, including whether a spec earns its cost |
 | Incoming bugs and requests | The [triage](https://aihero.dev/skills-triage) on-ramp, not another triage pass over tickets you generated yourself |
 | Supplied designs to reproduce in the existing app | [parity](https://aihero.dev/skills-parity), with reference captures and a visual correction loop |

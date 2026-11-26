@@ -1,0 +1,5 @@
+interface:
+  display_name: "Recall"
+  short_description: "Rebuild recent working context across chats"
+policy:
+  allow_implicit_invocation: false
