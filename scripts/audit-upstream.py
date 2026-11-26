@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Reconcile upstream skills and docs with this fork and write a Markdown report."""
+"""Audit the skills fork and review upstream changes to pstack."""
 
 from __future__ import annotations
 
@@ -9,6 +9,7 @@ import fnmatch
 import json
 import re
 import subprocess
+import sys
 import tempfile
 from dataclasses import dataclass, field
 from datetime import datetime
@@ -19,6 +20,7 @@ from typing import Any, Iterable
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_CONFIG = REPO_ROOT / ".agents/skills/audit-upstream/config.json"
 DEFAULT_TEMPLATE = REPO_ROOT / ".agents/skills/audit-upstream/REPORT-TEMPLATE.md"
+PSTACK_CONFIG = REPO_ROOT / ".agents/skills/audit-upstream/pstack.json"
 TEMPLATE_TOKEN = re.compile(r"{{[A-Z_]+}}")
 
 
@@ -45,7 +47,7 @@ class Comparison:
     reason: str | None = None
 
 
-def run(command: list[str], cwd: Path | None = None) -> str:
+def run(command: list[str], cwd: Path | None = None, *, strip: bool = True) -> str:
     result = subprocess.run(
         command,
         cwd=cwd,
@@ -54,7 +56,7 @@ def run(command: list[str], cwd: Path | None = None) -> str:
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
     )
-    return result.stdout.strip()
+    return result.stdout.strip() if strip else result.stdout
 
 
 def git_value(repo: Path, *arguments: str, fallback: str = "unknown") -> str:
@@ -617,27 +619,129 @@ def upstream_checkout(config: dict[str, Any], supplied: Path | None):
     return temporary, root, config["upstream_url"]
 
 
+def pstack_report(repo: Path, config: dict[str, Any], head: str, source: str) -> Path:
+    def git(*args: str, strip: bool = True) -> str:
+        return run(["git", "-C", str(repo), *args], strip=strip)
+
+    reviewed = git("rev-parse", "--verify", f"{config['reviewed']}^{{commit}}")
+    current = git("rev-parse", "--verify", f"{head}^{{commit}}")
+    paths = config["paths"]
+    if not paths:
+        raise ValueError("The pstack watchlist must contain at least one path")
+
+    def tree(revision: str) -> set[str]:
+        return set(git("ls-tree", "-r", "--name-only", "-z", revision, "--", "pstack").split("\0")) - {""}
+
+    def covers(watch: str, path: str) -> bool:
+        return path == watch or (watch.endswith("/") and path.startswith(watch))
+
+    before, after = tree(reviewed), tree(current)
+    diff_args = ("diff", "--no-ext-diff", "--no-textconv", "--no-renames")
+    changed = set(
+        git(*diff_args, "--name-only", "-z", reviewed, current, "--", *paths).split("\0")
+    ) - {""}
+    added_skills = sorted(
+        path for path in after - before
+        if re.fullmatch(r"pstack/skills/[^/]+/SKILL\.md", path)
+        and not any(covers(watch, path) for watch in paths)
+    )
+    changes = [
+        f"- `{path}` ({'added' if path not in before else 'removed' if path not in after else 'changed'})"
+        for path in sorted(changed)
+    ]
+    rows = []
+    for watch, local in paths.items():
+        if not any(covers(watch, path) for path in after):
+            state = "Missing upstream"
+        elif any(covers(watch, path) for path in changed):
+            state = "Changed"
+        else:
+            state = "Unchanged"
+        targets = ", ".join(f"[`{path}`](../../{path})" for path in local)
+        rows.append(f"| `{watch}` | {targets} | {state} |")
+
+    date = datetime.now().astimezone().date().isoformat()
+    patch = git(*diff_args, "--binary", reviewed, current, "--", *paths, strip=False) if changed else ""
+    report = [
+        f"# pstack audit: {date}", "",
+        f"- Source: {source}",
+        f"- Last reviewed: `{reviewed}`",
+        f"- Current: `{current}`",
+        f"- Local: `{git_value(REPO_ROOT, 'rev-parse', 'HEAD')}`",
+        "", "This compares two upstream snapshots. Local paths show where to assess adoption, not what the diff compares.",
+        "", "## Assessment", "",
+        f"{len(changed)} watched files changed; {len(added_skills)} new unwatched skills to classify.",
+        "", "## Watchlist", "",
+        "| Upstream path | Local guidance | Status |", "| --- | --- | --- |",
+        *rows,
+        "", "## Changed watched files", "", *(changes or ["_None._"]),
+        "", "## New unwatched skills", "",
+        *([f"- [`{path}`](https://github.com/cursor/plugins/blob/{current}/{path})" for path in added_skills] or ["_None._"]),
+        "", "## Upstream diff", "", *([f"~~~~diff\n{patch}~~~~"] if patch else ["_None._"]),
+        "", "Configuration: [pstack.json](../../.agents/skills/audit-upstream/pstack.json).", "",
+    ]
+    output = REPO_ROOT / "docs/upstream" / f"{date}-pstack-{reviewed[:7]}-{current[:7]}.md"
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text("\n".join(report), encoding="utf-8")
+    return output
+
+
+def audit_pstack(supplied: Path | None) -> Path:
+    config = json.loads(PSTACK_CONFIG.read_text(encoding="utf-8"))
+    if supplied is not None:
+        root = supplied.resolve()
+        return pstack_report(root, config, "HEAD", f"local checkout `{root}`")
+    with tempfile.TemporaryDirectory(prefix="audit-pstack-") as directory:
+        root = Path(directory)
+        run(["git", "init", "--bare", "--quiet", str(root)])
+        ref = "refs/heads/pstack-current"
+        run([
+            "git", "-C", str(root), "fetch", "--quiet", "--no-tags", "--depth=1",
+            config["upstream_url"], config["reviewed"], f"{config['upstream_ref']}:{ref}",
+        ])
+        return pstack_report(root, config, ref, config["upstream_url"])
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--config",
         type=Path,
-        default=DEFAULT_CONFIG,
-        help="Audit configuration (default: %(default)s)",
+        help="Fork audit configuration; implies --source fork unless --pstack-dir is also supplied",
     )
     parser.add_argument(
         "--upstream-dir",
         type=Path,
         help="Use an existing upstream checkout instead of cloning",
     )
-    return parser.parse_args()
+    parser.add_argument(
+        "--source", choices=("both", "fork", "pstack"),
+        help="Audit both by default, or select one upstream",
+    )
+    parser.add_argument(
+        "--pstack-dir", type=Path,
+        help="Compare a trusted pstack checkout's HEAD; it must contain the reviewed commit",
+    )
+    args = parser.parse_args()
+    if args.source is None:
+        fork_override = args.config is not None or args.upstream_dir is not None
+        if fork_override and args.pstack_dir is None:
+            args.source = "fork"
+        elif args.pstack_dir is not None and not fork_override:
+            args.source = "pstack"
+        else:
+            args.source = "both"
+    if args.source == "pstack" and (args.config is not None or args.upstream_dir is not None):
+        parser.error("--config and --upstream-dir apply only to the fork audit")
+    if args.source == "fork" and args.pstack_dir is not None:
+        parser.error("--pstack-dir applies only to the pstack audit")
+    return args
 
 
-def main() -> int:
-    args = parse_args()
-    config = load_config(args.config.resolve())
+def audit_fork(config_path: Path, upstream_dir: Path | None) -> Path:
+    config = load_config(config_path.resolve())
     temporary, upstream_root, upstream_source = upstream_checkout(
-        config, args.upstream_dir
+        config, upstream_dir
     )
     try:
         skills, ignored_skills, stale_skill_ignores = reconcile_skills(
@@ -662,11 +766,30 @@ def main() -> int:
         output = REPO_ROOT / config["report_directory"] / f"{date}-{upstream_commit[:7]}.md"
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(report, encoding="utf-8")
-        print(output.relative_to(REPO_ROOT).as_posix())
-        return 0
+        return output
     finally:
         if temporary is not None:
             temporary.cleanup()
+
+
+def main() -> int:
+    args = parse_args()
+    audits = []
+    if args.source in ("both", "fork"):
+        audits.append(("fork", lambda: audit_fork(args.config or DEFAULT_CONFIG, args.upstream_dir)))
+    if args.source in ("both", "pstack"):
+        audits.append(("pstack", lambda: audit_pstack(args.pstack_dir)))
+    failed = False
+    for source, audit in audits:
+        try:
+            output = audit()
+        except (OSError, ValueError, subprocess.CalledProcessError) as error:
+            detail = error.stderr.strip() if isinstance(error, subprocess.CalledProcessError) and error.stderr else str(error)
+            print(f"{source} audit failed: {detail}", file=sys.stderr)
+            failed = True
+        else:
+            print(output.relative_to(REPO_ROOT).as_posix())
+    return int(failed)
 
 
 if __name__ == "__main__":

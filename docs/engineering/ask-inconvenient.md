@@ -12,7 +12,7 @@ npx skills update ask-inconvenient
 
 ## What it does
 
-`ask-inconvenient` is the router over the skills in this repo. You describe the situation you're in; it names the skill or flow that fits, the order to run it, and where your decisions sit. It recommends a next command rather than starting the work for you.
+`ask-inconvenient` starts with what you want to do, not the name of a skill. It recommends the next command, explains why, and can give you a prompt ready to send. It mentions setup only when it changes that next step.
 
 It **does no work itself**. It doesn't grill, write a spec, or fix anything; it only orients. It exists for the user-invoked skills above all: nothing fires those for you, so `ask-inconvenient` is the memory you offload that to. It also maps model-invoked disciplines such as [verify](https://aihero.dev/skills-verify) and the three vocabulary layers: [domain-modeling](https://aihero.dev/skills-domain-modeling), [codebase-design](https://aihero.dev/skills-codebase-design), and [engineering-principles](https://aihero.dev/skills-engineering-principles).
 
@@ -22,13 +22,20 @@ You invoke this by typing `/ask-inconvenient`; the agent won't reach for it on i
 
 | Your situation | What the router gives back |
 | --- | --- |
+| What the code does now, or why someone designed it that way | [how](https://aihero.dev/skills-how) traces the current code; [why](https://aihero.dev/skills-why) traces the decision record |
+| An unclear idea needs the right vocabulary before design starts | [reframe](https://aihero.dev/skills-reframe), for checked precedents and a rewritten brief |
+| A change looks small but could break a consumer elsewhere | [blast-radius](https://aihero.dev/skills-blast-radius), for a focused check of the safety assumption |
+| Progress in this chat, and what decisions still need you | [ketchup](https://aihero.dev/skills-ketchup), not [handoff](https://aihero.dev/skills-handoff) for another agent or [wait-what](https://aihero.dev/skills-wait-what) for one confusing reply |
 | An idea, and no idea where to start | The head of the main flow, including whether a spec earns its cost |
 | Incoming bugs and requests | The [triage](https://aihero.dev/skills-triage) on-ramp, not another triage pass over tickets you generated yourself |
 | Supplied designs to reproduce in the existing app | [parity](https://aihero.dev/skills-parity), with reference captures and a visual correction loop |
+| A named property should hold across event orders or inputs | [formal-verify](https://aihero.dev/skills-formal-verify) to create, run, or maintain a check with explicit scope |
+| A transition model or counterexample needs a readable chart | [statechart](https://aihero.dev/skills-statechart) to generate it from TLC output |
 | Finished branch work to publish | [ship](https://aihero.dev/skills-ship) to rebase, resolve conflicts, verify, commit, push, and open a PR using [pr](https://aihero.dev/skills-pr) |
 | Two skills that look interchangeable | A concrete boundary: working directory or none, single-session or multi-session planning |
 | A long session and a context decision | The ordered choices at a phase boundary |
-| A session to learn from, or measured evidence of where agent time goes | [retro](https://aihero.dev/skills-retro) for the session; `/retro time` for the time audit |
+| A session, repeated agent mistake, or ineffective skill to learn from | [retro](https://aihero.dev/skills-retro) for proposals; `/retro time` if you want measured time accounting |
+| Engineering docs need a structure, or a draft just needs cleaner prose | [technical-writing](https://aihero.dev/skills-technical-writing) for structure; [unslop](https://aihero.dev/skills-unslop) for a copy pass |
 | A skill you have already picked | No extra step needed. Invoke that skill directly. |
 
 ## Prerequisites

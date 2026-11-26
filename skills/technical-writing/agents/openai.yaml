@@ -1,0 +1,3 @@
+interface:
+  display_name: "Technical Writing"
+  short_description: "Structure human-facing engineering docs around the reader's task"

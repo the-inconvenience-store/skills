@@ -1,14 +1,12 @@
 ---
 name: audit-upstream
-description: Audit the canonical upstream skills repository against this fork and write a decision-ready Markdown report.
+description: Audit the canonical skills fork and pstack, and classify changes worth adopting.
 disable-model-invocation: true
 ---
 
 # Audit Upstream
 
-Treat the audit as a **reconciliation**: normalize both repository layouts first, then account for every skill and docs page.
-
-## 1. Generate the inventory
+## 1. Generate the reports
 
 From the repository root, run:
 
@@ -16,15 +14,16 @@ From the repository root, run:
 ./scripts/audit-upstream.py
 ```
 
-Pass `--upstream-dir <path>` only when the user supplied a trusted local checkout. The default clones the configured upstream ref into a temporary directory. The step is complete when the command exits successfully and prints a report path under `docs/upstream/` with both upstream and local commit identities.
+By default this writes two report paths under `docs/upstream/`: a fork reconciliation against the local working tree, and a pstack comparison from its last-reviewed commit to the current upstream commit. Use `--source fork` or `--source pstack` when the user asks for only one. Pass `--upstream-dir` (fork) or `--pstack-dir` only for a trusted checkout the user supplied. Read the printed reports. If one audit fails, assess any successful report and name the missing source.
 
-## 2. Check the reconciliation
+## 2. Check each source using its own policy
 
-Read [the audit configuration](./config.json) and the generated report. Confirm that every upstream skill is exactly one of mapped, new, or ignored, and every local skill is mapped or reported as absent upstream. Treat rename mappings and ignores as policy: record suspected additions in the report instead of changing policy without the user's direction. The step is complete when there are no duplicate targets, unclassified skills, or unexplained stale ignore entries.
+- **Fork:** Read [config.json](./config.json). Confirm that every upstream skill is mapped, new, or ignored, and every local skill is mapped or reported as absent upstream. Keep rename mappings and ignores as policy; call out suspected changes rather than silently remapping them. Account for duplicate targets, unclassified skills, and stale ignores.
+- **pstack:** Read the [watchlist procedure](./PSTACK.md) and its mapping. Assess watched diffs against the corresponding local guidance, investigate missing paths, and inspect newly added unwatched skills. Treat pstack as a source of ideas, not a fork whose local differences must be reconciled.
 
 ## 3. Assess the changes
 
-Read every new-skill entry, changed-skill file list, absent-upstream entry, docs change, and detailed diff in the report. Replace the generated assessment with a concise decision-oriented summary that distinguishes:
+Read each report's changed paths and diffs, including docs. For the fork, also read each new and absent entry; for pstack, open the pinned source of each new unwatched skill. Replace each generated assessment with an adopt, defer, or ignore summary that distinguishes:
 
 - upstream changes worth considering for adoption;
 - intentional fork divergence, including branding and invocation changes;
@@ -33,11 +32,13 @@ Read every new-skill entry, changed-skill file list, absent-upstream entry, docs
 
 The step is complete when every non-empty report category is represented in the assessment or explicitly identified as mechanical noise.
 
+For pstack, advance the last-reviewed commit only after accounting for every watched change and new skill. Keep the evidence report for the comparison that informed the decision.
+
 ## 4. Implement approved changes
 
 When the user asks to adopt upstream changes, implement the meaningful behavior and its connected docs, manifests, router entries, and invocation metadata according to this repository's instructions.
 
-For every new upstream skill classified during an implementation run, update [the audit configuration](./config.json) in the same change. Add an explicit `skill_mappings` entry even when the normalized local name is unchanged; add the corresponding `docs_mappings` entry when an upstream docs page exists. If the user deliberately declines the skill, add a reasoned ignore rule instead. No newly classified skill may remain implicit after implementation.
+For a new fork skill classified during implementation, add an explicit mapping in [config.json](./config.json), including the docs mapping when one exists, or add a reasoned ignore if the user declines. For a newly adopted pstack source, add its upstream path and local landing points to [pstack.json](./pstack.json) instead.
 
 Localize adopted content. Search the implemented skill and every connected local file case-insensitively for upstream branding and identifiers:
 
@@ -47,16 +48,16 @@ rg -ni 'matt([ -]?pocock)?|mattpocock' <adopted paths>
 
 Replace user-facing and internal references with this fork's vocabulary: `inconvenient`, the appropriate renamed skill such as `ask-inconvenient` or `bootstrap-skills`, and `the-inconvenience-store/skills` where a repository identifier is needed. Inspect every match rather than applying a blind replacement. Preserve upstream identity only where exact provenance, fetch URLs, mapping keys, raw diffs, or attribution require it.
 
-Re-run `./scripts/audit-upstream.py` after implementation. Read every remaining changed mapping and explain why it is intentional; continue implementing if it exposes an unapplied behavioral change. The step is complete when the refreshed report has no unclassified additions and every remaining difference has a concrete fork reason.
+After fork adoption, rerun `./scripts/audit-upstream.py --source fork` and explain every remaining changed mapping as intentional or finish applying the missing behavior. After pstack adoption, check the adopted behavior and its local consumers directly: the upstream-to-upstream diff cannot prove local adoption. Preserve the original pstack report, including its comparison revisions and decisions.
 
 ## 5. Finish with a decision summary
 
-Verify the report follows [the report template](./REPORT-TEMPLATE.md), contains no unresolved template token, and remains under `docs/upstream/`.
+Verify that the fork report follows [the report template](./REPORT-TEMPLATE.md), that the pstack report records both upstream revisions and its watchlist results, and that all generated reports remain under `docs/upstream/` without unresolved template tokens.
 
 Always finish by telling the user:
 
 - which changes are meaningful and why, grouped by adopt, defer, or ignore rather than by raw file count;
-- the report path and headline reconciliation counts;
+- the report paths and counts for each source;
 - which remaining differences are intentional fork policy.
 
 For an audit-only run, explicitly offer to implement the meaningful changes. For an implementation run, summarize what was implemented and offer to implement any meaningful changes that remain; say clearly when none remain. The audit is incomplete if the final response only reports counts or a file path.

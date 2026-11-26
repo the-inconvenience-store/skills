@@ -1,0 +1,3 @@
+interface:
+  display_name: "Formal Verify"
+  short_description: "Check a named property in a model or actual code"

@@ -8,7 +8,24 @@ disable-model-invocation: true
 
 You don't remember every skill, so ask.
 
-Before stating what a skill does or recommending a step be skipped, read that skill's SKILL.md: the summaries here are for orientation only.
+This is a recommendation, not an execution step. Read the destination's `SKILL.md` before recommending it or saying a step can be skipped. Mention setup only when it changes the next action. Give one next command, the reason it fits, and at most one ready-to-send prompt with the goal and relevant constraints or evidence. If no skill is needed, give the prompt alone. For a multi-step flow, name the next step first.
+
+Route a named intent directly. If two routes would lead to materially different actions and the context does not settle which one the user wants, ask one question that separates them. Do not invoke the recommended skill or start the work, even if the request also describes the work.
+
+## Start with intent
+
+| The user wants to | Recommend |
+| --- | --- |
+| Understand how code works today or where responsibility lives | `/how`. For why a decision was made, use `/why`. |
+| Find the right words for an unclear idea | `/reframe`. For decisions that need an interview, use `/grill-with-docs` in a repo or `/grill-me` without one. |
+| Check whether you understood their ask | Offer the prompt: “Restate my goal, the problem, and what is still ambiguous. Do not start the work.” |
+| See what a change might break elsewhere | `/blast-radius`. For Standards and Spec review use `/code-review`; for evidence that the changed path works use `/verify`. |
+| Catch up on this chat and see what still needs their decision | `/ketchup`. For one confusing reply use `/wait-what`; for a fresh agent to take over use `/handoff`. |
+| Investigate a broken or slow behavior | `/diagnosing-bugs`, or the triage on-ramp for an unprocessed inbox. |
+| Learn from a session, a recurring mistake, or a skill that did not help | `/retro`. Use `/retro time` only when the user wants measured time accounting. |
+| Draft or organize engineering docs for people | `/technical-writing`. For instructions agents follow use `/writing-for-agents`; for a PR body use `/pr`. |
+| Tighten the wording of an existing draft without changing its meaning | `/unslop`. |
+| Turn an idea into shipped work | Follow the main flow below. Use `/wayfinder` if the decisions are too large and unclear for one session. |
 
 A **flow** is a path through the skills. Most paths run along one **main flow**, and two **on-ramps** merge onto it. Everything else is standalone, or a vocabulary layer that runs underneath.
 
@@ -89,6 +106,8 @@ Off the main flow entirely.
 - **`/grilling`** is the interview primitive itself: rounds, the frontier, facts are the agent's job and decisions are yours. `/grill-me` and `/grill-with-docs` are the two named ways in, and `/triage`, `/wayfinder` and `/improve-codebase-architecture` all run it internally. Reach for it directly only when you want the interview with no wrapper around it.
 - **`/prototype`** is a small, throwaway program that answers one design question: does this state model feel right, or what should this UI look like. Throwaway is a constraint on how the code is written, not a promise to destroy it: the answer folds into the real code, and the prototype itself is kept as a **primary source** on a `prototype/<name>` branch out of main, pointed at from the implementation issue. It's the detour in step 2 of the main flow, but reach for it any time a design question is hard to settle on paper.
 - **`/parity`**: reproduce supplied designs using project components and existing application contracts. It reads and renders references, captures a baseline, compares the requested screens, then batches corrections and refreshes only affected evidence. New backend capabilities require explicit scope; unrelated bugs are reported separately. Use it directly for visual implementation, `/implement` for settled behavior from specs or tickets, and `/prototype` for design exploration. When explicitly combined with `/implement`, the enclosing workflow runs engineering gates once.
+- **`/formal-verify`**: create, run, or maintain a project-local formal check of a named property that ordinary tests struggle to cover. It reports the model or code checked and the limits of the result. Use `/verify` instead for evidence from the shipped surface.
+- **`/statechart`**: check a TLA+ transition model and generate a Mermaid chart from the explored graph or counterexample, with SVG on request. Use it before implementation to review a design or after a formal check to explain a trace.
 - **`/research`**: delegate reading legwork to a **background agent**: it investigates a question against **primary sources**, then leaves a cited Markdown file in the repo. Keep working while it reads. The file it produces is something to take *into* the main flow at `/grill-with-docs`; research feeds the thinking, it doesn't replace it.
 - **`/to-questionnaire`**: when the thing blocking you isn't in your head or the codebase but in **someone else's**, this writes them a questionnaire to fill in. It's the inverse of `/grill-me`: instead of interviewing you about the subject, it interviews you about the **send** (who it's going to, what you need back) and aims the questions at the gap. What comes back is material for `/grill-with-docs` or `/to-spec`.
 - **`/wizard`** is for the steps only a **human** can take: provisioning infrastructure, setting up credentials or CI secrets, clicking through an unfamiliar third-party dashboard, running a one-off migration or cutover. It generates an interactive bash script that opens each URL, captures each value, and writes it into `.env` and GitHub secrets, so the procedure stops being something you re-explain to an agent every time. Model-invoked, so the agent reaches for it the moment it hits a wall only you can pass. If the agent could just do it itself, it should; this is for where a human is genuinely in the loop.

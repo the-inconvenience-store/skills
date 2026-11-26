@@ -39,9 +39,11 @@ The **Standards** axis needs no standards document to exist: it always carries a
 
 The defining idea is the **two axes**. **Standards** asks whether the diff conforms to how this repo writes code: every file in the repo that documents standards (`CODING_STANDARDS.md` and `CONTRIBUTING.md` always, when present), a fixed Fowler smell baseline, and only the engineering principles triggered by this change. Repository standards override the baselines; smells and principles remain judgment calls rather than hard violations. **Spec** asks the orthogonal question: does the code do what the issue or spec actually asked, without missing requirements or smuggling in scope creep?
 
-When a spec is available, both axes run as parallel foreground sub-agents, issued together, so neither pollutes the other's context. The final report presents separate `## Standards` and `## Spec` headings, then a finding count and worst issue **per axis**, never an overall winner. Real-surface execution remains the job of [verify](https://aihero.dev/skills-verify), not a third review axis.
+When a spec is available, both axes run as parallel foreground sub-agents, issued together, so neither pollutes the other's context. The final report presents separate `## Standards` and `## Spec` headings, then a finding count and worst issue **per axis**, never an overall winner.
 
 Two sub-agents is the full fan-out when both axes run; without a spec, only Standards runs. Each starts with a fresh context window. Both briefs forbid the sub-agent from reaching for `/code-review` itself or spawning anything further, because a review agent that can rediscover this skill will start its own pair and the count climbs without a ceiling.
+
+For a risky change, the review calls [blast-radius](https://aihero.dev/skills-blast-radius) on the same diff to check the one assumption that makes the change safe. Missing evidence leaves it unproven. This is not a third review axis or a substitute for [verify](https://aihero.dev/skills-verify) on the finished change.
 
 ## Common questions
 

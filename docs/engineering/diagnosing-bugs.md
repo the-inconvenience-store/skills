@@ -40,6 +40,10 @@ If no red-capable loop can be built, the skill stops and lists what it tried. Th
 
 The repro is then minimised until every remaining input, caller, and setup step is needed to keep it red. That smaller case makes the hypothesis list sharper and, where a correct test seam exists, becomes the regression test. If no seam can exercise the real call-site pattern, the skill records that architectural finding rather than hiding it behind a shallow test.
 
+When the history could change which hypothesis to test first, the agent uses [why](https://aihero.dev/skills-why) to recover the recorded rationale. That history helps pick the next probe; it does not establish what caused the failure.
+
+If two fixes that share an assumption fail the same check, Fix Root Causes switches the next step from another patch to a probe of that assumption. For a performance regression, Explain the Number sets the decision threshold before measuring and keeps successful work, run-to-run spread, and the observed bottleneck attached to any claimed improvement.
+
 The hand-off is evidence, not just a patch: the original repro goes green, the original public path receives a `VERIFIED` verdict, and the commit or PR names the hypothesis that proved correct. A passing test alone does not replace that real-surface proof.
 
 ## Common questions

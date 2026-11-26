@@ -14,7 +14,7 @@ npx skills update engineering-principles
 
 `engineering-principles` gives engineering workflows a shared vocabulary for recurring decisions: subtract before adding, model behavior structurally, keep retries idempotent, fail loudly, isolate parallel writers, and prove the real result without weakening the checks that prove it.
 
-It is selective rather than a 24-item checklist. The agent scans triggers against the current decision, loads only references that could materially change it, and turns each into a concrete constraint, design choice, or proof obligation. References already available in context are reused across workflows; selection changes when a new material decision appears. You may name a principle for extra emphasis, but selection does not depend on you doing so.
+The agent scans triggers against the decision in front of it, loads only references that could materially change it, and turns each into a concrete constraint, design choice, or proof obligation. References already available in context are reused across workflows; selection changes when a new material decision appears. You may name a principle for extra emphasis, but selection does not depend on you doing so.
 
 ## When to reach for it
 
@@ -28,23 +28,25 @@ The principles sit below explicit product decisions, the accepted spec, reposito
 
 This matters when useful principles pull in different directions. A one-wave API migration is simpler, but an independently deployed consumer may require bounded expand-contract. The skill preserves agreed behavior and a working feedback loop, then prefers the smaller reversible step. Deliberation scales with reversibility: a two-way door proceeds on precedent, while a one-way door such as data loss or a published contract earns exploration and confirmation.
 
-## Twenty-four leading words
+## Twenty-five leading words
 
 The index covers five families:
 
 - **Shape:** Laziness Protocol, Foundational Thinking, Redesign from First Principles, Subtract Before You Add, Minimize Reader Load, Outcome-Oriented Execution, Experience First, Exhaust the Design Space, and Build the Lever.
 - **Architecture:** Model Behavior Structurally, Boundary Discipline, Type System Discipline, Make Operations Idempotent, Migrate Callers Then Delete Legacy APIs, Separate Before Serializing Shared State, Treat Observable Behavior as Contract, and Fail Loudly.
-- **Verification:** Prove It Works, Protect the Signal, Fix Root Causes, and Sequence Verifiable Units.
+- **Verification:** Prove It Works, Protect the Signal, Fix Root Causes, Explain the Number, and Sequence Verifiable Units.
 - **Collaboration:** Guard the Context Window and Keep Execution Unblocked.
 - **Learning:** Encode Lessons in Structure.
+
+**Attack the Premise** is part of Fix Root Causes. When two fixes share an assumption and fail the same check, test that assumption directly before trying another. **Explain the Number** asks what result would change the decision and what the measurement actually counted, so a speedup claim reflects successful work rather than skipped work or noise.
 
 Two names are deliberately adapted to this workflow. **Model Behavior Structurally** leaves domain language to `domain-modeling`. **Keep Execution Unblocked** preserves the split that facts belong to the agent while product decisions belong to you.
 
 ## Common questions
 
-**Twenty-four principles is a lot of context. Does all of it load every time?**
+**Do all twenty-five principles load every time?**
 
-No, and the selective design is the whole point. The agent scans the trigger index against the decision in front of it and reads only the matched leaves. A skill that loaded all twenty-four would be a checklist, and a checklist gets skimmed: the failure mode is an agent that nods at every principle and applies none. If you see a report citing most of the index, something has gone wrong with selection, not with the decision.
+No. The agent scans the index and reads only the leaves relevant to the decision. If you see a report citing most of the index, something has gone wrong with selection, not with the decision.
 
 **Will each workflow or subagent read the same references again?**
 

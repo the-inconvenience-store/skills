@@ -1,6 +1,6 @@
 ---
 name: engineering-principles
-description: Shared decision principles for implementation, refactoring, architecture, review, debugging, verification, migration, and parallel work. Use when another engineering skill needs common judgment rules or the user names Laziness Protocol, Foundational Thinking, Redesign from First Principles, Subtract Before You Add, Minimize Reader Load, Outcome-Oriented Execution, Experience First, Exhaust the Design Space, Build the Lever, Model Behavior Structurally, Boundary Discipline, Type System Discipline, Make Operations Idempotent, Migrate Callers Then Delete Legacy APIs, Separate Before Serializing Shared State, Treat Observable Behavior as Contract, Fail Loudly, Prove It Works, Protect the Signal, Fix Root Causes, Sequence Verifiable Units, Guard the Context Window, Keep Execution Unblocked, or Encode Lessons in Structure.
+description: Shared decision principles for implementation, refactoring, architecture, review, debugging, verification, migration, and parallel work. Use when another engineering skill needs common judgment rules or the user names Laziness Protocol, Foundational Thinking, Redesign from First Principles, Subtract Before You Add, Minimize Reader Load, Outcome-Oriented Execution, Experience First, Exhaust the Design Space, Build the Lever, Model Behavior Structurally, Boundary Discipline, Type System Discipline, Make Operations Idempotent, Migrate Callers Then Delete Legacy APIs, Separate Before Serializing Shared State, Treat Observable Behavior as Contract, Fail Loudly, Prove It Works, Protect the Signal, Fix Root Causes, Attack the Premise, Explain the Number, Sequence Verifiable Units, Guard the Context Window, Keep Execution Unblocked, or Encode Lessons in Structure.
 ---
 
 # Engineering Principles
@@ -64,7 +64,8 @@ Selection is complete when every material decision surface has been scanned and 
 
 - **Prove It Works**: work is about to be called complete. Read [references/prove-it-works.md](references/prove-it-works.md).
 - **Protect the Signal**: a check fails and the tempting fix changes the check rather than the code. Read [references/protect-the-signal.md](references/protect-the-signal.md).
-- **Fix Root Causes**: a bug, failure, or performance regression is being diagnosed, or performance is being optimized. Read [references/fix-root-causes.md](references/fix-root-causes.md).
+- **Fix Root Causes** (including Attack the Premise): a bug, failure, or performance regression is being diagnosed, or performance is being optimized. Read [references/fix-root-causes.md](references/fix-root-causes.md).
+- **Explain the Number**: a measured result will support a performance claim or decision. Read [references/explain-the-number.md](references/explain-the-number.md).
 - **Sequence Verifiable Units**: work spans several slices, commits, tickets, or migration batches, or validation must be scoped, scheduled, or rerun. Read [references/sequence-verifiable-units.md](references/sequence-verifiable-units.md).
 
 ## Collaboration

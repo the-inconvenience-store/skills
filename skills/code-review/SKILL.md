@@ -78,9 +78,15 @@ Exactly two sub-agents run, and neither delegates further. Both briefs below end
 
 If the spec is missing, skip the Spec sub-agent and note this in the final report.
 
-### 5. Aggregate
+### 5. Check the safety assumption when the change has material blast radius
+
+For a change that could break a downstream consumer, shared state, or durable data, call the Skill tool with `blast-radius`. Supply the exact diff and reviewed revision from step 1. Run this in the review lead, without spawning another review axis. Standards and Spec findings still stand on their own evidence; textual findings do not need a runtime reproduction.
+
+### 6. Aggregate
 
 Present the two reports under `## Standards` and `## Spec` headings, verbatim or lightly cleaned. Do **not** merge or rerank findings, because the two axes are deliberately separate (see _Why two axes_).
+
+If the blast-radius step applied, report the assumption after the two axes. Give the command, observed result, and whether it supports or contradicts the assumption. If it could not be established, report **Unproven** and why. Keep this evidence out of the axis finding counts.
 
 End with a one-line summary: total findings per axis, and the worst issue _within each axis_ (if any). Don't pick a single winner across axes: that's the reranking the separation exists to prevent.
 

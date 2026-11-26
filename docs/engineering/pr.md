@@ -16,6 +16,8 @@ npx skills update pr
 
 The summary is a visual, not a paragraph. Where a default PR body narrates the diff in prose, this one picks the **smallest view** that makes the key point clear and keeps the words around it brief. The reviewer already has the diff open; the body's job is to show them its shape before they read it.
 
+After the body is drafted, `pr` calls [unslop](https://aihero.dev/skills-unslop) once to tighten the prose. The template, diagrams, evidence, and risk call stay intact.
+
 ## When to reach for it
 
 Type `/pr`, or the agent reaches for it automatically whenever it is writing a PR body.

@@ -11,6 +11,8 @@ When exploring the codebase, read `GLOSSARY.md` (if it exists) to get a clear me
 
 Call the Skill tool with `engineering-principles` unless its selection policy is already available in context. Apply that policy against the symptom, suspected mechanism, and intended fix. Fix Root Causes is the diagnostic default. Select Build the Lever when repeated or broad work repays tooling cost, and Prove It Works when preparing a completion claim.
 
+If a measurement will support a diagnosis or performance claim, apply Explain the Number before building or running the measurement loop in Phase 1.
+
 ## Redact
 
 This skill has you show commands, outputs and captured artifacts. **Redact every secret first**: write `<REDACTED>` in its place. Build loops against env vars, so the credential stays in the environment rather than in what you show. Captured artifacts carry auth headers: quote only the lines that carry the signal.
@@ -91,6 +93,8 @@ Do not proceed until you have reproduced **and** minimised.
 
 ## Phase 3: Hypothesise
 
+If the history of the affected code could change which hypothesis you test first, call the Skill tool with `why`. Give it the affected symbol or path and any known last-good or first-bad revision. Use the record to rank hypotheses; use the red feedback loop to test them.
+
 Generate **3–5 ranked hypotheses** before testing any of them. Single-hypothesis generation anchors on the first plausible idea.
 
 Each hypothesis must be **falsifiable**: state the prediction it makes.
@@ -113,7 +117,7 @@ Tool preference:
 
 **Tag every debug log** with a unique prefix, e.g. `[DEBUG-a4f2]`. Cleanup at the end becomes a single grep. Untagged logs survive; tagged logs die.
 
-**Perf branch.** For performance regressions, logs are usually wrong. Instead: establish a baseline measurement (timing harness, `performance.now()`, profiler, query plan), then bisect. Measure first, fix second.
+**Perf branch.** For performance regressions, prefer a baseline measurement and profile to logging. Apply Explain the Number to vet the baseline before bisecting or changing code, and to judge the post-fix result before reporting it.
 
 ## Phase 5: Fix + regression test
 

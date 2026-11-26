@@ -191,7 +191,7 @@ Skills for daily code work.
 
 **User-invoked**
 
-- **[ask-inconvenient](./skills/ask-inconvenient/SKILL.md)**: Ask which skill or flow fits your situation. A router over the user-invoked skills in this repo.
+- **[ask-inconvenient](./skills/ask-inconvenient/SKILL.md)**: Recommend the next skill or flow from your situation, with a prompt you can send. Does not start the work.
 - **[grill-with-docs](./skills/grill-with-docs/SKILL.md)**: Grilling session that also builds your project's domain model, sharpening terminology and updating `GLOSSARY.md` and ADRs inline.
 - **[triage](./skills/triage/SKILL.md)**: Move issues through a state machine of triage roles.
 - **[improve-codebase-architecture](./skills/improve-codebase-architecture/SKILL.md)**: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.
@@ -214,10 +214,16 @@ Skills for daily code work.
 - **[tdd](./skills/tdd/SKILL.md)**: Test-driven development with a red-green-refactor loop. Builds features or fixes bugs one vertical slice at a time.
 - **[domain-modeling](./skills/domain-modeling/SKILL.md)**: Actively build and sharpen a project's domain model: challenge terms against the glossary, stress-test with edge-case scenarios, and update `GLOSSARY.md` and ADRs inline.
 - **[codebase-design](./skills/codebase-design/SKILL.md)**: Shared discipline and vocabulary for designing deep modules: a lot of behaviour behind a small interface, placed at a clean seam, testable through that interface.
-- **[engineering-principles](./skills/engineering-principles/SKILL.md)**: Selective vocabulary for 24 recurring engineering decisions. Workflows proactively scan its trigger index and load only the matched leaves; user-named principles receive extra emphasis rather than enabling selection.
+- **[engineering-principles](./skills/engineering-principles/SKILL.md)**: Selective vocabulary for 25 recurring engineering decisions. Workflows proactively scan its trigger index and load only the matched leaves; user-named principles receive extra emphasis rather than enabling selection.
 - **[verify](./skills/verify/SKILL.md)**: Create, run, or maintain portable project instructions for proving behavior through the real UI, CLI, service, mobile app, or public library interface.
+- **[formal-verify](./skills/formal-verify/SKILL.md)**: Create, run, or maintain a project-local check of a named property, using a state model, an implementation verifier, or a proof as the claim requires.
+- **[statechart](./skills/statechart/SKILL.md)**: Check a TLA+ model with TLC and generate a readable Mermaid statechart, with counterexample paths and Pele SVG rendering on request.
 - **[code-review](./skills/code-review/SKILL.md)**: Two-axis review of the diff since a fixed point: **Standards** (does it follow the repo's coding standards, plus a Fowler smell baseline?) and **Spec** (does it faithfully implement the originating issue/spec?), run as parallel sub-agents so neither pollutes the other.
+- **[how](./skills/how/SKILL.md)**: Trace how a subsystem works today and where its responsibilities live.
+- **[why](./skills/why/SKILL.md)**: Explain a decision from the historical record, separating documented rationale from inference.
+- **[blast-radius](./skills/blast-radius/SKILL.md)**: Find what a change might break beyond the diff and check the assumption that makes it safe.
 - **[pr](./skills/pr/SKILL.md)**: Shape a PR body that's fast to review: the smallest visual that makes the change clear, before/after evidence that it works, and a one-way or two-way door call with its blast radius.
+- **[technical-writing](./skills/technical-writing/SKILL.md)**: Structure human-facing engineering docs around what the reader needs to learn, do, look up, or understand.
 - **[wizard](./skills/wizard/SKILL.md)**: Generate an interactive bash wizard for setup steps only a human can perform, such as credentials, dashboards, migrations, and cutovers.
 
 ### Productivity
@@ -231,8 +237,11 @@ General workflow tools, not code-specific.
 - **[teach](./skills/teach/SKILL.md)**: Teach the user a new skill or concept over multiple sessions, using the current directory as a stateful teaching workspace.
 - **[to-questionnaire](./skills/to-questionnaire/SKILL.md)**: Turn a decision blocked on someone else's knowledge into a Markdown questionnaire they can answer asynchronously.
 - **[wait-what](./skills/wait-what/SKILL.md)**: Re-pitch the agent's last message with missing context, simpler English, and the project's vocabulary.
+- **[reframe](./skills/reframe/SKILL.md)**: Find the expert vocabulary and checked precedents that sharpen an unclear brief.
+- **[ketchup](./skills/ketchup/SKILL.md)**: Catch up on what changed in this chat and get the evidence needed for decisions still waiting on you.
 
 **Model-invoked**
 
 - **[grilling](./skills/grilling/SKILL.md)**: Interview the user in frontier-based rounds until every branch of the design tree is resolved. The reusable loop behind `grill-me` and `grill-with-docs`.
 - **[writing-for-agents](./skills/writing-for-agents/SKILL.md)**: Reference for writing documents agents consume, including skills, `AGENTS.md`, and `CLAUDE.md`.
+- **[unslop](./skills/unslop/SKILL.md)**: Cut filler, vague claims, and canned phrasing from a draft without changing its meaning or format.

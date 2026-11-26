@@ -1,0 +1,5 @@
+interface:
+  display_name: "Reframe"
+  short_description: "Find the right words and rewrite your brief"
+policy:
+  allow_implicit_invocation: false

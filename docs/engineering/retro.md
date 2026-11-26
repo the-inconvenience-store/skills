@@ -40,8 +40,8 @@ The workflow applies to omp, Claude Code, Codex CLI, and other harnesses with ac
 
 | Invocation | Scope and purpose |
 | --- | --- |
-| `/retro` | The current session, across all retrospective categories |
-| `/retro <session>` | A specified session, with the same general scope |
+| `/retro` | Review the current session and use the lenses its evidence calls for |
+| `/retro <session>` | Review a specified session in the same way |
 | `/retro time` | A full measured time audit of the current repo's trailing 90 days, including subagents |
 | `/retro time <session>` | A measured time audit of the specified session |
 | `/retro time` with an explicit period | A measured time audit over that period instead of the default window |
@@ -56,7 +56,7 @@ Findings cite evidence, separate cause confidence from impact confidence, and na
 
 ## Where the findings land
 
-Each candidate belongs to one category, and the category decides where the fix goes:
+The evidence determines where a proposal belongs:
 
 | What went wrong in the session | Fix it with |
 | --- | --- |
@@ -72,6 +72,8 @@ Each candidate belongs to one category, and the category decides where the fix g
 The leading idea is that standards belong to the **reviewer**, not the implementer. The implementing agent carries the most context pressure: it explores, writes code, and debugs failures. The reviewing agent receives a diff and nothing else. So a new rule goes where there is room to apply it, in review, and never in `AGENTS.md`, which loads into every session's context window whether it's relevant or not.
 
 Before any rule gets written, the violation is classified. A **mechanical** one (a banned API, an import shape, a file-location rule) gets a deterministic check, because a check can fail and a sentence in a standards file can't. The check is usually a rule the repo's linter already ships, switched on. Security and bug patterns, and patterns in files the linter never reads, such as CI workflows and Dockerfiles, become Semgrep rules. Only genuine judgement calls, the kind no linter could ever enforce, become prose. A repo with no guardrail at all (no pre-commit hook, no CI job running lint, typecheck, and tests) is reported as a finding in its own right.
+
+Two lenses apply only to session review. **Correct** needs two instances of the same underlying mistake and proposes the earliest reliable way to prevent it, with a check against a real past failure. **Reflect** starts from a skill that failed to activate or steer the work and proposes a change to the actual trigger or instruction. If the skill already says the right thing clearly, repeating it is not the fix. Neither lens adds a command, expands the transcript search, or edits files.
 
 ## Common questions
 
@@ -105,7 +107,7 @@ By default it reviews the current session, which is the best case: the struggles
 
 **The agent keeps making the same mistake. Should I add a line to `CLAUDE.md`?**
 
-Usually not, and that's the most common place `retro` pushes back. A line in `CLAUDE.md` is loaded into every session, dilutes everything else in the file, and drifts as the code changes. If the mistake is mechanical, the fix is a check that fails. If it's a judgement call, it goes in the coding standards the reviewer reads. `AGENTS.md` and `CLAUDE.md` are for navigation pointers, and little else. For the same reason `retro` is not a memory system: it doesn't store what happened, it changes the environment so it can't happen again.
+Usually not. A line in `CLAUDE.md` loads into every session. Correct looks for the earliest reliable way to prevent the recurrence: remove the wrong path, make the invalid state unrepresentable, or make a check fail. Reserve prose for judgment calls. Retro proposes the change; it does not add a standing rule table.
 
 **My setup mentions `CODING_STANDARDS.md` and I don't have one. Where does it come from?**
 
@@ -136,6 +138,6 @@ Run standard retro after a build worth learning from, in the same session or poi
 
 - [code-review](https://aihero.dev/skills-code-review) is the reviewer agent `retro` most often tunes: new coding standards land where its Standards axis reads them.
 - [guardrails](https://aihero.dev/skills-guardrails) is where a finding goes when the gap is the whole baseline rather than one check.
-- [writing-for-agents](https://aihero.dev/skills-writing-for-agents) sets the writing style for every steering file and skill `retro` proposes, and `retro` loads it before it starts.
+- [writing-for-agents](https://aihero.dev/skills-writing-for-agents) guides proposals that change a skill or agent instruction. Retro loads it only for those proposals.
 
 [ask-inconvenient](https://aihero.dev/skills-ask-inconvenient) routes across the whole set when you are unsure which skill the situation wants.
