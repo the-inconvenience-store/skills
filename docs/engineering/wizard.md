@@ -65,6 +65,10 @@ Not mid-run. There is no back button: the stages run forward, and a wrong answer
 
 Partly, and less than the launch reactions assumed. It reads the repo before it asks (your `.env` files, `docker-compose`, framework config, the `secrets.*` references in CI), so it scopes to values that are genuinely missing rather than starting from zero the way a README does. What it doesn't do is check the third-party service. If a key exists in your `.env` the wizard offers it back and Enter keeps it; if you already created the Stripe account but never saved the key, the wizard still sends you to the dashboard for it.
 
+**Why does ShellCheck report `SC1087` near “Enter keeps current”?**
+
+Older templates triggered this warning even though Bash accepted the script. The current template fixes it. If you kept a generated copy, replace `$e[` with `${e}[` on that prompt line and rerun ShellCheck.
+
 **Where does it sit in the workflow, after grilling and the spec?**
 
 Nowhere in particular. It's a standalone, not a chain step. The common guess is `/grill-with-docs → /to-spec → /wizard`, and that sequence is fine, but the trigger is a manual procedure showing up, which can happen at any point: before you start, mid-build, or long after ship. It also works as a discovery tool: scoping surfaces the hidden prerequisites of a task, like the three API keys you hadn't thought about, before you commit to the work.
