@@ -95,7 +95,7 @@ No to both. AgentTrace is optional and used only when available. Standard mode s
 
 **Is this tied to omp?**
 
-No. Both modes use the selected harness's native history or exports, documented storage, and AgentTrace discovery where available. omp's archive API is an optional extra reference, not a prerequisite for Claude Code, Codex CLI, or other harnesses. A model name does not select the source: a Codex model running in omp still uses omp logs.
+No. Both modes use the selected harness's native history or exports, documented storage, and AgentTrace discovery where available. When reviewing omp work, standard retro mines `omp grievances list` for tool friction in the selected session. Time mode uses it to investigate tool bottlenecks already identified in the ledger. The list is read-only during retro, and its reports are leads to verify against session records, not timing evidence. Neither the list nor omp's archive API is required for other harnesses. A model name does not select the source: a Codex model running in omp still uses omp logs.
 
 **Won't it just invent generic advice to fill its categories?**
 

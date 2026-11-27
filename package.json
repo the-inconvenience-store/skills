@@ -1,0 +1,11 @@
+{
+  "name": "inconvenient-skills",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "check-frontmatter": "node scripts/check-frontmatter.mjs"
+  },
+  "devDependencies": {
+    "yaml": "2.9.1"
+  }
+}

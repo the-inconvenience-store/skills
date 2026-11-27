@@ -39,7 +39,7 @@ The frontier is the set of questions that can be answered now without guessing a
 
 This keeps related work moving without flattening dependencies into a bulk questionnaire. The interview ends when the frontier is empty and every branch has been visited, then waits for you to confirm the shared understanding.
 
-Facts are the agent's job; decisions are yours. Simple lookups stay inline; substantive independent research earns delegation when useful parallelism repays coordination cost. Unrelated questions keep moving while downstream questions wait for that research. Each recommendation appears on its own line so you can answer a whole round by number.
+Facts are the agent's job; decisions are yours. If the agent can see whether the legacy endpoint has callers, it looks that up. Whether to keep supporting those callers is a decision for you. Simple lookups stay inline; substantive independent research earns delegation when it can run usefully in parallel. Only questions that depend on that research wait. Each recommendation appears on its own line so you can answer a whole round by number.
 
 The frontier is chosen by judgement, not computed from a graph. If two questions turn out to depend on each other, point that out so the affected branch can be reopened in the next round.
 

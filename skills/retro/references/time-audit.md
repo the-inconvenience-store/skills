@@ -58,6 +58,8 @@ Rank sinks by accounted call-time, showing execution and elapsed-latency contrib
 
 For each sink, read the applicable branches of [diagnosis.md](diagnosis.md). Inspect the actual command, workload, repetition pattern, and available phase timings. Measure why it is slow instead of inferring the cause from its name. Propose the cheapest fix that preserves the required behavior. Supported dependency edges may identify a blocking critical path; parentage and timestamps alone cannot.
 
+For an omp tool sink, [mine reported tool friction](omp.md#mine-reported-tool-friction) for leads about failed attempts, retries, or workarounds. Confirm them against the ledger and raw events. Use confirmed leads to explain the sink, never to add calls or durations, rank sinks, or claim savings.
+
 Where safe on this machine, benchmark the current command against a non-mutating alternative using [paired command benchmarks](diagnosis.md#paired-command-benchmarks). If measurement is unsafe or unavailable, report the historical baseline, any safe local baseline, and an executable experiment plan with its equivalence criterion. Claim an improvement only after measuring it.
 
 **Done when:** each selected sink has a measured baseline or explicit measurement gap, evidence for its cause, the cheapest proposed fix, and either a paired benchmark with equivalence evidence or an executable experiment plan. Name suspected causes that the measurements exonerate, especially quality gates that are not the bottleneck; preserve their required behavior.

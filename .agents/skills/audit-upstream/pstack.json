@@ -1,7 +1,7 @@
 {
   "upstream_url": "https://github.com/cursor/plugins.git",
   "upstream_ref": "refs/heads/main",
-  "reviewed": "b1fbf4b60ac6813b4583ccc356850dafcf492665",
+  "reviewed": "b7b93c36be9bcc36a74db438e0fd385d660bc559",
   "paths": {
     "pstack/skills/create-verification-skill/": ["skills/verify/references/create.md", "skills/verify/references/project-format.md"],
     "pstack/skills/maintain-verification-skill/SKILL.md": ["skills/verify/references/maintain.md"],

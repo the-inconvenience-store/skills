@@ -41,7 +41,7 @@ Use it in the project workspace where the model belongs. Nothing needs to exist 
 
 Two artifacts, two different bars:
 
-- **The glossary** (`GLOSSARY.md`) captures language. Each entry defines what a project-specific concept **is** in one or two sentences, with rejected synonyms under `_Avoid_`. It is written inline when the term becomes canonical, not batched at the end. Implementation details and general programming concepts do not belong.
+- **The glossary** (`GLOSSARY.md`) captures language. Each entry defines what a project-specific concept **is** in one or two sentences, with rejected synonyms under `_Avoid_`. Bold canonical terms inside other definitions to show how they relate: an Invoice is a request for payment for an **Order**, sent to its **Customer**. Record terms as they become canonical; leave implementation details and general programming concepts out.
 - **An ADR** captures a decision, and the bar is high: offered only when the choice is **hard to reverse**, **surprising without context**, and **the result of a real trade-off**. Miss any one of the three and there is no ADR. This is what keeps `docs/adr/` a record of consequential forks rather than a diary.
 
 The move that makes it click: when you state how something works, the skill cross-references the code and surfaces the contradiction: "your code cancels entire Orders, but you just said partial cancellation is possible. Which is right?" The language and the code are forced to agree.

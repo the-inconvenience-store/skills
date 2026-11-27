@@ -21,3 +21,15 @@ Prompt search and recaps omit some SDK/subagent activity. Follow parent/child an
 The observed AgentTrace source identifier for omp is `oh_my_pi`. Set `agent_source` to the confirmed identifier and use the shared source-scoped CLI recipes. If the archive API is unavailable, continue with discovered logs and AgentTrace evidence, reporting the coverage limit instead of requiring an omp-only API.
 
 Inspect raw events to establish whether timestamps refer to message creation, completed messages, execution, or result delivery. Assistant-message timestamps do not automatically mark tool execution start. Link asynchronous submissions, jobs, completions, and waits before computing runtime, and reconcile parent and child records so the same work is counted once. AgentTrace step fields alone do not establish a complete execution trace or subagent tree.
+
+## Mine reported tool friction
+
+Use the local, read-only list when the selected source is omp. Start with a bounded recent sample; add `--tool <name>` to focus on an observed harness tool.
+
+```sh
+omp grievances list --limit 50 --json
+```
+
+Look for reports of failures, unexpected results, and workarounds that can explain friction in the selected work. Group duplicate reports by underlying issue and keep grievance IDs and redacted summaries instead of copying raw reports. The list is not scoped to a project, session, or time window. Check each lead against the selected session or ledger events for the same tool and failure. An unmatched report is a hypothesis, not proof of scope, recurrence, cause, or duration. A bounded sample cannot establish that an issue never occurred.
+
+If the command or relevant entries are unavailable, continue with native evidence. Do not clean the list or push reports as part of retro.

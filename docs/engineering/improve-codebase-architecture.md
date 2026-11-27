@@ -48,7 +48,7 @@ It speaks in the shared design vocabulary (**module**, **interface**, **depth**,
 
 The output is a browser-ready file at `<tmpdir>/architecture-review-<timestamp>.html`; the agent opens it and tells you its absolute path. Each candidate is a card with the files involved, the friction, a plain-English solution, the benefit in terms of locality and leverage, a before/after diagram, and a `Strong` / `Worth exploring` / `Speculative` badge. It closes with the one it would tackle first. A candidate that contradicts an ADR must say which decision it reopens and why the friction warrants it.
 
-Then it stops and asks which one you want to explore, before proposing interfaces. Pick one and it runs the [grilling](https://aihero.dev/skills-grilling) loop over that design (constraints, what sits behind the seam, which tests survive), updating the domain model inline as decisions crystallise. This is a design decision, not an implementation diff: take the settled result into [to-spec](https://aihero.dev/skills-to-spec) and the normal build flow.
+The report is a survey, not permission to refactor. The agent waits for you to choose a candidate before proposing interfaces. Picking one starts [grilling](https://aihero.dev/skills-grilling) about constraints, seams, and which tests survive. That conversation may update the glossary or record an ADR, but it does not change application code. Take a settled redesign into [to-spec](https://aihero.dev/skills-to-spec) and the normal build flow.
 
 ## Common questions
 

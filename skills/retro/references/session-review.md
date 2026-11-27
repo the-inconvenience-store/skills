@@ -4,6 +4,8 @@
 
 Inspect the selected session and its relevant child activity. For older sessions, discover records through native history, documented storage, or AgentTrace. For omp sessions, read [omp.md](omp.md). When AgentTrace is installed and recorded evidence is needed, use its [session-specific recipes](agenttrace.md#extract-tool-steps-and-inspect-a-specific-session); do not expand to a historical inventory. Name inaccessible evidence. Missing timing data does not block non-performance findings.
 
+For omp sessions, [mine reported tool friction](omp.md#mine-reported-tool-friction) for leads tied to this session or its relevant children. Use confirmed events in the tool-economy findings or the Correct and Reflect lenses as applicable. A grievance and its matching transcript event describe one occurrence, not two.
+
 **Done when:** the session, relevant child activity, and evidence limits are explicit.
 
 ## 2. Find candidates

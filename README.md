@@ -249,3 +249,7 @@ General workflow tools, not code-specific.
 - **[grilling](./skills/grilling/SKILL.md)**: Interview the user in frontier-based rounds until every branch of the design tree is resolved. The reusable loop behind `grill-me` and `grill-with-docs`.
 - **[writing-for-agents](./skills/writing-for-agents/SKILL.md)**: Reference for writing documents agents consume, including skills, `AGENTS.md`, and `CLAUDE.md`.
 - **[unslop](./skills/unslop/SKILL.md)**: Cut filler, vague claims, and canned phrasing from a draft without changing its meaning or format.
+
+## Check skill frontmatter
+
+Run `npm ci` and `npm run check-frontmatter` to check both promoted skills and drafts with the skills installer's YAML parser. CI runs the same check on pull requests and pushes to `main`.

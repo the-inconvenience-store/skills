@@ -37,7 +37,7 @@ The **Standards** axis needs no standards document to exist: it always carries a
 
 ## Two axes, never merged
 
-The defining idea is the **two axes**. **Standards** asks whether the diff conforms to how this repo writes code: every file in the repo that documents standards (`CODING_STANDARDS.md` and `CONTRIBUTING.md` always, when present), a fixed Fowler smell baseline, and only the engineering principles triggered by this change. Repository standards override the baselines; smells and principles remain judgment calls rather than hard violations. **Spec** asks the orthogonal question: does the code do what the issue or spec actually asked, without missing requirements or smuggling in scope creep?
+The axes can disagree on the same diff. If a change preserves the requested behavior but bypasses a repository rule that route handlers must use the shared validation layer, that is a **Standards** finding. If it follows that rule but omits a requested error case, that is a **Spec** finding. Standards also reports Fowler smells and relevant engineering principles as judgment calls, not violations; repository rules override the baselines.
 
 When a spec is available, both axes run as parallel foreground sub-agents, issued together, so neither pollutes the other's context. The final report presents separate `## Standards` and `## Spec` headings, then a finding count and worst issue **per axis**, never an overall winner.
 

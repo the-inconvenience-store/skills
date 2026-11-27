@@ -43,10 +43,10 @@ The idea to hold onto is **portability**: a targeted summary can cross a boundar
 ## Common questions
 
 **Handoff or compact?**
-`/compact` unless something is travelling. Staying on the same task is a compact, not a handoff: same harness, same directory, and you need to stay in the loop is where the phase-boundary tree lands most days. `/handoff`'s advantage is not that it summarises better; it's that the result is a file you can carry somewhere `/compact` can't reach.
+Use `/handoff` when another session or person needs a file they can open independently. On the same task in the same harness and directory, continue if the exact conversation matters; use `/compact` if context is running short but you still need its intent. A design question headed to a separate prototype workspace calls for a handoff; an interview that can continue straight into its spec does not.
 
 **So what's the actual difference between compact, clear and handoff?**
-Three different things being preserved. `/compact` compresses this context and keeps you going in a fresh window: intent survives. `/clear` empties the window and starts from nothing: correct when everything behind you is disposable, and one-way if it isn't. `/handoff` writes a portable file: the work survives the move to somewhere else. Note that all three turn a **[primary source](https://www.aihero.dev/ai-coding-dictionary/primary-source)** (the conversation as it happened) into a **[secondary source](https://www.aihero.dev/ai-coding-dictionary/secondary-source)** (a summary of it). Continuing is the only move that doesn't, which is why it's the first one to rule out.
+`/compact` keeps a summary in a fresh context window. `/clear` starts from nothing, so use it only when the current context is disposable. `/handoff` puts a targeted summary in a portable file. Continue when you still need the conversation as a [primary source](https://www.aihero.dev/ai-coding-dictionary/primary-source), rather than relying on a summary of it.
 
 **Where did my handoff file go?**
 The temp directory, which is the most-reported friction with the skill. The skill resolves it as `$TMPDIR`, else `/tmp` (`%TEMP%` on Windows), but the paths are long. Ask for the path back and keep it before you move on. Temp is deliberate: a handoff is a transit document, not an artifact you maintain. It is not a durable one either; see the next question.

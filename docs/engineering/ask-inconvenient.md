@@ -50,6 +50,8 @@ Local development installs also expose the WIP standalone [clean-copy](https://g
 
 The user-invoked WIP [prune-tests](https://github.com/the-inconvenience-store/skills/tree/main/in-progress/prune-tests) is also available in local development installs for removing redundant or behavior-free tests while preserving independent contracts. It is not included in the plugin.
 
+For a long-running goal that needs fresh workers and a dated wiki, local development installs expose the user-invoked [chief-of-staff draft](https://github.com/the-inconvenience-store/skills/tree/main/in-progress/chief-of-staff). It is not included in the plugin.
+
 ## Flows, not just skills
 
 The idea `ask-inconvenient` gives you to think with is the **flow**: a path *through* the skills rather than a single one. Before the first engineering flow, [bootstrap-skills](https://aihero.dev/skills-bootstrap-skills) records repository configuration, invokes [guardrails](https://aihero.dev/skills-guardrails), then creates the project route through [verify](https://aihero.dev/skills-verify). Most feature work then runs along one main flow: grill → spec → tickets → implement through TDD → review → real-surface verification. On-ramps merge bugs, incoming requests, and codebase-health work onto it; standalones remain available when only one discipline is needed.
