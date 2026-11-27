@@ -1,0 +1,5 @@
+# Authoring a skill
+
+1. Call the Skill tool with `writing-for-agents`. For a mode skill, check whether it already exists. Gather explicit conventions from the current conversation and repository first. If there is a real gap and the user wants history included, use only native read-only history or exports scoped to this project. Prefer explicit decisions and corroborated patterns to one-off preferences. Ask only about materially different conventions the evidence does not settle.
+2. Draft or edit in place. Keep reusable rules in the skills that own them, route with the local invocation contract, and disclose references only to the branch that needs them. Call the Skill tool with `unslop` for a final wording pass.
+3. Validate metadata, references, invocation boundaries, and registration. For structural changes, exercise relevant routes or helpers. For a personal style choice, show the draft and collect feedback rather than claiming taste was verified by a benchmark. Publish only when authorized.

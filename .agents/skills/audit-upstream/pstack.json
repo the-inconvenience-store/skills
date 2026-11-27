@@ -43,6 +43,7 @@
     "pstack/skills/reflect/SKILL.md": ["skills/retro/references/session-review.md"],
     "pstack/skills/technical-writing/SKILL.md": ["skills/technical-writing/SKILL.md"],
     "pstack/skills/unslop/SKILL.md": ["skills/unslop/SKILL.md", "skills/pr/SKILL.md"],
+    "pstack/skills/poteto-mode/": ["skills/inconvenient-mode/"],
     "pstack/skills/create-formal-verification-skill/SKILL.md": ["skills/formal-verify/references/create.md"],
     "pstack/skills/maintain-formal-verification-skill/SKILL.md": ["skills/formal-verify/references/maintain.md"],
     "pstack/skills/statechart/": ["skills/statechart/"]

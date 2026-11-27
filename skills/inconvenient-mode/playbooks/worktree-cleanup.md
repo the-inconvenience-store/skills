@@ -1,0 +1,13 @@
+# Audit worktrees before cleanup
+
+1. **Pin the integration ref.** Use the base the work is meant to land on, not the remote default. If the base is unresolved, identify it before running the audit. If the ref is absent locally or its freshness is unknown, report that limit rather than fetching or substituting another ref.
+2. **Inventory the repository.** Run `bash <skill-dir>/scripts/worktree-audit.sh --base <integration-ref> [repo-path]`. Omit `repo-path` to use the repository containing the current directory. The helper reads local Git data, prints the base commit it used, and reports every registered worktree. Treat a nonzero exit as an incomplete audit, not as clearance for any row. Worktree paths and refs are shell-escaped for display.
+3. **Check what Git cannot see.** Compare `review-candidate` rows with known active sessions, editor windows, jobs, and workspaces. Use current evidence the user has supplied or authorized you to inspect. If use is unknown, keep it unknown. A clean checkout and an ancestor commit say nothing about who is using that checkout. A squash or rebase can integrate changes without preserving commit ancestry; investigate that separately without promoting the row on the basis of the audit.
+4. **Hand back the decision.** Report the base ref and commit, the candidates with their usage evidence, and each hold with its reason. Call out missing evidence and active or unconfirmed use. Stop at the inventory and recommendation. The user owns any later decision to remove a worktree; this route does not change worktrees, branches, or other local or remote state.
+
+## Read the inventory
+
+- `hold`: A protected role (main, current, selected repo checkout, locked, detached, bare, or prunable), changes, or incomplete/non-ancestor evidence. The main worktree is the first Git porcelain record; current and selected refer to the launch directory's and supplied repo path's worktrees respectively. A prunable record is metadata to investigate, not permission to change it.
+- `review-candidate`: An ordinary linked checkout with no changes Git reported and an exact ancestor of the pinned base. This label is not a safety verdict.
+- `dirty` covers tracked, untracked, and ignored entries. Failed checkout/status checks, configured clean filters, uninspected submodule files, and index flags that can hide edits hold a row rather than pass it as clean.
+- `not-ancestor` means Git did not establish ancestry in a non-shallow repository. `unknown` includes failed ancestry checks, negative checks in shallow repositories, and repositories with grafts. No row establishes current remote state, equivalent patches, or usage. Recheck time-sensitive evidence before the user acts.

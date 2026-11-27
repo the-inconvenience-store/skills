@@ -22,6 +22,7 @@ You invoke this by typing `/ask-inconvenient`; the agent won't reach for it on i
 
 | Your situation | What the router gives back |
 | --- | --- |
+| An engineering task to run without picking the workflow | [inconvenient-mode](https://aihero.dev/skills-inconvenient-mode), which does the authorized work instead of recommending a command |
 | What the code does now, or why someone designed it that way | [how](https://aihero.dev/skills-how) traces the current code; [why](https://aihero.dev/skills-why) traces the decision record |
 | An unclear idea needs the right vocabulary before design starts | [reframe](https://aihero.dev/skills-reframe), for checked precedents and a rewritten brief |
 | A scoped task prompt needs better sources, methods, or proof | [sharpen](https://aihero.dev/skills-sharpen), without expanding or doing the task |

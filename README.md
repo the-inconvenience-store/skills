@@ -192,6 +192,7 @@ Skills for daily code work.
 **User-invoked**
 
 - **[ask-inconvenient](./skills/ask-inconvenient/SKILL.md)**: Recommend the next skill or flow from your situation, with a prompt you can send. Does not start the work.
+- **[inconvenient-mode](./skills/inconvenient-mode/SKILL.md)**: Run a scoped engineering task through the skills that fit and report what the work established.
 - **[grill-with-docs](./skills/grill-with-docs/SKILL.md)**: Grilling session that also builds your project's domain model, sharpening terminology and updating `GLOSSARY.md` and ADRs inline.
 - **[triage](./skills/triage/SKILL.md)**: Move issues through a state machine of triage roles.
 - **[improve-codebase-architecture](./skills/improve-codebase-architecture/SKILL.md)**: Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.

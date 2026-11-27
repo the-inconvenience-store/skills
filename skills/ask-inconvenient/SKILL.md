@@ -16,6 +16,7 @@ Route a named intent directly. If two routes would lead to materially different 
 
 | The user wants to | Recommend |
 | --- | --- |
+| Run a scoped engineering task without picking the workflow | `/inconvenient-mode` with the goal and what should be true when done. This starts work; `/ask-inconvenient` only recommends. |
 | Understand how code works today or where responsibility lives | `/how`. For why a decision was made, use `/why`. |
 | Find the right words for an unclear idea | `/reframe`. For decisions that need an interview, use `/grill-with-docs` in a repo or `/grill-me` without one. |
 | Improve an already scoped task prompt before sending it | `/sharpen`. Use `/reframe` instead if the problem itself is unclear. |

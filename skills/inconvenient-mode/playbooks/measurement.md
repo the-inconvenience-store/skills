@@ -1,0 +1,5 @@
+# Measurement
+
+1. Define one metric, a representative case, and an unchanged correctness gate. Apply Explain the Number through the `engineering-principles` selection policy. Reuse a known baseline when it matches the case; otherwise capture a short baseline that can distinguish the suspected mechanism from noise.
+2. For a one-off issue, call the Skill tool with `diagnosing-bugs` to locate the bottleneck before editing. Prefer eliminating unnecessary work, then reducing repeated work, before making the operation itself faster. For a requested hillclimb, set a target and attempt or time budget. Hold the case and gate constant while evaluating one hypothesis at a time. Keep only improvements that clear noise and preserve correctness; record the rejected attempts too.
+3. Report baseline, final value, workload, command or artifact, and any limit on comparison. Stop at the target or budget and state which condition ended the run. For a maintained decision trail, suggest `/show-me-your-work` rather than initializing one implicitly.

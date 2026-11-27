@@ -1,0 +1,5 @@
+interface:
+  display_name: "Inconvenient Mode"
+  short_description: "Run a scoped task through the skills that fit"
+policy:
+  allow_implicit_invocation: false
