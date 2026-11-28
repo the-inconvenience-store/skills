@@ -26,6 +26,8 @@ Use it for a specific promise with costly failures that ordinary examples are un
 
 The selected checker must support the target and scope of the claim. Existing checks can be recorded under `docs/agents/formal-verification/`; without a record, Run uses a direct or scratch check if available. Only Create and Maintain write permanent verification files.
 
+For Go functions and methods, [Gobra](https://github.com/viperproject/gobra) can check whether the implementation satisfies an annotated contract, such as a postcondition that describes the result for every input that meets the preconditions.
+
 ## The property stays fixed
 
 Create records a reusable check and proves that a deliberate break makes the named property fail. Run checks the requested property at the revision under review. Maintain compares the check with current source, then repairs drift without rewriting a product bug as intended behavior. A check can be up to date and still correctly report a failure.
